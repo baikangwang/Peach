@@ -3,15 +3,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.Core", "Peach.Core\Peach.Core.csproj", "{D64F87BB-5235-4115-A0A2-679F2EDA3DEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.Core.Test", "Peach.Core.Test\Peach.Core.Test.csproj", "{2E430A8B-4706-4AD7-AB26-30ECAF2FE088}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.Entity", "Peach.Entity\Peach.Entity.csproj", "{1BB4F061-2A42-4ACC-88A6-7F8D10A7F420}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.Log", "Peach.Log\Peach.Log.csproj", "{F594087C-8118-4931-9AF4-2F1033635417}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.View", "Peach.View\Peach.View.csproj", "{95A5AE80-9DB3-4823-B6CC-A2F36CD83056}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://baikangwang.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Peach.Core\\Peach.Core.csproj
 		SccProjectName1 = Peach.Core
 		SccLocalPath1 = Peach.Core
+		SccProjectUniqueName2 = Peach.Core.Test\\Peach.Core.Test.csproj
+		SccProjectName2 = Peach.Core.Test
+		SccLocalPath2 = Peach.Core.Test
+		SccProjectUniqueName3 = Peach.Entity\\Peach.Entity.csproj
+		SccProjectName3 = Peach.Entity
+		SccLocalPath3 = Peach.Entity
+		SccProjectUniqueName4 = Peach.Log\\Peach.Log.csproj
+		SccProjectName4 = Peach.Log
+		SccLocalPath4 = Peach.Log
+		SccProjectUniqueName5 = Peach.View\\Peach.View.csproj
+		SccProjectName5 = Peach.View
+		SccLocalPath5 = Peach.View
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +42,22 @@ Global
 		{D64F87BB-5235-4115-A0A2-679F2EDA3DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D64F87BB-5235-4115-A0A2-679F2EDA3DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D64F87BB-5235-4115-A0A2-679F2EDA3DEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E430A8B-4706-4AD7-AB26-30ECAF2FE088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E430A8B-4706-4AD7-AB26-30ECAF2FE088}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E430A8B-4706-4AD7-AB26-30ECAF2FE088}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E430A8B-4706-4AD7-AB26-30ECAF2FE088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BB4F061-2A42-4ACC-88A6-7F8D10A7F420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BB4F061-2A42-4ACC-88A6-7F8D10A7F420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BB4F061-2A42-4ACC-88A6-7F8D10A7F420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BB4F061-2A42-4ACC-88A6-7F8D10A7F420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F594087C-8118-4931-9AF4-2F1033635417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F594087C-8118-4931-9AF4-2F1033635417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F594087C-8118-4931-9AF4-2F1033635417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F594087C-8118-4931-9AF4-2F1033635417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95A5AE80-9DB3-4823-B6CC-A2F36CD83056}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95A5AE80-9DB3-4823-B6CC-A2F36CD83056}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95A5AE80-9DB3-4823-B6CC-A2F36CD83056}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95A5AE80-9DB3-4823-B6CC-A2F36CD83056}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
