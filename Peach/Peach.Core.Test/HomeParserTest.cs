@@ -14,7 +14,7 @@ namespace Peach.Core.Test
     using Peach.Entity;
 
     [TestFixture]
-    public class ParserTest
+    public class HomeParserTest
     {
         [Test]
         public void ParseTest()
@@ -52,15 +52,19 @@ namespace Peach.Core.Test
         [Test]
         public void ListHomeGalleryTest()
         {
-            string input = File.ReadAllText("homeview.txt").Replace("\n", string.Empty).Replace("\r", string.Empty);
+            string filename = "homeview.txt";//"searchview.txt"; //;
 
-            Parser p=new Parser();
+            string input = File.ReadAllText(filename).Replace("\n", string.Empty).Replace("\r", string.Empty);
+
+            Parser p=new HomeParser();
             IList<Gallery> gs = p.ListGalleries(input);
 
             foreach (Gallery g in gs)
             {
                 Console.WriteLine("[{0}] > {1}", gs.IndexOf(g), g);
             }
+
+            p.Dispose();
         }
     }
 }

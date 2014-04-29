@@ -11,6 +11,8 @@
     {
         private readonly string _title;
 
+        private readonly string _url;
+
         private readonly IList<Thumbnail> _thumbnails;
 
         private readonly IList<FullImage> _fullImages;
@@ -18,9 +20,10 @@
         public string Title
         { get { return this._title; } }
 
-        public Gallery(string title)
+        public Gallery(string title,string url)
         {
             this._title = title;
+            this._url = url;
 
             this._thumbnails=new List<Thumbnail>();
             this._fullImages=new List<FullImage>();
@@ -175,7 +178,7 @@
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(string.Format("Title: {0}", this._title));
+            sb.AppendLine(string.Format("Title: {0}, Url: {1}", this._title, this._url));
             sb.AppendLine(string.Format("---{0} of Thumbnails---", this._thumbnails.Count));
             foreach (Thumbnail t in this._thumbnails)
             {

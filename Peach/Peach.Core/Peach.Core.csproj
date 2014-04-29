@@ -47,8 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Browser.cs" />
+    <Compile Include="HomeParser.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Peach.Entity\Peach.Entity.csproj">
