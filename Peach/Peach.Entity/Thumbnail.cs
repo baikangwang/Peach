@@ -18,5 +18,12 @@ namespace Peach.Entity
         {
             get { return this.fullUrl; }
         }
+
+        public override string ToString()
+        {
+            string o = base.ToString();
+
+            return string.Format("{0}, FullUrl: {1}", o, this.fullUrl);
+        }
     }
 }

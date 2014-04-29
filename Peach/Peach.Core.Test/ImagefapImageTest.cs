@@ -22,7 +22,7 @@ namespace Peach.Core.Test
             // string thumb = "http://x1.fap.to/images/thumb/52/851/851926088.jpg";
 
             // send request
-            WebRequest request = WebRequest.CreateHttp(new Uri(url));
+            WebRequest request = WebRequest.Create(new Uri(url));
 
             WebResponse response = request.GetResponse();
 
@@ -53,7 +53,7 @@ namespace Peach.Core.Test
             // string url = "http://www.imagefap.com/image.php?id=287720072"; //string.Empty;
              string url = "http://x1.fap.to/images/thumb/52/287/287720072.jpg";
 
-            WebRequest request = WebRequest.CreateHttp(new Uri(url));
+            WebRequest request = WebRequest.Create(new Uri(url));
 
             WebResponse response = request.GetResponse();
 
@@ -73,7 +73,7 @@ namespace Peach.Core.Test
                 }
             }
 
-            response.Dispose();
+            response.Close();
         }
 
         private ImageFormat GetImageFormat(string type)

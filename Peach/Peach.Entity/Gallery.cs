@@ -171,5 +171,23 @@
                 throw new NotSupportedException("Not Support the type of " + typeof(T));
             }
         }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(string.Format("Title: {0}", this._title));
+            sb.AppendLine(string.Format("---{0} of Thumbnails---", this._thumbnails.Count));
+            foreach (Thumbnail t in this._thumbnails)
+            {
+                sb.AppendLine(string.Format("[{0}] > {1}", this._thumbnails.IndexOf(t), t));
+            }
+            sb.AppendLine(string.Format("---{0} of FullImages---", this._fullImages.Count));
+            foreach (FullImage f in this._fullImages)
+            {
+                sb.AppendLine(string.Format("[{0}] > {1}", this._fullImages.IndexOf(f), f));
+            }
+
+            return sb.ToString();
+        }
     }
 }

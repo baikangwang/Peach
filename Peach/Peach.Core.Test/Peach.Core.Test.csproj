@@ -50,14 +50,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImagefapImageTest.cs" />
+    <Compile Include="ParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="galleryview.txt" />
-    <Content Include="homeview.txt" />
+    <Content Include="homeview.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="homesample.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="oneimage.txt" />
     <Content Include="searchview.txt" />
     <Content Include="singleview.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Peach.Core\Peach.Core.csproj">
+      <Project>{d64f87bb-5235-4115-a0a2-679f2eda3dea}</Project>
+      <Name>Peach.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Peach.Entity\Peach.Entity.csproj">
+      <Project>{1BB4F061-2A42-4ACC-88A6-7F8D10A7F420}</Project>
+      <Name>Peach.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -46,6 +46,9 @@
   <ItemGroup>
     <Compile Include="FullImage.cs" />
     <Compile Include="Gallery.cs" />
+    <Compile Include="MethodResult.cs" />
+    <Compile Include="Page.cs" />
+    <Compile Include="Pager.cs" />
     <Compile Include="Thumbnail.cs" />
     <Compile Include="Img.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -139,6 +139,11 @@
             return Equals((Img) obj);
         }
 
+        public override string ToString()
+        {
+            return string.Format("Title: {0},Url: {1}", this._title, this._url);
+        }
+
         /*
         /// <summary>
         /// The resolve url.
