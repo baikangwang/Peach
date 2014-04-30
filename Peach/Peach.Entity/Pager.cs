@@ -1,12 +1,23 @@
-﻿namespace Peach.Entity
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Pager.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The pager.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Peach.Entity
 {
     using System.Collections.Generic;
 
     /// <summary>
-    /// The pager.
+    ///     The pager.
     /// </summary>
     public class Pager
     {
+        #region Constructors and Destructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Pager"/> class.
         /// </summary>
@@ -26,19 +37,25 @@
             this.Next = next;
         }
 
-        /// <summary>
-        /// Gets or sets the next.
-        /// </summary>
-        public Page Next { get; set; }
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the current.
+        ///     Gets or sets the current.
         /// </summary>
         public Page Current { get; set; }
 
         /// <summary>
-        /// Gets or sets the pages.
+        ///     Gets or sets the next.
+        /// </summary>
+        public Page Next { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the pages.
         /// </summary>
         public SortedList<int, Page> Pages { get; set; }
+
+        #endregion
     }
 }

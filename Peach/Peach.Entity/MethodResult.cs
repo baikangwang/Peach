@@ -1,10 +1,14 @@
-﻿namespace Peach.Entity
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MethodResult.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The method result.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
+namespace Peach.Entity
+{
     /// <summary>
     /// The method result.
     /// </summary>
@@ -12,20 +16,26 @@
     /// </typeparam>
     public class MethodResult<T>
     {
+        #region Fields
+
         /// <summary>
-        /// The value.
+        ///     The message.
+        /// </summary>
+        private readonly string message;
+
+        /// <summary>
+        ///     The result.
+        /// </summary>
+        private readonly T result;
+
+        /// <summary>
+        ///     The value.
         /// </summary>
         private readonly bool value;
 
-        /// <summary>
-        /// The result.
-        /// </summary>
-        private T result;
+        #endregion
 
-        /// <summary>
-        /// The message.
-        /// </summary>
-        private string message;
+        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MethodResult{T}"/> class.
@@ -58,19 +68,23 @@
             this.message = message;
         }
 
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
-        /// Gets a value indicating whether result.
+        ///     Gets the message.
         /// </summary>
-        public bool Value
+        public string Message
         {
             get
             {
-                return this.value;
+                return this.message;
             }
         }
 
         /// <summary>
-        /// Gets the result.
+        ///     Gets the result.
         /// </summary>
         public T Result
         {
@@ -81,15 +95,19 @@
         }
 
         /// <summary>
-        /// Gets the message.
+        ///     Gets a value indicating whether result.
         /// </summary>
-        public string Message
+        public bool Value
         {
             get
             {
-                return this.message;
+                return this.value;
             }
         }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         /// <summary>
         ///     Overloads false operator to return underlying Result
@@ -120,5 +138,7 @@
         {
             return mr.value;
         }
+
+        #endregion
     }
 }

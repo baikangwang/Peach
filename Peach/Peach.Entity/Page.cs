@@ -1,19 +1,20 @@
-﻿namespace Peach.Entity
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Page.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The page.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Peach.Entity
 {
     /// <summary>
-    /// The page.
+    ///     The page.
     /// </summary>
     public class Page
     {
-        /// <summary>
-        /// The number.
-        /// </summary>
-        private int number;
-
-        /// <summary>
-        /// The url.
-        /// </summary>
-        private string url;
+        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Page"/> class.
@@ -26,40 +27,24 @@
         /// </param>
         public Page(int number, string url)
         {
-            this.number = number;
-            this.url = url;
+            this.Number = number;
+            this.Url = url;
         }
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the number.
+        ///     Gets or sets the number.
         /// </summary>
-        public int Number
-        {
-            get
-            {
-                return this.number;
-            }
-
-            set
-            {
-                this.number = value;
-            }
-        }
+        public int Number { get; set; }
 
         /// <summary>
-        /// Gets or sets the url.
+        ///     Gets or sets the url.
         /// </summary>
-        public string Url
-        {
-            get
-            {
-                return this.url;
-            }
+        public string Url { get; set; }
 
-            set
-            {
-                this.url = value;
-            }
-        }
+        #endregion
     }
 }

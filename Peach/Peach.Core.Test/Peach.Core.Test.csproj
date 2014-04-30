@@ -63,6 +63,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="oneimage.txt" />
+    <Content Include="pagersample.txt" />
+    <Content Include="searchsample.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SearchSingle.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="searchview.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

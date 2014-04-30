@@ -12,13 +12,13 @@ namespace Peach.Core.Test
     public class SearchParserTest
     {
         [Test]
-        public void ListHomeGalleryTest()
+        public void ListGalleryTest()
         {
             string filename = "searchview.txt";
 
-            string input = File.ReadAllText(filename);//.Replace("\n", string.Empty).Replace("\r", string.Empty);
+            string input = File.ReadAllText(filename);
 
-            using (Parser p = new SearchParser(input))
+            using (SearchParser p = new SearchParser(input))
             {
                 IList<Gallery> gs = p.ListGalleries(true);
 
@@ -28,5 +28,17 @@ namespace Peach.Core.Test
                 }
             }
         }
+#if DEBUG
+        [Test]
+        public void GetGalleryTest()
+        {
+            string input = File.ReadAllText("searchsingle.txt");
+            using (SearchParser p=new SearchParser(input))
+            {
+                Gallery g = p.GetGellery(input);
+                Console.WriteLine(g.ToString());
+            }
+        }
+#endif
     }
 }

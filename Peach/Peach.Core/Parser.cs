@@ -2,8 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using System.Diagnostics;
     using System.Text.RegularExpressions;
 
     using Peach.Entity;
@@ -11,21 +10,36 @@
     /// <summary>
     /// The parser.
     /// </summary>
-    public abstract class Parser:IDisposable
+    public abstract class Parser : IDisposable
     {
+        /// <summary>
+        /// The _input.
+        /// </summary>
         private string _input;
 
+        /// <summary>
+        /// Gets or sets the input.
+        /// </summary>
         protected virtual string Input
         {
             get { return this._input; }
             set { this._input = value; }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parser"/> class.
+        /// </summary>
+        /// <param name="input">
+        /// The input.
+        /// </param>
         protected Parser(string input)
         {
             this._input = input;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parser"/> class.
+        /// </summary>
         protected Parser()
         {
             
@@ -47,6 +61,15 @@
             return this.ListGalleries(cleanup);
         }
 
+        /// <summary>
+        /// The list galleries.
+        /// </summary>
+        /// <param name="cleanup">
+        /// The cleanup.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IList"/>.
+        /// </returns>
         public abstract IList<Gallery> ListGalleries(bool cleanup = false);
 
         /// <summary>
@@ -73,11 +96,23 @@
              * </a>*/
 
             string pattern =
-                "<a.*?title\\s*?=\\s*?\"(?<gallery>.*?)\".*?href\\s*?=\\s*?\"(?<fullurl>.*?)\".*?><img.*?alt\\s*?=\\s*?\"(?<title>.*?)\".*?src\\s*?=\\s*?\"(?<thumbnailurl>.*?)\".*?>\\s*</a>";
+                "<a.*?href\\s*=\\s*\"(?<fullurl>.*?)\".*?><img.*?alt\\s*=\\s*\"(?<title>.*?)\".*?src\\s*=\\s*\"(?<thumbnailurl>.*?)\".*?>\\s*</a>";
 
-            string input = cleanup ? html.Replace("\\n", string.Empty).Replace("\\r", string.Empty) : html;
+            string input = cleanup ? Regex.Replace(html, "(\r|\n)", string.Empty) : html;
 
-            Match match = Regex.Match(input, pattern, RegexOptions.Compiled | RegexOptions.Singleline);
+            Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
+
+#if DEBUG
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+#endif
+
+            Match match = r.Match(input);
+
+#if DEBUG
+            timer.Stop();
+            Console.WriteLine(string.Format("Thumbnail Match costed: {0}", timer.Elapsed));
+#endif
             if (match.Success)
             {
                 string fullurl = match.Groups["fullurl"].Value;
@@ -112,6 +147,12 @@
         }
          * */
 
+        /// <summary>
+        /// The dispose.
+        /// </summary>
+        /// <param name="all">
+        /// The all.
+        /// </param>
         protected virtual void Dispose(bool all)
         {
             if (all)
@@ -120,6 +161,9 @@
             }
         }
 
+        /// <summary>
+        /// The dispose.
+        /// </summary>
         public void Dispose()
         {
             this.Dispose(true);

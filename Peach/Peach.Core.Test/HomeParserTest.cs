@@ -44,20 +44,17 @@ namespace Peach.Core.Test
             }
             while (match.Success && match.Index != (input.Length - 1));
 
-            //for (Match m = Regex.Match(input, pattern); m.Success; m = m.NextMatch())
-            //{
-            //    Console.WriteLine(m.Value);
-            //}
         }
+
         [Test]
-        public void ListHomeGalleryTest()
+        public void ListGalleryTest()
         {
             string filename = "homeview.txt";//"searchview.txt"; //;
 
-            string input = File.ReadAllText(filename).Replace("\n", string.Empty).Replace("\r", string.Empty);
+            string input = File.ReadAllText(filename);//.Replace("\n", string.Empty).Replace("\r", string.Empty);
 
             Parser p=new HomeParser();
-            IList<Gallery> gs = p.ListGalleries(input);
+            IList<Gallery> gs = p.ListGalleries(input,true);
 
             foreach (Gallery g in gs)
             {

@@ -1,15 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="FullImage.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The full image.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Peach.Entity
 {
-    public class FullImage:Img
+    /// <summary>
+    /// The full image.
+    /// </summary>
+    public class FullImage : Img
     {
-        public FullImage(string title, string url) : base(title, url)
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FullImage"/> class.
+        /// </summary>
+        /// <param name="title">
+        /// The title.
+        /// </param>
+        /// <param name="url">
+        /// The url.
+        /// </param>
+        public FullImage(string title, string url)
+            : base(title, url)
         {
         }
+
+        #endregion
     }
 }

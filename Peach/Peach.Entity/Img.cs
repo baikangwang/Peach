@@ -1,70 +1,72 @@
-﻿namespace Peach.Entity
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Img.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The img.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Peach.Entity
 {
     using System;
     using System.IO;
+
     using Peach.Log;
-    
+
     /// <summary>
-    /// The img.
+    ///     The img.
     /// </summary>
     public abstract class Img
     {
-        protected bool Equals(Img other)
-        {
-            return string.Equals(this._title,other._title) && string.Equals(this._url, other._url);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                int hashCode = (_title != null ? _title.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (_url != null ? _url.GetHashCode() : 0);
-                /*hashCode = (hashCode*397) ^ (_stream != null ? _stream.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (_fileName != null ? _fileName.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (OwnerGallery != null ? OwnerGallery.GetHashCode() : 0);*/
-                return hashCode;
-            }
-        }
+        #region Fields
 
         /// <summary>
-        /// The title.
+        ///     The title.
         /// </summary>
         private readonly string _title;
 
         /// <summary>
-        /// The url.
+        ///     The url.
         /// </summary>
         private readonly string _url;
 
-        private Stream _stream;
-
+        /// <summary>
+        /// The _file name.
+        /// </summary>
         private string _fileName;
 
-        public Gallery OwnerGallery { get; internal set; }
+        /// <summary>
+        /// The _stream.
+        /// </summary>
+        private Stream _stream;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         /// <summary>
-        /// Gets the title.
+        /// Initializes a new instance of the <see cref="Img"/> class.
         /// </summary>
-        public virtual string Title
+        /// <param name="title">
+        /// The title.
+        /// </param>
+        /// <param name="url">
+        /// The url.
+        /// </param>
+        protected Img(string title, string url)
         {
-            get
-            {
-                return this._title;
-            }
+            this._title = title;
+            this._url = url;
         }
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
-        /// Gets the url.
+        /// Gets the file name.
         /// </summary>
-        public virtual string Url
-        {
-            get
-            {
-                return this._url;
-            }
-        }
-
         public virtual string FileName
         {
             get
@@ -79,12 +81,12 @@
                     {
                         try
                         {
-                            Uri uri = new Uri(this._url);
+                            var uri = new Uri(this._url);
                             this._fileName = uri.Segments[uri.Segments.Length - 1];
                         }
                         catch (Exception ex)
                         {
-                            Logger.Current.Error(string.Format("Resolving invalid image url: {0}", this._url),ex);
+                            Logger.Current.Error(string.Format("Resolving invalid image url: {0}", this._url), ex);
                             this._fileName = string.Empty;
                         }
                     }
@@ -95,29 +97,94 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Img"/> class.
+        /// Gets the owner gallery.
         /// </summary>
-        /// <param name="title">
-        /// The title.
-        /// </param>
-        /// <param name="url">
-        /// The url.
-        /// </param>
-        protected Img(string title,string url)
+        public Gallery OwnerGallery { get; internal set; }
+
+        /// <summary>
+        ///     Gets the title.
+        /// </summary>
+        public virtual string Title
         {
-            this._title = title;
-            this._url = url;
+            get
+            {
+                return this._title;
+            }
         }
 
         /// <summary>
-        /// The get content.
+        ///     Gets the url.
+        /// </summary>
+        public virtual string Url
+        {
+            get
+            {
+                return this._url;
+            }
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The equals.
+        /// </summary>
+        /// <param name="obj">
+        /// The obj.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return this.Equals((Img)obj);
+        }
+
+        /// <summary>
+        ///     The get content.
         /// </summary>
         /// <returns>
-        /// The <see cref="Stream"/>.
+        ///     The <see cref="Stream" />.
         /// </returns>
         public virtual Stream GetContent()
         {
             return this._stream;
+        }
+
+        /// <summary>
+        /// The get hash code.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = this._title != null ? this._title.GetHashCode() : 0;
+                hashCode = (hashCode * 397) ^ (this._url != null ? this._url.GetHashCode() : 0);
+
+                /*hashCode = (hashCode*397) ^ (_stream != null ? _stream.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (_fileName != null ? _fileName.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (OwnerGallery != null ? OwnerGallery.GetHashCode() : 0);*/
+                return hashCode;
+            }
         }
 
         /// <summary>
@@ -131,18 +198,36 @@
             this._stream = response;
         }
 
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Img) obj);
-        }
-
+        /// <summary>
+        /// The to string.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public override string ToString()
         {
             return string.Format("Title: {0},Url: {1}", this._title, this._url);
         }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The equals.
+        /// </summary>
+        /// <param name="other">
+        /// The other.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        protected bool Equals(Img other)
+        {
+            return string.Equals(this._title, other._title) && string.Equals(this._url, other._url);
+        }
+
+        #endregion
 
         /*
         /// <summary>
