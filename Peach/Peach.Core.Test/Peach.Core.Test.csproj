@@ -50,28 +50,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImagefapImageTest.cs" />
-    <Compile Include="HomeParserTest.cs" />
+    <Compile Include="HomeParser\HomeParserTest.cs" />
+    <Compile Include="PagerParser\PagerParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchParserTest.cs" />
+    <Compile Include="SearchParser\SearchParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="galleryview.txt" />
-    <Content Include="homeview.txt">
+    <Content Include="GalleryParser\gallerysample.txt" />
+    <Content Include="GalleryParser\galleryview.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GalleryParser\Thumbnailsample.txt" />
+    <Content Include="HomeParser\homeview.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="homesample.txt">
+    <Content Include="HomeParser\homesample.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="oneimage.txt" />
-    <Content Include="pagersample.txt" />
-    <Content Include="searchsample.txt">
+    <Content Include="PagerParser\pagersample.txt" />
+    <Content Include="PagerParser\PageSample.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="SearchSingle.txt">
+    <Content Include="SearchParser\searchsample.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="searchview.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="SearchParser\SearchSingle.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SearchParser\searchview.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="singleview.txt" />
   </ItemGroup>
@@ -85,6 +93,7 @@
       <Name>Peach.Entity</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

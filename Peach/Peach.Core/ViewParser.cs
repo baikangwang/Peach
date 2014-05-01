@@ -10,40 +10,31 @@
     /// <summary>
     /// The parser.
     /// </summary>
-    public abstract class Parser : IDisposable
+    public abstract class ViewParser : BaseParser
     {
         /// <summary>
-        /// The _input.
-        /// </summary>
-        private string _input;
-
-        /// <summary>
-        /// Gets or sets the input.
-        /// </summary>
-        protected virtual string Input
-        {
-            get { return this._input; }
-            set { this._input = value; }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Parser"/> class.
+        /// Initializes a new instance of the <see cref="ViewParser"/> class.
         /// </summary>
         /// <param name="input">
         /// The input.
         /// </param>
-        protected Parser(string input)
+        protected ViewParser(string input):base(input)
         {
-            this._input = input;
+            if (string.IsNullOrEmpty(input))
+            {
+                this.Input = string.Empty;
+            }
+            else
+            {
+                Regex r = new Regex("\\r|\\n", RegexOptions.Compiled);
+                this.Input = r.Replace(input, string.Empty);
+            }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Parser"/> class.
-        /// </summary>
-        protected Parser()
+        protected ViewParser() : base()
         {
-            
         }
+
 
         /// <summary>
         /// The list galleries.
@@ -57,7 +48,7 @@
         /// </returns>
         public virtual IList<Gallery> ListGalleries(string html, bool cleanup = false)
         {
-            this._input = html;
+            this.Input = html;
             return this.ListGalleries(cleanup);
         }
 
@@ -146,27 +137,5 @@
             return new List<Thumbnail>();
         }
          * */
-
-        /// <summary>
-        /// The dispose.
-        /// </summary>
-        /// <param name="all">
-        /// The all.
-        /// </param>
-        protected virtual void Dispose(bool all)
-        {
-            if (all)
-            {
-                this._input = null;
-            }
-        }
-
-        /// <summary>
-        /// The dispose.
-        /// </summary>
-        public void Dispose()
-        {
-            this.Dispose(true);
-        }
     }
 }

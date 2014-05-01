@@ -17,9 +17,10 @@ namespace Peach.Core.Test
     public class HomeParserTest
     {
         [Test]
+        [Ignore]
         public void ParseTest()
         {
-            string input = File.ReadAllText("homeview.txt").Replace("\n", string.Empty).Replace("\r", string.Empty);
+            string input = File.ReadAllText("HomeParser\\homeview.txt").Replace("\n", string.Empty).Replace("\r", string.Empty);
 
             string single =
                 //"(?<gallery><tr\\s*?id='(\\w*?)'.*?>\\s*<td((?!colspan=2).)*?>.*?<a.*?>View gallery</a>.*?</td>\\s*<td.*?>.*?</td>\\s*<td.*?>.*?</td>\\s*</tr>\\s*<tr>\\s*<td.*?>\\s*<table>\\s*<tr.*?>\\s*<td.*?>\\s*</td>(\\s*<td.*?>\\s*<a.*?>\\s*<img.*?>\\s*</a>.*?</td>\\s*)+?</tr>\\s*</table>\\s*</tr>)";
@@ -49,12 +50,12 @@ namespace Peach.Core.Test
         [Test]
         public void ListGalleryTest()
         {
-            string filename = "homeview.txt";//"searchview.txt"; //;
+            string filename = "HomeParser\\homeview.txt";//"searchview.txt"; //;
 
             string input = File.ReadAllText(filename);//.Replace("\n", string.Empty).Replace("\r", string.Empty);
 
-            Parser p=new HomeParser();
-            IList<Gallery> gs = p.ListGalleries(input,true);
+            ViewParser p=new HomeViewParser(input);
+            IList<Gallery> gs = p.ListGalleries(input);
 
             foreach (Gallery g in gs)
             {

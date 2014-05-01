@@ -46,5 +46,10 @@ namespace Peach.Entity
         public string Url { get; set; }
 
         #endregion
+
+        public override string ToString()
+        {
+            return string.Format("Number: {0}, Url: {1}", this.Number, this.Url);
+        }
     }
 }

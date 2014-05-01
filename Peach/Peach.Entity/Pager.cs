@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Text;
+
 namespace Peach.Entity
 {
     using System.Collections.Generic;
@@ -30,7 +32,7 @@ namespace Peach.Entity
         /// <param name="current">
         /// The current.
         /// </param>
-        public Pager(SortedList<int, Page> pages, Page next, Page current)
+        public Pager(IList<Page> pages, Page next, Page current)
         {
             this.Pages = pages;
             this.Current = current;
@@ -54,8 +56,20 @@ namespace Peach.Entity
         /// <summary>
         ///     Gets or sets the pages.
         /// </summary>
-        public SortedList<int, Page> Pages { get; set; }
+        public IList<Page> Pages { get; set; }
 
         #endregion
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(string.Format("Current Page-> {0}", this.Current));
+            foreach (Page p in this.Pages)
+            {
+                sb.AppendLine(string.Format("Other Page-> {0}", p));
+            }
+            sb.AppendLine(string.Format("Next page-> {0}", this.Next));
+            return sb.ToString();
+        }
     }
 }

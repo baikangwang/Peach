@@ -12,22 +12,22 @@
     /// <summary>
     /// The home parser.
     /// </summary>
-    public class HomeParser : Parser
+    public class HomeViewParser : ViewParser
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="HomeParser"/> class.
+        /// Initializes a new instance of the <see cref="HomeViewParser"/> class.
         /// </summary>
         /// <param name="input">
         /// The input.
         /// </param>
-        public HomeParser(string input) : base(input)
+        public HomeViewParser(string input) : base(input)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HomeParser"/> class.
+        /// Initializes a new instance of the <see cref="HomeViewParser"/> class.
         /// </summary>
-        public HomeParser()
+        public HomeViewParser()
             : base()
         {
         }

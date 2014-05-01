@@ -14,11 +14,11 @@ namespace Peach.Core.Test
         [Test]
         public void ListGalleryTest()
         {
-            string filename = "searchview.txt";
+            string filename = "SearchParser\\searchview.txt";
 
             string input = File.ReadAllText(filename);
 
-            using (SearchParser p = new SearchParser(input))
+            using (SearchViewParser p = new SearchViewParser(input))
             {
                 IList<Gallery> gs = p.ListGalleries(true);
 
@@ -32,8 +32,8 @@ namespace Peach.Core.Test
         [Test]
         public void GetGalleryTest()
         {
-            string input = File.ReadAllText("searchsingle.txt");
-            using (SearchParser p=new SearchParser(input))
+            string input = File.ReadAllText("SearchParser\\searchsingle.txt");
+            using (SearchViewParser p=new SearchViewParser(input))
             {
                 Gallery g = p.GetGellery(input);
                 Console.WriteLine(g.ToString());

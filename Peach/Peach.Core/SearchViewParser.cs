@@ -14,15 +14,15 @@
     /// <summary>
     /// The search parser.
     /// </summary>
-    public class SearchParser : Parser
+    public class SearchViewParser : ViewParser
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SearchParser"/> class.
+        /// Initializes a new instance of the <see cref="SearchViewParser"/> class.
         /// </summary>
         /// <param name="input">
         /// The input.
         /// </param>
-        public SearchParser(string input) : base(input)
+        public SearchViewParser(string input) : base(input)
         {
         }
 
@@ -140,7 +140,7 @@
             string pattern =
                 "<tr\\s*id=\"\\w+\".*?>.*?<a\\s*title=\"View\\s*(?<title>.*?)\".*?href=\"(?<url>.*?)\".*?>.*?</a>.*?</tr>\\s*<tr.*?>\\s*<td.*?>\\s*<table>\\s*<tr>(\\s*<!--<div.*?>-->\\s*<td.*?>\\s*(?<thumbnail><a.*?title=\"View\\s*\\k<title>\".*?>\\s*<img.*?>\\s*</a>)\\s*</td>\\s*<!--</div>-->\\s*)+</tr>";
 
-            string input = cleanup ? html.Replace("\\n", string.Empty).Replace("\\r", string.Empty) : html;
+            string input = cleanup ? Regex.Replace(this.Input, "(\r|\n)", string.Empty) : html;
 
             Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
@@ -190,137 +190,12 @@
             }
         }
 
-        public Pager GetPager(bool cleanup = false)
+        public virtual Pager GetPager(bool cleanup = false)
         {
-#if DEBUG
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-#endif
-
-            if (string.IsNullOrEmpty(this.Input))
+            using (PagerParser p = new PagerParser(this.Input))
             {
-                return null;
-            }
-
-            /* <div\s*class="gallerylist">\s*<table.*?>.*?(?<galleries>(?<gallery>\s*<tr\s*id="\w+".*?>.*?<a\s*title="View\s*(?<title>.*?)".*?href="(?<url>.*?)".*?>\s*<i>\s*<b>\s*\1\s*</b>\s*</i>\s*</a>.*?</tr>\s*<tr.*?>\s*<td.*?>\s*<table>\s*<tr>(?:\s*<!--<div.*?>-->\s*<td.*?>\s*<a.*?title="View\s*\1".*?>\s*<img.*?>\s*</a>\s*</td>\s*<!--</div>-->\s*)+</tr>\s*</table>\s*</td>\s*<td.*?>.*?</td>\s*<td.*?>\s*</td>\s*</tr>\s*)+)\s*</table>\s*</div> 
-             (?<gallery>\s*<tr\s*id="\w+".*?>.*?<a\s*title="View\s*(?<title>.*?)".*?href="(?<url>.*?)".*?>\s*<i>\s*<b>\s*\1\s*</b>\s*</i>\s*</a>.*?</tr>\s*<tr.*?>\s*<td.*?>\s*<table>\s*<tr>(?:\s*<!--<div.*?>-->\s*<td.*?>\s*<a.*?title="View\s*\1".*?>\s*<img.*?>\s*</a>\s*</td>\s*<!--</div>-->\s*)+</tr>\s*</table>\s*</td>\s*<td.*?>.*?</td>\s*<td.*?>\s*</td>\s*</tr>\s*)
-             */
-
-            string pattern =
-                "<tr\\s*id=\"\\w+\".*?>.*?<a\\s*title=\"View\\s*(?<title>.*?)\".*?href=\"(?<url>.*?)\".*?>.*?</a>.*?</tr>\\s*<tr.*?>\\s*<td.*?>\\s*<table>\\s*<tr>(\\s*<!--<div.*?>-->\\s*<td.*?>\\s*(?<thumbnail><a.*?title=\"View\\s*\\k<title>\".*?>\\s*<img.*?>\\s*</a>)\\s*</td>\\s*<!--</div>-->\\s*)+</tr>";
-
-            string input = cleanup ? this.Input.Replace("\\n", string.Empty).Replace("\\r", string.Empty) : this.Input;
-
-            Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
-
-
-            Match match = r.Match(input);
-
-#if DEBUG
-            timer.Stop();
-            Console.WriteLine(string.Format("Pager Match costed: {0}", timer.Elapsed));
-            timer.Start();
-#endif
-
-            if (match.Success)
-            {
-                SortedList<int, Page> pages = new SortedList<int, Page>();
-                
-                CaptureCollection cc = match.Groups["pages"].Captures;
-
-                Task[] tasks = new Task[cc.Count];
-
-                for (int i = 0; i < cc.Count; i++)
-                {
-                    int index = i;
-                    Task task = new Task(
-                        () =>
-                        {
-                            Page p = this.GetPage(cc[index].Value);
-                            pages.Add(p.Number, p);
-                        });
-                    tasks[index] = task;
-                    task.Start();
-                }
-
-                Task.WaitAll(tasks);
-
-                // todo: temp code
-                Page next = new Page(0, null);
-                Page current = new Page(0, null);
-
-                Pager pr = new Pager(pages, next, current);
-
-#if DEBUG
-                timer.Stop();
-                Console.WriteLine(string.Format("Gallery Completed: {0}", timer.Elapsed));
-#endif
+                Pager pr = p.GetPager(cleanup);
                 return pr;
-            }
-            else
-            {
-                Peach.Log.Logger.Current.Warn(string.Format("Invalid pager tag, {0}", this.Input));
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// The get pager.
-        /// </summary>
-        /// <param name="html">
-        /// The html.
-        /// </param>
-        /// <param name="cleanup">
-        /// The cleanup.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Pager"/>.
-        /// </returns>
-        public Pager GetPager(string html, bool cleanup = false)
-        {
-            this.Input = html;
-            return this.GetPager(cleanup);
-        }
-
-        /// <summary>
-        /// The get page.
-        /// </summary>
-        /// <param name="html">
-        /// The html.
-        /// </param>
-        /// <param name="cleanup">
-        /// The cleanup.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Page"/>.
-        /// </returns>
-        protected Page GetPage(string html, bool cleanup = false)
-        {
-            if (string.IsNullOrEmpty(html))
-            {
-                return null;
-            }
-
-            string pattern =
-                "<tr\\s*id=\"\\w+\".*?>.*?<a\\s*title=\"View\\s*(?<title>.*?)\".*?href=\"(?<url>.*?)\".*?>.*?</a>.*?</tr>\\s*<tr.*?>\\s*<td.*?>\\s*<table>\\s*<tr>(\\s*<!--<div.*?>-->\\s*<td.*?>\\s*(?<thumbnail><a.*?title=\"View\\s*\\k<title>\".*?>\\s*<img.*?>\\s*</a>)\\s*</td>\\s*<!--</div>-->\\s*)+</tr>";
-
-            string input = cleanup ? html.Replace("\\n", string.Empty).Replace("\\r", string.Empty) : html;
-
-            Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
-
-            Match match = r.Match(input);
-
-            if (match.Success)
-            {
-                int number = int.Parse(match.Groups["number"].Value);
-                string url = match.Groups["url"].Value;
-
-                return new Page(number, url);
-            }
-            else
-            {
-                Peach.Log.Logger.Current.Warn(string.Format("Invalid page tag, {0}", html));
-                return null;
             }
         }
     }
