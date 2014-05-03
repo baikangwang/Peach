@@ -31,11 +31,6 @@
             }
         }
 
-        protected ViewParser() : base()
-        {
-        }
-
-
         /// <summary>
         /// The list galleries.
         /// </summary>

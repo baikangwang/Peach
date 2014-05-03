@@ -51,6 +51,7 @@
     <Compile Include="GalleryViewParser.cs" />
     <Compile Include="HomeViewParser.cs" />
     <Compile Include="PagerParser.cs" />
+    <Compile Include="PagerViewParser.cs" />
     <Compile Include="ViewParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchViewParser.cs" />

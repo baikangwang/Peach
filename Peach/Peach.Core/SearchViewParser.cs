@@ -14,7 +14,7 @@
     /// <summary>
     /// The search parser.
     /// </summary>
-    public class SearchViewParser : ViewParser
+    public class SearchViewParser : PagerViewParser
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchViewParser"/> class.
@@ -41,7 +41,7 @@
             Stopwatch timer = new Stopwatch();
             timer.Start();
 #endif
-            string input = cleanup ? Regex.Replace(this.Input, "(\r|\n)", string.Empty) : this.Input;
+            string input = cleanup ? Regex.Replace(this.ViewInput, "(\r|\n)", string.Empty) : this.ViewInput;
 
             string single =
                 "(?<gallery>\\s*<tr\\s*id=\"\\w+\".*?>.*?<a\\s*title=\"View\\s*(?<title>.*?)\".*?href=\"(?<url>.*?)\".*?>\\s*<i>\\s*<b>\\s*\\k<title>\\s*</b>\\s*</i>\\s*</a>.*?</tr>\\s*<tr.*?>\\s*<td.*?>\\s*<table>\\s*<tr>(\\s*<!--<div.*?>-->\\s*<td.*?>\\s*<a.*?title=\"View\\s*\\k<title>\".*?>\\s*<img.*?>\\s*</a>\\s*</td>\\s*<!--</div>-->\\s*)+</tr>\\s*</table>\\s*</td>\\s*<td.*?>.*?</td>\\s*<td.*?>\\s*</td>\\s*</tr>\\s*)";
@@ -190,12 +190,25 @@
             }
         }
 
-        public virtual Pager GetPager(bool cleanup = false)
+        protected override void Init()
         {
-            using (PagerParser p = new PagerParser(this.Input))
+            string single =
+                "(?<gallery>\\s*<tr\\s*id=\"\\w+\".*?>.*?<a\\s*title=\"View\\s*(?<title>.*?)\".*?href=\"(?<url>.*?)\".*?>\\s*<i>\\s*<b>\\s*\\k<title>\\s*</b>\\s*</i>\\s*</a>.*?</tr>\\s*<tr.*?>\\s*<td.*?>\\s*<table>\\s*<tr>(\\s*<!--<div.*?>-->\\s*<td.*?>\\s*<a.*?title=\"View\\s*\\k<title>\".*?>\\s*<img.*?>\\s*</a>\\s*</td>\\s*<!--</div>-->\\s*)+</tr>\\s*</table>\\s*</td>\\s*<td.*?>.*?</td>\\s*<td.*?>\\s*</td>\\s*</tr>\\s*)";
+            string pattern = string.Format(
+                "(?<galleries><div\\s*class=\"gallerylist\">\\s*<table.*?>.*?{0}+\\s*</table>\\s*</div>\\s*<BR>\\s*<center.*?>\\s*(?<pager>.*?)\\s*<BR><BR>\\s*</center>)", single);
+
+            Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
+
+            Match match = r.Match(this.Input);
+
+            if (match.Success)
             {
-                Pager pr = p.GetPager(cleanup);
-                return pr;
+                this.PagerInput = match.Groups["pager"].Value;
+                this.ViewInput = match.Groups["galleries"].Value;
+            }
+            else
+            {
+                Peach.Log.Logger.Current.Warn(string.Format("Invalid input, {0}", this.Input));
             }
         }
     }

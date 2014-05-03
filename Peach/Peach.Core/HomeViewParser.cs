@@ -25,14 +25,6 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HomeViewParser"/> class.
-        /// </summary>
-        public HomeViewParser()
-            : base()
-        {
-        }
-
-        /// <summary>
         /// The list galleries.
         /// </summary>
         /// <param name="cleanup">

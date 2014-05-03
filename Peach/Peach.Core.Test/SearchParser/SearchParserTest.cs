@@ -20,12 +20,16 @@ namespace Peach.Core.Test
 
             using (SearchViewParser p = new SearchViewParser(input))
             {
-                IList<Gallery> gs = p.ListGalleries(true);
+                IList<Gallery> gs = p.ListGalleries();
+
+                Pager pr = p.GetPager();
 
                 foreach (Gallery g in gs)
                 {
                     Console.WriteLine("[{0}] > {1}", gs.IndexOf(g), g);
                 }
+
+                Console.WriteLine(pr);
             }
         }
 #if DEBUG

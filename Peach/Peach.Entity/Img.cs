@@ -17,19 +17,19 @@ namespace Peach.Entity
     /// <summary>
     ///     The img.
     /// </summary>
-    public abstract class Img
+    public abstract class Img:IDisposable
     {
         #region Fields
 
         /// <summary>
         ///     The title.
         /// </summary>
-        private readonly string _title;
+        private string _title;
 
         /// <summary>
         ///     The url.
         /// </summary>
-        private readonly string _url;
+        private string _url;
 
         /// <summary>
         /// The _file name.
@@ -187,13 +187,29 @@ namespace Peach.Entity
             }
         }
 
+        protected virtual void Dispose(bool all)
+        {
+            if (all)
+            {
+                this._stream.Dispose();
+                this._fileName = null;
+                this._url = null;
+                this._title = null;
+            }
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
+
         /// <summary>
         /// The read.
         /// </summary>
         /// <param name="response">
         /// The response.
         /// </param>
-        public virtual void Read(Stream response)
+        public virtual void Load(Stream response)
         {
             this._stream = response;
         }

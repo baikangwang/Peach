@@ -7,6 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Text;
 
 namespace Peach.Entity
@@ -16,7 +17,7 @@ namespace Peach.Entity
     /// <summary>
     ///     The pager.
     /// </summary>
-    public class Pager
+    public class Pager:IDisposable
     {
         #region Constructors and Destructors
 
@@ -70,6 +71,31 @@ namespace Peach.Entity
             }
             sb.AppendLine(string.Format("Next page-> {0}", this.Next));
             return sb.ToString();
+        }
+
+        protected virtual void Dispose(bool all)
+        {
+            if (all)
+            {
+                this.Next.Dispose();
+                this.Next = null;
+
+                this.Current.Dispose();
+                this.Current = null;
+
+                foreach (Page page in Pages)
+                {
+                    page.Dispose();
+                }
+
+                Pages.Clear();
+                Pages = null;
+            }
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
         }
     }
 }

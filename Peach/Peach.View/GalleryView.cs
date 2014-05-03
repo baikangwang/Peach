@@ -1,33 +1,27 @@
-﻿namespace Peach.View
+﻿using System.Linq;
+using Peach.Core;
+
+namespace Peach.View
 {
     using Peach.Entity;
 
     /// <summary>
     /// The gallery view.
     /// </summary>
-    public class GalleryView
+    public class GalleryView:View<GalleryViewParser>
     {
         /// <summary>
         /// The _current.
         /// </summary>
         private Gallery _current;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GalleryView"/> class.
-        /// </summary>
-        public GalleryView()
-        {
-        }
+        private Pager _pager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GalleryView"/> class.
         /// </summary>
-        /// <param name="gallery">
-        /// The gallery.
-        /// </param>
-        public GalleryView(Gallery gallery)
+        public GalleryView(string url):base(url)
         {
-            this._current = gallery;
         }
 
         /// <summary>
@@ -39,10 +33,21 @@
             {
                 return this._current;
             }
-            set
-            {
-                this._current = value;
-            }
+        }
+
+        /// <summary>
+        /// Gets or sets the pager.
+        /// </summary>
+        public Pager Pager
+        {
+            get { return _pager; }
+        }
+
+        public override void GetView()
+        {
+            base.GetView();
+            this._current = this.ViewParser.ListGalleries().FirstOrDefault();
+            this._pager = this.ViewParser.GetPager();
         }
     }
 }

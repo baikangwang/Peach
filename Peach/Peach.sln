@@ -11,9 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.Log", "Peach.Log\Peac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.View", "Peach.View\Peach.View.csproj", "{95A5AE80-9DB3-4823-B6CC-A2F36CD83056}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.Viewer", "Peach.Viewer\Peach.Viewer.csproj", "{745C213F-8EE9-4FDA-8056-66A88355A0D8}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://baikangwang.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
@@ -32,6 +34,9 @@ Global
 		SccProjectUniqueName5 = Peach.View\\Peach.View.csproj
 		SccProjectName5 = Peach.View
 		SccLocalPath5 = Peach.View
+		SccProjectUniqueName6 = Peach.Viewer\\Peach.Viewer.csproj
+		SccProjectName6 = Peach.Viewer
+		SccLocalPath6 = Peach.Viewer
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +63,10 @@ Global
 		{95A5AE80-9DB3-4823-B6CC-A2F36CD83056}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95A5AE80-9DB3-4823-B6CC-A2F36CD83056}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95A5AE80-9DB3-4823-B6CC-A2F36CD83056}.Release|Any CPU.Build.0 = Release|Any CPU
+		{745C213F-8EE9-4FDA-8056-66A88355A0D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{745C213F-8EE9-4FDA-8056-66A88355A0D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{745C213F-8EE9-4FDA-8056-66A88355A0D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{745C213F-8EE9-4FDA-8056-66A88355A0D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

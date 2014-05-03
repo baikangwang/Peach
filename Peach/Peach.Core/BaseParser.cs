@@ -34,14 +34,6 @@ namespace Peach.Core
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewParser"/> class.
-        /// </summary>
-        protected BaseParser()
-        {
-            
-        }
-        
-        /// <summary>
         /// The dispose.
         /// </summary>
         /// <param name="all">

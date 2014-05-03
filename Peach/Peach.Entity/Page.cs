@@ -7,12 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Peach.Entity
 {
     /// <summary>
     ///     The page.
     /// </summary>
-    public class Page
+    public class Page:IDisposable
     {
         #region Constructors and Destructors
 
@@ -50,6 +52,20 @@ namespace Peach.Entity
         public override string ToString()
         {
             return string.Format("Number: {0}, Url: {1}", this.Number, this.Url);
+        }
+
+        protected virtual void Dispose(bool all)
+        {
+            if (all)
+            {
+                this.Url = null;
+                this.Number = 0;
+            }
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
         }
     }
 }

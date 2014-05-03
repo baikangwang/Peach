@@ -9,12 +9,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Peach.View</RootNamespace>
     <AssemblyName>Peach.View</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,8 +49,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingleView.cs" />
     <Compile Include="GalleryView.cs" />
+    <Compile Include="View.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Peach.Core\Peach.Core.csproj">
+      <Project>{d64f87bb-5235-4115-a0a2-679f2eda3dea}</Project>
+      <Name>Peach.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Peach.Entity\Peach.Entity.csproj">
       <Project>{1BB4F061-2A42-4ACC-88A6-7F8D10A7F420}</Project>
       <Name>Peach.Entity</Name>

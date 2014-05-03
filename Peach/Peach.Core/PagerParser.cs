@@ -16,10 +16,6 @@ namespace Peach.Core
             
         }
 
-        public PagerParser():base()
-        {
-            
-        }
         /// <summary>
         /// The get pager.
         /// </summary>
@@ -72,10 +68,13 @@ namespace Peach.Core
             if (match.Success)
             {
                 IList<Page> pages = new List<Page>();
+                Page next=null;
+                Page current = null;
+
 
                 CaptureCollection cc = match.Groups["page"].Captures;
 
-                Task[] tasks = new Task[cc.Count];
+                Task[] tasks = new Task[cc.Count+2];
 
                 for (int i = 0; i < cc.Count; i++)
                 {
@@ -90,10 +89,19 @@ namespace Peach.Core
                     task.Start();
                 }
 
-                Task.WaitAll(tasks);
+                Task n=new Task(() =>
+                                    {
+                                        next = GetNext(match.Groups["next"].Value);
+                                    });
+                tasks[tasks.Length - 2] = n;
 
-                Page next = GetNext(match.Groups["next"].Value);
-                Page current = GetCurrent(match.Groups["current"].Value);
+                Task c=new Task(() =>
+                                    {
+                                        current = GetCurrent(match.Groups["current"].Value);
+                                    });
+                tasks[tasks.Length - 1] = c;
+
+                Task.WaitAll(tasks);
 
                 Pager pr = new Pager(pages, next, current);
 
@@ -187,7 +195,7 @@ namespace Peach.Core
                 return null;
             }
 
-            string pattern = "<a.*?href=\"(?<url>.*?page=(?<number>\\d+))\">\\s*::\\s*next\\s*::\\s*</a>";
+            string pattern = "<a.*?href=\"(?<url>.*?page=(?<number>\\d+).*?)\">\\s*::\\s*next\\s*::\\s*</a>";
 
             string input = cleanup ? Regex.Replace(this.Input, "(\r|\n)", string.Empty) : html;
 

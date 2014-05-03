@@ -9,21 +9,18 @@ using Peach.Entity;
 
 namespace Peach.Core
 {
-    public class GalleryViewParser:ViewParser
+    public class GalleryViewParser:PagerViewParser
     {
+        
         public GalleryViewParser(string input) : base(input)
         {
             
         }
 
-        public GalleryViewParser()
-        {
-        }
-
         public override IList<Gallery> ListGalleries(bool cleanup = false)
         {
             IList<Gallery> gs=new List<Gallery>();
-            Gallery g = this.GetGallery(this.Input);
+            Gallery g = this.GetGallery(this.ViewInput);
             if (g != null)
             {
                 gs.Add(g);
@@ -48,7 +45,7 @@ namespace Peach.Core
             
 
             string pattern =
-                "<table.*?>\\s*<tr>\\s*<td.*?>\\s*<div\\s*id=\"menubar\".*?>.*?</div>.*?<table.*?id=\"gal_desc\"\\s*>.*?</table>.*?<div\\s*id=\"gallery\">\\s*(?<ptemp><font.*?>\\s*<span.*?>\\s*(?<pager>\\|\\s*<b>\\s*\\w+\\s*</b>.*?::\\s*next\\s*::\\s*</a>)\\s*</span>\\s*</font>)\\s*<BR>\\s*<form.*?>\\s*<table.*?>(?<row>\\s*<tr>(?<thumbnal>\\s*<td.*?>.*?</td>\\s*){1,4}</tr>\\s*)+</table>\\s*</form>\\s*<BR>\\s*\\k<ptemp>\\s*<br\\s*/><br\\s*/>\\s*</div>.*?<center>\\s*<a.*?>\\s*Report\\s*this\\s*gallery\\s*</a>\\s*<br>\\s*<br>\\s*<br>\\s*<br>\\s*</center>\\s*<!--.*?-->\\s*</td>\\s*</tr>\\s*</table>";
+                "<table.*?>\\s*<tr>\\s*<td.*?>\\s*<div\\s*id=\"menubar\".*?>.*?</div>.*?<table.*?id=\"gal_desc\"\\s*>.*?</table>.*?<div\\s*id=\"gallery\">\\s*(?<ptemp><font.*?>\\s*<span.*?>\\s*(?<pager>\\|\\s*<b>\\s*\\w+\\s*</b>.*?::\\s*next\\s*::\\s*</a>)\\s*</span>\\s*</font>)\\s*<BR>\\s*<form.*?>\\s*<table.*?>(?<row>\\s*<tr>(?<thumbnail>\\s*<td.*?>.*?</td>\\s*){1,4}</tr>\\s*)+</table>\\s*</form>\\s*<BR>\\s*\\k<ptemp>\\s*<br\\s*/><br\\s*/>\\s*</div>.*?<center>\\s*<a.*?>\\s*Report\\s*this\\s*gallery\\s*</a>\\s*<br>\\s*<br>\\s*<br>\\s*<br>\\s*</center>\\s*<!--.*?-->\\s*</td>\\s*</tr>\\s*</table>";
 
             string input = cleanup ? Regex.Replace(this.Input, "(\r|\n)", string.Empty) : html;
 
@@ -114,11 +111,11 @@ namespace Peach.Core
              * </a>*/
 
             /*
-             <td\s*?id="(?<name>\w+)".*?>\s*<table>\s*<tr>\s*<td.*?>\s*<a\s*name="\k<name>"\s*href="(?<fullurl>.*?)">\s*<img.*?alt="(?<title>.*?)".*?src="(?<url>.*?)">\s*</a>\s*</td>\s*</tr>\s*<tr.*?>\s*<td.*?>.*?<span\s*id="img_\k<name>_desc">\s*</span>.*?<i>(?<filename>\w+.jpg)</i>.*?<b>\d+</b>&nbsp;x&nbsp;<b>\d+</b>.*?<span.*?>.*?\d+\s*Views.*?</span>.*?</td>\s*</tr>\s*</table>\s*</td>
+             <td\s*?id="(?<name>\w+)".*?>\s*<table>\s*<tr>\s*<td.*?>\s*<a\s*name="\k<name>"\s*href="(?<fullurl>.*?)">\s*<img.*?alt="(?<title>.*?)".*?src="(?<thumbnailurl>.*?)">\s*</a>\s*</td>\s*</tr>\s*<tr.*?>\s*<td.*?>.*?<span\s*id="img_\k<name>_desc">\s*</span>.*?<i>(?<filename>.*?)</i>.*?<b>\d+</b>&nbsp;x&nbsp;<b>\d+</b>.*?<span.*?>.*?\d+\s*Views.*?</span>.*?</td>\s*</tr>\s*</table>\s*</td>
              */
 
             string pattern =
-                "<td\\s*?id=\"(?<name>\\w+)\".*?>\\s*<table>\\s*<tr>\\s*<td.*?>\\s*<a\\s*name=\"\\k<name>\"\\s*href=\"(?<fullurl>.*?)\">\\s*<img.*?alt=\"(?<title>.*?)\".*?src=\"(?<url>.*?)\">\\s*</a>\\s*</td>\\s*</tr>\\s*<tr.*?>\\s*<td.*?>.*?<span\\s*id=\"img_\\k<name>_desc\">\\s*</span>.*?<i>\\w+.jpg</i>.*?<b>\\d+</b>&nbsp;x&nbsp;<b>\\d+</b>.*?<span.*?>.*?\\d+\\s*Views.*?</span>.*?</td>\\s*</tr>\\s*</table>\\s*</td>";
+                "<td\\s*?id=\"(?<name>\\w+)\".*?>\\s*<table>\\s*<tr>\\s*<td.*?>\\s*<a\\s*name=\"\\k<name>\"\\s*href=\"(?<fullurl>.*?)\">\\s*<img.*?alt=\"(?<title>.*?)\".*?src=\"(?<thumbnailurl>.*?)\">\\s*</a>\\s*</td>\\s*</tr>\\s*<tr.*?>\\s*<td.*?>.*?<span\\s*id=\"img_\\k<name>_desc\">\\s*</span>.*?<i>.*?</i>.*?<b>\\d+</b>&nbsp;x&nbsp;<b>\\d+</b>.*?<span.*?>.*?\\d+\\s*Views.*?</span>.*?</td>\\s*</tr>\\s*</table>\\s*</td>";
 
             string input = cleanup ? Regex.Replace(html, "(\r|\n)", string.Empty) : html;
 
@@ -147,6 +144,26 @@ namespace Peach.Core
             {
                 Peach.Log.Logger.Current.Warn(string.Format("Invalid thumbnail tag, {0}", html));
                 return null;
+            }
+        }
+
+        protected override void Init()
+        {
+            string pattern =
+                "(?<gallery><table.*?>\\s*<tr>\\s*<td.*?>\\s*<div\\s*id=\"menubar\".*?>.*?</div>.*?<table.*?id=\"gal_desc\"\\s*>.*?</table>.*?<div\\s*id=\"gallery\">\\s*(?<ptemp><font.*?>\\s*<span.*?>\\s*(?<pager>\\|\\s*<b>\\s*\\w+\\s*</b>.*?::\\s*next\\s*::\\s*</a>)\\s*</span>\\s*</font>)\\s*<BR>\\s*<form.*?>\\s*<table.*?>(?<row>\\s*<tr>(?<thumbnail>\\s*<td.*?>.*?</td>\\s*){1,4}</tr>\\s*)+</table>\\s*</form>\\s*<BR>\\s*\\k<ptemp>\\s*<br\\s*/><br\\s*/>\\s*</div>.*?<center>\\s*<a.*?>\\s*Report\\s*this\\s*gallery\\s*</a>\\s*<br>\\s*<br>\\s*<br>\\s*<br>\\s*</center>\\s*<!--.*?-->\\s*</td>\\s*</tr>\\s*</table>)";
+
+            Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
+
+            Match match = r.Match(this.Input);
+
+            if (match.Success)
+            {
+                this.PagerInput = match.Groups["pager"].Value;
+                this.ViewInput = match.Groups["gallery"].Value;
+            }
+            else
+            {
+                Peach.Log.Logger.Current.Warn(string.Format("Invalid input, {0}", this.Input));
             }
         }
     }

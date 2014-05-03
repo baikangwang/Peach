@@ -1,4 +1,6 @@
-﻿namespace Peach.View
+﻿using Peach.Core;
+
+namespace Peach.View
 {
     using System.Collections.Generic;
 
@@ -7,8 +9,11 @@
     /// <summary>
     /// The search view.
     /// </summary>
-    public class SearchView
+    public class SearchView:View<SearchViewParser>
     {
+        private Pager _pager;
+        private IList<Gallery> _galleries;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchView"/> class.
         /// </summary>
@@ -18,20 +23,31 @@
         /// <param name="galleries">
         /// The galleries.
         /// </param>
-        public SearchView(Pager pager, IList<Gallery> galleries)
+        public SearchView(string url):base(url)
         {
-            this.Pager = pager;
-            this.Galleries = galleries;
         }
         
         /// <summary>
         /// Gets or sets the pager.
         /// </summary>
-        public Pager Pager { get; set; }
+        public Pager Pager
+        {
+            get { return _pager; }
+        }
 
         /// <summary>
         /// Gets or sets the galleries.
         /// </summary>
-        public IList<Gallery> Galleries { get; set; }
+        public IList<Gallery> Galleries
+        {
+            get { return _galleries; }
+        }
+
+        public override void GetView()
+        {
+            base.GetView();
+            this._galleries = this.ViewParser.ListGalleries();
+            this._pager = this.ViewParser.GetPager();
+        }
     }
 }

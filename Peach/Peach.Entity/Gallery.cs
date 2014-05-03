@@ -18,29 +18,29 @@ namespace Peach.Entity
     /// <summary>
     /// The gallery.
     /// </summary>
-    public class Gallery
+    public class Gallery:IDisposable
     {
         #region Fields
 
         /// <summary>
         /// The _full images.
         /// </summary>
-        private readonly IList<FullImage> _fullImages;
+        private IList<FullImage> _fullImages;
 
         /// <summary>
         /// The _thumbnails.
         /// </summary>
-        private readonly IList<Thumbnail> _thumbnails;
+        private IList<Thumbnail> _thumbnails;
 
         /// <summary>
         /// The _title.
         /// </summary>
-        private readonly string _title;
+        private string _title;
 
         /// <summary>
         /// The _url.
         /// </summary>
-        private readonly string _url;
+        private string _url;
 
         #endregion
 
@@ -330,6 +330,36 @@ namespace Peach.Entity
             }
 
             return sb.ToString();
+        }
+
+        protected virtual void Dispose(bool all)
+
+        {
+            if (all)
+            {
+                this._title = null;
+                this._url = null;
+
+                foreach (Thumbnail img in _thumbnails)
+                {
+                    img.Dispose();
+                }
+
+                this._thumbnails.Clear();
+                this._thumbnails = null;
+
+                foreach (FullImage img in this._fullImages)
+                {
+                    img.Dispose();
+                }
+                this._fullImages.Clear();
+                this._fullImages = null;
+            }
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

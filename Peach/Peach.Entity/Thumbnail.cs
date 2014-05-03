@@ -19,7 +19,7 @@ namespace Peach.Entity
         /// <summary>
         /// The full url.
         /// </summary>
-        private readonly string fullUrl;
+        private string fullUrl;
 
         #endregion
 
@@ -76,5 +76,14 @@ namespace Peach.Entity
         }
 
         #endregion
+
+        protected override void Dispose(bool all)
+        {
+            base.Dispose(all);
+            if (all)
+            {
+                this.fullUrl = null;
+            }
+        }
     }
 }

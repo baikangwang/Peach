@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GalleryParser\GalleryParserTest.cs" />
     <Compile Include="ImagefapImageTest.cs" />
     <Compile Include="HomeParser\HomeParserTest.cs" />
     <Compile Include="PagerParser\PagerParserTest.cs" />
