@@ -1,28 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="BaseParser.cs" company="Orange">
+//   
+// </copyright>
+// <summary>
+//   The base parser.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Peach.Core
 {
-    public abstract class BaseParser:IDisposable
+    using System;
+
+    /// <summary>
+    /// The base parser.
+    /// </summary>
+    public abstract class BaseParser : IDisposable
     {
+        #region Fields
+
         /// <summary>
-        /// The _input.
+        ///     The _input.
         /// </summary>
         private string _input;
 
-        /// <summary>
-        /// Gets or sets the input.
-        /// </summary>
-        protected virtual string Input
-        {
-            get { return this._input; }
-            set { this._input = value; }
-        }
+        #endregion
+
+        #region Constructors and Destructors
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="BaseParser"/> class. 
         /// Initializes a new instance of the <see cref="ViewParser"/> class.
         /// </summary>
         /// <param name="input">
@@ -32,6 +38,42 @@ namespace Peach.Core
         {
             this._input = input;
         }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets the input.
+        /// </summary>
+        protected virtual string Input
+        {
+            get
+            {
+                return this._input;
+            }
+
+            set
+            {
+                this._input = value;
+            }
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        ///     The dispose.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// The dispose.
@@ -47,12 +89,6 @@ namespace Peach.Core
             }
         }
 
-        /// <summary>
-        /// The dispose.
-        /// </summary>
-        public void Dispose()
-        {
-            this.Dispose(true);
-        }
+        #endregion
     }
 }

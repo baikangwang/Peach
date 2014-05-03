@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MethodResult.cs" company="">
+// <copyright file="MethodResult.cs" company="Orange">
 //   
 // </copyright>
 // <summary>

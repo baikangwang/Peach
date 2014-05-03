@@ -27,8 +27,14 @@ namespace Peach.Viewer
         public MainWindow()
         {
             InitializeComponent();
-            _view=new HomeView("http://www.imagefap.com");
-            _view.GetView();
+            log4net.Config.XmlConfigurator.Configure();
+            this.Loaded += MainWindow_Loaded;
+            this._view=new HomeView("http://www.imagefap.com");
+        }
+
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this._view.GetView();
             Gallery g = _view.Galleries.FirstOrDefault();
             if (g != null)
             {

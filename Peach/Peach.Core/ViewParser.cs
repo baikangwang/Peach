@@ -1,24 +1,35 @@
-﻿namespace Peach.Core
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ViewParser.cs" company="Orange">
+//   
+// </copyright>
+// <summary>
+//   The parser.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Peach.Core
 {
-    using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Text.RegularExpressions;
 
     using Peach.Entity;
+    using Peach.Log;
 
     /// <summary>
-    /// The parser.
+    ///     The parser.
     /// </summary>
     public abstract class ViewParser : BaseParser
     {
+        #region Constructors and Destructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewParser"/> class.
         /// </summary>
         /// <param name="input">
         /// The input.
         /// </param>
-        protected ViewParser(string input):base(input)
+        protected ViewParser(string input)
+            : base(input)
         {
             if (string.IsNullOrEmpty(input))
             {
@@ -26,10 +37,14 @@
             }
             else
             {
-                Regex r = new Regex("\\r|\\n", RegexOptions.Compiled);
+                var r = new Regex("\\r|\\n", RegexOptions.Compiled);
                 this.Input = r.Replace(input, string.Empty);
             }
         }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         /// <summary>
         /// The list galleries.
@@ -37,7 +52,8 @@
         /// <param name="html">
         /// The html.
         /// </param>
-        /// <param name="cleanup"></param>
+        /// <param name="cleanup">
+        /// </param>
         /// <returns>
         /// The <see cref="IList"/>.
         /// </returns>
@@ -58,13 +74,31 @@
         /// </returns>
         public abstract IList<Gallery> ListGalleries(bool cleanup = false);
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The get gallery.
+        /// </summary>
+        /// <param name="html">
+        /// The html.
+        /// </param>
+        /// <param name="cleanup">
+        /// </param>
+        /// <returns>
+        /// The <see cref="Gallery"/>.
+        /// </returns>
+        protected abstract Gallery GetGallery(string html, bool cleanup = false);
+
         /// <summary>
         /// The get thumbnail.
         /// </summary>
         /// <param name="html">
         /// The html.
         /// </param>
-        /// <param name="cleanup"></param>
+        /// <param name="cleanup">
+        /// </param>
         /// <returns>
         /// The <see cref="Thumbnail"/>.
         /// </returns>
@@ -80,25 +114,15 @@
              *      alt="Free porn pics of Horny Girls on Vacation - Kristyna - Part 1 1 of 4 pics" 
              *      src="http://x4.fap.to/images/thumb/52/499/499149355.jpg">
              * </a>*/
-
             string pattern =
                 "<a.*?href\\s*=\\s*\"(?<fullurl>.*?)\".*?><img.*?alt\\s*=\\s*\"(?<title>.*?)\".*?src\\s*=\\s*\"(?<thumbnailurl>.*?)\".*?>\\s*</a>";
 
             string input = cleanup ? Regex.Replace(html, "(\r|\n)", string.Empty) : html;
 
-            Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
-
-#if DEBUG
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-#endif
+            var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
             Match match = r.Match(input);
 
-#if DEBUG
-            timer.Stop();
-            Console.WriteLine(string.Format("Thumbnail Match costed: {0}", timer.Elapsed));
-#endif
             if (match.Success)
             {
                 string fullurl = match.Groups["fullurl"].Value;
@@ -109,22 +133,12 @@
             }
             else
             {
-                Peach.Log.Logger.Current.Warn(string.Format("Invalid thumbnail tag, {0}", html));
+                Logger.Current.Warn(string.Format("Invalid thumbnail tag, {0}", html));
                 return null;
             }
         }
 
-        /// <summary>
-        /// The get gallery.
-        /// </summary>
-        /// <param name="html">
-        /// The html.
-        /// </param>
-        /// <param name="cleanup"></param>
-        /// <returns>
-        /// The <see cref="Gallery"/>.
-        /// </returns>
-        protected abstract Gallery GetGallery(string html, bool cleanup = false);
+        #endregion
 
         /*
         public IList<Thumbnail> ListThumbnails(string html)

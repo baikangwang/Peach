@@ -36,33 +36,37 @@ namespace Peach.View
         public override void GetView()
         {
             base.GetView();
-            this._galleries = new List<Gallery>() {this.ViewParser.ListGalleries().FirstOrDefault()};
+            this._galleries = new List<Gallery>() { this.ViewParser.ListGalleries().FirstOrDefault() };
 
             Task[] tgs = new Task[this._galleries.Count];
 
-            for (int i = 0; i < this._galleries.Count;i++ )
+            for (int i = 0; i < this._galleries.Count; i++)
             {
                 Gallery ig = this._galleries[i];
-                Task tg = new Task(() =>
-                                    {
-                                        Task[] tts = new Task[ig.Thumbnails.Count];
+                Task tg = new Task(
+                    () =>
+                        {
+                            Task[] tts = new Task[ig.Thumbnails.Count];
 
-                                        for (int j = 0; j < ig.Thumbnails.Count; j++)
+                            for (int j = 0; j < ig.Thumbnails.Count; j++)
+                            {
+                                Thumbnail it = ig.Thumbnails[j];
+                                Task tt = new Task(
+                                    () =>
                                         {
-                                            Thumbnail it = ig.Thumbnails[j];
-                                            Task tt = new Task(() =>
-                                                                 {
-                                                                     MethodResult<HttpWebResponse> r =
-                                                                         Browser.Current.GetImage(it.Url);
+                                            MethodResult<HttpWebResponse> r = Browser.Current.GetImage(it.Url);
+                                            if (r)
+                                            {
+                                                it.Load(r.Result.GetResponseStream());
+                                            }
+                                        });
 
-                                                                     it.Load(r.Result.GetResponseStream());
-                                                                 });
-                                            tts[j] = tt;
-                                            tt.Start();
-                                        }
+                                tts[j] = tt;
+                                tt.Start();
+                            }
 
-                                        Task.WaitAll(tts);
-                                    });
+                            Task.WaitAll(tts);
+                        });
                 tgs[i] = tg;
                 tg.Start();
             }

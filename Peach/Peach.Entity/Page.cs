@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Page.cs" company="">
+// <copyright file="Page.cs" company="Orange">
 //   
 // </copyright>
 // <summary>

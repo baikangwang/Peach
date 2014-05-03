@@ -1,28 +1,42 @@
-﻿namespace Peach.Core
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="HomeViewParser.cs" company="Orange">
+//   
+// </copyright>
+// <summary>
+//   The home parser.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Peach.Core
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
 
     using Peach.Entity;
+    using Peach.Log;
 
     /// <summary>
-    /// The home parser.
+    ///     The home parser.
     /// </summary>
     public class HomeViewParser : ViewParser
     {
+        #region Constructors and Destructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HomeViewParser"/> class.
         /// </summary>
         /// <param name="input">
         /// The input.
         /// </param>
-        public HomeViewParser(string input) : base(input)
+        public HomeViewParser(string input)
+            : base(input)
         {
         }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         /// <summary>
         /// The list galleries.
@@ -42,7 +56,7 @@
 
             string pattern = string.Format("<table.*?>.*?(?<galleries>{0}+).*?</table>", single);
 
-            Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
+            var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
             Match match = r.Match(input);
 
@@ -52,18 +66,18 @@
             {
                 CaptureCollection cc = match.Groups["gallery"].Captures;
 
-                Task[] tasks = new Task[cc.Count];
+                var tasks = new Task[cc.Count];
 
                 for (int i = 0; i < cc.Count; i++)
                 {
                     int index = i;
-                    Task task = new Task(
+                    var task = new Task(
                         () =>
-                        {
-                            Gallery g = this.GetGallery(cc[index].Value);
+                            {
+                                Gallery g = this.GetGallery(cc[index].Value);
 
-                            gs.Add(g);
-                        });
+                                gs.Add(g);
+                            });
                     tasks[index] = task;
                     task.Start();
                 }
@@ -72,11 +86,15 @@
             }
             else
             {
-                Peach.Log.Logger.Current.Warn(string.Format("Invalid thumbnail tag, {0}", this.Input));
+                Logger.Current.Warn(string.Format("Invalid thumbnail tag, {0}", this.Input));
             }
 
             return gs;
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// The get gallery.
@@ -98,13 +116,12 @@
             }
 
             /* (?<gallery><tr\s*?id='(\w*?)'.*?>\s*<td.*?>.*?<a.*?>View gallery</a>.*?<b>(?<title>.+?)</b>.*?</td>\s*<td.*?>.*?</td>\s*<td.*?>.*?</td>\s*</tr>\s*<tr>\s*<td.*?>\s*<table>\s*<tr.*?>\s*<td.*?>\s*</td>(\s*<td.*?>\s*(?<thumbnail><a.*?>\s*<img.*?>\s*</a>).*?</td>\s*)+?</tr>\s*</table>\s*</tr>) */
-
             string pattern =
                 "(?<gallery><tr\\s*id='(\\w*?)'.*?>\\s*<td.*?>.*?<a.*?href=\"(?<url>.*?)\".*?>View gallery</a>.*?<b>\\s*(?<title>.+?)\\s*</b>.*?</td>\\s*<td.*?>.*?</td>\\s*<td.*?>.*?</td>\\s*</tr>\\s*<tr>\\s*<td.*?>\\s*<table>\\s*<tr.*?>\\s*<td.*?>\\s*</td>(\\s*<td.*?>\\s*(?<thumbnail><a.*?>\\s*<img.*?>\\s*</a>).*?</td>\\s*)+?</tr>\\s*</table>\\s*</tr>)";
 
             string input = cleanup ? Regex.Replace(html, "(\r|\n)", string.Empty) : html;
 
-            Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
+            var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
             Match match = r.Match(input);
 
@@ -112,22 +129,21 @@
             {
                 string title = match.Groups["title"].Value;
                 string url = match.Groups["url"].Value;
-                Gallery g = new Gallery(title, url);
-
+                var g = new Gallery(title, url);
 
                 CaptureCollection cc = match.Groups["thumbnail"].Captures;
 
-                Task[] tasks = new Task[cc.Count];
+                var tasks = new Task[cc.Count];
 
                 for (int i = 0; i < cc.Count; i++)
                 {
                     int index = i;
-                    Task task = new Task(
+                    var task = new Task(
                         () =>
-                        {
-                            Thumbnail t = this.GetThumbnail(cc[index].Value);
-                            g.Add(t);
-                        });
+                            {
+                                Thumbnail t = this.GetThumbnail(cc[index].Value);
+                                g.Add(t);
+                            });
                     tasks[index] = task;
                     task.Start();
                 }
@@ -138,10 +154,12 @@
             }
             else
             {
-                Peach.Log.Logger.Current.Warn(string.Format("Invalid gallery tag, {0}", html));
+                Logger.Current.Warn(string.Format("Invalid gallery tag, {0}", html));
                 return null;
             }
         }
+
+        #endregion
 
         /*
         public IList<Thumbnail> ListThumbnails(string html)

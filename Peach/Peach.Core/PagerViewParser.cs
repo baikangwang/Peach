@@ -1,31 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Peach.Entity;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="PagerViewParser.cs" company="Orange">
+//   
+// </copyright>
+// <summary>
+//   The pager view parser.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Peach.Core
 {
-    public abstract class PagerViewParser:ViewParser
+    using Peach.Entity;
+
+    /// <summary>
+    /// The pager view parser.
+    /// </summary>
+    public abstract class PagerViewParser : ViewParser
     {
+        #region Constructors and Destructors
 
-        protected string PagerInput { get; set; }
-        protected string ViewInput { get; set; }
-
-        protected abstract void Init();
-
-        protected PagerViewParser(string input) : base(input)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PagerViewParser"/> class.
+        /// </summary>
+        /// <param name="input">
+        /// The input.
+        /// </param>
+        protected PagerViewParser(string input)
+            : base(input)
         {
             this.Init();
         }
 
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the pager input.
+        /// </summary>
+        protected string PagerInput { get; set; }
+
+        /// <summary>
+        /// Gets or sets the view input.
+        /// </summary>
+        protected string ViewInput { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The get pager.
+        /// </summary>
+        /// <param name="cleanup">
+        /// The cleanup.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Pager"/>.
+        /// </returns>
         public virtual Pager GetPager(bool cleanup = false)
         {
-            using (PagerParser p = new PagerParser(this.PagerInput))
+            using (var p = new PagerParser(this.PagerInput))
             {
                 Pager pr = p.GetPager(cleanup);
                 return pr;
             }
         }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The init.
+        /// </summary>
+        protected abstract void Init();
+
+        #endregion
     }
 }

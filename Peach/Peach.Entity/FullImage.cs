@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FullImage.cs" company="">
+// <copyright file="FullImage.cs" company="Orange">
 //   
 // </copyright>
 // <summary>

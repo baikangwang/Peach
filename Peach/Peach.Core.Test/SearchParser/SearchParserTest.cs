@@ -32,17 +32,5 @@ namespace Peach.Core.Test
                 Console.WriteLine(pr);
             }
         }
-#if DEBUG
-        [Test]
-        public void GetGalleryTest()
-        {
-            string input = File.ReadAllText("SearchParser\\searchsingle.txt");
-            using (SearchViewParser p=new SearchViewParser(input))
-            {
-                Gallery g = p.GetGellery(input);
-                Console.WriteLine(g.ToString());
-            }
-        }
-#endif
     }
 }

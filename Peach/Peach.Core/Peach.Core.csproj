@@ -55,6 +55,7 @@
     <Compile Include="ViewParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchViewParser.cs" />
+    <Compile Include="WithTimeout.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Peach.Entity\Peach.Entity.csproj">

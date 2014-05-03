@@ -1,26 +1,49 @@
-﻿namespace Peach.Core
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Browser.cs" company="Orange">
+//   
+// </copyright>
+// <summary>
+//   The browser.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Peach.Core
 {
     using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
     using System.Net;
-    using System.Text;
 
     using Peach.Entity;
+    using Peach.Log;
 
     /// <summary>
-    /// The browser.
+    ///     The browser.
     /// </summary>
     public class Browser
     {
-        /// <summary>
-        /// The _current.
-        /// </summary>
-        private static Browser _current = new Browser();
+        #region Static Fields
 
         /// <summary>
-        /// Gets the current.
+        ///     The _current.
+        /// </summary>
+        private static readonly Browser _current = new Browser();
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Browser" /> class.
+        /// </summary>
+        protected Browser()
+        {
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        ///     Gets the current.
         /// </summary>
         public static Browser Current
         {
@@ -30,13 +53,48 @@
             }
         }
 
+        #endregion
+
+        #region Public Methods and Operators
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="Browser"/> class.
+        /// The get.
         /// </summary>
-        protected Browser()
+        /// <param name="url">
+        /// The url.
+        /// </param>
+        /// <returns>
+        /// The <see cref="MethodResult"/>.
+        /// </returns>
+        public MethodResult<HttpWebResponse> Get(string url)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                Logger.Current.ErrorFormat("Empty requesting url->{0}", url);
+                return new MethodResult<HttpWebResponse>("Empty requesting url");
+            }
+
+            Logger.Current.InfoFormat("Requesting url->{0}", url);
+
+            Uri uri;
+            try
+            {
+                uri = new Uri(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.ErrorFormat("Invalid requesting url->{0}, Error:{1}", url, ex);
+                return
+                    new MethodResult<HttpWebResponse>(
+                        string.Format("Invalid requesting url->{0}, Error:{1}", url, ex.Message));
+            }
+
+            var request = (HttpWebRequest)WebRequest.Create(uri);
+            request.Timeout = 5 * 1000;
+
+            return this.TryGetResponse(request);
         }
-        
+
         /// <summary>
         /// The get image.
         /// </summary>
@@ -48,21 +106,7 @@
         /// </returns>
         public MethodResult<HttpWebResponse> GetImage(string url)
         {
-            Uri uri = new Uri(url);
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.ProtocolVersion = new Version(1, 1);
-            request.Method = "GET";
-            request.Host = uri.Host;
-            request.KeepAlive = true;
-            request.UserAgent =
-                "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Maxthon/3.0 Chrome/22.0.1229.79 Safari/537.1";
-            request.Accept = "*/*";
-            request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip,deflate";
-            request.Headers[HttpRequestHeader.AcceptLanguage] = "en-US";
-            request.Headers[HttpRequestHeader.AcceptCharset] = "GBK,utf-8;q=0.7,*;q=0.3";
-
-            return this.TryGetResponse(request);
+            return this.Get(url);
         }
 
         /// <summary>
@@ -76,53 +120,79 @@
         /// </returns>
         public MethodResult<HttpWebResponse> GetPage(string url)
         {
-            Uri uri = new Uri(url);
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.ProtocolVersion = new Version(1, 1);
-            request.Method = "GET";
-            request.Host = uri.Host;
-            request.KeepAlive = true;
-            request.UserAgent=
-                "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Maxthon/3.0 Chrome/22.0.1229.79 Safari/537.1";
-            request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-            //request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip,deflate";
-            request.Headers[HttpRequestHeader.AcceptLanguage] = "en-US";
-            request.Headers[HttpRequestHeader.AcceptCharset] = "GBK,utf-8;q=0.7,*;q=0.3";
-
-            return this.TryGetResponse(request);
+            return this.Get(url);
         }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The try get response.
+        /// </summary>
+        /// <param name="request">
+        /// The request.
+        /// </param>
+        /// <returns>
+        /// The <see cref="MethodResult"/>.
+        /// </returns>
         private MethodResult<HttpWebResponse> TryGetResponse(HttpWebRequest request)
         {
             int max = 3;
 
-            //try 3 times
+            // try 3 times
             while (max > 0)
             {
-                HttpWebResponse response = (HttpWebResponse) request.GetResponse();
+                try
+                {
+                    Logger.Current.InfoFormat(
+                        "Getting response of url, {0} requesting {1} times.", request.RequestUri, 3 - max + 1);
 
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    return new MethodResult<HttpWebResponse>(response);
+                    var response = (HttpWebResponse)request.GetResponse();
+
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        return new MethodResult<HttpWebResponse>(response);
+                    }
+                    else
+                    {
+                        Logger.Current.InfoFormat(
+                            "Fail to getting response of url, {0} {1} times. Status Code: {2}", 
+                            request.RequestUri, 
+                            3 - max + 1, 
+                            response.StatusCode);
+                        max--;
+                    }
+
+                    if (max == 0)
+                    {
+                        return new MethodResult<HttpWebResponse>(response.StatusDescription);
+                    }
+                    else
+                    {
+                        // nothing to do
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
+                    Logger.Current.WarnFormat(
+                        "Fail to getting response of url, {0} {1} times. error: {2}", 
+                        request.RequestUri, 
+                        3 - max + 1, 
+                        ex.Message);
                     max--;
-                }
 
-                if (max == 0)
-                {
-                    return new MethodResult<HttpWebResponse>(response.StatusDescription);
-                }
-                else
-                {
-                    // nothing to do
+                    if (max == 0)
+                    {
+                        return new MethodResult<HttpWebResponse>(ex.Message);
+                    }
                 }
             }
 
-            //must not be here
+            // must not be here
             return new MethodResult<HttpWebResponse>("unknown error hanppened.");
         }
+
+        #endregion
     }
 }
