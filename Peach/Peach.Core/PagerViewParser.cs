@@ -7,6 +7,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using Peach.Log;
+
 namespace Peach.Core
 {
     using Peach.Entity;
@@ -16,6 +19,8 @@ namespace Peach.Core
     /// </summary>
     public abstract class PagerViewParser : ViewParser
     {
+        private bool _isInit;
+        
         #region Constructors and Destructors
 
         /// <summary>
@@ -27,7 +32,7 @@ namespace Peach.Core
         protected PagerViewParser(string input)
             : base(input)
         {
-            this.Init();
+            //this.Init();
         }
 
         #endregion
@@ -59,11 +64,31 @@ namespace Peach.Core
         /// </returns>
         public virtual Pager GetPager(bool cleanup = false)
         {
+            if (!_isInit)
+            {
+                Init();
+            }
+            
+            OnParserStatusChanged(
+                new ParserEventArgs("Starting to extract pager..."));
+            
             using (var p = new PagerParser(this.PagerInput))
             {
                 Pager pr = p.GetPager(cleanup);
+
+                OnParserStatusChanged(new ParserEventArgs("Finish to extract pager..."));
                 return pr;
             }
+        }
+
+        public override System.Collections.Generic.IList<Gallery> ListGalleries(bool cleanup = false)
+        {
+            if (!_isInit)
+            {
+                Init();
+            }
+
+            return null;
         }
 
         #endregion

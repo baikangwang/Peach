@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Peach.Core
 {
     using System.Collections.Generic;
@@ -121,7 +123,16 @@ namespace Peach.Core
 
             var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
-            Match match = r.Match(input);
+            Match match;
+            try
+            {
+                match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.Warn(string.Format("Fail to parse thumbnail tag, Error: {0}", ex));
+                return null;
+            }
 
             if (match.Success)
             {
@@ -139,12 +150,5 @@ namespace Peach.Core
         }
 
         #endregion
-
-        /*
-        public IList<Thumbnail> ListThumbnails(string html)
-        {
-            return new List<Thumbnail>();
-        }
-         * */
     }
 }

@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Peach.Core
 {
     using System.Collections;
@@ -50,6 +52,10 @@ namespace Peach.Core
         /// </returns>
         public override IList<Gallery> ListGalleries(bool cleanup = false)
         {
+            base.ListGalleries(cleanup);
+            
+            OnParserStatusChanged(new ParserEventArgs("Starting to extract all of the galleries..."));
+            
             string input = cleanup ? Regex.Replace(this.ViewInput, "(\r|\n)", string.Empty) : this.ViewInput;
 
             string single =
@@ -59,7 +65,16 @@ namespace Peach.Core
 
             var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
-            Match match = r.Match(input);
+            Match match;
+            try
+            {
+                match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.Error(string.Format("Fail to extract galleries, Error: {0}", ex));
+                throw new Exception(string.Format("Fail to extract galleries, Error:{0}", ex.Message));
+            }
 
             IList<Gallery> gs = new List<Gallery>();
 
@@ -75,9 +90,15 @@ namespace Peach.Core
                     var task = new Task(
                         () =>
                             {
+                                OnParserStatusChanged(
+                                    new ParserEventArgs(string.Format("Starting to extract gallery [{0}]...", index)));
+
                                 Gallery g = this.GetGallery(cc[index].Value);
 
                                 gs.Add(g);
+
+                                OnParserStatusChanged(
+                                    new ParserEventArgs(string.Format("Finish to extract gallery [{0}]...", index)));
                             });
                     tasks[index] = task;
                     task.Start();
@@ -89,6 +110,8 @@ namespace Peach.Core
             {
                 Logger.Current.Warn(string.Format("Invalid thumbnail tag, {0}", this.Input));
             }
+
+            OnParserStatusChanged(new ParserEventArgs("Finish to extract all of the galleries."));
 
             return gs;
         }
@@ -126,7 +149,16 @@ namespace Peach.Core
 
             var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
-            Match match = r.Match(input);
+            Match match;
+            try
+            {
+                match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.Warn(string.Format("Fail to parse gallery tag, Error: {0}", ex));
+                return null;
+            }
 
             if (match.Success)
             {
@@ -135,6 +167,9 @@ namespace Peach.Core
                 var g = new Gallery(title, url);
 
                 CaptureCollection cc = match.Groups["thumbnail"].Captures;
+
+                OnParserStatusChanged(
+                    new ParserEventArgs("Starting to extract all of thumbnails of the gallery..."));
 
                 var tasks = new Task[cc.Count];
 
@@ -153,6 +188,9 @@ namespace Peach.Core
 
                 Task.WaitAll(tasks);
 
+                OnParserStatusChanged(
+                    new ParserEventArgs("Finish to extract all of thumbnails of the gallery."));
+
                 return g;
             }
             else
@@ -167,6 +205,8 @@ namespace Peach.Core
         /// </summary>
         protected override void Init()
         {
+            OnParserStatusChanged(new ParserEventArgs("Starting to initialize Search View..."));
+            
             string single =
                 "(?<gallery>\\s*<tr\\s*id=\"\\w+\".*?>.*?<a\\s*title=\"View\\s*(?<title>.*?)\".*?href=\"(?<url>.*?)\".*?>\\s*<i>\\s*<b>\\s*\\k<title>\\s*</b>\\s*</i>\\s*</a>.*?</tr>\\s*<tr.*?>\\s*<td.*?>\\s*<table>\\s*<tr>(\\s*<!--<div.*?>-->\\s*<td.*?>\\s*<a.*?title=\"View\\s*\\k<title>\".*?>\\s*<img.*?>\\s*</a>\\s*</td>\\s*<!--</div>-->\\s*)+</tr>\\s*</table>\\s*</td>\\s*<td.*?>.*?</td>\\s*<td.*?>\\s*</td>\\s*</tr>\\s*)";
             string pattern =
@@ -176,7 +216,16 @@ namespace Peach.Core
 
             var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
-            Match match = r.Match(this.Input);
+            Match match;
+            try
+            {
+                match = Util.WithTimeout(() => r.Match(this.Input), 5 * 1000);
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.Warn(string.Format("Fail to parse search view, Error: {0}", ex));
+                throw new ViewRecogntionException("Unrecognized search view","SearchView", ex);
+            }
 
             if (match.Success)
             {
@@ -187,6 +236,8 @@ namespace Peach.Core
             {
                 Logger.Current.Warn(string.Format("Invalid input, {0}", this.Input));
             }
+
+            OnParserStatusChanged(new ParserEventArgs("Finish to initialize Search View."));
         }
 
         #endregion

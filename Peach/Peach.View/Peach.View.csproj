@@ -50,6 +50,7 @@
     <Compile Include="SingleView.cs" />
     <Compile Include="GalleryView.cs" />
     <Compile Include="View.cs" />
+    <Compile Include="ViewEventHandle.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Peach.Core\Peach.Core.csproj">

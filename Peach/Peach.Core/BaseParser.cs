@@ -16,6 +16,14 @@ namespace Peach.Core
     /// </summary>
     public abstract class BaseParser : IDisposable
     {
+        public event ParserEventHandler ParserStatusChanged;
+
+        protected virtual void OnParserStatusChanged(ParserEventArgs e)
+        {
+            ParserEventHandler handler = ParserStatusChanged;
+            if (handler != null) handler(this, e);
+        }
+
         #region Fields
 
         /// <summary>

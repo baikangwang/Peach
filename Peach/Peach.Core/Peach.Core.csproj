@@ -48,10 +48,13 @@
   <ItemGroup>
     <Compile Include="BaseParser.cs" />
     <Compile Include="Browser.cs" />
+    <Compile Include="BrowserEventHandler.cs" />
+    <Compile Include="Exception\RecognitionException.cs" />
     <Compile Include="GalleryViewParser.cs" />
     <Compile Include="HomeViewParser.cs" />
     <Compile Include="PagerParser.cs" />
     <Compile Include="PagerViewParser.cs" />
+    <Compile Include="ParserEventHandler.cs" />
     <Compile Include="ViewParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchViewParser.cs" />

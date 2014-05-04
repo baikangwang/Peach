@@ -35,10 +35,10 @@ namespace Peach.View
 
         public override void GetView()
         {
-            MethodResult<HttpWebResponse> r = Browser.Current.GetImage(this.Url);
+            MethodResult<Stream> r = Browser.Current.GetImage(this.Url);
             if (r)
             {
-                        this._fullImage.Load(r.Result.GetResponseStream());
+                        this._fullImage.Load(r.Result);
             }
             else
             {

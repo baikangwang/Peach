@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.IO;
+
 namespace Peach.Core
 {
     using System;
@@ -27,6 +29,22 @@ namespace Peach.Core
         /// </summary>
         private static readonly Browser _current = new Browser();
 
+        public event BrowserEventHandler Requesting;
+
+        private void OnRequesting(BrowserEventArgs e)
+        {
+            BrowserEventHandler handler = Requesting;
+            if (handler != null) handler(null, e);
+        }
+
+        public event BrowserEventHandler Responsed;
+
+        private void OnResponsed(BrowserEventArgs e)
+        {
+            BrowserEventHandler handler = Responsed;
+            if (handler != null) handler(null, e);
+        }
+
         #endregion
 
         #region Constructors and Destructors
@@ -36,6 +54,18 @@ namespace Peach.Core
         /// </summary>
         protected Browser()
         {
+            this.Requesting += Browser_Requesting;
+            this.Responsed += Browser_Responsed;
+        }
+
+        void Browser_Responsed(object sender, BrowserEventArgs e)
+        {
+            Logger.Current.Debug(e.Message);
+        }
+
+        void Browser_Requesting(object sender, BrowserEventArgs e)
+        {
+            Logger.Current.Debug(e.Message);
         }
 
         #endregion
@@ -74,8 +104,6 @@ namespace Peach.Core
                 return new MethodResult<HttpWebResponse>("Empty requesting url");
             }
 
-            Logger.Current.InfoFormat("Requesting url->{0}", url);
-
             Uri uri;
             try
             {
@@ -104,9 +132,27 @@ namespace Peach.Core
         /// <returns>
         /// The <see cref="MethodResult"/>.
         /// </returns>
-        public MethodResult<HttpWebResponse> GetImage(string url)
+        public MethodResult<Stream> GetImage(string url)
         {
-            return this.Get(url);
+            MethodResult<HttpWebResponse> r = this.Get(url);
+            if (r)
+            {
+                try
+                {
+                    Stream s = Util.WithTimeout<Stream>(() => r.Result.GetResponseStream(), 10 * 1000);
+                    return new MethodResult<Stream>(s);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Current.Warn(string.Format("Fail to get image {0}. Error:{1}", url, ex));
+                    return new MethodResult<Stream>(string.Format("Fail to get image {0}. Error:{1}", url, ex.Message));
+                }
+                
+            }
+            else
+            {
+                return new MethodResult<Stream>(r.Message);
+            }
         }
 
         /// <summary>
@@ -143,35 +189,20 @@ namespace Peach.Core
             // try 3 times
             while (max > 0)
             {
+                HttpWebResponse response;
+                
                 try
                 {
-                    Logger.Current.InfoFormat(
-                        "Getting response of url, {0} requesting {1} times.", request.RequestUri, 3 - max + 1);
+                    OnRequesting(
+                        new BrowserEventArgs(string.Format("The {0} time to getting response of {1}", ToLabel(3 - max + 1),
+                                                           request.RequestUri)));
 
-                    var response = (HttpWebResponse)request.GetResponse();
+                    response = Util.WithTimeout<HttpWebResponse>(() => (HttpWebResponse)request.GetResponse(), 10 * 1000);
 
-                    if (response.StatusCode == HttpStatusCode.OK)
-                    {
-                        return new MethodResult<HttpWebResponse>(response);
-                    }
-                    else
-                    {
-                        Logger.Current.InfoFormat(
-                            "Fail to getting response of url, {0} {1} times. Status Code: {2}", 
-                            request.RequestUri, 
-                            3 - max + 1, 
-                            response.StatusCode);
-                        max--;
-                    }
+                    OnResponsed(
+                        new BrowserEventArgs(string.Format("Got response of {1} at {0} time.", ToLabel(3 - max + 1),
+                                                           request.RequestUri)));
 
-                    if (max == 0)
-                    {
-                        return new MethodResult<HttpWebResponse>(response.StatusDescription);
-                    }
-                    else
-                    {
-                        // nothing to do
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -180,17 +211,58 @@ namespace Peach.Core
                         request.RequestUri, 
                         3 - max + 1, 
                         ex.Message);
+
                     max--;
 
                     if (max == 0)
                     {
                         return new MethodResult<HttpWebResponse>(ex.Message);
                     }
+
+                    continue;
+                }
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    return new MethodResult<HttpWebResponse>(response);
+                }
+                else
+                {
+                    Logger.Current.InfoFormat(
+                        "Fail to getting response of url, {0} {1} times. Status Code: {2}",
+                        request.RequestUri,
+                        3 - max + 1,
+                        response.StatusCode);
+                    max--;
+                }
+
+                if (max == 0)
+                {
+                    return new MethodResult<HttpWebResponse>(response.StatusDescription);
+                }
+                else
+                {
+                    // nothing to do
                 }
             }
 
             // must not be here
             return new MethodResult<HttpWebResponse>("unknown error hanppened.");
+        }
+
+        private string ToLabel(int sequence)
+        {
+            switch (sequence)
+            {
+                case 1:
+                    return "First";
+                case 2:
+                    return "Second";
+                case 3:
+                    return "Third";
+                default:
+                    return "Last";
+            }
         }
 
         #endregion

@@ -11,6 +11,9 @@
                 <Image x:Name="img4" Width="196"/>
             </StackPanel>
         </GroupBox>
+        <StatusBar HorizontalAlignment="Left" Height="46" Margin="0,677,0,0" VerticalAlignment="Top" Width="1034">
+            <Label x:Name="lblMsg" Content="Label" Width="1024"/>
+        </StatusBar>
 
     </Grid>
 </Window>

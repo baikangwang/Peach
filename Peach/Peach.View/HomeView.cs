@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
 using Peach.Core;
 
 namespace Peach.View
@@ -38,6 +39,8 @@ namespace Peach.View
             base.GetView();
             this._galleries = new List<Gallery>() { this.ViewParser.ListGalleries().FirstOrDefault() };
 
+            this.OnViewStatusChanged(new ViewEventArgs(string.Format("Starting to draw all of galleries...")));
+            
             Task[] tgs = new Task[this._galleries.Count];
 
             for (int i = 0; i < this._galleries.Count; i++)
@@ -46,6 +49,8 @@ namespace Peach.View
                 Task tg = new Task(
                     () =>
                         {
+                            this.OnViewStatusChanged(new ViewEventArgs(string.Format("Starting to get all of thumbnails of the gallery {0}...", ig.Title)));
+                            
                             Task[] tts = new Task[ig.Thumbnails.Count];
 
                             for (int j = 0; j < ig.Thumbnails.Count; j++)
@@ -54,10 +59,17 @@ namespace Peach.View
                                 Task tt = new Task(
                                     () =>
                                         {
-                                            MethodResult<HttpWebResponse> r = Browser.Current.GetImage(it.Url);
+                                            this.OnViewStatusChanged(new ViewEventArgs(string.Format("Starting to get thumbnail {0}...", it.Url)));
+                                            
+                                            MethodResult<Stream> r = Browser.Current.GetImage(it.Url);
                                             if (r)
                                             {
-                                                it.Load(r.Result.GetResponseStream());
+                                                it.Load(r.Result);
+                                                this.OnViewStatusChanged(new ViewEventArgs(string.Format("Finish to get thumbnail {0}", it.Url)));
+                                            }
+                                            else
+                                            {
+                                                this.OnViewStatusChanged(new ViewEventArgs(r.Message));
                                             }
                                         });
 
@@ -66,12 +78,16 @@ namespace Peach.View
                             }
 
                             Task.WaitAll(tts);
+
+                            this.OnViewStatusChanged(new ViewEventArgs(string.Format("Finish to get all of thumbnails of the gallery {0}", ig.Title)));
                         });
                 tgs[i] = tg;
                 tg.Start();
             }
 
             Task.WaitAll(tgs);
+
+            this.OnViewStatusChanged(new ViewEventArgs(string.Format("Finish to draw all of galleries.")));
         }
     }
 }

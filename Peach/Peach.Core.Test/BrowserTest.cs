@@ -24,15 +24,15 @@ namespace Peach.Core.Test
             // string url = "http://www.imagefap.com/image.php?id=287720072"; //string.Empty;
             string url = "http://x1.fap.to/images/thumb/52/287/287720072.jpg";
 
-            HttpWebResponse response = Browser.Current.GetImage(url).Result;
+            Stream response = Browser.Current.GetImage(url).Result;
 
-            string contentType = response.Headers[HttpResponseHeader.ContentType];
+            string contentType = "image/jpeg";
 
             if (contentType.Contains("image"))
             {
                 string type = contentType.Split(new char[] { '/' }, StringSplitOptions.None)[1];
 
-                using (Stream s = response.GetResponseStream())
+                using (Stream s = response)
                 {
                     using (Image image = Image.FromStream(s))
                     {

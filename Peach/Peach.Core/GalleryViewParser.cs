@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Peach.Core
 {
     using System.Collections.Generic;
@@ -49,6 +51,10 @@ namespace Peach.Core
         /// </returns>
         public override IList<Gallery> ListGalleries(bool cleanup = false)
         {
+            base.ListGalleries(cleanup);
+            
+            OnParserStatusChanged(new ParserEventArgs("Starting to extract gallery..."));
+            
             IList<Gallery> gs = new List<Gallery>();
             Gallery g = this.GetGallery(this.ViewInput);
             if (g != null)
@@ -57,9 +63,9 @@ namespace Peach.Core
             }
             else
             {
-                Logger.Current.WarnFormat("Cannot extract Gallery info");
+                Logger.Current.Error("Cannot extract Gallery info");
             }
-
+            OnParserStatusChanged(new ParserEventArgs("Finish to extract gallery"));
             return gs;
         }
 
@@ -95,8 +101,16 @@ namespace Peach.Core
 
             var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
-            //todo: add try-catch block
-            Match match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+            Match match;
+            try
+            {
+                match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.Error(string.Format("Fail to parse gallery tag, Error: {0}", ex));
+                throw new GalleryRecogtionExpcetion(string.Format("Unrecongnized gallery, Error: {0}", ex));
+            }
 
             if (match.Success)
             {
@@ -106,6 +120,8 @@ namespace Peach.Core
 
                 CaptureCollection cc = match.Groups["thumbnail"].Captures;
 
+                OnParserStatusChanged(new ParserEventArgs("Starting to extract all of thumbnails of the gallery ..."));
+                
                 var tasks = new Task[cc.Count];
 
                 for (int i = 0; i < cc.Count; i++)
@@ -129,6 +145,8 @@ namespace Peach.Core
                 }
 
                 Task.WaitAll(tasks);
+
+                OnParserStatusChanged(new ParserEventArgs("Finish to extract all of thumbnails of the gallery..."));
 
                 return g;
             }
@@ -175,7 +193,16 @@ namespace Peach.Core
 
             var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
-            Match match = r.Match(input);
+            Match match;
+            try
+            {
+                match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.Warn(string.Format("Fail to parse thumbnail tag, Error: {0}", ex));
+                return null;
+            }
 
             if (match.Success)
             {
@@ -197,12 +224,23 @@ namespace Peach.Core
         /// </summary>
         protected override void Init()
         {
+            OnParserStatusChanged(new ParserEventArgs("Starting to initialize Gallery View..."));
+            
             string pattern =
                 "(?<gallery><table.*?>\\s*<tr>\\s*<td.*?>\\s*<div\\s*id=\"menubar\".*?>.*?</div>.*?<table.*?id=\"gal_desc\"\\s*>.*?</table>.*?<div\\s*id=\"gallery\">\\s*(?<ptemp><font.*?>\\s*<span.*?>\\s*(?<pager>\\|\\s*<b>\\s*\\w+\\s*</b>.*?::\\s*next\\s*::\\s*</a>)\\s*</span>\\s*</font>)\\s*<BR>\\s*<form.*?>\\s*<table.*?>(?<row>\\s*<tr>(?<thumbnail>\\s*<td.*?>.*?</td>\\s*){1,4}</tr>\\s*)+</table>\\s*</form>\\s*<BR>\\s*\\k<ptemp>\\s*<br\\s*/><br\\s*/>\\s*</div>.*?<center>\\s*<a.*?>\\s*Report\\s*this\\s*gallery\\s*</a>\\s*<br>\\s*<br>\\s*<br>\\s*<br>\\s*</center>\\s*<!--.*?-->\\s*</td>\\s*</tr>\\s*</table>)";
 
             var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
-            Match match = r.Match(this.Input);
+            Match match;
+            try
+            {
+                match = Util.WithTimeout(() => r.Match(this.Input), 5 * 1000);
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.Warn(string.Format("Fail to parse gallery view, Error: {0}", ex));
+                throw new ViewRecogntionException("Unrecognized Gallery View", "GalleryView", ex);
+            }
 
             if (match.Success)
             {
@@ -212,7 +250,10 @@ namespace Peach.Core
             else
             {
                 Logger.Current.Warn(string.Format("Invalid input, {0}", this.Input));
+                throw new ViewRecogntionException("Unrecognized Gallery View", "GalleryView");
             }
+
+            OnParserStatusChanged(new ParserEventArgs("Finish to initialize Gallery View."));
         }
 
         #endregion

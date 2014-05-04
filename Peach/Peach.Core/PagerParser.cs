@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Peach.Core
 {
     using System.Collections.Generic;
@@ -81,7 +83,16 @@ namespace Peach.Core
 
             var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
-            Match match = r.Match(input);
+            Match match;
+            try
+            {
+                match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.Error(string.Format("Cannot extract pager info, Error: {0}", ex));
+                throw new PagerRecogntionException("Cannot extract pager info", ex);
+            }
 
             if (match.Success)
             {
@@ -100,7 +111,10 @@ namespace Peach.Core
                         () =>
                             {
                                 Page p = this.GetPage(cc[index].Value);
-                                pages.Add(p);
+                                if (p != null)
+                                {
+                                    pages.Add(p);
+                                }
                             });
                     tasks[index] = task;
                     task.Start();
@@ -108,9 +122,11 @@ namespace Peach.Core
 
                 var n = new Task(() => { next = this.GetNext(match.Groups["next"].Value); });
                 tasks[tasks.Length - 2] = n;
+                n.Start();
 
                 var c = new Task(() => { current = this.GetCurrent(match.Groups["current"].Value); });
                 tasks[tasks.Length - 1] = c;
+                c.Start();
 
                 Task.WaitAll(tasks);
 
@@ -120,8 +136,9 @@ namespace Peach.Core
             }
             else
             {
-                Logger.Current.Warn(string.Format("Invalid pager tag, {0}", this.Input));
-                return null;
+                string message = string.Format("Invalid pager tag, {0}", this.Input);
+                Logger.Current.Error(message);
+                throw new Exception(message);
             }
         }
 
@@ -154,7 +171,16 @@ namespace Peach.Core
 
             var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
-            Match match = r.Match(input);
+            Match match;
+            try
+            {
+                match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.Warn(string.Format("Fail to parse current of pager tag, Error: {0}", ex));
+                return null;
+            }
 
             if (match.Success)
             {
@@ -195,7 +221,16 @@ namespace Peach.Core
 
             var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
-            Match match = r.Match(input);
+            Match match;
+            try
+            {
+                match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.Warn(string.Format("Fail to parse next of pager tag, Error: {0}", ex));
+                return null;
+            }
 
             if (match.Success)
             {
@@ -236,7 +271,16 @@ namespace Peach.Core
 
             var r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
 
-            Match match = r.Match(input);
+            Match match;
+            try
+            {
+                match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.Warn(string.Format("Fail to parse page tag, Error: {0}", ex));
+                return null;
+            }
 
             if (match.Success)
             {
