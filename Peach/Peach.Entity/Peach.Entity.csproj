@@ -39,12 +39,13 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FullImage.cs" />
     <Compile Include="Gallery.cs" />
+    <Compile Include="IFullImage.cs" />
+    <Compile Include="IImage.cs" />
+    <Compile Include="IThumbnail.cs" />
     <Compile Include="MethodResult.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="Pager.cs" />
-    <Compile Include="Thumbnail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

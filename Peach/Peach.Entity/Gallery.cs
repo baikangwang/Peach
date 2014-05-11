@@ -25,12 +25,12 @@ namespace Peach.Entity
         /// <summary>
         /// The _full images.
         /// </summary>
-        private IList<FullImage> _fullImages;
+        private IList<IFullImage> _fullImages;
 
         /// <summary>
         /// The _thumbnails.
         /// </summary>
-        private IList<Thumbnail> _thumbnails;
+        private IList<IThumbnail> _thumbnails;
 
         /// <summary>
         /// The _title.
@@ -60,8 +60,8 @@ namespace Peach.Entity
             this._title = title;
             this._url = url;
 
-            this._thumbnails = new List<Thumbnail>();
-            this._fullImages = new List<FullImage>();
+            this._thumbnails = new List<IThumbnail>();
+            this._fullImages = new List<IFullImage>();
         }
 
         #endregion
@@ -71,7 +71,7 @@ namespace Peach.Entity
         /// <summary>
         /// Gets the full images.
         /// </summary>
-        public IList<FullImage> FullImages
+        public IList<IFullImage> FullImages
         {
             get
             {
@@ -82,7 +82,7 @@ namespace Peach.Entity
         /// <summary>
         /// Gets the thumbnails.
         /// </summary>
-        public IList<Thumbnail> Thumbnails
+        public IList<IThumbnail> Thumbnails
         {
             get
             {
@@ -118,20 +118,20 @@ namespace Peach.Entity
         /// </returns>
         /// <exception cref="NotSupportedException">
         /// </exception>
-        public int Add<T>(T value) where T : Img
+        public int Add<T>(T value) where T : IImage
         {
-            Type t = typeof(T);
+            Type[] interfaces = typeof(T).GetInterfaces();
 
-            if (t == typeof(Thumbnail))
+            if (interfaces.Contains(typeof(IThumbnail)))
             {
-                var img = value as Thumbnail;
+                var img = value as IThumbnail;
                 img.OwnerGallery = this;
                 this._thumbnails.Add(img);
                 return this._thumbnails.IndexOf(img);
             }
-            else if (t == typeof(FullImage))
+            else if (interfaces.Contains(typeof(IFullImage)))
             {
-                var img = value as FullImage;
+                var img = value as IFullImage;
                 img.OwnerGallery = this;
                 this._fullImages.Add(img);
                 return this._fullImages.IndexOf(img);
@@ -149,15 +149,15 @@ namespace Peach.Entity
         /// </typeparam>
         /// <exception cref="NotSupportedException">
         /// </exception>
-        public void Clear<T>() where T : Img
+        public void Clear<T>() where T : IImage
         {
-            Type t = typeof(T);
+            Type[] interfaces = typeof(T).GetInterfaces();
 
-            if (t == typeof(Thumbnail))
+            if (interfaces.Contains(typeof(IThumbnail)))
             {
                 this._thumbnails.Clear();
             }
-            else if (t == typeof(FullImage))
+            else if (interfaces.Contains(typeof(IFullImage)))
             {
                 this._fullImages.Clear();
             }
@@ -180,15 +180,15 @@ namespace Peach.Entity
         /// </returns>
         /// <exception cref="NotSupportedException">
         /// </exception>
-        public bool Contains<T>(object value) where T : Img
+        public bool Contains<T>(object value) where T : IImage
         {
-            Type t = typeof(T);
+            Type[] interfaces = typeof(T).GetInterfaces();
 
-            if (t == typeof(Thumbnail))
+            if (interfaces.Contains(typeof(IThumbnail)))
             {
                 return this._thumbnails.Contains(value);
             }
-            else if (t == typeof(FullImage))
+            else if (interfaces.Contains(typeof(IFullImage)))
             {
                 return this._fullImages.Contains(value);
             }
@@ -208,15 +208,15 @@ namespace Peach.Entity
         /// </returns>
         /// <exception cref="NotSupportedException">
         /// </exception>
-        public int Count<T>() where T : Img
+        public int Count<T>() where T : IImage
         {
-            Type t = typeof(T);
+            Type[] interfaces = typeof(T).GetInterfaces();
 
-            if (t == typeof(Thumbnail))
+            if (interfaces.Contains(typeof(IThumbnail)))
             {
                 return this._thumbnails.Count;
             }
-            else if (t == typeof(FullImage))
+            else if (interfaces.Contains(typeof(IFullImage)))
             {
                 return this._fullImages.Count;
             }
@@ -261,17 +261,17 @@ namespace Peach.Entity
         /// </returns>
         /// <exception cref="NotSupportedException">
         /// </exception>
-        public T Get<T>(int index) where T : Img
+        public T Get<T>(int index) where T : IImage
         {
-            Type t = typeof(T);
+            Type[] interfaces = typeof(T).GetInterfaces();
 
-            if (t == typeof(Thumbnail))
+            if (interfaces.Contains(typeof(IThumbnail)))
             {
-                return this._thumbnails[index] as T;
+                return (T)this._thumbnails[index];
             }
-            else if (t == typeof(FullImage))
+            else if (interfaces.Contains(typeof(IFullImage)))
             {
-                return this._fullImages[index] as T;
+                return (T) this._fullImages[index];
             }
             else
             {
@@ -289,15 +289,15 @@ namespace Peach.Entity
         /// </returns>
         /// <exception cref="NotSupportedException">
         /// </exception>
-        public IEnumerator GetEnumerator<T>() where T : Img
+        public IEnumerator GetEnumerator<T>() where T : IImage
         {
-            Type t = typeof(T);
+            Type[] interfaces = typeof(T).GetInterfaces();
 
-            if (t == typeof(Thumbnail))
+            if (interfaces.Contains(typeof(IThumbnail)))
             {
                 return this._thumbnails.GetEnumerator();
             }
-            else if (t == typeof(FullImage))
+            else if (interfaces.Contains(typeof(IFullImage)))
             {
                 return this._fullImages.GetEnumerator();
             }
@@ -318,13 +318,13 @@ namespace Peach.Entity
             var sb = new StringBuilder();
             sb.AppendLine(string.Format("Title: {0}, Url: {1}", this._title, this._url));
             sb.AppendLine(string.Format("---{0} of Thumbnails---", this._thumbnails.Count));
-            foreach (Thumbnail t in this._thumbnails)
+            foreach (IThumbnail t in this._thumbnails)
             {
                 sb.AppendLine(string.Format("[{0}] > {1}", this._thumbnails.IndexOf(t), t));
             }
 
             sb.AppendLine(string.Format("---{0} of FullImages---", this._fullImages.Count));
-            foreach (FullImage f in this._fullImages)
+            foreach (IFullImage f in this._fullImages)
             {
                 sb.AppendLine(string.Format("[{0}] > {1}", this._fullImages.IndexOf(f), f));
             }
@@ -333,14 +333,13 @@ namespace Peach.Entity
         }
 
         protected virtual void Dispose(bool all)
-
         {
             if (all)
             {
                 this._title = null;
                 this._url = null;
 
-                foreach (Thumbnail img in _thumbnails)
+                foreach (IThumbnail img in _thumbnails)
                 {
                     img.Dispose();
                 }
@@ -348,7 +347,7 @@ namespace Peach.Entity
                 this._thumbnails.Clear();
                 this._thumbnails = null;
 
-                foreach (FullImage img in this._fullImages)
+                foreach (IFullImage img in this._fullImages)
                 {
                     img.Dispose();
                 }
@@ -359,7 +358,7 @@ namespace Peach.Entity
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            this.Dispose(true);
         }
 
         #endregion

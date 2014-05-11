@@ -12,7 +12,7 @@ namespace Peach.Entity
     /// <summary>
     /// The full image.
     /// </summary>
-    public class FullImage : Img
+    public class FullImage : Img, IFullImage
     {
         #region Constructors and Destructors
 

@@ -39,55 +39,47 @@ namespace Peach.View
             base.GetView();
             this._galleries = this.ViewParser.ListGalleries();
 
-            this.OnViewStatusChanged(new ViewEventArgs(string.Format("Starting to draw all of galleries...")));
+            //this.OnViewStatusChanged(new ViewEventArgs(string.Format("Starting to draw all of galleries...")));
             
-            Task[] tgs = new Task[this._galleries.Count];
+            //Task[] tgs = new Task[this._galleries.Count];
 
-            for (int i = 0; i < this._galleries.Count; i++)
-            {
-                Gallery ig = this._galleries[i];
-                Task tg = new Task(
-                    () =>
-                        {
-                            this.OnViewStatusChanged(new ViewEventArgs(string.Format("Starting to get all of thumbnails of the gallery {0}...", ig.Title)));
+            //for (int i = 0; i < this._galleries.Count; i++)
+            //{
+            //    Gallery ig = this._galleries[i];
+            //    Task tg = new Task(
+            //        () =>
+            //            {
+            //                this.OnViewStatusChanged(new ViewEventArgs(string.Format("Starting to get all of thumbnails of the gallery {0}...", ig.Title)));
                             
-                            Task[] tts = new Task[ig.Thumbnails.Count];
+            //                Task[] tts = new Task[ig.Thumbnails.Count];
 
-                            for (int j = 0; j < ig.Thumbnails.Count; j++)
-                            {
-                                Thumbnail it = ig.Thumbnails[j];
-                                Task tt = new Task(
-                                    () =>
-                                        {
-                                            this.OnViewStatusChanged(new ViewEventArgs(string.Format("Starting to get thumbnail {0}...", it.Url)));
+            //                for (int j = 0; j < ig.Thumbnails.Count; j++)
+            //                {
+            //                    IThumbnail it = ig.Thumbnails[j];
+            //                    Task tt = new Task(
+            //                        () =>
+            //                            {
+            //                                this.OnViewStatusChanged(new ViewEventArgs(string.Format("Starting to get thumbnail {0}...", it.Url)));
                                             
-                                            MethodResult<Stream> r = Browser.Current.GetImage(it.Url);
-                                            if (r)
-                                            {
-                                                it.Load(r.Result);
-                                                this.OnViewStatusChanged(new ViewEventArgs(string.Format("Finish to get thumbnail {0}", it.Url)));
-                                            }
-                                            else
-                                            {
-                                                this.OnViewStatusChanged(new ViewEventArgs(r.Message));
-                                            }
-                                        });
+            //                                    it.Load();
+            //                                    this.OnViewStatusChanged(new ViewEventArgs(string.Format("Finish to get thumbnail {0}", it.Url)));
+            //                            });
 
-                                tts[j] = tt;
-                                tt.Start();
-                            }
+            //                    tts[j] = tt;
+            //                    tt.Start();
+            //                }
 
-                            Task.WaitAll(tts);
+            //                Task.WaitAll(tts);
 
-                            this.OnViewStatusChanged(new ViewEventArgs(string.Format("Finish to get all of thumbnails of the gallery {0}", ig.Title)));
-                        });
-                tgs[i] = tg;
-                tg.Start();
-            }
+            //                this.OnViewStatusChanged(new ViewEventArgs(string.Format("Finish to get all of thumbnails of the gallery {0}", ig.Title)));
+            //            });
+            //    tgs[i] = tg;
+            //    tg.Start();
+            //}
 
-            Task.WaitAll(tgs);
+            //Task.WaitAll(tgs);
 
-            this.OnViewStatusChanged(new ViewEventArgs(string.Format("Finish to draw all of galleries.")));
+            //this.OnViewStatusChanged(new ViewEventArgs(string.Format("Finish to draw all of galleries.")));
         }
     }
 }

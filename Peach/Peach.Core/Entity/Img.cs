@@ -7,6 +7,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Net;
+using Peach.Core;
+
 namespace Peach.Entity
 {
     using System;
@@ -17,7 +20,7 @@ namespace Peach.Entity
     /// <summary>
     ///     The img.
     /// </summary>
-    public abstract class Img:IDisposable
+    public abstract class Img: IImage
     {
         #region Fields
 
@@ -99,7 +102,7 @@ namespace Peach.Entity
         /// <summary>
         /// Gets the owner gallery.
         /// </summary>
-        public Gallery OwnerGallery { get; internal set; }
+        public Gallery OwnerGallery { get; set; }
 
         /// <summary>
         ///     Gets the title.
@@ -209,9 +212,23 @@ namespace Peach.Entity
         /// <param name="response">
         /// The response.
         /// </param>
-        public virtual void Load(Stream response)
+        public virtual void Load()
         {
-            this._stream = response;
+            MethodResult<HttpWebResponse> r = Browser.Current.Get(this._url);
+            Stream stream = r.Result.GetResponseStream();
+            byte[] segment = new byte[1024];
+            int n = stream.Read(segment, 0, segment.Length);
+            MemoryStream ms = new MemoryStream();
+            while (n > 0)
+            {
+                ms.Write(segment, 0, n);
+                n = stream.Read(segment, 0, segment.Length);
+            }
+            stream.Close();
+            //ms.Close();
+            ms.Position = 0;
+
+            this._stream = ms;
         }
 
         /// <summary>

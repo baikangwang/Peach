@@ -433,32 +433,19 @@ namespace Peach.Viewer
                 {
                     int jindex = j;
 
-                    Thumbnail t = g.Thumbnails[jindex];
+                    IThumbnail t = g.Thumbnails[jindex];
 
                     var it = Task.Factory.StartNew(
                         () =>
                             {
-                                var stream = t.GetContent();
-                                byte[] segment = new byte[1024];
-                                int n = stream.Read(segment, 0, segment.Length);
-                                MemoryStream ms = new MemoryStream();
-                                while (n > 0)
-                                {
-                                    ms.Write(segment, 0, n);
-                                    n = stream.Read(segment, 0, segment.Length);
-                                }
-                                stream.Close();
-                                //ms.Close();
-                                ms.Position = 0;
-                                var source = BitmapFrame.Create(ms,
+                                var source = BitmapFrame.Create(t.GetContent(),
                                                                 BitmapCreateOptions.None,
                                                                 BitmapCacheOption.OnLoad);
+                                source.Freeze();
 
-                                return source;
-                            }, this._globalcancell.Token);
+                                this.OnCellInitializing(new {Group = title, GalleryIndex = gindex, ImageIndex = jindex, Image = source});
 
-                    it.ContinueWith(task => this.OnCellInitializing(
-                        new {Group = title,GalleryIndex=gindex, ImageIndex = jindex, Image = task.Result}), this._ui);
+                            }, this._globalcancell.Token, TaskCreationOptions.None, this._ui);
 
                     tasks[j] = it;
                 }

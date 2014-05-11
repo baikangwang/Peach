@@ -12,7 +12,7 @@ namespace Peach.Entity
     /// <summary>
     /// The thumbnail.
     /// </summary>
-    public class Thumbnail : Img
+    public class Thumbnail : Img, IThumbnail
     {
         #region Fields
 
