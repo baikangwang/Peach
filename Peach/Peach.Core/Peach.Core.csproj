@@ -45,6 +45,7 @@
     <Compile Include="Exception\RecognitionException.cs" />
     <Compile Include="GalleryViewParser.cs" />
     <Compile Include="HomeViewParser.cs" />
+    <Compile Include="Img.cs" />
     <Compile Include="PagerParser.cs" />
     <Compile Include="PagerViewParser.cs" />
     <Compile Include="ParserEventHandler.cs" />

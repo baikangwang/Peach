@@ -37,7 +37,7 @@ namespace Peach.View
         public override void GetView()
         {
             base.GetView();
-            this._galleries = new List<Gallery>() { this.ViewParser.ListGalleries().FirstOrDefault() };
+            this._galleries = this.ViewParser.ListGalleries();
 
             this.OnViewStatusChanged(new ViewEventArgs(string.Format("Starting to draw all of galleries...")));
             
