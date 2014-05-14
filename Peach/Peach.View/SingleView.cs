@@ -38,7 +38,7 @@ namespace Peach.View
             MethodResult<Stream> r = Browser.Current.GetImage(this.Url);
             if (r)
             {
-                        this._fullImage.Load(r.Result);
+                        //this._fullImage.Load(r.Result);
             }
             else
             {

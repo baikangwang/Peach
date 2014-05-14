@@ -100,7 +100,7 @@ namespace Peach.Core
         {
             if (string.IsNullOrEmpty(url))
             {
-                Logger.Current.ErrorFormat("Empty requesting url->{0}", url);
+                Logger.Current.ErrorFormat("{0} -> Empty", url);
                 return new MethodResult<HttpWebResponse>("Empty requesting url");
             }
 
@@ -111,13 +111,24 @@ namespace Peach.Core
             }
             catch (Exception ex)
             {
-                Logger.Current.ErrorFormat("Invalid requesting url->{0}, Error:{1}", url, ex);
+                Logger.Current.ErrorFormat("{0} -> Invalid, Error:{1}", url, ex);
                 return
                     new MethodResult<HttpWebResponse>(
-                        string.Format("Invalid requesting url->{0}, Error:{1}", url, ex.Message));
+                        string.Format("{0} -> Invalid, Error:{1}", url, ex.Message));
             }
 
-            var request = (HttpWebRequest)WebRequest.Create(uri);
+            HttpWebRequest request;
+            
+            try
+            {
+                request = (HttpWebRequest)WebRequest.Create(uri);
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.ErrorFormat("{0} -> Invalid, Error:{1}", url, ex);
+                return new MethodResult<HttpWebResponse>(ex.Message);
+            }
+
             request.Timeout = 5 * 1000;
 
             return this.TryGetResponse(request);
@@ -193,21 +204,21 @@ namespace Peach.Core
                 
                 try
                 {
-                    OnRequesting(
-                        new BrowserEventArgs(string.Format("The {0} time to getting response of {1}", ToLabel(3 - max + 1),
+                    this.OnRequesting(
+                        new BrowserEventArgs(string.Format("{1} -> requesting {0}", ToLabel(3 - max + 1),
                                                            request.RequestUri)));
 
-                    response = Util.WithTimeout<HttpWebResponse>(() => (HttpWebResponse)request.GetResponse(), 10 * 1000);
+                    response = Util.WithTimeout<HttpWebResponse>(() => (HttpWebResponse) request.GetResponse(), 10 * 1000);
 
-                    OnResponsed(
-                        new BrowserEventArgs(string.Format("Got response of {1} at {0} time.", ToLabel(3 - max + 1),
+                    this.OnResponsed(
+                        new BrowserEventArgs(string.Format("{1} -> Got at {0} time.", ToLabel(3 - max + 1),
                                                            request.RequestUri)));
 
                 }
                 catch (Exception ex)
                 {
                     Logger.Current.WarnFormat(
-                        "Fail to getting response of url, {0} {1} times. error: {2}", 
+                        "{0} -> request failure at {1} times. error: {2}", 
                         request.RequestUri, 
                         3 - max + 1, 
                         ex.Message);
@@ -229,7 +240,7 @@ namespace Peach.Core
                 else
                 {
                     Logger.Current.InfoFormat(
-                        "Fail to getting response of url, {0} {1} times. Status Code: {2}",
+                        "{0} -> request failure at {1} times. Status Code: {2}",
                         request.RequestUri,
                         3 - max + 1,
                         response.StatusCode);

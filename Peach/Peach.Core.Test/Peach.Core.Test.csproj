@@ -55,6 +55,7 @@
     <Compile Include="PagerParser\PagerParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchParser\SearchParserTest.cs" />
+    <Compile Include="ThumbnailTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="GalleryParser\gallerysample.txt" />

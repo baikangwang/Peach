@@ -17,6 +17,21 @@ namespace Peach.Entity
 
     using Peach.Log;
 
+    public delegate void ImageDownLoadEventHandler(object sender, ImageDownloadEventArgs e);
+
+    public class ImageDownloadEventArgs:EventArgs
+    {
+        public long TotalLength { get; private set; }
+
+        public long CurrentLength { get; private set; }
+
+        public ImageDownloadEventArgs(long total,long current)
+        {
+            this.TotalLength = total;
+            this.CurrentLength = current;
+        }
+    }
+
     /// <summary>
     ///     The img.
     /// </summary>
@@ -45,6 +60,14 @@ namespace Peach.Entity
         private Stream _stream;
 
         #endregion
+
+        public event ImageDownLoadEventHandler ImageDownloading;
+
+        protected virtual void OnImageDownloading(ImageDownloadEventArgs e)
+        {
+            ImageDownLoadEventHandler handler = ImageDownloading;
+            if (handler != null) handler(this, e);
+        }
 
         #region Constructors and Destructors
 
@@ -215,20 +238,50 @@ namespace Peach.Entity
         public virtual void Load()
         {
             MethodResult<HttpWebResponse> r = Browser.Current.Get(this._url);
-            Stream stream = r.Result.GetResponseStream();
-            byte[] segment = new byte[1024];
-            int n = stream.Read(segment, 0, segment.Length);
-            MemoryStream ms = new MemoryStream();
-            while (n > 0)
+            if (r)
             {
-                ms.Write(segment, 0, n);
-                n = stream.Read(segment, 0, segment.Length);
-            }
-            stream.Close();
-            //ms.Close();
-            ms.Position = 0;
+                Stream stream;
+                
+                try
+                {
+                    stream = r.Result.GetResponseStream();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Current.ErrorFormat("{0} -> load image content failure. {1}", this._url, ex);
+                    this._stream = null;
+                    return;
+                }
 
-            this._stream = ms;
+                if (stream == null)
+                {
+                    Logger.Current.ErrorFormat("{0} -> load image content failure. {1}", this._url);
+                    return;
+                }
+                
+                long length = r.Result.ContentLength;
+                long current = 0;
+
+                byte[] segment = new byte[1024];
+                int n = stream.Read(segment, 0, segment.Length);
+                MemoryStream ms = new MemoryStream();
+                while (n > 0)
+                {
+                    current += n;
+                    this.OnImageDownloading(new ImageDownloadEventArgs(length, current));
+                    
+                    ms.Write(segment, 0, n);
+                    n = stream.Read(segment, 0, segment.Length);
+                }
+                stream.Close();
+                ms.Position = 0;
+
+                this._stream = ms;
+            }
+            else
+            {
+                this._stream = null;
+            }
         }
 
         /// <summary>

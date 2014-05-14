@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,7 @@ using Peach.Log;
 using Peach.View;
 using Xceed.Wpf.Toolkit;
 using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
+using Path = System.IO.Path;
 
 namespace Peach.Viewer
 {
@@ -433,21 +436,29 @@ namespace Peach.Viewer
                 {
                     int jindex = j;
 
-                    IThumbnail t = g.Thumbnails[jindex];
+                    IThumbnail thum = g.Thumbnails[jindex];
 
-                    var it = Task.Factory.StartNew(
-                        () =>
-                            {
-                                var source = BitmapFrame.Create(t.GetContent(),
-                                                                BitmapCreateOptions.None,
-                                                                BitmapCacheOption.OnLoad);
-                                source.Freeze();
+                    var t = Task.Factory.StartNew(thum.Load, this._globalcancell.Token);
 
-                                this.OnCellInitializing(new {Group = title, GalleryIndex = gindex, ImageIndex = jindex, Image = source});
+                    var top = t.ContinueWith(task =>
+                                                 {
+                                                     var source = BitmapFrame.Create(thum.GetContent(),
+                                                                                     BitmapCreateOptions.None,
+                                                                                     BitmapCacheOption.OnLoad);
+                                                     source.Freeze();
 
-                            }, this._globalcancell.Token, TaskCreationOptions.None, this._ui);
+                                                     this.OnCellInitializing(
+                                                         new
+                                                             {
+                                                                 Group = title,
+                                                                 GalleryIndex = gindex,
+                                                                 ImageIndex = jindex,
+                                                                 Image = source
+                                                             });
 
-                    tasks[j] = it;
+                                                 }, this._globalcancell.Token,TaskContinuationOptions.None,  this._ui);
+
+                    tasks[j] = top;
                 }
 
                 Task.WaitAll(tasks);

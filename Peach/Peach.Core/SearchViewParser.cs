@@ -68,7 +68,8 @@ namespace Peach.Core
             Match match;
             try
             {
-                match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+                // match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+                match = r.Match(input);
             }
             catch (Exception ex)
             {
@@ -152,7 +153,8 @@ namespace Peach.Core
             Match match;
             try
             {
-                match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+                // match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+                match = r.Match(input);
             }
             catch (Exception ex)
             {

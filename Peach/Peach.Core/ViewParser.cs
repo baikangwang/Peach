@@ -126,13 +126,20 @@ namespace Peach.Core
             Match match;
             try
             {
-                match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+                // match = Util.WithTimeout(() => r.Match(input), 5 * 1000);
+                match = r.Match(input);
             }
             catch (Exception ex)
             {
                 Logger.Current.Warn(string.Format("Fail to parse thumbnail tag, Error: {0}", ex));
                 return null;
             }
+
+            //if (match == null)
+            //{
+            //    Logger.Current.Warn(string.Format("Fail to parse thumbnail tag"));
+            //    return null;
+            //}
 
             if (match.Success)
             {
