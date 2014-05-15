@@ -32,8 +32,7 @@ namespace Peach.Core
         /// <param name="input">
         /// The input.
         /// </param>
-        public SearchViewParser(string input)
-            : base(input)
+        public SearchViewParser()
         {
         }
 
@@ -54,7 +53,7 @@ namespace Peach.Core
         {
             base.ListGalleries(cleanup);
             
-            OnParserStatusChanged(new ParserEventArgs("Starting to extract all of the galleries..."));
+            OnParserStatusChanged(new ParserStatusEventArgs("Starting to extract all of the galleries..."));
             
             string input = cleanup ? Regex.Replace(this.ViewInput, "(\r|\n)", string.Empty) : this.ViewInput;
 
@@ -92,14 +91,14 @@ namespace Peach.Core
                         () =>
                             {
                                 OnParserStatusChanged(
-                                    new ParserEventArgs(string.Format("Starting to extract gallery [{0}]...", index)));
+                                    new ParserStatusEventArgs(string.Format("Starting to extract gallery [{0}]...", index)));
 
                                 Gallery g = this.GetGallery(cc[index].Value);
 
                                 gs.Add(g);
 
                                 OnParserStatusChanged(
-                                    new ParserEventArgs(string.Format("Finish to extract gallery [{0}]...", index)));
+                                    new ParserStatusEventArgs(string.Format("Finish to extract gallery [{0}]...", index)));
                             });
                     tasks[index] = task;
                     task.Start();
@@ -112,7 +111,7 @@ namespace Peach.Core
                 Logger.Current.Warn(string.Format("Invalid thumbnail tag, {0}", this.Input));
             }
 
-            OnParserStatusChanged(new ParserEventArgs("Finish to extract all of the galleries."));
+            OnParserStatusChanged(new ParserStatusEventArgs("Finish to extract all of the galleries."));
 
             return gs;
         }
@@ -171,7 +170,7 @@ namespace Peach.Core
                 CaptureCollection cc = match.Groups["thumbnail"].Captures;
 
                 OnParserStatusChanged(
-                    new ParserEventArgs("Starting to extract all of thumbnails of the gallery..."));
+                    new ParserStatusEventArgs("Starting to extract all of thumbnails of the gallery..."));
 
                 var tasks = new Task[cc.Count];
 
@@ -191,7 +190,7 @@ namespace Peach.Core
                 Task.WaitAll(tasks);
 
                 OnParserStatusChanged(
-                    new ParserEventArgs("Finish to extract all of thumbnails of the gallery."));
+                    new ParserStatusEventArgs("Finish to extract all of thumbnails of the gallery."));
 
                 return g;
             }
@@ -205,9 +204,11 @@ namespace Peach.Core
         /// <summary>
         /// The init.
         /// </summary>
-        protected override void Init()
+        public override void Init(string input)
         {
-            OnParserStatusChanged(new ParserEventArgs("Starting to initialize Search View..."));
+            base.Init(input);
+            
+            OnParserStatusChanged(new ParserStatusEventArgs("Starting to initialize Search View..."));
             
             string single =
                 "(?<gallery>\\s*<tr\\s*id=\"\\w+\".*?>.*?<a\\s*title=\"View\\s*(?<title>.*?)\".*?href=\"(?<url>.*?)\".*?>\\s*<i>\\s*<b>\\s*\\k<title>\\s*</b>\\s*</i>\\s*</a>.*?</tr>\\s*<tr.*?>\\s*<td.*?>\\s*<table>\\s*<tr>(\\s*<!--<div.*?>-->\\s*<td.*?>\\s*<a.*?title=\"View\\s*\\k<title>\".*?>\\s*<img.*?>\\s*</a>\\s*</td>\\s*<!--</div>-->\\s*)+</tr>\\s*</table>\\s*</td>\\s*<td.*?>.*?</td>\\s*<td.*?>\\s*</td>\\s*</tr>\\s*)";
@@ -239,7 +240,7 @@ namespace Peach.Core
                 Logger.Current.Warn(string.Format("Invalid input, {0}", this.Input));
             }
 
-            OnParserStatusChanged(new ParserEventArgs("Finish to initialize Search View."));
+            OnParserStatusChanged(new ParserStatusEventArgs("Finish to initialize Search View."));
         }
 
         #endregion

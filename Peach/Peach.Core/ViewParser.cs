@@ -30,9 +30,14 @@ namespace Peach.Core
         /// <param name="input">
         /// The input.
         /// </param>
-        protected ViewParser(string input)
-            : base(input)
+        protected ViewParser()
         {
+        }
+
+        public override void Init(string input)
+        {
+            base.Init(input);
+
             if (string.IsNullOrEmpty(input))
             {
                 this.Input = string.Empty;
@@ -134,12 +139,6 @@ namespace Peach.Core
                 Logger.Current.Warn(string.Format("Fail to parse thumbnail tag, Error: {0}", ex));
                 return null;
             }
-
-            //if (match == null)
-            //{
-            //    Logger.Current.Warn(string.Format("Fail to parse thumbnail tag"));
-            //    return null;
-            //}
 
             if (match.Success)
             {

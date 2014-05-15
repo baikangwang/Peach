@@ -49,7 +49,7 @@
     <Compile Include="Entity\Img.cs" />
     <Compile Include="PagerParser.cs" />
     <Compile Include="PagerViewParser.cs" />
-    <Compile Include="ParserEventHandler.cs" />
+    <Compile Include="ParserStatusEventHandler.cs" />
     <Compile Include="Entity\Thumbnail.cs" />
     <Compile Include="ViewParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

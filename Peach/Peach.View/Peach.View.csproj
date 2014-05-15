@@ -45,7 +45,8 @@
     <Compile Include="SingleView.cs" />
     <Compile Include="GalleryView.cs" />
     <Compile Include="View.cs" />
-    <Compile Include="ViewEventHandle.cs" />
+    <Compile Include="ViewException.cs" />
+    <Compile Include="ViewStatusEventHandle.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Peach.Core\Peach.Core.csproj">
@@ -55,6 +56,10 @@
     <ProjectReference Include="..\Peach.Entity\Peach.Entity.csproj">
       <Project>{1BB4F061-2A42-4ACC-88A6-7F8D10A7F420}</Project>
       <Name>Peach.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Peach.Log\Peach.Log.csproj">
+      <Project>{f594087c-8118-4931-9af4-2f1033635417}</Project>
+      <Name>Peach.Log</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

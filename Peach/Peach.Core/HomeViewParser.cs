@@ -31,8 +31,7 @@ namespace Peach.Core
         /// <param name="input">
         /// The input.
         /// </param>
-        public HomeViewParser(string input)
-            : base(input)
+        public HomeViewParser()
         {
         }
 
@@ -51,7 +50,7 @@ namespace Peach.Core
         /// </returns>
         public override IList<Gallery> ListGalleries(bool cleanup = false)
         {
-            OnParserStatusChanged(new ParserEventArgs("Starting to extract all of galleries..."));
+            OnParserStatusChanged(new ParserStatusEventArgs("Starting to extract all of galleries..."));
             
             string input = cleanup ? Regex.Replace(this.Input, "(\r|\n)", string.Empty) : this.Input;
 
@@ -88,8 +87,8 @@ namespace Peach.Core
                     var task = new Task(
                         () =>
                             {
-                                OnParserStatusChanged(
-                                    new ParserEventArgs(string.Format("Starting to extract gallery [{0}]...", index)));
+                                this.OnParserStatusChanged(
+                                    new ParserStatusEventArgs(string.Format("Starting to extract gallery [{0}]...", index)));
                                 
                                 Gallery g = this.GetGallery(cc[index].Value);
                                 if (g != null)
@@ -97,8 +96,10 @@ namespace Peach.Core
                                     gs.Add(g);
                                 }
 
-                                OnParserStatusChanged(
-                                    new ParserEventArgs(string.Format("Finish to extract gallery [{0}]...", index)));
+                                this.OnParserGalleryProcessed(g);
+
+                                this.OnParserStatusChanged(
+                                    new ParserStatusEventArgs(string.Format("Finish to extract gallery [{0}]...", index)));
                             });
                     tasks[index] = task;
                     task.Start();
@@ -111,7 +112,7 @@ namespace Peach.Core
                 Logger.Current.Warn(string.Format("Invalid thumbnail tag, {0}", this.Input));
             }
 
-            OnParserStatusChanged(new ParserEventArgs("Finish to extract all of galleries..."));
+            OnParserStatusChanged(new ParserStatusEventArgs("Finish to extract all of galleries..."));
 
             return gs;
         }
@@ -174,7 +175,7 @@ namespace Peach.Core
                 CaptureCollection cc = match.Groups["thumbnail"].Captures;
                 
                 OnParserStatusChanged(
-                    new ParserEventArgs("Starting to extract all of thumbnails of the gallery..."));
+                    new ParserStatusEventArgs("Starting to extract all of thumbnails of the gallery..."));
                 
                 var tasks = new Task[cc.Count];
 
@@ -197,7 +198,7 @@ namespace Peach.Core
                 Task.WaitAll(tasks);
 
                 OnParserStatusChanged(
-                    new ParserEventArgs("Finish to extract all of thumbnails of the gallery."));
+                    new ParserStatusEventArgs("Finish to extract all of thumbnails of the gallery."));
                 
                 return g;
             }

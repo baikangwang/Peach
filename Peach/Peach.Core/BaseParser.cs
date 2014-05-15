@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Peach.Entity;
+
 namespace Peach.Core
 {
     using System;
@@ -16,11 +18,19 @@ namespace Peach.Core
     /// </summary>
     public abstract class BaseParser : IDisposable
     {
-        public event ParserEventHandler ParserStatusChanged;
+        public event ParserStatusEventHandler ParserStatusChanged;
 
-        protected virtual void OnParserStatusChanged(ParserEventArgs e)
+        public event ParserProcessEventHandler ParserGalleryProcessed;
+
+        protected virtual void OnParserGalleryProcessed(Gallery gallery)
         {
-            ParserEventHandler handler = ParserStatusChanged;
+            ParserProcessEventHandler handler = ParserGalleryProcessed;
+            if (handler != null) handler(this, gallery);
+        }
+
+        protected virtual void OnParserStatusChanged(ParserStatusEventArgs e)
+        {
+            ParserStatusEventHandler handler = ParserStatusChanged;
             if (handler != null) handler(this, e);
         }
 
@@ -42,9 +52,14 @@ namespace Peach.Core
         /// <param name="input">
         /// The input.
         /// </param>
-        protected BaseParser(string input)
+        //protected BaseParser(string input)
+        //{
+        //    this._input = input;
+        //}
+
+        protected BaseParser()
         {
-            this._input = input;
+            this._input = string.Empty;
         }
 
         #endregion
@@ -70,6 +85,14 @@ namespace Peach.Core
         #endregion
 
         #region Public Methods and Operators
+
+        /// <summary>
+        /// The init.
+        /// </summary>
+        public virtual void Init(string input)
+        {
+            this._input = input;
+        }
 
         /// <summary>
         ///     The dispose.

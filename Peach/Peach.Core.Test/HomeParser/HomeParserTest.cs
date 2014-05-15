@@ -54,7 +54,8 @@ namespace Peach.Core.Test
 
             string input = File.ReadAllText(filename);//.Replace("\n", string.Empty).Replace("\r", string.Empty);
 
-            ViewParser p=new HomeViewParser(input);
+            ViewParser p=new HomeViewParser();
+            p.Init(input);
             IList<Gallery> gs = p.ListGalleries(input);
 
             foreach (Gallery g in gs)

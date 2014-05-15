@@ -31,8 +31,7 @@ namespace Peach.Core
         /// <param name="input">
         /// The input.
         /// </param>
-        public PagerParser(string input)
-            : base(input)
+        public PagerParser()
         {
         }
 

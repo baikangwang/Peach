@@ -78,17 +78,15 @@ namespace Peach.Viewer
             this.Closed += MainWindow_Closed;
             this._view=new HomeView("http://www.imagefap.com");
             //this._view.ViewStatusChanged += View_ViewStatusChanged;
-            //Browser.Current.Requesting += (sender, e) => this.View_ViewStatusChanged(sender, new ViewEventArgs(e.Message));
-            //Browser.Current.Responsed += (sender, e) => this.View_ViewStatusChanged(sender, new ViewEventArgs(e.Message));
+            //Browser.Current.Requesting += (sender, e) => this.View_ViewStatusChanged(sender, new ViewStatusEventArgs(e.Message));
+            //Browser.Current.Responsed += (sender, e) => this.View_ViewStatusChanged(sender, new ViewStatusEventArgs(e.Message));
 
-            this.Content = this._loading;
             this.Loaded += this.MainWindow_Loaded;
             this.ContentRendered += this.MainWindow_ContentRendered;
             this.RowsInitializing += this.MainWindow_RowsInitializing;
             this.CellInitializing += this.MainWindow_CellInitializing;
             this.BeginBusy += this.MainWindow_BeginBusy;
             this.EndBusy += this.MainWindow_EndBusy;
-            this._ui = TaskScheduler.FromCurrentSynchronizationContext();
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)
@@ -320,10 +318,10 @@ namespace Peach.Viewer
         /// </param>
         private void MainWindow_ContentRendered(object sender, EventArgs e)
         {
+            //todo if fail get view cancel loadwebcotent
+            
             Task.Factory.StartNew(() =>
                                       {
-                                          Task.Factory.StartNew(() => this.OnBeginBusy(null), CancellationToken.None,
-                                                                TaskCreationOptions.None, this._ui);
 
                                          try
                                          {
@@ -331,11 +329,8 @@ namespace Peach.Viewer
                                          }
                                          catch (Exception ex)
                                          {
-                                             View_ViewStatusChanged(this, new ViewEventArgs(ex.Message));
+                                             View_ViewStatusChanged(this, new ViewStatusEventArgs(ex.Message));
                                          }
-
-                                         Task.Factory.StartNew(() => this.OnEndBusy(null), CancellationToken.None,
-                                                               TaskCreationOptions.None, this._ui);
 
                                      }, this._globalcancell.Token);
         }
@@ -368,9 +363,37 @@ namespace Peach.Viewer
         /// </param>
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            this._loading.Content = this._scrollbar;
+            this.Content = this._scrollbar;
+            this._scrollbar.Content = this._loading;
             this._scrollbar.Content = this.main;
             this.main.Orientation = Orientation.Vertical;
+            this._ui = TaskScheduler.FromCurrentSynchronizationContext();
+
+            Task.Factory.StartNew(() => this.OnBeginBusy(null), CancellationToken.None,
+                                  TaskCreationOptions.None, this._ui);
+            try
+            {
+                this._view.GetView();
+            }
+            catch (Exception)
+            {
+                //todo render default view
+                //show message
+
+                Task.Factory.StartNew(() => this.OnEndBusy(null), CancellationToken.None,
+                                      TaskCreationOptions.None, this._ui);
+                return;
+            }
+
+            IList<Gallery> gs = _view.Galleries;
+
+            var tinit = Task.Factory.StartNew(() => this.OnRowsInitializing(gs), CancellationToken.None,
+                                          TaskCreationOptions.None, this._ui);
+            tinit.Wait();
+
+            Task.Factory.StartNew(() => this.OnEndBusy(null), CancellationToken.None,
+                                  TaskCreationOptions.None, this._ui);
+
         }
 
         /// <summary>
@@ -400,7 +423,7 @@ namespace Peach.Viewer
 
         #endregion
 
-        private void View_ViewStatusChanged(object sender, ViewEventArgs e)
+        private void View_ViewStatusChanged(object sender, ViewStatusEventArgs e)
         {
             //if (lblMsg.Dispatcher.CheckAccess())
             //{
@@ -410,18 +433,13 @@ namespace Peach.Viewer
             //else
             //{
             //    // Invokation required
-            //    lblMsg.Dispatcher.Invoke(DispatcherPriority.Normal, new ViewEventHandle(View_ViewStatusChanged),sender,e);
+            //    lblMsg.Dispatcher.Invoke(DispatcherPriority.Normal, new ViewStatusEventHandle(View_ViewStatusChanged),sender,e);
             //}
         }
 
         private void LoadWebContent()
         {
-            this._view.GetView();
             IList<Gallery> gs = _view.Galleries;
-
-            var tinit = Task.Factory.StartNew(() => this.OnRowsInitializing(gs), CancellationToken.None,
-                                          TaskCreationOptions.None, this._ui);
-            tinit.Wait();
 
             for (int i = 0; i < gs.Count; i++)
             {

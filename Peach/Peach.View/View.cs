@@ -13,52 +13,72 @@ namespace Peach.View
 {
     public abstract class View<T> : View where T : BaseParser
     {
-        public event ViewEventHandle ViewStatusChanged;
-
-        protected virtual void OnViewStatusChanged(ViewEventArgs e)
+        public event ParserStatusEventHandler ViewStatusChanged
         {
-            ViewEventHandle handler = ViewStatusChanged;
-            if (handler != null) handler(this, e);
+            add { ViewParser.ParserStatusChanged += value; }
+            remove { ViewParser.ParserStatusChanged -= value; }
         }
 
-        protected T ViewParser { get; set; }
+        public event ParserProcessEventHandler ViewGalleryProcessed
+        {
+            add
+            {
+                ViewParser.ParserGalleryProcessed += value;
+            }
+            remove
+            {
+                ViewParser.ParserGalleryProcessed -= value;
+            }
+        }
+
+        protected T ViewParser { get; private set; }
         
         public override void GetView()
         {
             MethodResult<HttpWebResponse> r = Browser.Current.GetPage(this.Url);
             if (r)
             {
-                using (Stream s=r.Result.GetResponseStream())
+                try
                 {
-                    if (s != null)
+                    using (Stream s = r.Result.GetResponseStream())
                     {
-                        using (StreamReader sr=new StreamReader(s))
+                        if (s != null)
                         {
-                            string input = sr.ReadToEnd();
-                            ViewParser = Activator.CreateInstance(typeof (T), input) as T;
-                            EventInfo e = typeof (T).GetEvent("ParserStatusChanged");
-                            if (e != null)
+                            using (StreamReader sr = new StreamReader(s))
                             {
-                                e.AddEventHandler(ViewParser, new ParserEventHandler(ParserStatusChanged));
+                                string input = sr.ReadToEnd();
+                                ViewParser.Init(input);
                             }
                         }
-                    }
-                    else
-                    {
-                        // error
-                        // throw exception
+                        else
+                        {
+                            // error
+                            throw new ViewException(string.Format("{0} -> fail to get page stream.", this.Url));
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    if (ex is ViewException)
+                    {
+                        throw;
+                    }
+                    
+                    Peach.Log.Logger.Current.ErrorFormat(string.Format("{0} -> fail to get page stream", this.Url), ex);
+                    throw new ViewException(string.Format("{0} -> fail to get page stream. {1}", this.Url, ex.Message));
+                }
+                
             }
             else
             {
                 // no response, show error
-                //throw exception
+                throw new ViewException(string.Format("{0} -> no response. {1}",this.Url, r.Message));
             }
         }
 
         protected View(string url):base(url)
         {
+            ViewParser = Activator.CreateInstance(typeof(T)) as T;
         }
         
         protected override void Dispose(bool all)
@@ -69,11 +89,6 @@ namespace Peach.View
             {
                 this.ViewParser.Dispose();
             }
-        }
-
-        protected void ParserStatusChanged(object sender, ParserEventArgs e)
-        {
-            this.OnViewStatusChanged(new ViewEventArgs(e.Message));
         }
     }
 

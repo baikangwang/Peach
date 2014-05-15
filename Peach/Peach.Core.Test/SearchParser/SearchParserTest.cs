@@ -18,8 +18,9 @@ namespace Peach.Core.Test
 
             string input = File.ReadAllText(filename);
 
-            using (SearchViewParser p = new SearchViewParser(input))
+            using (SearchViewParser p = new SearchViewParser())
             {
+                p.Init(input);
                 IList<Gallery> gs = p.ListGalleries();
 
                 Pager pr = p.GetPager();

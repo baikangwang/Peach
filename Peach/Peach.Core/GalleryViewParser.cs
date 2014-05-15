@@ -31,8 +31,7 @@ namespace Peach.Core
         /// <param name="input">
         /// The input.
         /// </param>
-        public GalleryViewParser(string input)
-            : base(input)
+        public GalleryViewParser()
         {
         }
 
@@ -53,7 +52,7 @@ namespace Peach.Core
         {
             base.ListGalleries(cleanup);
             
-            OnParserStatusChanged(new ParserEventArgs("Starting to extract gallery..."));
+            OnParserStatusChanged(new ParserStatusEventArgs("Starting to extract gallery..."));
             
             IList<Gallery> gs = new List<Gallery>();
             Gallery g = this.GetGallery(this.ViewInput);
@@ -65,7 +64,7 @@ namespace Peach.Core
             {
                 Logger.Current.Error("Cannot extract Gallery info");
             }
-            OnParserStatusChanged(new ParserEventArgs("Finish to extract gallery"));
+            OnParserStatusChanged(new ParserStatusEventArgs("Finish to extract gallery"));
             return gs;
         }
 
@@ -121,7 +120,7 @@ namespace Peach.Core
 
                 CaptureCollection cc = match.Groups["thumbnail"].Captures;
 
-                OnParserStatusChanged(new ParserEventArgs("Starting to extract all of thumbnails of the gallery ..."));
+                OnParserStatusChanged(new ParserStatusEventArgs("Starting to extract all of thumbnails of the gallery ..."));
                 
                 var tasks = new Task[cc.Count];
 
@@ -147,7 +146,7 @@ namespace Peach.Core
 
                 Task.WaitAll(tasks);
 
-                OnParserStatusChanged(new ParserEventArgs("Finish to extract all of thumbnails of the gallery..."));
+                OnParserStatusChanged(new ParserStatusEventArgs("Finish to extract all of thumbnails of the gallery..."));
 
                 return g;
             }
@@ -224,9 +223,11 @@ namespace Peach.Core
         /// <summary>
         /// The init.
         /// </summary>
-        protected override void Init()
+        public override void Init(string input)
         {
-            OnParserStatusChanged(new ParserEventArgs("Starting to initialize Gallery View..."));
+            base.Init(input);
+            
+            OnParserStatusChanged(new ParserStatusEventArgs("Starting to initialize Gallery View..."));
             
             string pattern =
                 "(?<gallery><table.*?>\\s*<tr>\\s*<td.*?>\\s*<div\\s*id=\"menubar\".*?>.*?</div>.*?<table.*?id=\"gal_desc\"\\s*>.*?</table>.*?<div\\s*id=\"gallery\">\\s*(?<ptemp><font.*?>\\s*<span.*?>\\s*(?<pager>\\|\\s*<b>\\s*\\w+\\s*</b>.*?::\\s*next\\s*::\\s*</a>)\\s*</span>\\s*</font>)\\s*<BR>\\s*<form.*?>\\s*<table.*?>(?<row>\\s*<tr>(?<thumbnail>\\s*<td.*?>.*?</td>\\s*){1,4}</tr>\\s*)+</table>\\s*</form>\\s*<BR>\\s*\\k<ptemp>\\s*<br\\s*/><br\\s*/>\\s*</div>.*?<center>\\s*<a.*?>\\s*Report\\s*this\\s*gallery\\s*</a>\\s*<br>\\s*<br>\\s*<br>\\s*<br>\\s*</center>\\s*<!--.*?-->\\s*</td>\\s*</tr>\\s*</table>)";
@@ -255,7 +256,7 @@ namespace Peach.Core
                 throw new ViewRecogntionException("Unrecognized Gallery View", "GalleryView");
             }
 
-            OnParserStatusChanged(new ParserEventArgs("Finish to initialize Gallery View."));
+            OnParserStatusChanged(new ParserStatusEventArgs("Finish to initialize Gallery View."));
         }
 
         #endregion

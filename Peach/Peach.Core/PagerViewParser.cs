@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using Peach.Log;
 
 namespace Peach.Core
@@ -19,7 +20,7 @@ namespace Peach.Core
     /// </summary>
     public abstract class PagerViewParser : ViewParser
     {
-        private bool _isInit;
+        //private bool _isInit;
         
         #region Constructors and Destructors
 
@@ -29,8 +30,7 @@ namespace Peach.Core
         /// <param name="input">
         /// The input.
         /// </param>
-        protected PagerViewParser(string input)
-            : base(input)
+        protected PagerViewParser()
         {
             //this.Init();
         }
@@ -64,41 +64,24 @@ namespace Peach.Core
         /// </returns>
         public virtual Pager GetPager(bool cleanup = false)
         {
-            if (!_isInit)
-            {
-                Init();
-            }
-            
             OnParserStatusChanged(
-                new ParserEventArgs("Starting to extract pager..."));
+                new ParserStatusEventArgs("Starting to extract pager..."));
             
-            using (var p = new PagerParser(this.PagerInput))
+            using (var p = new PagerParser())
             {
+                p.Init(this.PagerInput);
+                
                 Pager pr = p.GetPager(cleanup);
 
-                OnParserStatusChanged(new ParserEventArgs("Finish to extract pager..."));
+                OnParserStatusChanged(new ParserStatusEventArgs("Finish to extract pager..."));
                 return pr;
             }
         }
 
         public override System.Collections.Generic.IList<Gallery> ListGalleries(bool cleanup = false)
         {
-            if (!_isInit)
-            {
-                Init();
-            }
-
-            return null;
+            return new List<Gallery>();
         }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// The init.
-        /// </summary>
-        protected abstract void Init();
 
         #endregion
     }

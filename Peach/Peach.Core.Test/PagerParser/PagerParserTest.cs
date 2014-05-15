@@ -19,8 +19,9 @@ namespace Peach.Core.Test
 
             input = Regex.Replace(input, "\r|\n", string.Empty);
             
-            using (PagerParser p=new PagerParser(input))
+            using (PagerParser p=new PagerParser())
             {
+                p.Init(input);
                 Pager pr= p.GetPager(false);
                 Console.WriteLine(pr);
             }

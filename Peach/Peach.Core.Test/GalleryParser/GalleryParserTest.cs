@@ -16,8 +16,10 @@ namespace Peach.Core.Test
         {
             string input = File.ReadAllText("GalleryParser\\galleryview.txt");
 
-            using (GalleryViewParser gp=new GalleryViewParser(input))
+            using (GalleryViewParser gp=new GalleryViewParser())
             {
+                gp.Init(input);
+                
                 IList<Gallery> gs = gp.ListGalleries();
 
                 Pager pr = gp.GetPager();
