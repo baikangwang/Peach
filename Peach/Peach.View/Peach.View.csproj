@@ -46,7 +46,6 @@
     <Compile Include="GalleryView.cs" />
     <Compile Include="View.cs" />
     <Compile Include="ViewException.cs" />
-    <Compile Include="ViewStatusEventHandle.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Peach.Core\Peach.Core.csproj">

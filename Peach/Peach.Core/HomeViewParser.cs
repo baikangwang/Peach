@@ -96,7 +96,7 @@ namespace Peach.Core
                                     gs.Add(g);
                                 }
 
-                                this.OnParserGalleryProcessed(g);
+                                this.OnParserGalleryProcessed(new ParserProcessEventArgs(index, g));
 
                                 this.OnParserStatusChanged(
                                     new ParserStatusEventArgs(string.Format("Finish to extract gallery [{0}]...", index)));

@@ -22,10 +22,10 @@ namespace Peach.Core
 
         public event ParserProcessEventHandler ParserGalleryProcessed;
 
-        protected virtual void OnParserGalleryProcessed(Gallery gallery)
+        protected virtual void OnParserGalleryProcessed( ParserProcessEventArgs e)
         {
             ParserProcessEventHandler handler = ParserGalleryProcessed;
-            if (handler != null) handler(this, gallery);
+            if (handler != null) handler(this, e);
         }
 
         protected virtual void OnParserStatusChanged(ParserStatusEventArgs e)

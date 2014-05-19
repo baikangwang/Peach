@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Net;
+using System.Threading;
 using Peach.Core;
 
 namespace Peach.Entity
@@ -59,6 +60,8 @@ namespace Peach.Entity
         /// </summary>
         private Stream _stream;
 
+        private WaitHandle _ready;
+
         #endregion
 
         public event ImageDownLoadEventHandler ImageDownloading;
@@ -84,6 +87,7 @@ namespace Peach.Entity
         {
             this._title = title;
             this._url = url;
+            this._ready = new ManualResetEvent(false);
         }
 
         #endregion
@@ -282,6 +286,13 @@ namespace Peach.Entity
             {
                 this._stream = null;
             }
+
+            (this._ready as ManualResetEvent).Set();
+        }
+
+        public WaitHandle Ready
+        {
+            get { return _ready; }
         }
 
         /// <summary>

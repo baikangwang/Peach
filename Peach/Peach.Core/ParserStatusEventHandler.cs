@@ -15,7 +15,20 @@ namespace Peach.Core
         }
     }
 
+    public class ParserProcessEventArgs:EventArgs
+    {
+        public int Index { get; private set; }
+
+        public Gallery Gallery { get; private set; }
+        
+        public ParserProcessEventArgs(int index, Gallery gallery)
+        {
+            this.Index = index;
+            this.Gallery = gallery;
+        }
+    }
+
     public delegate void ParserStatusEventHandler(object sender, ParserStatusEventArgs e);
 
-    public delegate void ParserProcessEventHandler(object sender, Gallery gallery);
+    public delegate void ParserProcessEventHandler(object sender, ParserProcessEventArgs e);
 }

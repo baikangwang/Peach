@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 
 namespace Peach.Entity
 {
@@ -40,5 +41,7 @@ namespace Peach.Entity
         /// The response.
         /// </param>
         void Load();
+
+        WaitHandle Ready { get; }
     }
 }
