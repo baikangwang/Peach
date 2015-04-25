@@ -58,6 +58,9 @@
           <operation Id="4b171736-292b-4383-84ce-da9b6ddc032c" name="RestartTimer" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="79a83dba-a2df-430f-90ff-cca4e5c734b8" />
           </operation>
+          <operation Id="880b9b20-54c6-4d8f-9fe9-08108f8042c1" name="RightRightTouch" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="4f8b59a9-7abd-42d4-9357-6644b6e14463" />
+          </operation>
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
