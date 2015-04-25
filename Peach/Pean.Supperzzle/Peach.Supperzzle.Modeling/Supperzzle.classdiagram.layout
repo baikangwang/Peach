@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Supperzzle">
+  <logicalClassDesignerModelMoniker Id="d8b8a040-607e-490c-b498-cdef83e0cb1a" />
+  <nestedChildShapes>
+    <enumerationShape Id="58c33374-30d6-43d4-9a34-1e021177600b" absoluteBounds="0.875, 0.75, 1.5, 1.1716406026482584" hideQualifiedName="false" increaseHeight="0" customColor="161, 150, 103">
+      <enumerationMoniker Id="6989a4cc-3d08-4594-855c-457b7ec18991" LastKnownName="ChessState" />
+      <nestedChildShapes>
+        <LiteralElementListCompartment Id="ba588ceb-fa78-4fd1-97a1-da74eb94da42" absoluteBounds="0.89, 1.1400000000000001, 1.4700000000000002, 0.68164060264825821" name="LiteralsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </enumerationShape>
+    <classShape Id="499e88c9-b45e-4ff9-9b9c-af9ff1d0d673" absoluteBounds="3.375, 0.75, 1.5, 1.8632812052965164" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="77edadb2-52c2-4e60-abba-9a401205197a" LastKnownName="Chess" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="0cec29e7-baec-4ef5-9c21-923e874a6cdf" absoluteBounds="3.39, 1.1400000000000001, 1.4700000000000002, 0.52148435761531187" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="581631e4-0377-4851-883b-211769ba7e40" absoluteBounds="3.39, 1.671484357615312, 1.4700000000000002, 0.84179684768120444" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>

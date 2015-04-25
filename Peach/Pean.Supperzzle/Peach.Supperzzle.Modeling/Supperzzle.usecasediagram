@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" dslVersion="1.0.0.0" Id="aab727f3-189e-4aaf-a10a-6fa252a51855" name="Supperzzle" linkedPackageId="54384711-f3d2-4e1e-a1a8-9fa7457abcd9" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="cabb075f-acd9-42f4-9a88-68daadce34b1">
+      <profileInstance Id="eabeb074-81e9-4617-aeaa-c5fbe588c893" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="f2798fd5-7b72-4357-a542-133d52fa8043">
+      <profileInstance Id="82209001-aa09-4b28-9f8d-00d8e6d900b8" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="be7a9b99-a699-4740-a24c-dc543c6910d0" name="Supperzzle" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="f5f37885-4e1e-476f-82f4-2b2e0dfe3c86" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="02535103-0185-4f51-bf8e-f3496990a988" name="Teacher" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="bcaf294e-2684-4171-958c-e6d55af0fbd2" />
+        <targetEnds>
+          <association Id="1d67c7ee-a500-42ce-9345-ac85d1c15829" isDerived="false" sourceEndRoleName="Teacher" targetEndRoleName="Config" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="3e8d8c81-dbaa-4982-b0d0-876a05a9df59" LastKnownName="Config" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ec9dc093-4805-4780-9317-6ca968d09d7c" name="Teacher" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="023d4ddf-bc86-4c87-85db-cf6c33072118" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b876fd2c-7132-4e00-ab6a-3df5429e3a32" name="Config" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="38d6274f-524b-4f3d-9f1c-c241eabd8a56" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="d131c2d1-ed72-487d-886a-f8bf0ea1d2d1" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="19e89f0f-1d71-4071-84ca-0a647f711e85" name="Student" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="1df2fab2-074f-4919-aa33-3a5e4f460e52" />
+        <targetEnds>
+          <association Id="cf233e1d-2f0b-4bc9-98d4-27a38b4382f7" isDerived="false" sourceEndRoleName="Student" targetEndRoleName="Game" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="821d4abc-f09d-4038-bfde-ead5acf31314" LastKnownName="Game" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e8924d82-9db4-4e6e-bf38-b53660f76aa2" name="Student" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="39fe9dea-92c3-4533-8c22-405fdf9ee9e8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="796eab73-2bd3-43f6-b486-89deda7c78f2" name="Game" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="19974799-8dc6-4910-ac30-def81b1fca6e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="02bde9fd-a873-446a-b7ec-9f41630cfdf1" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="821d4abc-f09d-4038-bfde-ead5acf31314" name="Game" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0b68578d-7b7c-4f6b-bd10-8f750e1de92e" />
+        <suppliersInternal>
+          <dependency Id="dbd796ab-6c42-4cc7-b616-46c50c47f41f">
+            <useCaseMoniker Id="3e8d8c81-dbaa-4982-b0d0-876a05a9df59" LastKnownName="Config" />
+            <elementDefinition Id="6c5bbde9-4710-4479-a25d-9ded748df978" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="be7a9b99-a699-4740-a24c-dc543c6910d0" LastKnownName="Supperzzle" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="3e8d8c81-dbaa-4982-b0d0-876a05a9df59" name="Config" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="665dc6ea-73a3-40ef-a2e9-5b45ca0b9764" />
+        <subjects>
+          <subsystemMoniker Id="be7a9b99-a699-4740-a24c-dc543c6910d0" LastKnownName="Supperzzle" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="54384711-f3d2-4e1e-a1a8-9fa7457abcd9" name="Peach.Supperzzle.Modeling">
+    <elementDefinition Id="5ce1782b-6717-4cdc-a845-6ffadb6bbdbf" />
+  </package>
+</useCaseModelRoot>

@@ -1,0 +1,1165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" xmlns:dm11="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="5ce1782b-6717-4cdc-a845-6ffadb6bbdbf"
+  name="Peach.Supperzzle.Modeling" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <subsystem
+        Id="f5f37885-4e1e-476f-82f4-2b2e0dfe3c86"
+        name="Supperzzle"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="bcaf294e-2684-4171-958c-e6d55af0fbd2"
+        name="Teacher"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="d131c2d1-ed72-487d-886a-f8bf0ea1d2d1"
+            isDerived="false"
+            sourceEndRoleName="Teacher"
+            targetEndRoleName="Config"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="665dc6ea-73a3-40ef-a2e9-5b45ca0b9764"
+              LastKnownName="Config"
+              LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="023d4ddf-bc86-4c87-85db-cf6c33072118"
+                  name="Teacher"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="38d6274f-524b-4f3d-9f1c-c241eabd8a56"
+                  name="Config"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="1df2fab2-074f-4919-aa33-3a5e4f460e52"
+        name="Student"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="02bde9fd-a873-446a-b7ec-9f41630cfdf1"
+            isDerived="false"
+            sourceEndRoleName="Student"
+            targetEndRoleName="Game"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="0b68578d-7b7c-4f6b-bd10-8f750e1de92e"
+              LastKnownName="Game"
+              LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="39fe9dea-92c3-4533-8c22-405fdf9ee9e8"
+                  name="Student"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="19974799-8dc6-4910-ac30-def81b1fca6e"
+                  name="Game"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="0b68578d-7b7c-4f6b-bd10-8f750e1de92e"
+        name="Game"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="6c5bbde9-4710-4479-a25d-9ded748df978">
+            <useCaseMoniker
+              Id="665dc6ea-73a3-40ef-a2e9-5b45ca0b9764"
+              LastKnownName="Config"
+              LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="f5f37885-4e1e-476f-82f4-2b2e0dfe3c86"
+            LastKnownName="Supperzzle"
+            LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="665dc6ea-73a3-40ef-a2e9-5b45ca0b9764"
+        name="Config"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="f5f37885-4e1e-476f-82f4-2b2e0dfe3c86"
+            LastKnownName="Supperzzle"
+            LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="f7491972-7602-4d10-9302-23387cbd1807"
+        name="Config"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="b737c291-b736-4ad0-aa43-55e872cee36e"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="4b29713e-c423-4197-aaa0-4fc28308e182"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="bb070a49-4b2c-42f1-9fec-6bb1d0c2a970"
+                  LastKnownName="Select Maxtrix"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="b65bb8f4-62e8-4036-99e4-ad2a8f385e6a"
+            name="Select fore bg"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="28f0dd0e-a0a6-43dd-b040-8161b25ee8b0"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="900a148f-976e-478f-9818-f57603e9474b"
+                  LastKnownName="Select puzzle bg"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="bb070a49-4b2c-42f1-9fec-6bb1d0c2a970"
+            name="Select Maxtrix"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="bc7365a7-a5bb-49f1-867e-d9ea0f45fa6b"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="0a10101f-6a49-46e7-a499-20a863470796"
+                  LastKnownName="Select fore images"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="0a10101f-6a49-46e7-a499-20a863470796"
+            name="Select fore images"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="626fef83-9d83-4ea8-a7c6-332aa7775f89"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="b65bb8f4-62e8-4036-99e4-ad2a8f385e6a"
+                  LastKnownName="Select fore bg"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="3a406ba3-94ee-4e46-a4d9-740da8ef773f"
+            name="Save"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="60a69e20-b5ff-4b8d-8e0a-3fef0eb723d0"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="d4fe9006-fc50-4e37-b629-e75f4853b591"
+                  LastKnownName="cut puzzle bg"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="d4fe9006-fc50-4e37-b629-e75f4853b591"
+            name="cut puzzle bg"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="37abf536-fd0f-4db6-8d9b-4889e12605b0"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="d68f4a43-f449-4f96-9edd-1a571e733808"
+                  LastKnownName="Index puzzle bg"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="d68f4a43-f449-4f96-9edd-1a571e733808"
+            name="Index puzzle bg"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="11a77092-db24-404a-a371-8dc94d07fbc2"
+                isLeaf="false">
+                <activityFinalNodeMoniker
+                  Id="027f6842-72e9-4937-b2cc-efed81c6a92a"
+                  LastKnownName="ActivityFinal1"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode
+            Id="027f6842-72e9-4937-b2cc-efed81c6a92a"
+            name="ActivityFinal1"
+            isLeaf="false" />
+          <opaqueAction
+            Id="900a148f-976e-478f-9818-f57603e9474b"
+            name="Select puzzle bg"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="cdfb1a31-67be-41b0-b61d-d63eddf1f504"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="3a406ba3-94ee-4e46-a4d9-740da8ef773f"
+                  LastKnownName="Save"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+        </nodes>
+      </activity>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="d18cc454-ae52-4f2a-8832-a084347c41f1"
+        name="Game"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="453dbae2-da32-4f8e-87c0-c129e934bd4b"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="53941d47-9ead-4c97-ae81-62de15a86691"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="4df5668a-edfc-48a0-9d51-c5d190aed369"
+                  LastKnownName="Show game form"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="4df5668a-edfc-48a0-9d51-c5d190aed369"
+            name="Show game form"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="3b834731-9daf-4f23-bda2-5de2ef699cb1"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="cf6abdfe-5283-4c49-b1d1-ca0351a16a07"
+                  LastKnownName="Show loading panel"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="23823bce-1fb3-402c-ac4b-e40d6101f592"
+            name="Draw &amp; index buttons"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="2c5a4299-9a52-4209-86ca-471b085c90bd"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="2fc90f49-0e40-4013-ba8e-db3a6a083dee"
+                  LastKnownName="Set fore bg"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="1315e9e6-d68d-40e1-906f-a33bc7ab9e7e"
+            name="Draw Table"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="674523c9-8c2d-4276-9fc4-a45fee6edf2b"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="23823bce-1fb3-402c-ac4b-e40d6101f592"
+                  LastKnownName="Draw &amp; index buttons"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <forkNode
+            Id="7bd396c5-674f-433b-949a-c4c74a46ac06"
+            name="Fork1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="a0d800a3-8c4d-4799-9024-24fb89f4a3b7"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="a421738d-db07-43af-9f25-0ae8f6d0cdcb"
+                  LastKnownName="Cache puzzle bg"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="337f1bab-0280-476b-a810-776a10509dd7"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="1315e9e6-d68d-40e1-906f-a33bc7ab9e7e"
+                  LastKnownName="Draw Table"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="82db4436-2368-4c70-babb-23a4b12c3dea"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="970c76a8-9b2a-4492-853c-ff86d59418f7"
+                  LastKnownName="cache for images"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </forkNode>
+          <opaqueAction
+            Id="a421738d-db07-43af-9f25-0ae8f6d0cdcb"
+            name="Cache puzzle bg"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="ed6bb6bc-af07-4b01-bc25-0b72f4a4f71c"
+                isLeaf="false">
+                <joinNodeMoniker
+                  Id="7adb7b6e-759f-48e4-af66-b20db8ef4ce9"
+                  LastKnownName="Join1"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="b8236d40-7797-48e1-b4df-2a86559ff6eb"
+            name="Radom index fore images"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="d08c4dc2-c0dc-4380-9dd9-1db251719a91"
+                isLeaf="false">
+                <joinNodeMoniker
+                  Id="7adb7b6e-759f-48e4-af66-b20db8ef4ce9"
+                  LastKnownName="Join1"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="970c76a8-9b2a-4492-853c-ff86d59418f7"
+            name="cache for images"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="8ca83621-1c43-4be9-b714-04ac28deaff6"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="b8236d40-7797-48e1-b4df-2a86559ff6eb"
+                  LastKnownName="Radom index fore images"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="2fc90f49-0e40-4013-ba8e-db3a6a083dee"
+            name="Set fore bg"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="963509a9-cd64-49fe-96b6-ac2408098be0"
+                isLeaf="false">
+                <joinNodeMoniker
+                  Id="7adb7b6e-759f-48e4-af66-b20db8ef4ce9"
+                  LastKnownName="Join1"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <joinNode
+            Id="7adb7b6e-759f-48e4-af66-b20db8ef4ce9"
+            name="Join1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="75ff4c86-b63f-4541-ac66-8d405ffde064"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="4b31a3da-b531-4f54-bf3f-20c40ae37fdb"
+                  LastKnownName="hide loading panel"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </joinNode>
+          <opaqueAction
+            Id="4b31a3da-b531-4f54-bf3f-20c40ae37fdb"
+            name="hide loading panel"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="c29512a3-d518-4fdf-9e55-4d7f9815ca7b"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="0db107f2-07f3-4c6f-9f9e-ea307cc50043"
+                  LastKnownName="Set fore images"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="cf6abdfe-5283-4c49-b1d1-ca0351a16a07"
+            name="Show loading panel"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="e48d456a-b662-4f9d-a884-65f54d84c9bf"
+                isLeaf="false">
+                <forkNodeMoniker
+                  Id="7bd396c5-674f-433b-949a-c4c74a46ac06"
+                  LastKnownName="Fork1"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <acceptEventAction
+            Id="03b364db-5cee-496d-b568-cb341a01db65"
+            name="button click"
+            isLeaf="false"
+            isUnmarshall="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="cb67e617-5e56-41ec-a71a-3bd8972a817c"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="3679c4b1-0557-4094-8735-985f5629e841"
+                  LastKnownName="Invert button"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </acceptEventAction>
+          <opaqueAction
+            Id="3679c4b1-0557-4094-8735-985f5629e841"
+            name="Invert button"
+            isLeaf="false">
+            <objectFlowTargets>
+              <objectFlow
+                Id="8853ec5f-679f-4d1e-bdc9-16c4a44e3cc9"
+                isLeaf="false"
+                isMulticast="false"
+                isMultireceive="false">
+                <objectNodeMoniker
+                  Id="a398b447-6162-40de-984b-54b6ba915864"
+                  LastKnownName="Inverting"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </objectFlow>
+            </objectFlowTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="2fce5672-8307-4c5c-8fe3-8506977e9eea"
+            name="Decision1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="8bc25b17-a0ca-43de-ba2d-0cc9bc93b3fe"
+                guard="Y"
+                name="Y"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="895fe98e-c80f-41cc-a71d-6a95f75974a4"
+                  LastKnownName="Restart Timer of another button"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="0237fb2a-7dd0-4d8b-a764-51680f0edcac"
+            name="Start Timer"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="8b0a4bab-432e-4b95-8210-df29001bf958"
+                isLeaf="false">
+                <acceptEventActionMoniker
+                  Id="27eb25e4-ba08-4d49-8237-581a2f377a8d"
+                  LastKnownName="Time Elapsed"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="71d7ef68-1ce7-4e7c-a166-6c2991f18273"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="63565677-35d9-4f0e-81c5-9ae137767c46"
+                  LastKnownName="Search another in inverting"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <acceptEventAction
+            Id="27eb25e4-ba08-4d49-8237-581a2f377a8d"
+            name="Time Elapsed"
+            isLeaf="false"
+            isUnmarshall="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="a46e55aa-3628-4fde-ad69-d38a48f9fcb2"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="47cb7765-f782-4ada-96d7-22993d4a6a3c"
+                  LastKnownName="restore button"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </acceptEventAction>
+          <opaqueAction
+            Id="47cb7765-f782-4ada-96d7-22993d4a6a3c"
+            name="restore button"
+            isLeaf="false">
+            <objectFlowTargets>
+              <objectFlow
+                Id="f69c8bff-3aab-4694-9fb6-e9fe1e5fa4e3"
+                isLeaf="false"
+                isMulticast="false"
+                isMultireceive="false">
+                <objectNodeMoniker
+                  Id="c3c31ae2-2f40-4661-9dc9-5ed24a0f97da"
+                  LastKnownName="Normal"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </objectFlow>
+            </objectFlowTargets>
+          </opaqueAction>
+          <objectNode
+            Id="a398b447-6162-40de-984b-54b6ba915864"
+            name="Inverting"
+            isLeaf="false"
+            ordering="Unordered"
+            isControlType="false">
+            <objectFlowTargets>
+              <objectFlow
+                Id="fc60bcf4-0b3d-4630-b4f2-ba9762d946bc"
+                isLeaf="false"
+                isMulticast="false"
+                isMultireceive="false">
+                <opaqueActionMoniker
+                  Id="0237fb2a-7dd0-4d8b-a764-51680f0edcac"
+                  LastKnownName="Start Timer"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </objectFlow>
+            </objectFlowTargets>
+            <upperBound>
+              <literalInteger
+                Id="b4e25cbe-5883-4113-8d98-8d4bd23ca93a"
+                name="2147483647"
+                value="2147483647" />
+            </upperBound>
+          </objectNode>
+          <objectNode
+            Id="c3c31ae2-2f40-4661-9dc9-5ed24a0f97da"
+            name="Normal"
+            isLeaf="false"
+            ordering="Unordered"
+            isControlType="false">
+            <upperBound>
+              <literalInteger
+                Id="a0e56613-736f-4f3d-9eef-320ba0c1ab77"
+                name="2147483647"
+                value="2147483647" />
+            </upperBound>
+          </objectNode>
+          <opaqueAction
+            Id="895fe98e-c80f-41cc-a71d-6a95f75974a4"
+            name="Restart Timer of another button"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="6d26dc9b-77b2-46be-93c3-6b5dde4583fe"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="0d1d36e0-20f6-4647-b489-5920847b1d14"
+                  LastKnownName="Compare fore images"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="0d1d36e0-20f6-4647-b489-5920847b1d14"
+            name="Compare fore images"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="61061db4-9c80-4b65-817b-de22ba98353b"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="74f7961a-366f-4772-a953-365eb33dd37b"
+                  LastKnownName="Decision2"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="63565677-35d9-4f0e-81c5-9ae137767c46"
+            name="Search another in inverting"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="a1b4895f-aee2-41d9-b3f6-4ac2f54ad8e2"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="2fce5672-8307-4c5c-8fe3-8506977e9eea"
+                  LastKnownName="Decision1"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="74f7961a-366f-4772-a953-365eb33dd37b"
+            name="Decision2"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="63212496-f2b2-4fdb-a045-5de8939172f8"
+                guard="N"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="61c98382-04af-4120-8a87-5d7b98aa61ae"
+                  LastKnownName="stop timer"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+            <objectFlowTargets>
+              <objectFlow
+                Id="dc64a42e-511c-4e68-8542-3b5a365f583a"
+                guard="Y"
+                name="Y"
+                isLeaf="false"
+                isMulticast="false"
+                isMultireceive="false">
+                <objectNodeMoniker
+                  Id="ef44dce4-ce21-4353-b31b-93c6cf979b56"
+                  LastKnownName="Inverted"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </objectFlow>
+            </objectFlowTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="61c98382-04af-4120-8a87-5d7b98aa61ae"
+            name="stop timer"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="6992a3c4-50ef-4fc5-9eba-3e8fa76d2c40"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="b3f9c6ad-e660-46d3-b094-a66ecacc01e0"
+                  LastKnownName="restore both"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="441bc7ca-8fb6-4f0e-be65-d7b9e4ac81d3"
+            name="Set puzzle bg"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="9efeebb2-c046-4fdb-b54c-feb024f20a13"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="bfef58f7-c33b-45f4-aaf0-7cb050c1e3b5"
+                  LastKnownName="Search any in normal?"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="b3f9c6ad-e660-46d3-b094-a66ecacc01e0"
+            name="restore both"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="4ceb3516-2dce-4c6c-8d23-4550b120dde2"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="94278c10-e1b6-4326-89e6-3583f2411fee"
+                  LastKnownName="play fail sound"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <objectNode
+            Id="ef44dce4-ce21-4353-b31b-93c6cf979b56"
+            name="Inverted"
+            isLeaf="false"
+            ordering="Unordered"
+            isControlType="false">
+            <objectFlowTargets>
+              <objectFlow
+                Id="ee9409b6-6592-440f-86a3-73a012e65179"
+                isLeaf="false"
+                isMulticast="false"
+                isMultireceive="false">
+                <opaqueActionMoniker
+                  Id="441bc7ca-8fb6-4f0e-be65-d7b9e4ac81d3"
+                  LastKnownName="Set puzzle bg"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </objectFlow>
+            </objectFlowTargets>
+            <upperBound>
+              <literalInteger
+                Id="0cfa044a-d438-4d9d-8a4e-ef9cce5f94df"
+                name="2147483647"
+                value="2147483647" />
+            </upperBound>
+          </objectNode>
+          <opaqueAction
+            Id="94278c10-e1b6-4326-89e6-3583f2411fee"
+            name="play fail sound"
+            isLeaf="false" />
+          <opaqueAction
+            Id="e8c09123-79da-4f7e-96e3-1503fb2e59be"
+            name="play success sound"
+            isLeaf="false" />
+          <opaqueAction
+            Id="bfef58f7-c33b-45f4-aaf0-7cb050c1e3b5"
+            name="Search any in normal?"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="37c4ecd2-4edf-428b-b629-32dd5f6f7a73"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="b5688557-b021-4bc7-a43a-72b557c548a1"
+                  LastKnownName="Decision3"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="b5688557-b021-4bc7-a43a-72b557c548a1"
+            name="Decision3"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="28813607-6b89-4191-9e42-41d3c339720b"
+                guard="Y"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="e8c09123-79da-4f7e-96e3-1503fb2e59be"
+                  LastKnownName="play success sound"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="904a53b8-4caa-411d-99e9-e46cb996636d"
+                guard="N"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="25476f99-b997-451c-b715-276bc36fc978"
+                  LastKnownName="play congratulation sound"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="25476f99-b997-451c-b715-276bc36fc978"
+            name="play congratulation sound"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="cb96c1e0-2b05-4a95-968c-b25482b56964"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="481514af-1dfa-4ddd-8f39-af4d5f914080"
+                  LastKnownName="Show close &amp; Restart button"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="481514af-1dfa-4ddd-8f39-af4d5f914080"
+            name="Show close &amp; Restart button"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="a8fb1661-bf34-46c4-8f67-faae3ffbea2a"
+                isLeaf="false">
+                <acceptEventActionMoniker
+                  Id="fa260022-d781-45bd-a2e4-b3118b2d34e6"
+                  LastKnownName="close"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="507bf98e-c313-4f39-8514-ef43a32f6d38"
+                isLeaf="false">
+                <acceptEventActionMoniker
+                  Id="5bb3c653-d8ec-492f-b574-088a912c36c5"
+                  LastKnownName="Restart"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode
+            Id="274e6ea3-b7ab-4c3a-a690-bf43ca550c8f"
+            name="ActivityFinal1"
+            isLeaf="false" />
+          <acceptEventAction
+            Id="fa260022-d781-45bd-a2e4-b3118b2d34e6"
+            name="close"
+            isLeaf="false"
+            isUnmarshall="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="bf9ac3c9-83e8-468b-b9d7-34fd8443a77e"
+                isLeaf="false">
+                <activityFinalNodeMoniker
+                  Id="274e6ea3-b7ab-4c3a-a690-bf43ca550c8f"
+                  LastKnownName="ActivityFinal1"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </acceptEventAction>
+          <acceptEventAction
+            Id="5bb3c653-d8ec-492f-b574-088a912c36c5"
+            name="Restart"
+            isLeaf="false"
+            isUnmarshall="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="74ca4782-8ba3-4dac-8ab5-d7e2ce9cdfe4"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="9e53970e-d87e-4a65-ae40-0b7b1e6f3ef9"
+                  LastKnownName="show loading panel"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </acceptEventAction>
+          <opaqueAction
+            Id="dba50144-1506-4588-a950-f2745af6d45b"
+            name="restore all buttons"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="188b79fb-af3b-411f-a185-11aa0fb26cb2"
+                isLeaf="false">
+                <joinNodeMoniker
+                  Id="d185cd8d-b5df-489a-9321-c61bc8e9eb22"
+                  LastKnownName="Join2"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <forkNode
+            Id="7f0107d7-d36a-40c0-883e-f5d89739d96f"
+            name="Fork2"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="ff2111ef-b296-4262-9105-f2b7ac213e4f"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="dba50144-1506-4588-a950-f2745af6d45b"
+                  LastKnownName="restore all buttons"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="e284dba5-d7d0-4cc7-ace2-1cf6955953a7"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="515094ad-cb1c-4044-9585-7f5c406da430"
+                  LastKnownName="Radom fore images"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </forkNode>
+          <opaqueAction
+            Id="515094ad-cb1c-4044-9585-7f5c406da430"
+            name="Radom fore images"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="4b221c82-2b86-4b88-ab9d-118cfe25f5f9"
+                isLeaf="false">
+                <joinNodeMoniker
+                  Id="d185cd8d-b5df-489a-9321-c61bc8e9eb22"
+                  LastKnownName="Join2"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="9e53970e-d87e-4a65-ae40-0b7b1e6f3ef9"
+            name="show loading panel"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="ca58c929-c992-406f-9a7c-7f7e08fff564"
+                isLeaf="false">
+                <forkNodeMoniker
+                  Id="7f0107d7-d36a-40c0-883e-f5d89739d96f"
+                  LastKnownName="Fork2"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <joinNode
+            Id="d185cd8d-b5df-489a-9321-c61bc8e9eb22"
+            name="Join2"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="8c0fadd6-cc16-4272-904a-e03fb40fd58b"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="4b31a3da-b531-4f54-bf3f-20c40ae37fdb"
+                  LastKnownName="hide loading panel"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </joinNode>
+          <opaqueAction
+            Id="0db107f2-07f3-4c6f-9f9e-ea307cc50043"
+            name="Set fore images"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="bfa6bb4e-cee0-4ec2-9e93-786c95723a25"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="7c01c170-ac99-450e-a0be-0b48977cd242"
+                  LastKnownName="show Count Down"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="7c01c170-ac99-450e-a0be-0b48977cd242"
+            name="show Count Down"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="0f7482e1-56cc-4635-a47b-a7c5b85b7a59"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="0acf2454-8e54-4bb0-ad1a-30b2bcc61d44"
+                  LastKnownName="Set fore bg"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="0acf2454-8e54-4bb0-ad1a-30b2bcc61d44"
+            name="Set fore bg"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="ad8fd78c-004c-4c8a-990c-f60faba53864"
+                isLeaf="false">
+                <acceptEventActionMoniker
+                  Id="03b364db-5cee-496d-b568-cb341a01db65"
+                  LastKnownName="button click"
+                  LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+        </nodes>
+      </activity>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <enumeration
+        Id="ab9681ca-a7cf-4729-963b-7babfdc19633"
+        name="ChessState"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedLiterals>
+          <enumerationLiteral
+            Id="24685140-3747-4cba-8fd0-0f53def26020"
+            name="Normal" />
+          <enumerationLiteral
+            Id="1fafa592-4bfd-4a2a-92ae-2482cb7da2b5"
+            name="Inverting" />
+          <enumerationLiteral
+            Id="768df5ff-f975-4aa0-925a-84c65ed226d9"
+            name="Inverted" />
+        </ownedLiterals>
+      </enumeration>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="15b54676-51ea-4045-b471-7330103155ce"
+        name="Chess"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="8b43c091-54db-4e28-9090-6ce9b1c729a8"
+            name="Timer"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="ccb0e3a3-c663-4c3c-bf17-db83c090f5ab"
+            name="State"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <enumerationMoniker
+                Id="ab9681ca-a7cf-4729-963b-7babfdc19633"
+                LastKnownName="ChessState"
+                LastKnownLocation="Peach.Supperzzle.Modeling.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="0976000b-1f6d-4833-a9f7-98feefe53752"
+            name="ChangeToInverting"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="bda23c83-4f2b-4755-9dcd-1e3333bf6846"
+            name="ChangeToNormal"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="a5529e75-cf9a-465f-b05f-c21a09331080"
+            name="ChangeToInverted"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="79a83dba-a2df-430f-90ff-cca4e5c734b8"
+            name="RestartTimer"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

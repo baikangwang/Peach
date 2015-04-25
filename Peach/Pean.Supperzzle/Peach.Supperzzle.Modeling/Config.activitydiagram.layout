@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Config">
+  <activityRootModelMoniker Id="98259d1e-d5cd-4f1d-8c2a-19991cd61585" />
+  <nestedChildShapes>
+    <initialNodeShape Id="2b2d8262-aaa8-4059-a8a8-868183154eab" absoluteBounds="2.75, 0.625, 0.125, 0.125" customColor="89, 89, 89">
+      <initialNodeMoniker Id="cbe852ca-a6b2-499c-abf2-3f5629843da2" LastKnownName="Initial1" />
+    </initialNodeShape>
+    <actionShape Id="ecfbc37b-9360-411c-b7b9-f3452c5d7919" absoluteBounds="2.25, 2.25, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="133b45ab-e5c1-4bcb-b61b-533fdd06b50d" LastKnownName="Select fore bg" />
+    </actionShape>
+    <actionShape Id="2c5ffce6-b20a-4b93-9103-91d815f7020b" absoluteBounds="2.25, 1, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="94720681-95ba-419c-9b80-88870bee0655" LastKnownName="Select Maxtrix" />
+    </actionShape>
+    <actionShape Id="dd1f0da9-8d6f-4cb3-8ca0-7e4362bbad18" absoluteBounds="2.25, 1.625, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="100a2bee-625d-4d92-8cdc-cec447420508" LastKnownName="Select fore images" />
+    </actionShape>
+    <controlFlowConnector edgePoints="[(2.8125 : 0.75); (2.8125 : 1)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="c4769eab-90a9-464c-a925-97878a9bb7b0" />
+      <relativeChildShapes />
+      <nodes>
+        <initialNodeShapeMoniker Id="2b2d8262-aaa8-4059-a8a8-868183154eab" />
+        <actionShapeMoniker Id="2c5ffce6-b20a-4b93-9103-91d815f7020b" />
+      </nodes>
+    </controlFlowConnector>
+    <controlFlowConnector edgePoints="[(2.8125 : 1.375); (2.8125 : 1.625)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="cb17b17b-6973-4042-aa1b-954a6f9b9012" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="2c5ffce6-b20a-4b93-9103-91d815f7020b" />
+        <actionShapeMoniker Id="dd1f0da9-8d6f-4cb3-8ca0-7e4362bbad18" />
+      </nodes>
+    </controlFlowConnector>
+    <controlFlowConnector edgePoints="[(2.8125 : 2); (2.8125 : 2.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="7cae72d4-954e-49dc-98bc-30332d756849" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="dd1f0da9-8d6f-4cb3-8ca0-7e4362bbad18" />
+        <actionShapeMoniker Id="ecfbc37b-9360-411c-b7b9-f3452c5d7919" />
+      </nodes>
+    </controlFlowConnector>
+    <actionShape Id="a94e1801-980d-4c9e-a4eb-adffa6407cad" absoluteBounds="2.25, 3.625, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="c34d3328-70a0-4987-8bcd-f331450ed04b" LastKnownName="Save" />
+    </actionShape>
+    <actionShape Id="29538014-4b93-4ed5-9237-e83e1e672fe1" absoluteBounds="2.25, 4.375, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="475d2a16-1379-4e02-9084-b6998ed71095" LastKnownName="cut puzzle bg" />
+    </actionShape>
+    <controlFlowConnector edgePoints="[(2.8125 : 4); (2.8125 : 4.375)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="db165dcd-8088-4a28-bb5e-c99a31ff102c" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="a94e1801-980d-4c9e-a4eb-adffa6407cad" />
+        <actionShapeMoniker Id="29538014-4b93-4ed5-9237-e83e1e672fe1" />
+      </nodes>
+    </controlFlowConnector>
+    <actionShape Id="a5e28f44-a488-49c8-9f89-8d430825234f" absoluteBounds="2.25, 5.125, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="0abb8201-a7ac-4391-b098-32a3ef354e83" LastKnownName="Index puzzle bg" />
+    </actionShape>
+    <activityFinalNodeShape Id="6049567b-ed53-4f34-9dba-aa66e4abb880" absoluteBounds="2.75, 5.75, 0.125, 0.125" customColor="89, 89, 89">
+      <activityFinalNodeMoniker Id="be16a207-6ff1-4bd7-96a7-2ced0ef40b73" LastKnownName="ActivityFinal1" />
+    </activityFinalNodeShape>
+    <controlFlowConnector edgePoints="[(2.8125 : 4.75); (2.8125 : 5.125)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="c2f90271-95c6-4e1c-8b72-7faa93518b58" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="29538014-4b93-4ed5-9237-e83e1e672fe1" />
+        <actionShapeMoniker Id="a5e28f44-a488-49c8-9f89-8d430825234f" />
+      </nodes>
+    </controlFlowConnector>
+    <controlFlowConnector edgePoints="[(2.8125 : 5.5); (2.8125 : 5.75)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="8dafd2f0-98f3-4dda-a1ca-01926066f840" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="a5e28f44-a488-49c8-9f89-8d430825234f" />
+        <activityFinalNodeShapeMoniker Id="6049567b-ed53-4f34-9dba-aa66e4abb880" />
+      </nodes>
+    </controlFlowConnector>
+    <actionShape Id="838b8a04-8754-4773-8774-e3478a9ef9eb" absoluteBounds="2.25, 2.875, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="4c243859-ed37-402d-a7a8-81b5c17edd47" LastKnownName="Select puzzle bg" />
+    </actionShape>
+    <controlFlowConnector edgePoints="[(2.8125 : 2.625); (2.8125 : 2.875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="5dd67803-4d31-4903-81cb-d0fc32c8ac94" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="ecfbc37b-9360-411c-b7b9-f3452c5d7919" />
+        <actionShapeMoniker Id="838b8a04-8754-4773-8774-e3478a9ef9eb" />
+      </nodes>
+    </controlFlowConnector>
+    <controlFlowConnector edgePoints="[(2.8125 : 3.25); (2.8125 : 3.625)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="67704881-1d57-4e2f-800a-574339a31975" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="838b8a04-8754-4773-8774-e3478a9ef9eb" />
+        <actionShapeMoniker Id="a94e1801-980d-4c9e-a4eb-adffa6407cad" />
+      </nodes>
+    </controlFlowConnector>
+  </nestedChildShapes>
+</activityDiagram>

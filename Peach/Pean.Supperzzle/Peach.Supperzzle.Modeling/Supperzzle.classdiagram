@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" dslVersion="1.0.0.0" Id="d8b8a040-607e-490c-b498-cdef83e0cb1a" name="Supperzzle" linkedPackageId="47eacbde-ada2-4bfb-abd7-53aafe93232b" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="829049d1-376d-4a98-a731-652102c1c395">
+      <profileInstance Id="a52cc078-1be8-4c7a-aa42-7c36b58b3a30" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="d8808162-8a84-497d-b05e-22adc9e45ac9">
+      <profileInstance Id="d4708d7a-c72c-40ae-903b-1e8caddbbafe" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <enumeration Id="6989a4cc-3d08-4594-855c-457b7ec18991" name="ChessState" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ab9681ca-a7cf-4729-963b-7babfdc19633" />
+        <ownedLiterals>
+          <enumerationLiteral Id="d69da30c-614c-4735-b4bc-097369a770c6" name="Normal">
+            <elementDefinition Id="24685140-3747-4cba-8fd0-0f53def26020" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="9bf19b09-0024-47af-9cbd-703fd0e4226f" name="Inverting">
+            <elementDefinition Id="1fafa592-4bfd-4a2a-92ae-2482cb7da2b5" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="03abe82f-36ec-4342-a715-c78026c88188" name="Inverted">
+            <elementDefinition Id="768df5ff-f975-4aa0-925a-84c65ed226d9" />
+          </enumerationLiteral>
+        </ownedLiterals>
+      </enumeration>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="77edadb2-52c2-4e60-abba-9a401205197a" name="Chess" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="15b54676-51ea-4045-b471-7330103155ce" />
+        <ownedAttributesInternal>
+          <property Id="5c2edff5-8511-4d8f-a66c-784d66ef6eda" name="Timer" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="8b43c091-54db-4e28-9090-6ce9b1c729a8" />
+          </property>
+          <property Id="7ae04315-8393-4dc0-b1a2-6b782773c324" name="State" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ccb0e3a3-c663-4c3c-bf17-db83c090f5ab" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="644198ae-7093-40c1-8a48-1603039dc48d" LastKnownName="ChessState" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="479bd661-717e-4c75-9e3b-448d7cb920a2" name="ChangeToInverting" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="0976000b-1f6d-4833-a9f7-98feefe53752" />
+          </operation>
+          <operation Id="ff12f856-f337-4edc-8d45-304dc06a38fa" name="ChangeToNormal" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="bda23c83-4f2b-4755-9dcd-1e3333bf6846" />
+          </operation>
+          <operation Id="840c44ed-dea5-45d2-b779-65af1387efe1" name="ChangeToInverted" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a5529e75-cf9a-465f-b05f-c21a09331080" />
+          </operation>
+          <operation Id="4b171736-292b-4383-84ce-da9b6ddc032c" name="RestartTimer" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="79a83dba-a2df-430f-90ff-cca4e5c734b8" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="644198ae-7093-40c1-8a48-1603039dc48d" name="ChessState" isAbstract="false" isLeaf="false" cachedFullName="Peach.Supperzzle.Modeling::ChessState">
+        <elementDefinition Id="ab9681ca-a7cf-4729-963b-7babfdc19633" />
+      </referencedType>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="47eacbde-ada2-4bfb-abd7-53aafe93232b" name="Peach.Supperzzle.Modeling">
+    <elementDefinition Id="5ce1782b-6717-4cdc-a845-6ffadb6bbdbf" />
+  </package>
+</logicalClassDesignerModel>
