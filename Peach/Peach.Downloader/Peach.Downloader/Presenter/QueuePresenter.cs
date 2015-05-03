@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Text.RegularExpressions;
 
     using Peach.Downloader.Models;
 
@@ -46,7 +47,19 @@
         {
             if (File.Exists(this.CachePath))
             {
-                string[] lines = File.ReadAllLines(this.CachePath);
+                string content;
+
+                using (FileStream fs = new FileStream(this.CachePath, FileMode.Open, FileAccess.Read))
+                {
+                    byte[] stream = new byte[fs.Length];
+                    fs.Read(stream, 0, stream.Length);
+                    content = Encoding.Default.GetString(stream);
+                }
+
+                string[] lines =
+                    Regex.Split(content, "\\r|\\n", RegexOptions.IgnoreCase | RegexOptions.Singleline)
+                        .Where(s => !string.IsNullOrEmpty(s))
+                        .ToArray();
 
                 return lines.Select(line => new Seed(line)).Cast<ISeed>().ToList();
             }

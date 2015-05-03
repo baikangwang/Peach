@@ -86,6 +86,7 @@
 
         public void OnCompleted()
         {
+            this.Status=Status.Complete;
             var handler = this.Completed;
             if (handler != null)
             {
@@ -95,6 +96,7 @@
 
         public void OnFail()
         {
+            this.Status = Status.Fail;
             var handler = this.Fail;
             if (handler != null)
             {

@@ -51,7 +51,9 @@ namespace Peach.Downloader.Ting56
             Task.Factory.StartNew(
                 () =>
                 {
-                    this._seeds[sender.Chapter][sender.Episode].Header = string.Format("{0}-{1}-{2}%", sender.Title, sender.Status, changed);
+                    TreeViewItem item=this._seeds[sender.Chapter][sender.Episode];
+                    item.Foreground = new SolidColorBrush(Colors.Blue);
+                    item.Header = string.Format("{0}-{1}-{2}%", sender.Title, sender.Status, changed);
                 }, CancellationToken.None, TaskCreationOptions.None, this._scheduler);
         }
 
@@ -61,7 +63,9 @@ namespace Peach.Downloader.Ting56
             Task.Factory.StartNew(
                 () =>
                 {
-                    this._seeds[sender.Chapter][sender.Episode].Header = string.Format("{0}-{1}", sender.Title, sender.Status);
+                    TreeViewItem item = this._seeds[sender.Chapter][sender.Episode];
+                    item.Foreground = new SolidColorBrush(Colors.Red);
+                    item.Header = string.Format("{0}-{1}", sender.Title, sender.Status);
                 }, CancellationToken.None, TaskCreationOptions.None, this._scheduler);
         }
 
@@ -72,7 +76,9 @@ namespace Peach.Downloader.Ting56
             Task.Factory.StartNew(
                 () =>
                 {
-                    this._seeds[sender.Chapter][sender.Episode].Header = string.Format("{0}-{1}", sender.Title, sender.Status);
+                    TreeViewItem item = this._seeds[sender.Chapter][sender.Episode];
+                    item.Foreground = new SolidColorBrush(Colors.Green);
+                    item.Header = string.Format("{0}-{1}", sender.Title, sender.Status);
                 }, CancellationToken.None, TaskCreationOptions.None, this._scheduler);
 
         }

@@ -121,6 +121,11 @@
 
                     int chapter = chapters.IndexOf(url1) + 1;
 
+                MatchCollection ms = null;
+
+                int i = 0;
+                while (i < 3)
+                {
                     string content = Downloader.Ting56.GetContent(url1);
 
                     Regex regex =
@@ -128,9 +133,15 @@
                             "\\<a\\s*title\\s*=\\s*'(?<title>.*?)'\\s*href\\s*=\\s*'(?<url>.*?)'\\s*target\\s*=\\s*\"_blank\"\\>",
                             RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
-                    MatchCollection ms = regex.Matches(content);
+                    ms = regex.Matches(content);
 
-                    foreach (Match match in ms)
+                    if (ms.Count > 0) break;
+                    i++;
+                }
+
+                if(ms==null || ms.Count==0) return new List<ISeed>();
+
+                foreach (Match match in ms)
                     {
                         if(token.IsCancellationRequested)
                             token.ThrowIfCancellationRequested();
@@ -173,7 +184,6 @@
                                     string[] paras = r.Split(ma).Where(s=>!string.IsNullOrEmpty(s)).ToArray();
                                     if (paras.Length > 0)
                                         url = string.Format("http://vr.tudou.com/v2proxy/v2?it={0}", paras[0]);
-
                                 }
                             }
                         }
@@ -181,7 +191,7 @@
                         ISeed seed = new Seed(title, chapter, episode, url, httpUrl);
                         seeds.Add(seed);
 
-                        Thread.Sleep(10 * 1000);
+                        Thread.Sleep(5 * 1000);
 
                         if(token.IsCancellationRequested)
                             token.ThrowIfCancellationRequested();

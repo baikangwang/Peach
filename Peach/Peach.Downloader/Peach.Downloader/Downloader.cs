@@ -5,7 +5,9 @@ namespace Peach.Downloader
 {
     using System.IO;
     using System.Net;
+    using System.Runtime.Remoting.Channels;
     using System.Text;
+    using System.Threading;
 
     using Peach.Downloader.Models;
 
@@ -28,85 +30,140 @@ namespace Peach.Downloader
 
         public virtual string GetContent(string url)
         {
-            HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
-            request.Method = "GET";
-            request.ContentType = "text/html, application/xhtml+xml, */*";
-            request.KeepAlive = true;
-            request.Host = "www.ting56.com";
-            request.UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)";
-            request.ProtocolVersion = Version.Parse("1.1");
-
-            HttpWebResponse response= request.GetResponse() as HttpWebResponse;
-
-            if (response.StatusCode == HttpStatusCode.OK)
+            int i = 0;
+            while (i<3)
             {
-                try
+                HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
+                request.Method = "GET";
+                request.ContentType = "text/html, application/xhtml+xml, */*";
+                request.KeepAlive = true;
+                request.Host = "www.ting56.com";
+                request.UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)";
+                request.ProtocolVersion = Version.Parse("1.1");
+
+                HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+
+                if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    using (Stream s = response.GetResponseStream())
+                    try
                     {
-                        byte[] content = new byte[response.ContentLength];
-                        s.Read(content, 0, content.Length);
-                        string result = Encoding.Default.GetString(content);
-                        return result;
+                        using (Stream s = response.GetResponseStream())
+                        {
+                            byte[] content = new byte[response.ContentLength];
+                            s.Read(content, 0, content.Length);
+                            string result = Encoding.Default.GetString(content);
+                            return result;
+                        }
+                    }
+                    catch (Exception)
+                    {
                     }
                 }
-                catch (Exception)
-                {
-                    return string.Empty;
-                }
+
+                i++;
             }
-            else
-            {
-                return string.Empty;
-            }
+
+            return String.Empty;
         }
 
         public void Download(ISeed seed)
         {
             seed.OnStatusChanged(0);
 
-            WebRequest request = HttpWebRequest.Create(seed.Url);
+            string url = seed.Url;
+            string file = this.GetFileName(seed);
+            if(File.Exists(file)) File.Delete(file);
 
-            WebResponse response = request.GetResponse();
-
-            try
+            using (WebClient wc=new WebClient())
             {
-                using (Stream s = response.GetResponseStream())
+                wc.Headers[HttpRequestHeader.AcceptEncoding] = "gzip, deflate";
+                wc.Headers[HttpRequestHeader.AcceptLanguage] = "en-US";
+                wc.Headers[HttpRequestHeader.Accept] = "text/html, application/xhtml+xml, */*";
+                wc.Headers[HttpRequestHeader.Host] = "vr.tudou.com";
+                wc.Headers[HttpRequestHeader.UserAgent] =
+                    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)";
+                wc.Headers["UA-CPU"] = "AMD64";
+
+                try
                 {
-                    string file = this.GetFileName(seed);
-                    long total = response.ContentLength;
-                    long read = 0;
-
-                    if(File.Exists(file)) File.Delete(file);
-
-                    using (FileStream fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                    wc.DownloadProgressChanged += (sender, e) =>
                     {
-                        while (true)
+                        int changed = (int)(e.BytesReceived * 100 / e.TotalBytesToReceive);
+                        seed.OnStatusChanged(changed);
+                    };
+                    wc.DownloadFileCompleted += (sender, e) =>
+                    {
+                        if (e.Cancelled || e.Error != null)
                         {
-                            byte[] content = new byte[1024*1024];
-                            read += s.Read(content, 0, content.Length);
-                            fs.Write(content, 0, content.Length);
-                            fs.Flush(true);
-                            if (read == total)
-                            {
-                                seed.Status=Status.Complete;
-                                seed.OnCompleted();
-                                break;
-                            }
-
-                            int changed =(int)((read * 100) / total);
-                            seed.OnStatusChanged(changed);
+                            seed.OnFail();
                         }
-                        fs.Close();
+                        else seed.OnCompleted();
+                    };
+                    wc.DownloadFileAsync(new Uri(url), file);
+
+                    while (wc.IsBusy)
+                    {
+                        Thread.Sleep(1000);
                     }
-                    s.Close();
+                }
+                catch (Exception)
+                {
+                    seed.OnFail();
                 }
             }
-            catch (Exception)
-            {
-                seed.Status = Status.Fail;
-                seed.OnFail();
-            }
+
+            //HttpWebRequest request = HttpWebRequest.Create(seed.Url) as HttpWebRequest;
+            //request.Method = "GET";
+            ////request.ContentType = "text/html, application/xhtml+xml, */*";
+            //request.KeepAlive = true;
+            //request.Host = "vr.tudou.com";
+            //request.UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)";
+            //request.ProtocolVersion = Version.Parse("1.1");
+            //request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip, deflate";
+            //request.Headers[HttpRequestHeader.AcceptLanguage] = "en-US";
+            //request.Accept = "text/html, application/xhtml+xml, */*";
+            //request.Headers["UA-CPU"] = "AMD64";
+
+            //HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+
+            //try
+            //{
+            //    using (Stream s = response.GetResponseStream())
+            //    {
+            //        string file = this.GetFileName(seed);
+            //        long total = response.ContentLength;
+            //        long read = 0;
+
+            //        if(File.Exists(file)) File.Delete(file);
+
+            //        using (FileStream fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            //        {
+            //            byte[] content = new byte[1024 * 1024];
+            //            while (true)
+            //            {
+            //                read += s.Read(content, 0, content.Length);
+            //                fs.Write(content, 0, content.Length);
+            //                fs.Flush(true);
+            //                if (read == total)
+            //                {
+            //                    seed.Status=Status.Complete;
+            //                    seed.OnCompleted();
+            //                    break;
+            //                }
+
+            //                int changed =(int)((read * 100) / total);
+            //                seed.OnStatusChanged(changed);
+            //            }
+            //            fs.Close();
+            //        }
+            //        s.Close();
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    seed.Status = Status.Fail;
+            //    seed.OnFail();
+            //}
         }
 
         protected virtual string GetFileName(ISeed seed)
@@ -119,9 +176,9 @@ namespace Peach.Downloader
     {
         public IList<string> CHAPTERS = new List<string>()
                                                {
-                                                   "http://www.ting56.com/mp3/218.html", // 第一季
+                                                   //"http://www.ting56.com/mp3/218.html", // 第一季
                                                    "http://www.ting56.com/mp3/219.html", // 第二季
-                                                   "http://www.ting56.com/mp3/220.html",
+                                                   //"http://www.ting56.com/mp3/220.html",
                                                    // 盗墓笔记 第三季
                                                    "http://www.ting56.com/mp3/899.html",
                                                    // 盗墓笔记 第四季
@@ -133,7 +190,7 @@ namespace Peach.Downloader
                                                    // 盗墓笔记 第七季
                                                    "http://www.ting56.com/mp3/2568.html",
                                                    // 盗墓笔记 第八季
-                                                   "http://www.ting56.com/mp3/2447.html",
+                                                   //"http://www.ting56.com/mp3/2447.html",
                                                    // 盗墓笔记 藏海花
                                                };
 
