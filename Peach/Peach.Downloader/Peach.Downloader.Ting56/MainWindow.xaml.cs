@@ -41,7 +41,7 @@ namespace Peach.Downloader.Ting56
             DownloadingQueue.Default.SeedFail += this.Default_SeedFail;
             DownloadingQueue.Default.SeedStatusChanged += this.Default_SeedStatusChanged;
             this._scheduler=TaskScheduler.FromCurrentSynchronizationContext();
-            this._label=new Label();
+            this._label = new Label();
             this.StatusBar.Items.Add(this._label);
         }
 
@@ -66,6 +66,7 @@ namespace Peach.Downloader.Ting56
                     TreeViewItem item = this._seeds[sender.Chapter][sender.Episode];
                     item.Foreground = new SolidColorBrush(Colors.Red);
                     item.Header = string.Format("{0}-{1}", sender.Title, sender.Status);
+                    Task.Factory.StartNew(() => { PendingQueue.Default.RefreshCache(); });
                 }, CancellationToken.None, TaskCreationOptions.None, this._scheduler);
         }
 
@@ -79,6 +80,7 @@ namespace Peach.Downloader.Ting56
                     TreeViewItem item = this._seeds[sender.Chapter][sender.Episode];
                     item.Foreground = new SolidColorBrush(Colors.Green);
                     item.Header = string.Format("{0}-{1}", sender.Title, sender.Status);
+                    Task.Factory.StartNew(() => { PendingQueue.Default.RefreshCache(); });
                 }, CancellationToken.None, TaskCreationOptions.None, this._scheduler);
 
         }
@@ -149,15 +151,18 @@ namespace Peach.Downloader.Ting56
 
             if (isStarted)
             {
-
+                this.Cursor = Cursors.Wait;
                 PendingQueue.Default.Stop();
                 DownloadingQueue.Default.Stop();
                 this.btTransaction.Content = "Start";
+                this.Cursor = Cursors.Arrow;
             }
             else
             {
+                this.Cursor = Cursors.Wait;
                 Task.Factory.StartNew(() => { PendingQueue.Default.Start(); });
                 this.btTransaction.Content = "Stop";
+                this.Cursor = Cursors.Arrow;
             }
 
             this.btTransaction.IsEnabled = true;

@@ -17,7 +17,11 @@
     {
         private QueuePresenter _presenter;
 
+        private IList<ISeed> _seeds; 
+
         private CancellationTokenSource _cancel;
+
+        private CancellationTokenSource _stoper;
 
         public event PendingQueueLoadEvent Ready;
 
@@ -49,14 +53,17 @@
 
         public PendingQueue()
         {
-            this._queue=new Queue<ISeed>();
-            this._cancel=new CancellationTokenSource();
+            this._queue = new Queue<ISeed>();
+            this._cancel = new CancellationTokenSource();
+            this._stoper=new CancellationTokenSource();
         }
 
         public void Start()
         {
            this._cancel=new CancellationTokenSource();
+            this._stoper=new CancellationTokenSource();
             this._queue = new Queue<ISeed>();
+            this._seeds=new List<ISeed>();
 
             this._thread = Task.Factory.StartNew(
                 () =>
@@ -66,34 +73,34 @@
 
                     this.OnStatusChanged("Loading Seeds...");
 
-                    IList<ISeed> seeds = this.LoadSeeds();
+                    this._seeds = this.LoadSeeds();
 
                     if (this._cancel.IsCancellationRequested)
                         this._cancel.Token.ThrowIfCancellationRequested();
 
                     this.OnStatusChanged("Not found Seeds in cache");
 
-                    if (seeds.Count == 0)
+                    if (this._seeds.Count == 0)
                     {
                         this.OnStatusChanged("Requesting Seeds...");
 
-                        seeds = this.RequestSeeds(this._cancel.Token);
+                        this._seeds = this.RequestSeeds(this._cancel.Token);
 
-                        this.OnStatusChanged(string.Format("Requested {0} Seeds...", seeds.Count));
+                        this.OnStatusChanged(string.Format("Requested {0} Seeds...", this._seeds.Count));
 
-                        this.OnStatusChanged(string.Format("Saving {0} Seeds...", seeds.Count));
+                        this.OnStatusChanged(string.Format("Saving {0} Seeds...", this._seeds.Count));
 
-                        this.Presenter.SaveSeeds(seeds);
+                        this.Presenter.SaveSeeds(this._seeds);
                     }
 
                     if (this._cancel.IsCancellationRequested)
                         this._cancel.Token.ThrowIfCancellationRequested();
 
-                    this.Push(seeds);
+                    this.Push(this._seeds);
 
                     this.OnStatusChanged("Ready");
 
-                    this.OnReady(seeds);
+                    this.OnReady(this._seeds);
 
                     if (this._cancel.IsCancellationRequested)
                         this._cancel.Token.ThrowIfCancellationRequested();
@@ -110,6 +117,8 @@
 
             foreach (string cUrl in chapters)
             {
+                this.OnStatusChanged(string.Format("Acquiring {0}...",cUrl));
+
                 if(token.IsCancellationRequested)
                     token.ThrowIfCancellationRequested();
 
@@ -124,7 +133,7 @@
                 MatchCollection ms = null;
 
                 int i = 0;
-                while (i < 3)
+                while (i < 10)
                 {
                     string content = Downloader.Ting56.GetContent(url1);
 
@@ -136,10 +145,16 @@
                     ms = regex.Matches(content);
 
                     if (ms.Count > 0) break;
+
+                    this.Pause(5 * 1000);
                     i++;
                 }
 
-                if(ms==null || ms.Count==0) return new List<ISeed>();
+                if (ms == null || ms.Count == 0)
+                {
+                    this.OnStatusChanged(string.Format("Not found episodes -> {0}", url1));
+                    return seeds;
+                }
 
                 foreach (Match match in ms)
                     {
@@ -189,10 +204,12 @@
                         }
 
                         ISeed seed = new Seed(title, chapter, episode, url, httpUrl);
+
+                        this.OnStatusChanged(string.Format("Acquired {0}-第{1}集", (seed as Seed).GetChapterName(),seed.Episode));
+
                         seeds.Add(seed);
 
-                        Thread.Sleep(5 * 1000);
-
+                        this.Pause(5 * 1000);
                         if(token.IsCancellationRequested)
                             token.ThrowIfCancellationRequested();
                     }
@@ -222,15 +239,35 @@
 
         public void Stop()
         {
+            if(this._cancel!=null)
             this._cancel.Cancel();
+            if(this._stoper!=null)
+            this._stoper.Cancel();
             if (this._thread != null)
             {
                 while (!this._thread.IsCanceled && !this._thread.IsCompleted && !this._thread.IsFaulted)
                 {
-                    Thread.Sleep(1000);
+                    this.Pause(1000);
                 }
             }
+
+            this.RefreshCache();
+
             this.Dispose();
+        }
+
+        public void RefreshCache()
+        {
+            lock (_lock)
+            {
+                if(this._seeds!=null)
+                this.Presenter.SaveSeeds(this._seeds);
+            }
+        }
+
+        private void Pause(int peroid)
+        {
+            this._stoper.Token.WaitHandle.WaitOne(peroid);
         }
 
         private IList<ISeed> LoadSeeds()
@@ -244,8 +281,20 @@
         {
             if (all)
             {
-                this._queue.Clear();
-                this._queue = null;
+                if (this._seeds != null)
+                {
+                    this._seeds.Clear();
+                    this._seeds = null;
+                }
+
+                lock (_lock)
+                {
+                    if (this._queue != null)
+                    {
+                        this._queue.Clear();
+                        this._queue = null;
+                    }
+                }
                 this._presenter = null;
             }
         }

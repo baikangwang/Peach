@@ -17,7 +17,7 @@
         {
             if(seeds.Count==0) return;
 
-            StringBuilder sb=new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             foreach (ISeed seed in seeds)
             {
                 sb.AppendLine(seed.ToString());
@@ -61,7 +61,7 @@
                         .Where(s => !string.IsNullOrEmpty(s))
                         .ToArray();
 
-                return lines.Select(line => new Seed(line)).Cast<ISeed>().ToList();
+                return lines.Select(line => new Seed(line)).Where(s=>s.Status!=Status.Complete).Cast<ISeed>().ToList();
             }
             else
             {

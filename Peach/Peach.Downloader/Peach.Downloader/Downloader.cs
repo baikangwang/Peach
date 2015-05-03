@@ -60,13 +60,14 @@ namespace Peach.Downloader
                     }
                 }
 
+                Thread.Sleep(1000);
                 i++;
             }
 
             return String.Empty;
         }
 
-        public void Download(ISeed seed)
+        public void Download(ISeed seed,CancellationToken token)
         {
             seed.OnStatusChanged(0);
 
@@ -93,16 +94,22 @@ namespace Peach.Downloader
                     };
                     wc.DownloadFileCompleted += (sender, e) =>
                     {
-                        if (e.Cancelled || e.Error != null)
+                        if (e.Error != null)
                         {
                             seed.OnFail();
                         }
-                        else seed.OnCompleted();
+                        else if (!e.Cancelled) seed.OnCompleted();
                     };
                     wc.DownloadFileAsync(new Uri(url), file);
 
                     while (wc.IsBusy)
                     {
+                        if (token.IsCancellationRequested)
+                        {
+                            wc.CancelAsync();
+                            break;
+                        }
+
                         Thread.Sleep(1000);
                     }
                 }
@@ -176,9 +183,9 @@ namespace Peach.Downloader
     {
         public IList<string> CHAPTERS = new List<string>()
                                                {
-                                                   //"http://www.ting56.com/mp3/218.html", // 第一季
+                                                   "http://www.ting56.com/mp3/218.html", // 第一季
                                                    "http://www.ting56.com/mp3/219.html", // 第二季
-                                                   //"http://www.ting56.com/mp3/220.html",
+                                                   "http://www.ting56.com/mp3/220.html",
                                                    // 盗墓笔记 第三季
                                                    "http://www.ting56.com/mp3/899.html",
                                                    // 盗墓笔记 第四季
@@ -190,7 +197,7 @@ namespace Peach.Downloader
                                                    // 盗墓笔记 第七季
                                                    "http://www.ting56.com/mp3/2568.html",
                                                    // 盗墓笔记 第八季
-                                                   //"http://www.ting56.com/mp3/2447.html",
+                                                   "http://www.ting56.com/mp3/2447.html",
                                                    // 盗墓笔记 藏海花
                                                };
 

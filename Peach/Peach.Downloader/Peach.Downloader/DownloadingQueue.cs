@@ -26,6 +26,8 @@ namespace Peach.Downloader
 
         private CancellationTokenSource _cancel;
 
+        private CancellationTokenSource _stoper;
+
         private Task _thread;
 
         private static object _lock=new object();
@@ -36,10 +38,18 @@ namespace Peach.Downloader
 
         public event SeedStatusEvent SeedStatusChanged;
 
+        protected DownloadingQueue()
+        {
+            this._cancel = new CancellationTokenSource();
+            this._stoper = new CancellationTokenSource();
+            this._queue = new List<ISeed>(MAX_THREAD);
+        }
+
         public void Start()
         {
-            this._queue = new List<ISeed>(MAX_THREAD);
             this._cancel=new CancellationTokenSource();
+            this._stoper=new CancellationTokenSource();
+            this._queue = new List<ISeed>(MAX_THREAD);
             this._thread = Task.Factory.StartNew(
                 () =>
                 {
@@ -52,19 +62,20 @@ namespace Peach.Downloader
 
                         if (this.IsEmpty())
                         {
-                            if (PendingQueue.Default.IsEmpty()) Thread.Sleep(1000 * 60);
+                            if (PendingQueue.Default.IsEmpty()) this.Pause(60*1000);
                             else
                             {
                                 while (!this.IsFull())
                                 {
-                                    if (token.IsCancellationRequested)
-                                        token.ThrowIfCancellationRequested();
+                                    if (token.IsCancellationRequested) token.ThrowIfCancellationRequested();
 
                                     ISeed seed = PendingQueue.Default.Dequeue();
 
-                                    if (seed != null) {this.Enqueue(seed);}
-                                    else
-                                        break;
+                                    if (seed != null)
+                                    {
+                                        this.Enqueue(seed);
+                                    }
+                                    else break;
                                 }
                             }
                         }
@@ -77,7 +88,7 @@ namespace Peach.Downloader
                             if (PendingQueue.Default.IsEmpty())
                             {
                                 this.Process(token);
-                                Thread.Sleep(1000 * 3);
+                                this.Pause(3*1000);
                             }
                             else
                             {
@@ -120,7 +131,7 @@ namespace Peach.Downloader
                             break;
                         case Status.Waiting:
                             seed.Status=Status.Downloading;
-                            Task.Factory.StartNew(() => { Downloader.Ting56.Download(seed); },token);
+                            Task.Factory.StartNew(() => { Downloader.Ting56.Download(seed,token); },token);
                             break;
                         case Status.Downloading:
                         default:
@@ -165,6 +176,11 @@ namespace Peach.Downloader
             }
         }
 
+        private void Pause(int period)
+        {
+            this._stoper.Token.WaitHandle.WaitOne(period);
+        }
+
         private bool IsFull()
         {
             lock (_lock)
@@ -175,12 +191,15 @@ namespace Peach.Downloader
 
         public void Stop()
         {
+            if(this._cancel!=null)
             this._cancel.Cancel();
+            if(this._stoper!=null)
+            this._stoper.Cancel();
             if (this._thread != null)
             {
                 while (!this._thread.IsCanceled && !this._thread.IsCompleted && !this._thread.IsFaulted)
                 {
-                    Thread.Sleep(1000);
+                    this.Pause(1000);
                 }
             }
             this.Dispose();
@@ -190,8 +209,11 @@ namespace Peach.Downloader
         {
             if (all)
             {
-                this._queue.Clear();
-                this._queue = null;
+                if (this._queue != null)
+                {
+                    this._queue.Clear();
+                    this._queue = null;
+                }
             }
         }
 
