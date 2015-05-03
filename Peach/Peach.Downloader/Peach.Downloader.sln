@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.Downloader", "Peach.Downloader\Peach.Downloader.csproj", "{A3E89569-AD83-4202-9BF3-FDD687150A61}"
+EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Peach.Downloader.Modeling", "Peach.Downloader.Modeling\Peach.Downloader.Modeling.modelproj", "{ABBEE631-411C-4258-B640-BC86EEF1A81B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.Downloader.Ting56", "Peach.Downloader.Ting56\Peach.Downloader.Ting56.csproj", "{F7413FC4-2B43-4A40-8AA3-D3F97040DD24}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://baikangwang.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Peach.Downloader.Modeling\\Peach.Downloader.Modeling.modelproj
+		SccProjectName1 = Peach.Downloader.Modeling
+		SccLocalPath1 = Peach.Downloader.Modeling
+		SccProjectUniqueName2 = Peach.Downloader.Ting56\\Peach.Downloader.Ting56.csproj
+		SccProjectName2 = Peach.Downloader.Ting56
+		SccLocalPath2 = Peach.Downloader.Ting56
+		SccProjectUniqueName3 = Peach.Downloader\\Peach.Downloader.csproj
+		SccProjectName3 = Peach.Downloader
+		SccLocalPath3 = Peach.Downloader
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3E89569-AD83-4202-9BF3-FDD687150A61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3E89569-AD83-4202-9BF3-FDD687150A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3E89569-AD83-4202-9BF3-FDD687150A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3E89569-AD83-4202-9BF3-FDD687150A61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABBEE631-411C-4258-B640-BC86EEF1A81B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABBEE631-411C-4258-B640-BC86EEF1A81B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABBEE631-411C-4258-B640-BC86EEF1A81B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABBEE631-411C-4258-B640-BC86EEF1A81B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7413FC4-2B43-4A40-8AA3-D3F97040DD24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7413FC4-2B43-4A40-8AA3-D3F97040DD24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7413FC4-2B43-4A40-8AA3-D3F97040DD24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7413FC4-2B43-4A40-8AA3-D3F97040DD24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

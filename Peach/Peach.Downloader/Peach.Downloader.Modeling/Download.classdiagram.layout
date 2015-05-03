@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Download">
+  <logicalClassDesignerModelMoniker Id="9ccde5e5-980b-4e02-9915-253a2c7e93b6" />
+  <nestedChildShapes>
+    <classShape Id="f3881d23-6521-41ca-986c-5fa884c4937f" absoluteBounds="1.875, 1, 1.5, 1.7031249602635703" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="a1837378-c095-41ea-91e9-188113f714ec" LastKnownName="Seed" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="168fd5f2-9f48-4323-b4eb-d1c430d99e35" absoluteBounds="1.89, 1.3900000000000001, 1.4700000000000002, 1.0019530927141507" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="eb32e170-33d3-421f-9332-89f4aa175cf6" absoluteBounds="1.89, 2.4019530927141508, 1.4700000000000002, 0.20117186754941963" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <enumerationShape Id="e2a03515-2e3d-4767-a52a-d4eebef86011" absoluteBounds="4, 1.125, 1.5, 1.1716406026482584" hideQualifiedName="false" increaseHeight="0" customColor="161, 150, 103">
+      <enumerationMoniker Id="de891706-39a7-41ac-b8f4-ec754a279d46" LastKnownName="Status" />
+      <nestedChildShapes>
+        <LiteralElementListCompartment Id="b699ee8b-8978-48d3-9b58-2ff38620be09" absoluteBounds="4.015, 1.5150000000000001, 1.4700000000000002, 0.68164060264825821" name="LiteralsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </enumerationShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" dslVersion="1.0.0.0" Id="1c627f69-ec1a-4001-960f-3440f9aa5dc3" name="Downloader" linkedPackageId="d9a2e52e-bf19-411b-86b2-ff25edbda73a" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="4c7c5fb4-40d9-4045-9952-a7ad512fc902">
+      <profileInstance Id="1b5f81ca-2acc-47a5-a11f-98ffab7df0cd" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="72656007-9f67-4dee-949e-7edd5436072c">
+      <profileInstance Id="1f57f8e1-1048-4446-99c9-ade4e87cae95" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="94b0358a-1311-4491-9aa3-5dd69806f65d" name="user" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="5a76bb96-fd83-4982-b143-e0ee750a91ef" />
+        <targetEnds>
+          <association Id="82e6e2b4-fe99-4ae2-83ac-cdc749fa40dc" isDerived="false" sourceEndRoleName="user" targetEndRoleName="Download Audio" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="a82749c5-ffb6-4409-9f15-d8f300786a74" LastKnownName="Download Audio" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="92dfcc31-0134-4c04-b6c4-dccae0a31c9e" name="user" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="9dad6cc8-ab00-4e3e-a1c5-c66b1b58b22b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="48e4b3aa-5508-427d-8801-397a30d2d9f9" name="Download Audio" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="bfbf521a-a402-40e3-bdcc-53ce7985cb8a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="42c9a578-093b-4070-9d03-c6412ee6a10a" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="22053085-adf1-4af6-a530-ddbfc9bc0a91" name="Subsystem1" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="4030fb28-9c02-432d-ae8a-d84cbae16c16" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="a82749c5-ffb6-4409-9f15-d8f300786a74" name="Download Audio" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="2f313c7b-35d0-4dc1-8464-120853f9977b" />
+        <suppliersInternal>
+          <dependency Id="0409a543-db5e-41f8-b744-0a5b6c5d214d">
+            <useCaseMoniker Id="155a1099-ad6b-43f0-837d-e7492e44b5ca" LastKnownName="Records Fail" />
+            <elementDefinition Id="1fe275be-d29c-4840-9565-f13ab4137d7b" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="22053085-adf1-4af6-a530-ddbfc9bc0a91" LastKnownName="Subsystem1" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="155a1099-ad6b-43f0-837d-e7492e44b5ca" name="Records Fail" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="32a83a7d-c941-4503-b488-b715abfd2bdc" />
+        <subjects>
+          <subsystemMoniker Id="22053085-adf1-4af6-a530-ddbfc9bc0a91" LastKnownName="Subsystem1" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="d9a2e52e-bf19-411b-86b2-ff25edbda73a" name="Peach.56Downloader.Modeling">
+    <elementDefinition Id="0791b4ec-6179-4112-b9a0-b35ca0c24fd4" />
+  </package>
+</useCaseModelRoot>

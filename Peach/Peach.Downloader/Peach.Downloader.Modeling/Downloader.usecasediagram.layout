@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Downloader">
+  <useCaseModelRootMoniker Id="1c627f69-ec1a-4001-960f-3440f9aa5dc3" />
+  <nestedChildShapes>
+    <actorShape Id="3685720a-f190-4dc1-bc13-dc9e0a7cdb83" absoluteBounds="1.25, 1.25, 0.5, 0.5" isReference="false" heightOffset="0">
+      <actorMoniker Id="94b0358a-1311-4491-9aa3-5dd69806f65d" LastKnownName="user" />
+      <relativeChildShapes />
+    </actorShape>
+    <SubsystemShape Id="b60cd777-5622-4bcb-9e45-424dfa4cd3bb" absoluteBounds="2.5, 0.625, 3, 2.625" customColor="White">
+      <subsystemMoniker Id="22053085-adf1-4af6-a530-ddbfc9bc0a91" LastKnownName="Subsystem1" />
+      <nestedChildShapes>
+        <useCaseShape Id="213b6ffb-57ba-4e84-bcc2-c326d49fafb2" absoluteBounds="3.125, 1.25, 1, 0.5" customColor="238, 237, 131" heightOffset="0">
+          <useCaseMoniker Id="a82749c5-ffb6-4409-9f15-d8f300786a74" LastKnownName="Download Audio" />
+          <relativeChildShapes />
+        </useCaseShape>
+        <useCaseShape Id="898e95e3-8abc-4a4e-815d-f90380e3b2b3" absoluteBounds="3.125, 2.25, 1, 0.5" customColor="238, 237, 131" heightOffset="0">
+          <useCaseMoniker Id="155a1099-ad6b-43f0-837d-e7492e44b5ca" LastKnownName="Records Fail" />
+          <relativeChildShapes />
+        </useCaseShape>
+      </nestedChildShapes>
+    </SubsystemShape>
+    <useCaseAssociationConnector edgePoints="[(1.75 : 1.5); (3.125 : 1.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+      <associationMoniker Id="82e6e2b4-fe99-4ae2-83ac-cdc749fa40dc" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="3685720a-f190-4dc1-bc13-dc9e0a7cdb83" />
+        <useCaseShapeMoniker Id="213b6ffb-57ba-4e84-bcc2-c326d49fafb2" />
+      </nodes>
+    </useCaseAssociationConnector>
+    <useCaseDependencyConnector edgePoints="[(3.625 : 1.75); (3.625 : 2.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <dependencyMoniker Id="0409a543-db5e-41f8-b744-0a5b6c5d214d" />
+      <relativeChildShapes />
+      <nodes>
+        <useCaseShapeMoniker Id="213b6ffb-57ba-4e84-bcc2-c326d49fafb2" />
+        <useCaseShapeMoniker Id="898e95e3-8abc-4a4e-815d-f90380e3b2b3" />
+      </nodes>
+    </useCaseDependencyConnector>
+  </nestedChildShapes>
+</useCaseDiagram>

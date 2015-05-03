@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="dd8a930a-187b-4fa7-ab59-90efaabc1936" name="Dowload" linkedPackageId="d3a11dac-bd24-4ef1-9a8a-4ade68efb979" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="bc8c3e0e-6b4e-47a4-9baa-72e387dac598">
+      <profileInstance Id="1d810880-1771-44cd-a7e2-d2cb7caaabc8" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="129ce185-3f26-4e04-ac20-f431f803e1bd">
+      <profileInstance Id="a8204436-98c4-49f3-9350-343484d64d6f" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="717e0e08-1468-47b4-8a59-60f17aef5dda" name="Dowload" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="00a63754-129a-402d-8b0d-0a86127baa23" />
+        <nodes>
+          <initialNode Id="fe18b8ee-c835-4547-ac3a-61cf4b1656fa" name="Initial1" isLeaf="false">
+            <elementDefinition Id="d514589e-6c31-4a45-9180-09bd5fb4e3f0" />
+            <flowNodeTargets>
+              <controlFlow Id="5caad09b-c987-4fd8-ad87-31ea52de6f57" isLeaf="false">
+                <opaqueActionMoniker Id="defe4cb2-e2ba-434d-9719-168210f729db" LastKnownName="Query pending if existing" />
+                <elementDefinition Id="10a8f4de-d6da-442d-ac49-6857a482a4eb" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="5fd153ed-d7c7-4653-8cf6-d30e23d98eb1" name="Request Chapter" isLeaf="false">
+            <elementDefinition Id="ba829298-355e-4bdc-b89e-70eaea3db666" />
+            <flowNodeTargets>
+              <controlFlow Id="0170d2b4-5f33-4cc0-8e3f-24da60ec1a9b" isLeaf="false">
+                <opaqueActionMoniker Id="d62eaaeb-dbb1-4e0e-a8e9-f002011cbe8c" LastKnownName="List all of espisodes " />
+                <elementDefinition Id="f4c70216-6320-4d7d-9dcc-949ded92f66b" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="d62eaaeb-dbb1-4e0e-a8e9-f002011cbe8c" name="List all of espisodes " isLeaf="false">
+            <elementDefinition Id="3e4c5eba-fb2d-41b0-b714-8aa354985003" />
+            <flowNodeTargets>
+              <controlFlow Id="ac38c5ad-b92d-4dc7-a7c0-52b275ab32f7" isLeaf="false">
+                <opaqueActionMoniker Id="c077415e-44e8-4100-9c49-eeb10a11b3d0" LastKnownName="Insert into DB" />
+                <elementDefinition Id="ca9199d1-9bba-4203-b4b6-98b8da9c04eb" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="8cd7ad5b-60a6-45a1-904f-e75a6429aca3" name="Request espisode" isLeaf="false">
+            <elementDefinition Id="4d18fd14-82eb-4d9b-befd-9e7a464db125" />
+            <flowNodeTargets>
+              <controlFlow Id="6bc24b50-0e8a-4bbd-95db-5adcd70be163" isLeaf="false">
+                <sendSignalActionMoniker Id="9b43859e-8fbf-4fee-ae78-3fa367562d66" LastKnownName="Start" />
+                <elementDefinition Id="092f1d39-055b-4777-be41-f447dff1b2a8" />
+              </controlFlow>
+              <controlFlow Id="39e15657-a172-4e19-a33c-ce1915de678d" isLeaf="false">
+                <opaqueActionMoniker Id="771b7d34-0950-45be-89a0-76dc6268321b" LastKnownName="Parse Audio Url" />
+                <elementDefinition Id="18462408-a933-4688-8069-c3c1e8d6751c" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="771b7d34-0950-45be-89a0-76dc6268321b" name="Parse Audio Url" isLeaf="false">
+            <elementDefinition Id="509799ff-5985-4674-b006-18b79d2417ea" />
+            <flowNodeTargets>
+              <controlFlow Id="111c9c14-a973-4215-813d-598a62113471" isLeaf="false">
+                <opaqueActionMoniker Id="13b9203a-24ff-4606-81d2-2161803fc017" LastKnownName="Download" />
+                <elementDefinition Id="0dac8c1a-1ce0-4252-84a3-c9ce88dba7a6" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="13b9203a-24ff-4606-81d2-2161803fc017" name="Download" isLeaf="false">
+            <elementDefinition Id="ab3cc947-2f6a-439c-9e5f-658d8cdb3f95" />
+            <flowNodeTargets>
+              <controlFlow Id="1ce5ee55-ae46-4ef5-b66e-6610f513f576" isLeaf="false">
+                <sendSignalActionMoniker Id="f0321b57-3535-473c-8b91-c869440be409" LastKnownName="Downloading" />
+                <elementDefinition Id="d236a955-1014-4fe3-a028-4723e133a8f8" />
+              </controlFlow>
+              <controlFlow Id="1d34dbd3-9422-4f4c-be82-26c0fb9ffbe1" isLeaf="false">
+                <opaqueActionMoniker Id="26118197-8b17-4c9d-9fdf-fee7cff67772" LastKnownName="Still pending in queue" />
+                <elementDefinition Id="f2fcaf3b-ffbc-4b1a-b572-521a5a3829bb" />
+              </controlFlow>
+              <controlFlow Id="3e7f45e9-28aa-43eb-a75d-1c6b48b338b0" isLeaf="false">
+                <sendSignalActionMoniker Id="2ec19301-0741-4c6a-86d3-994cc5a48817" LastKnownName="Fail" />
+                <elementDefinition Id="c62d44d2-a305-416c-983f-f2983198dba4" />
+              </controlFlow>
+              <controlFlow Id="4649f69e-3698-4202-90bc-816e03362d74" isLeaf="false">
+                <sendSignalActionMoniker Id="c23560fb-c572-4fe4-9b15-fca5757b6a6c" LastKnownName="Downloaded" />
+                <elementDefinition Id="7ec74a0a-f8a5-4ccf-833f-6a667beca48a" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <sendSignalAction Id="9b43859e-8fbf-4fee-ae78-3fa367562d66" name="Start" isLeaf="false">
+            <elementDefinition Id="c5aaecb1-ec2b-4b01-9f2b-178d3f20c0a2" />
+            <flowNodeTargets>
+              <controlFlow Id="febef9e1-c69b-4ee6-9897-7daca20124d5" isLeaf="false">
+                <acceptEventActionMoniker Id="42d71c9a-a58a-4e8d-a767-7b24a0b6ed80" LastKnownName="Show Status" />
+                <elementDefinition Id="ffb99222-dfe7-44d9-a776-609d680eabfb" />
+              </controlFlow>
+            </flowNodeTargets>
+          </sendSignalAction>
+          <sendSignalAction Id="f0321b57-3535-473c-8b91-c869440be409" name="Downloading" isLeaf="false">
+            <elementDefinition Id="dcbe59a8-e636-43a7-939a-1f474ece5aa1" />
+            <flowNodeTargets>
+              <controlFlow Id="832ca57f-ef17-4dd1-8bd3-7219d8d1041c" isLeaf="false">
+                <acceptEventActionMoniker Id="42d71c9a-a58a-4e8d-a767-7b24a0b6ed80" LastKnownName="Show Status" />
+                <elementDefinition Id="ecd9e505-2d6f-44bb-8f31-a70eb48116f6" />
+              </controlFlow>
+            </flowNodeTargets>
+          </sendSignalAction>
+          <acceptEventAction Id="42d71c9a-a58a-4e8d-a767-7b24a0b6ed80" name="Show Status" isLeaf="false" isUnmarshall="false">
+            <elementDefinition Id="0d0da7fa-c1a2-4a72-85f6-0275e389a6b0" />
+          </acceptEventAction>
+          <opaqueAction Id="defe4cb2-e2ba-434d-9719-168210f729db" name="Query pending if existing" isLeaf="false">
+            <elementDefinition Id="252cef0b-b745-4629-91ea-0a63bffac709" />
+            <flowNodeTargets>
+              <controlFlow Id="3404b2fe-2d04-4730-84f1-8c082f55572d" isLeaf="false">
+                <decisionNodeMoniker Id="5630e38f-fa3e-4c82-a80f-725b854b2bbf" LastKnownName="Decision1" />
+                <elementDefinition Id="8fa82b47-3e7b-46c2-8266-0873846439dd" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="5630e38f-fa3e-4c82-a80f-725b854b2bbf" name="Decision1" isLeaf="false">
+            <elementDefinition Id="5830e081-0384-421a-9ed4-c2a5169f9546" />
+            <flowNodeTargets>
+              <controlFlow Id="88a0813b-dc27-484b-af3f-661ad57a714e" guard="N" isLeaf="false">
+                <opaqueActionMoniker Id="5fd153ed-d7c7-4653-8cf6-d30e23d98eb1" LastKnownName="Request Chapter" />
+                <elementDefinition Id="41cb75b0-51d9-4872-bf80-8c2bfd68d5bf" />
+              </controlFlow>
+              <controlFlow Id="c893e2a5-ef8c-47da-bfa3-a14651d43fc2" guard="Y" isLeaf="false">
+                <opaqueActionMoniker Id="e6aaa837-63aa-434f-be1e-1560214241e3" LastKnownName="Query All" />
+                <elementDefinition Id="74890aa6-ffa0-4ce7-bcf1-bb57b4096e2d" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="c077415e-44e8-4100-9c49-eeb10a11b3d0" name="Insert into DB" isLeaf="false">
+            <elementDefinition Id="917f6de5-7e0f-4eea-97da-1958c8cde96c" />
+            <flowNodeTargets>
+              <controlFlow Id="834f2fed-fb5d-477f-b42f-263cf6e8e16e" isLeaf="false">
+                <opaqueActionMoniker Id="e6aaa837-63aa-434f-be1e-1560214241e3" LastKnownName="Query All" />
+                <elementDefinition Id="dff978a6-dcc0-44cb-ade1-86d5c5f46997" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="e6aaa837-63aa-434f-be1e-1560214241e3" name="Query All" isLeaf="false">
+            <elementDefinition Id="2c33f68e-8e31-4130-9fb8-ee9e3e973bfc" />
+            <flowNodeTargets>
+              <controlFlow Id="6751bf43-49dc-45cd-a51f-329cfc7b19f0" isLeaf="false">
+                <forkNodeMoniker Id="624bd4c8-d498-4977-8357-93c57c574857" LastKnownName="Fork1" />
+                <elementDefinition Id="af6517fb-3e8a-4227-8361-6885d000f81a" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <forkNode Id="624bd4c8-d498-4977-8357-93c57c574857" name="Fork1" isLeaf="false">
+            <elementDefinition Id="43fca189-a756-4257-8517-297a66625f36" />
+            <flowNodeTargets>
+              <controlFlow Id="a8a6a53e-e71f-4191-a24c-e253e3adcd82" isLeaf="false">
+                <opaqueActionMoniker Id="8cd7ad5b-60a6-45a1-904f-e75a6429aca3" LastKnownName="Request espisode" />
+                <elementDefinition Id="b2111c3d-c80b-4a31-ae6e-467415ecc108" />
+              </controlFlow>
+            </flowNodeTargets>
+          </forkNode>
+          <opaqueAction Id="26118197-8b17-4c9d-9fdf-fee7cff67772" name="Still pending in queue" isLeaf="false">
+            <elementDefinition Id="f8dee6f2-365b-451b-accb-23b83e187a39" />
+            <flowNodeTargets>
+              <controlFlow Id="d50dc6d7-cdcc-4f2f-a36a-54c11469a07d" isLeaf="false">
+                <decisionNodeMoniker Id="8545d57a-09ab-4320-8663-c629203d4fbb" LastKnownName="Decision2" />
+                <elementDefinition Id="8723114c-0bb2-41a6-b1c6-6587acd07163" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="8545d57a-09ab-4320-8663-c629203d4fbb" name="Decision2" isLeaf="false">
+            <elementDefinition Id="9b3dbb56-ba40-467e-88d0-51cb0b9e7624" />
+            <flowNodeTargets>
+              <controlFlow Id="362d2458-6cb3-491e-8a9a-aea5f31f4e03" guard="N" isLeaf="false">
+                <activityFinalNodeMoniker Id="8e8041f7-0ed1-4283-9582-35024afe3dc1" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="35357f6e-88e2-4e62-9db4-0d61351a7556" />
+              </controlFlow>
+              <controlFlow Id="3ab5bcb6-ec12-4d2b-96ce-e66c3641df4c" guard="Y" isLeaf="false">
+                <opaqueActionMoniker Id="8cd7ad5b-60a6-45a1-904f-e75a6429aca3" LastKnownName="Request espisode" />
+                <elementDefinition Id="4073e50c-ff1d-4157-ba44-4416a2a8a3c2" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <activityFinalNode Id="8e8041f7-0ed1-4283-9582-35024afe3dc1" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="371f87e4-7874-4dc8-843f-c6d9456dd2f9" />
+          </activityFinalNode>
+          <sendSignalAction Id="2ec19301-0741-4c6a-86d3-994cc5a48817" name="Fail" isLeaf="false">
+            <elementDefinition Id="a79d3367-a20f-4bd1-9cdc-12f35482c0ce" />
+            <flowNodeTargets>
+              <controlFlow Id="da9cb26e-618c-4418-8b18-cb318e0b2090" isLeaf="false">
+                <acceptEventActionMoniker Id="eea48a6a-47fa-45f7-bc63-615b6f5a265b" LastKnownName="Update to db, Show Status" />
+                <elementDefinition Id="26ac0b4a-3ebd-4d0d-a22e-a5e140c6410e" />
+              </controlFlow>
+            </flowNodeTargets>
+          </sendSignalAction>
+          <sendSignalAction Id="c23560fb-c572-4fe4-9b15-fca5757b6a6c" name="Downloaded" isLeaf="false">
+            <elementDefinition Id="f792b4b5-b259-4679-9de2-74e894cf5670" />
+            <flowNodeTargets>
+              <controlFlow Id="e98dace0-4018-4a3a-9ccf-89cdfe1d0bca" isLeaf="false">
+                <acceptEventActionMoniker Id="f5d83f9f-bc03-4cf5-bf0d-8b7949f2a54a" LastKnownName="Update to  DB, Show status" />
+                <elementDefinition Id="f7c9a2d9-7d21-4739-abdc-1b93331ad00e" />
+              </controlFlow>
+            </flowNodeTargets>
+          </sendSignalAction>
+          <acceptEventAction Id="eea48a6a-47fa-45f7-bc63-615b6f5a265b" name="Update to db, Show Status" isLeaf="false" isUnmarshall="false">
+            <elementDefinition Id="e36b6cc1-eb2a-425b-b515-269cbeff1eb0" />
+          </acceptEventAction>
+          <acceptEventAction Id="f5d83f9f-bc03-4cf5-bf0d-8b7949f2a54a" name="Update to  DB, Show status" isLeaf="false" isUnmarshall="false">
+            <elementDefinition Id="2e899d23-aa15-4018-8452-d652e9f529b8" />
+          </acceptEventAction>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="d3a11dac-bd24-4ef1-9a8a-4ade68efb979" name="Peach.56Downloader.Modeling">
+    <elementDefinition Id="0791b4ec-6179-4112-b9a0-b35ca0c24fd4" />
+  </package>
+</activityRootModel>
