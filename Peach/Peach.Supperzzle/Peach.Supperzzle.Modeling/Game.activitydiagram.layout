@@ -37,7 +37,7 @@
     <actionShape Id="e96c276e-3e6c-405e-9429-2634ea5d269a" absoluteBounds="4.5, 5.375, 1.125, 0.375" customColor="161, 199, 231">
       <opaqueActionMoniker Id="ce5a22e2-607a-4a5f-b65b-0d6d01f0bbe3" LastKnownName="hide loading panel" />
     </actionShape>
-    <controlFlowConnector edgePoints="[(5.3125 : 0.625); (5.3125 : 1)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.3125 : 0.625); (5.3125 : 1)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="547f205e-3c56-468f-9989-ec6f81348924" />
       <relativeChildShapes />
       <nodes>
@@ -45,7 +45,7 @@
         <actionShapeMoniker Id="dc2472fc-81e9-429c-aa31-45381fe6152a" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(4.75 : 2.3125); (3.5625 : 2.3125); (3.5625 : 2.875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(4.75 : 2.3125); (3.5625 : 2.3125); (3.5625 : 2.875)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="3e7a96dc-75e7-40dc-a662-ac553f1bf38f" />
       <relativeChildShapes />
       <nodes>
@@ -53,7 +53,7 @@
         <actionShapeMoniker Id="22e7ad07-7a2c-4277-9f51-879f9f76e9ff" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.1875 : 2.375); (5.1875 : 2.875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.1875 : 2.375); (5.1875 : 2.875)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="e33fa456-1c90-4c3b-99ac-6172a08c71e6" />
       <relativeChildShapes />
       <nodes>
@@ -61,7 +61,7 @@
         <actionShapeMoniker Id="652a1486-b674-42ab-aa48-09a8691acb30" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.875 : 2.3125); (6.5625 : 2.3125); (6.5625 : 2.875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.875 : 2.3125); (6.5625 : 2.3125); (6.5625 : 2.875)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="68c6d844-8680-445b-b97d-7d9e37504ffe" />
       <relativeChildShapes />
       <nodes>
@@ -69,7 +69,7 @@
         <actionShapeMoniker Id="9d83cf12-2e3f-4c10-8950-871a7d2fb778" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.0625 : 3.25); (5.0625 : 3.625)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 3.25); (5.0625 : 3.625)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="b0963d69-1404-4721-912f-d9a01b7dd14d" />
       <relativeChildShapes />
       <nodes>
@@ -77,7 +77,7 @@
         <actionShapeMoniker Id="9be61d48-d936-4615-ac86-083ea1497067" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.0625 : 4); (5.0625 : 4.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 4); (5.0625 : 4.25)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="7ecfa03d-d51c-4ee5-af27-0553c03945c9" />
       <relativeChildShapes />
       <nodes>
@@ -85,7 +85,7 @@
         <actionShapeMoniker Id="219d28c4-917f-41fb-92c0-13d71eae9280" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(6.5625 : 3.25); (6.5625 : 3.625)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(6.5625 : 3.25); (6.5625 : 3.625)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="48e22c47-566e-474c-95ee-345fda81d885" />
       <relativeChildShapes />
       <nodes>
@@ -93,7 +93,7 @@
         <actionShapeMoniker Id="b2ec87fe-180c-413a-8624-ab162b6f69ae" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(6.5625 : 4); (6.5625 : 4.875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(6.5625 : 4); (6.5625 : 4.875)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="821ffe53-dc96-4532-9a24-9234392c5e41" />
       <relativeChildShapes />
       <nodes>
@@ -101,7 +101,7 @@
         <joinNodeShapeMoniker Id="77e49e8b-5c54-4923-9541-87478b90a019" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.0625 : 4.625); (5.0625 : 4.875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 4.625); (5.0625 : 4.875)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="8d20ba38-a28e-43d6-a2f2-d0d5e08f2ce6" />
       <relativeChildShapes />
       <nodes>
@@ -109,7 +109,7 @@
         <joinNodeShapeMoniker Id="77e49e8b-5c54-4923-9541-87478b90a019" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(3.625 : 3.25); (3.625 : 4.875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(3.625 : 3.25); (3.625 : 4.875)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="455bff2c-6788-4e41-a662-a4a84ef28e1b" />
       <relativeChildShapes />
       <nodes>
@@ -123,7 +123,7 @@
     <acceptEventActionShape Id="f2ef0865-a2a1-455c-a706-7b6986115d22" absoluteBounds="4.5, 8, 1.125, 0.375" customColor="185, 212, 238">
       <acceptEventActionMoniker Id="e58739a4-c63f-412f-8c8c-a7abf44ee464" LastKnownName="button click" />
     </acceptEventActionShape>
-    <controlFlowConnector edgePoints="[(5.0625 : 5); (5.0625 : 5.375)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 5); (5.0625 : 5.375)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="2df20f7a-926a-48a1-9356-a167ed542adc" />
       <relativeChildShapes />
       <nodes>
@@ -147,7 +147,7 @@
     <actionShape Id="d5da9c58-2ec8-492e-b1de-023a00d75c54" absoluteBounds="6.125, 9.5, 1.125, 0.375" customColor="161, 199, 231">
       <opaqueActionMoniker Id="b5a95a35-cf27-4d31-9a00-bb9731f71d9c" LastKnownName="restore button" />
     </actionShape>
-    <controlFlowConnector edgePoints="[(5.625 : 10.4375); (6.23325317547306 : 10.4375)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.625 : 10.4375); (6.23325317547306 : 10.4375)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="0a1041fa-d7ca-4661-9eab-176d66b569a1" />
       <relativeChildShapes />
       <nodes>
@@ -161,7 +161,7 @@
     <objectNodeShape Id="a56cfd99-ad14-45dd-9e8a-e73cde6c10e4" absoluteBounds="6.125, 8.75, 1.125, 0.375" customColor="White">
       <objectNodeMoniker Id="2cd77df4-d8c5-47ab-a202-65e4a52fb1b8" LastKnownName="Normal" />
     </objectNodeShape>
-    <objectFlowConnector edgePoints="[(5.0625 : 9.125); (5.0625 : 9.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <objectFlowConnector edgePoints="[(5.0625 : 9.125); (5.0625 : 9.5)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <objectFlowMoniker Id="1719fb44-bc9e-4d33-af5c-fb109cbc7cb0" />
       <relativeChildShapes />
       <nodes>
@@ -169,7 +169,7 @@
         <objectNodeShapeMoniker Id="10aa545d-1ed7-45ae-8429-c0cf82ffdbc6" />
       </nodes>
     </objectFlowConnector>
-    <objectFlowConnector edgePoints="[(5.0625 : 9.875); (5.0625 : 10.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <objectFlowConnector edgePoints="[(5.0625 : 9.875); (5.0625 : 10.25)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <objectFlowMoniker Id="6313737b-1f99-4594-8961-0549c14f67a2" />
       <relativeChildShapes />
       <nodes>
@@ -177,7 +177,7 @@
         <actionShapeMoniker Id="e7745441-8554-4011-abd6-598a79b23fe0" />
       </nodes>
     </objectFlowConnector>
-    <controlFlowConnector edgePoints="[(6.6875 : 10.25); (6.6875 : 9.875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(6.6875 : 10.25); (6.6875 : 9.875)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="73572b01-c4ed-4518-b814-557f4fda5bca" />
       <relativeChildShapes />
       <nodes>
@@ -185,7 +185,7 @@
         <actionShapeMoniker Id="d5da9c58-2ec8-492e-b1de-023a00d75c54" />
       </nodes>
     </controlFlowConnector>
-    <objectFlowConnector edgePoints="[(6.6875 : 9.5); (6.6875 : 9.125)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <objectFlowConnector edgePoints="[(6.6875 : 9.5); (6.6875 : 9.125)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <objectFlowMoniker Id="5372b4df-4b07-4ad3-aebf-0297f73bd897" />
       <relativeChildShapes />
       <nodes>
@@ -218,7 +218,7 @@
     <objectNodeShape Id="83ebc0b3-4f25-4f1a-a53f-882a4e22b4ad" absoluteBounds="4.5, 14.125, 1.125, 0.375" customColor="White">
       <objectNodeMoniker Id="0b2783af-4875-4944-9995-c140b484d753" LastKnownName="Inverted" />
     </objectNodeShape>
-    <controlFlowConnector edgePoints="[(5.0625 : 10.625); (5.0625 : 10.875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 10.625); (5.0625 : 10.875)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="4614901e-0f04-426c-add5-224e9ed5a333" />
       <relativeChildShapes />
       <nodes>
@@ -226,7 +226,7 @@
         <actionShapeMoniker Id="b4840e38-29ce-4b97-b0ee-f54823694397" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.0625 : 11.25); (5.0625 : 11.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 11.25); (5.0625 : 11.5)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="84f2a840-09ca-4f3f-99f1-c8bfef0f1470" />
       <relativeChildShapes />
       <nodes>
@@ -234,7 +234,7 @@
         <decisionNodeShapeMoniker Id="d74601d4-565c-4f55-b3ed-746add773c1f" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.0625 : 11.875); (5.0625 : 12.125)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 11.875); (5.0625 : 12.125)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="4d160ab5-ca38-44b2-80da-a84350510905" />
       <relativeChildShapes />
       <moveableDecoratorHostShapes>
@@ -245,7 +245,7 @@
         <actionShapeMoniker Id="6a272a38-f16e-407b-b038-db6c78fae742" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.0625 : 12.5); (5.0625 : 12.75)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 12.5); (5.0625 : 12.75)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="d2fc4405-89d6-4bfa-8e39-53a66882920b" />
       <relativeChildShapes />
       <nodes>
@@ -253,7 +253,7 @@
         <actionShapeMoniker Id="fe778497-b26e-4fc1-8af7-8c2162f4fc9e" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.0625 : 13.125); (5.0625 : 13.375)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 13.125); (5.0625 : 13.375)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="59e8924b-1362-438d-b024-cf1a250011f6" />
       <relativeChildShapes />
       <nodes>
@@ -261,7 +261,7 @@
         <decisionNodeShapeMoniker Id="b85c0604-2727-4be2-8f3e-f72e291f9ca9" />
       </nodes>
     </controlFlowConnector>
-    <objectFlowConnector edgePoints="[(5.0625 : 13.75); (5.0625 : 14.125)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <objectFlowConnector edgePoints="[(5.0625 : 13.75); (5.0625 : 14.125)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <objectFlowMoniker Id="fca4f0f0-6446-4a5b-80d2-73fb5e3eb3fa" />
       <relativeChildShapes />
       <moveableDecoratorHostShapes>
@@ -272,7 +272,7 @@
         <objectNodeShapeMoniker Id="83ebc0b3-4f25-4f1a-a53f-882a4e22b4ad" />
       </nodes>
     </objectFlowConnector>
-    <objectFlowConnector edgePoints="[(5.0625 : 14.5); (5.0625 : 14.75)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <objectFlowConnector edgePoints="[(5.0625 : 14.5); (5.0625 : 14.75)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <objectFlowMoniker Id="5518ef06-c7dd-452c-ba06-de302fabedff" />
       <relativeChildShapes />
       <nodes>
@@ -280,7 +280,7 @@
         <actionShapeMoniker Id="c100cbf4-67b8-4f5d-aa80-2f2106883276" />
       </nodes>
     </objectFlowConnector>
-    <controlFlowConnector edgePoints="[(5.25 : 13.5625); (6.375 : 13.5625)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.25 : 13.5625); (6.375 : 13.5625)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="2c873ba0-a420-40d6-a4ab-590ab74c10bc" />
       <relativeChildShapes />
       <nodes>
@@ -288,7 +288,7 @@
         <actionShapeMoniker Id="a8ef54d8-aa08-42a5-aee7-d57163f821fe" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(6.9375 : 13.375); (6.9375 : 13.125)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(6.9375 : 13.375); (6.9375 : 13.125)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="caf47965-9310-460d-b2ac-c624b07af7b1" />
       <relativeChildShapes />
       <nodes>
@@ -299,7 +299,7 @@
     <actionShape Id="20a47aef-2db3-496b-b241-ebd1924a8bc8" absoluteBounds="6.375, 12.125, 1.125, 0.375" customColor="161, 199, 231">
       <opaqueActionMoniker Id="c173d2c2-f8f9-487f-a04b-d914761f912e" LastKnownName="play fail sound" />
     </actionShape>
-    <controlFlowConnector edgePoints="[(6.9375 : 12.75); (6.9375 : 12.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(6.9375 : 12.75); (6.9375 : 12.5)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="5febfed5-a3eb-406b-ac85-79a58e6f3056" />
       <relativeChildShapes />
       <nodes>
@@ -310,7 +310,7 @@
     <actionShape Id="436eeea3-5114-4a36-ab41-a4348029392e" absoluteBounds="6, 16.125, 1.125, 0.375" customColor="161, 199, 231">
       <opaqueActionMoniker Id="4216d780-9f57-46d6-8126-d81234e436b9" LastKnownName="play success sound" />
     </actionShape>
-    <controlFlowConnector edgePoints="[(5.0625 : 8.375); (5.0625 : 8.75)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 8.375); (5.0625 : 8.75)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="0a042966-b7c5-40c3-9865-409d16ccedef" />
       <relativeChildShapes />
       <nodes>
@@ -325,7 +325,7 @@
       <decisionNodeMoniker Id="bcc6c463-725d-4f80-8346-bdb2ecd461b8" LastKnownName="Decision3" />
       <relativeChildShapes />
     </decisionNodeShape>
-    <controlFlowConnector edgePoints="[(5.0625 : 15.125); (5.0625 : 15.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 15.125); (5.0625 : 15.5)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="215ab81f-e343-490a-b5aa-73ad1050e9bb" />
       <relativeChildShapes />
       <nodes>
@@ -333,7 +333,7 @@
         <actionShapeMoniker Id="1d2ed1fc-f7db-4622-b4c6-3df3f983a263" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.0625 : 15.875); (5.0625 : 16.125)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 15.875); (5.0625 : 16.125)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="72664104-f06b-4c13-8b3c-fc5a5d9c07e6" />
       <relativeChildShapes />
       <nodes>
@@ -341,7 +341,7 @@
         <decisionNodeShapeMoniker Id="0780ce10-ee64-419c-89c1-030d4bf087f5" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.25 : 16.3125); (6 : 16.3125)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.25 : 16.3125); (6 : 16.3125)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="374f4c59-22da-45db-beb9-211b86fdaee0" />
       <relativeChildShapes />
       <nodes>
@@ -352,7 +352,7 @@
     <actionShape Id="cfed9331-6467-48c9-81e9-59f69751bc9c" absoluteBounds="4.5, 16.875, 1.125, 0.375" customColor="161, 199, 231">
       <opaqueActionMoniker Id="e53d5bfc-86f8-4562-944b-063adafbc744" LastKnownName="play congratulation sound" />
     </actionShape>
-    <controlFlowConnector edgePoints="[(5.0625 : 16.5); (5.0625 : 16.875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 16.5); (5.0625 : 16.875)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="d3cabb2b-6227-4208-a7f6-9937c8c65058" />
       <relativeChildShapes />
       <nodes>
@@ -360,7 +360,7 @@
         <actionShapeMoniker Id="cfed9331-6467-48c9-81e9-59f69751bc9c" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.3125 : 1.375); (5.3125 : 1.625)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.3125 : 1.375); (5.3125 : 1.625)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="58482761-0010-47b4-8d1c-7db4d09c844b" />
       <relativeChildShapes />
       <nodes>
@@ -368,7 +368,7 @@
         <actionShapeMoniker Id="55e0a426-83e5-4eb3-b093-f235ae63c9b2" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.3125 : 2); (5.3125 : 2.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.3125 : 2); (5.3125 : 2.25)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="bf9e4f72-acb5-4de0-a111-6e0b3d73be2f" />
       <relativeChildShapes />
       <nodes>
@@ -382,7 +382,7 @@
     <activityFinalNodeShape Id="cb9ddcb4-11a1-41de-a295-7f32c716b650" absoluteBounds="5, 19.375, 0.125, 0.125" customColor="89, 89, 89">
       <activityFinalNodeMoniker Id="272ef955-0f96-461c-be5f-2c9a0986a649" LastKnownName="ActivityFinal1" />
     </activityFinalNodeShape>
-    <controlFlowConnector edgePoints="[(5.0625 : 17.25); (5.0625 : 17.625)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 17.25); (5.0625 : 17.625)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="79fbae9f-cff7-4f64-9e26-8645aff16885" />
       <relativeChildShapes />
       <nodes>
@@ -393,7 +393,7 @@
     <acceptEventActionShape Id="532f2f16-30ec-4eba-8d90-28f055777a6f" absoluteBounds="4.5, 18.5, 1.125, 0.375" customColor="185, 212, 238">
       <acceptEventActionMoniker Id="5eead479-87e2-4051-a491-9a23aa9e72e8" LastKnownName="close" />
     </acceptEventActionShape>
-    <controlFlowConnector edgePoints="[(5.05024274155386 : 18.875); (5.05024274155386 : 19.3762137077693)]" fixedFrom="Algorithm" fixedTo="Caller" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.05024274155386 : 18.875); (5.05024274155386 : 19.3762137077693)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="650d22e0-3817-49d3-b742-55ea94388bf0" />
       <relativeChildShapes />
       <nodes>
@@ -401,7 +401,7 @@
         <activityFinalNodeShapeMoniker Id="cb9ddcb4-11a1-41de-a295-7f32c716b650" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.0625 : 18); (5.0625 : 18.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 18); (5.0625 : 18.5)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="e2b2088e-17a7-4b22-8ce0-34f1b2ee747c" />
       <relativeChildShapes />
       <nodes>
@@ -412,7 +412,7 @@
     <acceptEventActionShape Id="1f9305bb-ef4c-46c4-bb6e-9899051b7e23" absoluteBounds="2.375, 17.625, 1.125, 0.375" customColor="185, 212, 238">
       <acceptEventActionMoniker Id="a7a9cb1f-9994-428b-9309-e41bd3cfe30a" LastKnownName="Restart" />
     </acceptEventActionShape>
-    <controlFlowConnector edgePoints="[(4.5 : 17.8125); (3.5 : 17.8125)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(4.5 : 17.8125); (3.5 : 17.8125)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="0cc34c3f-cd2c-4ec1-bebc-20da65558a1a" />
       <relativeChildShapes />
       <nodes>
@@ -427,7 +427,7 @@
       <forkNodeMoniker Id="b501c290-749d-4ccd-a610-4560ffa2388b" LastKnownName="Fork2" />
       <relativeChildShapes />
     </forkNodeShape>
-    <controlFlowConnector edgePoints="[(3.78098739495797 : 16.375); (3.78098739495797 : 16)]" fixedFrom="Caller" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(3.78098739495797 : 16.375); (3.78098739495797 : 16)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="043bf6e4-1e9b-4d84-ab45-3006402c40aa" />
       <relativeChildShapes />
       <nodes>
@@ -438,7 +438,7 @@
     <actionShape Id="d9dbd0e0-adab-4970-9769-316be09ae058" absoluteBounds="1.875, 15.625, 1.125, 0.375" customColor="161, 199, 231">
       <opaqueActionMoniker Id="a6c82725-928f-4dc2-b86a-1a8bef853115" LastKnownName="Radom fore images" />
     </actionShape>
-    <controlFlowConnector edgePoints="[(2.4375 : 16.375); (2.4375 : 16)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(2.4375 : 16.375); (2.4375 : 16)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="5f46de5c-5306-4b5d-a761-5815080d9314" />
       <relativeChildShapes />
       <nodes>
@@ -449,7 +449,7 @@
     <actionShape Id="013522f6-4777-4ff4-8b8d-cf64ea8a9c96" absoluteBounds="2.375, 16.875, 1.125, 0.375" customColor="161, 199, 231">
       <opaqueActionMoniker Id="a9572412-5a74-4b10-94c4-7cf51840f0af" LastKnownName="show loading panel" />
     </actionShape>
-    <controlFlowConnector edgePoints="[(2.9375 : 17.625); (2.9375 : 17.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(2.9375 : 17.625); (2.9375 : 17.25)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="89b18482-d8fc-47ef-bd60-2ad6773a411f" />
       <relativeChildShapes />
       <nodes>
@@ -457,7 +457,7 @@
         <actionShapeMoniker Id="013522f6-4777-4ff4-8b8d-cf64ea8a9c96" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(2.9375 : 16.875); (2.9375 : 16.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(2.9375 : 16.875); (2.9375 : 16.5)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="67828f36-6b8e-4816-99f7-b4546bb31b4c" />
       <relativeChildShapes />
       <nodes>
@@ -469,7 +469,7 @@
       <joinNodeMoniker Id="233799a0-26ef-4e10-8c23-d0c74abc53fd" LastKnownName="Join2" />
       <relativeChildShapes />
     </joinNodeShape>
-    <controlFlowConnector edgePoints="[(2.4375 : 15.625); (2.4375 : 15.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(2.4375 : 15.625); (2.4375 : 15.25)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="b7bab45d-08fe-40c1-8d2b-f604ada84f59" />
       <relativeChildShapes />
       <nodes>
@@ -477,7 +477,7 @@
         <joinNodeShapeMoniker Id="49b69df8-4f31-46b5-b052-6b0feea059cf" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(3.81194444444444 : 15.625); (3.81194444444444 : 15.25)]" fixedFrom="Algorithm" fixedTo="Caller" customColor="Black">
+    <controlFlowConnector edgePoints="[(3.81194444444444 : 15.625); (3.81194444444444 : 15.25)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="80b04a2c-664e-4482-9520-4df11926e845" />
       <relativeChildShapes />
       <nodes>
@@ -485,7 +485,7 @@
         <joinNodeShapeMoniker Id="49b69df8-4f31-46b5-b052-6b0feea059cf" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(3.0625 : 15.125); (3.0625 : 5.5625); (4.5 : 5.5625)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(3.0625 : 15.125); (3.0625 : 5.5625); (4.5 : 5.5625)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="3990112c-05ef-4f4a-b461-a8a2a97b6ace" />
       <relativeChildShapes />
       <nodes>
@@ -502,7 +502,7 @@
     <actionShape Id="f9495408-ef6c-429c-9764-be0c2a9c244c" absoluteBounds="4.5, 7.25, 1.125, 0.375" customColor="161, 199, 231">
       <opaqueActionMoniker Id="8377b391-7da8-465b-b56a-0acf51b80b99" LastKnownName="Set fore bg" />
     </actionShape>
-    <controlFlowConnector edgePoints="[(5.0625 : 5.75); (5.0625 : 6)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 5.75); (5.0625 : 6)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="d9c0dbf3-7d2c-422e-a543-aca1f65c5f0c" />
       <relativeChildShapes />
       <nodes>
@@ -510,7 +510,7 @@
         <actionShapeMoniker Id="b9f93711-4e9c-4f0b-810e-99d5af6d17ae" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.0625 : 6.375); (5.0625 : 6.625)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 6.375); (5.0625 : 6.625)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="2c8aee68-759d-45d8-a216-80ad8f21a598" />
       <relativeChildShapes />
       <nodes>
@@ -518,7 +518,7 @@
         <actionShapeMoniker Id="084c0256-7a40-4504-9c58-d23d6ff4f494" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.0625 : 7); (5.0625 : 7.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 7); (5.0625 : 7.25)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="67711eb5-56e3-4765-ab66-5f3f9d036e69" />
       <relativeChildShapes />
       <nodes>
@@ -526,7 +526,7 @@
         <actionShapeMoniker Id="f9495408-ef6c-429c-9764-be0c2a9c244c" />
       </nodes>
     </controlFlowConnector>
-    <controlFlowConnector edgePoints="[(5.0625 : 7.625); (5.0625 : 8)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <controlFlowConnector edgePoints="[(5.0625 : 7.625); (5.0625 : 8)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <controlFlowMoniker Id="ff7353cb-2ef6-45cd-946a-8e8adf58d543" />
       <relativeChildShapes />
       <nodes>
