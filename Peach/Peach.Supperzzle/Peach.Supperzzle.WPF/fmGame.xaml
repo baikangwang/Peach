@@ -1,0 +1,47 @@
+﻿<Window x:Class="Pean.Supperzzle.WPF.fmGame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="fmGame" WindowStartupLocation="CenterScreen" WindowState="Maximized" WindowStyle="None" Height="600" Width="800" Background="#FF47DC4E">
+    <!--<xctk:BusyIndicator Name="loading">
+        <xctk:BusyIndicator.OverlayStyle>
+            <Style TargetType="Rectangle">
+                <Setter Property="Fill" Value="#000000ff"/>
+            </Style>
+        </xctk:BusyIndicator.OverlayStyle>-->
+    <Grid>
+        <Grid Name="pnDownCount" ZIndex="2">
+            <Label Name="lblDownCount" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="400" FontWeight="Bold" Foreground="#FFDCF108" SnapsToDevicePixels="True">
+                <Label.Effect>
+                    <DropShadowEffect Color="#FF2EBD3B"/>
+                </Label.Effect></Label>
+        </Grid>
+        <Grid Name="pnButtons" ZIndex="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Name="btRestart" Style="{DynamicResource MenuButton}" Content="Restart" 
+                HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="128"
+                Click="btRestart_Click" Height="128" FontSize="24" FontWeight="Bold">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/play.png"></ImageBrush>
+                </Button.Background>
+            </Button>
+            <Button Style="{DynamicResource MenuButton}" Name="btQuit" Content="Quit" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1"
+                VerticalAlignment="Center" Width="128" Height="128" Click="btQuit_Click"
+                FontSize="24" FontWeight="Bold">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/polaroid.png"></ImageBrush>
+                </Button.Background>
+            </Button>
+        </Grid>
+        <Grid Name="panel" ZIndex="0">
+        </Grid>
+    </Grid>
+    <!--</xctk:BusyIndicator>-->
+</Window>
