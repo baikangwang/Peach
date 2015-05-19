@@ -61,7 +61,7 @@
                         .Where(s => !string.IsNullOrEmpty(s))
                         .ToArray();
 
-                return lines.Select(line => new Seed(line)).Where(s=>s.Status!=Status.Complete).Cast<ISeed>().ToList();
+                return lines.Select(line => new Seed(line)).Cast<ISeed>().ToList();
             }
             else
             {

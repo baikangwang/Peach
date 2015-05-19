@@ -123,6 +123,24 @@ namespace Peach.Downloader.Ting56
                         if (!this._seeds[chapter].ContainsKey(episode))
                         {
                             TreeViewItem s = new TreeViewItem() { Header = string.Format("{0}-{1}", seed.Title, seed.Status) };
+                            switch (seed.Status)
+                            {
+                                    case Status.Complete:
+                                    s.Foreground=new SolidColorBrush(Colors.Green);
+                                    break;
+                                case Status.Fail:
+                                    s.Foreground = new SolidColorBrush(Colors.Red);
+                                    break;
+                                    case Status.Waiting:
+                                    s.Foreground = new SolidColorBrush(Colors.Silver);
+                                    break;
+                                    case Status.Downloading:
+                                    s.Foreground = new SolidColorBrush(Colors.Blue);
+                                    break;
+                                default:
+                                    s.Foreground = new SolidColorBrush(Colors.Silver);
+                                    break;
+                            }
                             this._seeds[chapter].Add(episode,s);
                             this._headers[chapter].Items.Add(s);
                         }

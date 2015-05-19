@@ -232,7 +232,17 @@
             {
                 foreach (ISeed seed in seeds)
                 {
-                    this._queue.Enqueue(seed);
+                    if (seed.Status != Status.Complete)
+                    {
+                    //    Where(s => s.Status != Status.Complete).Select(
+                    //s =>
+                    //{
+                    //    s.Status = Status.Waiting;
+                    //    return s;
+                    //})
+                        seed.Status=Status.Waiting;
+                        this._queue.Enqueue(seed);
+                    }
                 }
             }
         }
