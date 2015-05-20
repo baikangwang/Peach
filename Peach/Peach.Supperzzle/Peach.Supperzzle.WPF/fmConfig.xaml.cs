@@ -331,6 +331,12 @@ namespace Pean.Supperzzle.WPF
 
         public void Save()
         {
+            string backup = Setting.INFO + ".bk";
+            if (File.Exists(Setting.INFO))
+            {
+                File.Move(Setting.INFO, backup);
+            }
+
             using (FileStream fs = new FileStream(Setting.INFO, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
                 string options = this._options.ToString();
@@ -338,6 +344,8 @@ namespace Pean.Supperzzle.WPF
                 fs.Write(content, 0, content.Length);
                 fs.Flush(true);
             }
+
+            if (File.Exists(backup)) File.Delete(backup);
 
             this._options.Dispose();
         }
