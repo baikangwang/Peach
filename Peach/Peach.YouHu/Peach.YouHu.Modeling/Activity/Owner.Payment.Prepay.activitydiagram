@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" xmlns:dm11="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="82ff37f8-299a-43d2-b9e4-1f31629cced7" name="Payment.Prepay" linkedPackageId="c0881805-dddb-4d2e-83f0-c364796b80b2" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="f800c16e-6826-497b-bde8-a1391860a0d2" name="Payment.Prepay" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="ef82d714-0e19-4cfc-b87d-70052b5f4dfd" />
+        <nodes>
+          <initialNode Id="53e5d804-0e74-4dfb-8acc-3322268c093a" name="Initial1" isLeaf="false">
+            <elementDefinition Id="c3214ed9-1bb4-47d5-b001-12b4dd8dd234" />
+            <flowNodeTargets>
+              <controlFlow Id="c2b4cfcd-b3f9-45cb-977b-4f0db49ca205" isLeaf="false">
+                <opaqueActionMoniker Id="bcac6864-b4c4-4709-b966-7647af9c63e8" LastKnownName="List all of the orders in Dealt" />
+                <elementDefinition Id="9b7bd9c9-bb78-486e-adad-25e0a9a0d0ff" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="bcac6864-b4c4-4709-b966-7647af9c63e8" name="List all of the orders in Dealt" isLeaf="false">
+            <elementDefinition Id="8b70a50c-ab5d-45bf-88ab-09dc7e852933" />
+            <flowNodeTargets>
+              <controlFlow Id="655f2870-ed4e-471c-82da-58c50dbfac34" isLeaf="false">
+                <opaqueActionMoniker Id="8634db02-4b9e-42d1-a437-4dd0c7d55679" LastKnownName="Choise order" />
+                <elementDefinition Id="a55ce9c1-3b2c-4a77-81aa-11532059226c" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="3556dacd-e39e-40cf-a6e1-afc9bb5ff32a" name="Pay" isLeaf="false">
+            <elementDefinition Id="4bef6d20-9dc4-4528-8dd4-321677f9901a" />
+            <objectFlowTargets>
+              <objectFlow Id="1592996c-ba09-4d0d-9146-6d6093a6c7d4" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <objectNodeMoniker Id="f74221a9-2c00-40f8-b49a-65059f6760a7" LastKnownName="Order to Paying" />
+                <elementDefinition Id="e21aa24b-3f82-46a7-9072-64b23cc67ea5" />
+              </objectFlow>
+            </objectFlowTargets>
+          </opaqueAction>
+          <objectNode Id="e7b6c42f-a7f4-47aa-8f36-ea6236f01741" name="Order to Paid" isLeaf="false" ordering="Unordered" isControlType="false">
+            <elementDefinition Id="d17721a8-b8f7-45ab-b6e6-df727105f949" />
+            <objectFlowTargets>
+              <objectFlow Id="29036969-406f-4e1a-a691-211470987fd0" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <decisionNodeMoniker Id="4d1c5ecc-5706-41a3-bc37-cb8c7e42dccd" LastKnownName="Decision1" />
+                <elementDefinition Id="2278f233-481f-4434-a9bb-7f162d968f54" />
+              </objectFlow>
+            </objectFlowTargets>
+            <upperBound>
+              <literalInteger Id="ea2d1907-aaac-4a3f-aa27-795c74014d97" name="2147483647" value="2147483647">
+                <elementDefinition Id="0d1065ef-c0ad-478f-bcd1-478e7ec9158f" />
+              </literalInteger>
+            </upperBound>
+          </objectNode>
+          <opaqueAction Id="8634db02-4b9e-42d1-a437-4dd0c7d55679" name="Choise order" isLeaf="false">
+            <elementDefinition Id="ccce2308-48a5-4767-9a9e-24747e2a84a1" />
+            <flowNodeTargets>
+              <controlFlow Id="a37ef1f9-5050-48a0-a0e9-bba9b1d07564" isLeaf="false">
+                <opaqueActionMoniker Id="3556dacd-e39e-40cf-a6e1-afc9bb5ff32a" LastKnownName="Pay" />
+                <elementDefinition Id="740acde3-b5d4-4946-9039-2985ed14d590" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="4d1c5ecc-5706-41a3-bc37-cb8c7e42dccd" name="Decision1" isLeaf="false">
+            <elementDefinition Id="e9afd2a6-c9cf-4077-972b-23fbe2f63d89" />
+            <flowNodeTargets>
+              <controlFlow Id="e3ba8217-f907-44a3-bbb0-c0e9c88e8cb0" guard="Not clean up" isLeaf="false">
+                <opaqueActionMoniker Id="8634db02-4b9e-42d1-a437-4dd0c7d55679" LastKnownName="Choise order" />
+                <elementDefinition Id="b810212c-14bc-44d3-ae7b-6ec611b9fa79" />
+              </controlFlow>
+              <controlFlow Id="452ee1fc-2a5b-4b0e-bc75-b7cd526a21c5" guard="Clean up" isLeaf="false">
+                <activityFinalNodeMoniker Id="5a80c222-74b2-44c7-8505-e451aa844fdb" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="f49aae5f-c627-4143-9173-bc532da1df19" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <activityFinalNode Id="5a80c222-74b2-44c7-8505-e451aa844fdb" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="5bf964ca-ae9e-47f1-838e-8c562a4bf8d7" />
+          </activityFinalNode>
+          <objectNode Id="f74221a9-2c00-40f8-b49a-65059f6760a7" name="Order to Paying" isLeaf="false" ordering="Unordered" isControlType="false">
+            <elementDefinition Id="db243c96-bd74-4fc1-b383-e37792b66861" />
+            <objectFlowTargets>
+              <objectFlow Id="8b9a7887-d94a-463a-a30d-c62d6def3fd8" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <opaqueActionMoniker Id="6e59f907-2748-4f50-b6d3-e52440327b81" LastKnownName="Call third-party payment platform" />
+                <elementDefinition Id="96e7efba-87c5-4440-affe-72a7360ddf97" />
+              </objectFlow>
+            </objectFlowTargets>
+            <upperBound>
+              <literalInteger Id="85208be8-81d6-4ad5-a108-51a1be7a12a1" name="2147483647" value="2147483647">
+                <elementDefinition Id="7c8033cf-6dc4-484b-bc77-4a3c14a2d2cb" />
+              </literalInteger>
+            </upperBound>
+          </objectNode>
+          <opaqueAction Id="6e59f907-2748-4f50-b6d3-e52440327b81" name="Call third-party payment platform" isLeaf="false">
+            <elementDefinition Id="2c47f85b-5907-48e3-8113-7393b1abfa92" />
+            <flowNodeTargets>
+              <controlFlow Id="10b1636a-26e6-45e1-8ef7-1ee8ac828077" isLeaf="false">
+                <decisionNodeMoniker Id="e16ba49f-03af-41d4-bb79-5ca55a327d82" LastKnownName="Decision2" />
+                <elementDefinition Id="67915536-7ec1-4afc-b90c-3bab8ba25c1d" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="e16ba49f-03af-41d4-bb79-5ca55a327d82" name="Decision2" isLeaf="false">
+            <elementDefinition Id="6a0861c1-cd12-4eec-8cb5-23d340426e39" />
+            <flowNodeTargets>
+              <controlFlow Id="8c01af45-9cd0-442c-b691-bcb6716795e7" guard="Fail" isLeaf="false">
+                <opaqueActionMoniker Id="3556dacd-e39e-40cf-a6e1-afc9bb5ff32a" LastKnownName="Pay" />
+                <elementDefinition Id="624dad33-85ea-4f28-ba4f-0fd6db227bcd" />
+              </controlFlow>
+            </flowNodeTargets>
+            <objectFlowTargets>
+              <objectFlow Id="70aaf8b9-1d1a-4d66-a69c-9dbfc9ec6c1f" guard="Success" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <objectNodeMoniker Id="e7b6c42f-a7f4-47aa-8f36-ea6236f01741" LastKnownName="Order to Paid" />
+                <elementDefinition Id="1ad40279-4b16-4c08-94d0-26c574ba4a63" />
+              </objectFlow>
+            </objectFlowTargets>
+          </decisionNode>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="c0881805-dddb-4d2e-83f0-c364796b80b2" name="Peach.YouHu.Modeling">
+    <elementDefinition Id="84dea7ad-3290-4c48-b832-7cfafeba4f1a" />
+    <profileInstances>
+      <packageHasProfileInstances Id="e7c6a8d7-4427-441d-beb9-56857d289a92">
+        <profileInstance Id="7d768427-fee0-46f9-87e5-7346259896bd" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="57e330ab-90a6-4543-9441-7d44ce448dcf">
+        <profileInstance Id="c3cd78b2-1685-4087-9870-50150e4c41fe" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</activityRootModel>

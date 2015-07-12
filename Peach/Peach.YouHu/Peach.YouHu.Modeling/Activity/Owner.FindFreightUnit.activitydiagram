@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm11="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm12="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="c4081440-9b91-4d4d-9cc1-2627f7aa05d2" name="Owner.FindFreightUnit" linkedPackageId="cd8bb8bb-62cc-4b1b-8594-f11310e8df0f" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="fe3682c7-961c-4a1a-9b04-205354b5aa30" name="Owner.FindFreightUnit" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="8281be08-7893-4b74-ab67-af97f52355a7" />
+        <nodes>
+          <initialNode Id="757e92ed-d9a5-4cf3-8d96-15fa292ef68f" name="Initial1" isLeaf="false">
+            <elementDefinition Id="08579fc4-9480-4e20-9d38-975d09f1b243" />
+            <flowNodeTargets>
+              <controlFlow Id="48976822-86a7-4408-9fd5-79486e7241f4" isLeaf="false">
+                <decisionNodeMoniker Id="d3a224bc-2d74-4500-81ae-d9a57d4f9c2d" LastKnownName="Decision2" />
+                <elementDefinition Id="a3cc2b72-6b0f-4056-898e-2f7c89c3ca62" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="3a06a427-dd28-4481-be4a-ff020b732b2c" name="Lookup the matched freights" isLeaf="false">
+            <elementDefinition Id="f66170f8-002f-493a-9ca1-5721e93c4278" />
+            <flowNodeTargets>
+              <controlFlow Id="970d6e2d-a756-4f53-8988-7fce2b79c4a4" isLeaf="false">
+                <opaqueActionMoniker Id="0e7509f5-23ae-466e-a722-097553d618b5" LastKnownName="Sort by Credit Evaluation" />
+                <elementDefinition Id="53b27935-bab2-4ed7-8024-fd1edfd722a9" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="829534bd-c117-4e47-abb6-a5f43350fc48" name="Decision1" isLeaf="false">
+            <elementDefinition Id="83956658-662e-4c3e-817b-6e99e1a8141a" />
+            <flowNodeTargets>
+              <controlFlow Id="4a1d5781-5b17-45fd-bf3f-d3661c4c1cc0" guard="Found" isLeaf="false">
+                <opaqueActionMoniker Id="4df5745e-1e86-450c-98d1-af173689bcd6" LastKnownName="Evaluate the freight cost" />
+                <elementDefinition Id="123b6f43-9770-472e-a92a-2e159e7443ca" />
+              </controlFlow>
+              <controlFlow Id="4bddcc1e-646c-4f3d-9076-15fb764e1c54" guard="Not" isLeaf="false">
+                <opaqueActionMoniker Id="3a06a427-dd28-4481-be4a-ff020b732b2c" LastKnownName="Lookup the matched freights" />
+                <elementDefinition Id="935e80ae-9bad-4079-b186-09846510b966" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="f168badc-76d7-447d-855c-15e172e42bfc" name="List the matched freights" isLeaf="false">
+            <elementDefinition Id="0172988e-4c59-4372-85ce-c31429fc6c09" />
+            <flowNodeTargets>
+              <controlFlow Id="76ee8a75-03ae-4d68-a2f3-12e997f9d6ae" isLeaf="false">
+                <opaqueActionMoniker Id="81aed4bc-6bd6-4cd7-a0cb-0ad553b54ec5" LastKnownName="Choise the truck" />
+                <elementDefinition Id="ccea298d-4551-4dd3-95ca-bdfebea67764" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="4df5745e-1e86-450c-98d1-af173689bcd6" name="Evaluate the freight cost" isLeaf="false">
+            <elementDefinition Id="8ab7d527-0f7b-40c7-a877-023ed29d6054" />
+            <flowNodeTargets>
+              <controlFlow Id="5b1ab8ba-0830-448d-aa66-50cf273aa0ec" isLeaf="false">
+                <opaqueActionMoniker Id="f168badc-76d7-447d-855c-15e172e42bfc" LastKnownName="List the matched freights" />
+                <elementDefinition Id="06016c1e-884b-4429-99fd-cb34393663e8" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="81aed4bc-6bd6-4cd7-a0cb-0ad553b54ec5" name="Choise the truck" isLeaf="false">
+            <elementDefinition Id="e170f0f0-5ffc-4b9f-a362-2dd45296c7c5" />
+            <flowNodeTargets>
+              <controlFlow Id="b6bc0844-9725-4c0e-9e59-97ca002c3ed1" isLeaf="false">
+                <opaqueActionMoniker Id="2ed69d00-175b-4c34-8c0c-01e5462fb5b1" LastKnownName="Make a deal" />
+                <elementDefinition Id="ddc867c2-6f3a-4ecf-b48d-79290cfc9541" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="2ed69d00-175b-4c34-8c0c-01e5462fb5b1" name="Make a deal" isLeaf="false">
+            <elementDefinition Id="703fe673-a370-4407-bdf6-290826378f21" />
+            <objectFlowTargets>
+              <objectFlow Id="ecbe1ebc-0f8c-4392-86e6-bdd6f7950886" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <objectNodeMoniker Id="5bdcdc98-49b5-4f91-a767-d49fc027468b" LastKnownName="Order to Dealing" />
+                <elementDefinition Id="df2b8f2b-e4bd-4a12-b657-c60007802b90" />
+              </objectFlow>
+            </objectFlowTargets>
+          </opaqueAction>
+          <objectNode Id="5bdcdc98-49b5-4f91-a767-d49fc027468b" name="Order to Dealing" isLeaf="false" ordering="Unordered" isControlType="false">
+            <elementDefinition Id="ad629cc0-b28a-4f55-9f3b-43a1718cdb08" />
+            <objectFlowTargets>
+              <objectFlow Id="4ecc6f13-e42b-47e3-aedb-f7087c5d5625" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <decisionNodeMoniker Id="c7b167e8-d914-4121-8bb0-bf646a791f56" LastKnownName="Decision3" />
+                <elementDefinition Id="3b4641ba-aeb7-4601-9cd6-a52e1187053a" />
+              </objectFlow>
+            </objectFlowTargets>
+            <upperBound>
+              <literalInteger Id="9ff4d104-609e-4b38-a111-8fb5a601cac1" name="2147483647" value="2147483647">
+                <elementDefinition Id="285a978c-4682-4bdc-8dcf-0b6ff5eb225e" />
+              </literalInteger>
+            </upperBound>
+          </objectNode>
+          <activityFinalNode Id="119a9ff7-4bf0-4f17-8811-d139dd9114ab" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="300f86fa-4de2-4df4-b35c-35af813252b0" />
+          </activityFinalNode>
+          <opaqueAction Id="254f6111-d320-40ee-813a-c9d8fd2bf6fc" name="List all or orders" isLeaf="false">
+            <elementDefinition Id="b051d1d5-a91c-4319-a8fa-d1150f4ba9de" />
+            <flowNodeTargets>
+              <controlFlow Id="8975c6d5-a967-48af-81aa-3bc0260b8921" isLeaf="false">
+                <opaqueActionMoniker Id="92c92ecf-13f9-4961-877c-69ac683549ff" LastKnownName="Select an order  in Ready or Rejected" />
+                <elementDefinition Id="916b314a-5e8b-48ca-8bbe-18da8428be89" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="d3a224bc-2d74-4500-81ae-d9a57d4f9c2d" name="Decision2" isLeaf="false">
+            <elementDefinition Id="ea5260c6-5b49-422c-ab0f-c292ce8e9e70" />
+            <flowNodeTargets>
+              <controlFlow Id="3e60fcf6-6cbc-40d0-985b-cd327a408c2b" guard="No" isLeaf="false">
+                <opaqueActionMoniker Id="254f6111-d320-40ee-813a-c9d8fd2bf6fc" LastKnownName="List all or orders" />
+                <elementDefinition Id="1f2ebe82-3670-4576-84fd-562b008299fa" />
+              </controlFlow>
+              <controlFlow Id="b97a3f32-3163-45ec-a2b6-2ba4635aa360" guard="Is the First to Publish" isLeaf="false">
+                <opaqueActionMoniker Id="3a06a427-dd28-4481-be4a-ff020b732b2c" LastKnownName="Lookup the matched freights" />
+                <elementDefinition Id="c12340a1-82e0-4a0d-b5b9-512ba8842bf2" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="92c92ecf-13f9-4961-877c-69ac683549ff" name="Select an order  in Ready or Rejected" isLeaf="false">
+            <elementDefinition Id="1bd8bf6d-ef38-4445-9c3a-1c2d28db39e6" />
+            <flowNodeTargets>
+              <controlFlow Id="3147180a-9b8b-4370-983c-2e9c8b929a1f" isLeaf="false">
+                <opaqueActionMoniker Id="3a06a427-dd28-4481-be4a-ff020b732b2c" LastKnownName="Lookup the matched freights" />
+                <elementDefinition Id="fc6e59d6-09fd-42f0-8af7-1fbec93ceec6" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="0e7509f5-23ae-466e-a722-097553d618b5" name="Sort by Credit Evaluation" isLeaf="false">
+            <elementDefinition Id="7fb2b4cc-6f17-4cf4-b111-6eccb89cf4cc" />
+            <flowNodeTargets>
+              <controlFlow Id="5779fd7c-0407-43bd-9f40-1e4f65f855dc" isLeaf="false">
+                <decisionNodeMoniker Id="829534bd-c117-4e47-abb6-a5f43350fc48" LastKnownName="Decision1" />
+                <elementDefinition Id="a987585a-55f8-412d-9cea-60698fe7e9c0" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="c7b167e8-d914-4121-8bb0-bf646a791f56" name="Decision3" isLeaf="false">
+            <elementDefinition Id="edab28d1-750c-4402-9542-725b1c1bd6a7" />
+            <flowNodeTargets>
+              <controlFlow Id="31a7f638-32c9-4c1e-8a82-019b3aa567f5" guard="Clean up" isLeaf="false">
+                <activityFinalNodeMoniker Id="119a9ff7-4bf0-4f17-8811-d139dd9114ab" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="a39b518e-f56a-416c-b617-2281a831fa43" />
+              </controlFlow>
+              <controlFlow Id="0d03ce58-55af-40a9-b3a0-43f400a11539" guard="Not" isLeaf="false">
+                <opaqueActionMoniker Id="92c92ecf-13f9-4961-877c-69ac683549ff" LastKnownName="Select an order  in Ready or Rejected" />
+                <elementDefinition Id="a4f271b6-c115-4042-aef7-6699f9ed2721" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="cd8bb8bb-62cc-4b1b-8594-f11310e8df0f" name="Peach.YouHu.Modeling">
+    <elementDefinition Id="84dea7ad-3290-4c48-b832-7cfafeba4f1a" />
+    <profileInstances>
+      <packageHasProfileInstances Id="b4771a35-d614-4dda-ad86-6a11cb5bd1da">
+        <profileInstance Id="a4b36369-8756-4452-887d-c5936bed19a0" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="a6f99d2c-2c5f-44bd-b360-681e61606a04">
+        <profileInstance Id="e4d57d35-1182-4ab4-b3a7-7af5616298a3" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</activityRootModel>

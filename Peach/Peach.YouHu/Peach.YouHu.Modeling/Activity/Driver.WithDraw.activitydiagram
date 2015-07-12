@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" xmlns:dm11="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="74bf122e-470b-42dd-895c-d238d7bac520" name="Driver.WithDraw" linkedPackageId="ce119ae0-7240-43d7-86de-bffc1e310b81" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <ownedCommentsInternal>
+    <comment Id="86ed831f-4118-409d-b662-15ae779b1167">
+      <elementDefinition Id="1530d71a-c8a3-4e54-888f-6d47372ba056" />
+      <body>OR</body>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="9afc5aa8-be37-4f6a-9438-dd7152a66127">
+      <profileInstance Id="db512b2a-aee3-4dd1-9bd1-7a9501201699" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="e42558ce-5b32-489b-89ff-380d9f8df925">
+      <profileInstance Id="799591f2-fc31-417d-9658-dba381d3925d" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="c7cb150d-e4bd-4225-a24c-fa746447095f" name="Driver.WithDraw" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="be5cfb93-2ec0-4fc7-a008-a9106638ca75" />
+        <nodes>
+          <initialNode Id="4733389d-785e-4708-a76d-78de59bed5ae" name="Initial1" isLeaf="false">
+            <elementDefinition Id="a6c60537-84b3-437a-99b9-7c7560181acd" />
+            <flowNodeTargets>
+              <controlFlow Id="001d145a-ff45-45be-87fb-d9b805c92473" isLeaf="false">
+                <decisionNodeMoniker Id="3f088bf6-663e-4b50-9409-ec7b3a4d9777" LastKnownName="Decision1" />
+                <elementDefinition Id="729b2a0e-888e-46de-bc6c-d8247a7a4583" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="de7532cd-06e6-489f-b035-5ab7181d28b0" name="WithDraw" isLeaf="false">
+            <elementDefinition Id="913549ae-7113-47c5-9d7f-350e6b44014e" />
+            <flowNodeTargets>
+              <controlFlow Id="2b56cae4-adc7-4ae1-bff1-62a37e100fb7" isLeaf="false">
+                <forkNodeMoniker Id="0e10ff93-72f6-4ca5-b712-def916e44550" LastKnownName="Fork1" />
+                <elementDefinition Id="563a89b2-6402-4cd5-8bd7-949ba91f2392" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="5315b669-8ae1-4e21-8a52-cec9bf26ef31" name="Call third-party platform" isLeaf="false">
+            <elementDefinition Id="5cd09752-fc8e-4da5-a9f9-812a1f96900c" />
+            <flowNodeTargets>
+              <controlFlow Id="f341c2f2-4ea8-466c-8aad-eafeffaf550e" isLeaf="false">
+                <joinNodeMoniker Id="3799ee91-e5a4-47ed-92bb-f519848c9dc6" LastKnownName="Join1" />
+                <elementDefinition Id="2cf6dd53-1bd3-4f72-8c9c-4317b39a9617" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="3f088bf6-663e-4b50-9409-ec7b3a4d9777" name="Decision1" isLeaf="false">
+            <elementDefinition Id="60b30223-e009-4620-ad7a-d17948889061" />
+            <flowNodeTargets>
+              <controlFlow Id="ab188682-3938-4915-a94a-53cc02b54bbb" isLeaf="false">
+                <opaqueActionMoniker Id="de7532cd-06e6-489f-b035-5ab7181d28b0" LastKnownName="WithDraw" />
+                <elementDefinition Id="8882079c-b629-41da-bfb0-99078c442bb9" />
+              </controlFlow>
+              <controlFlow Id="293f22c4-cd26-467f-964a-e096db660b4a" guard="Is The First" isLeaf="false">
+                <opaqueActionMoniker Id="1ce69a04-2a2e-4647-b1ca-6a44fec63393" LastKnownName="Bind Banking Card" />
+                <elementDefinition Id="551ecb73-1d34-4451-9321-add71a4b89e2" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="1ce69a04-2a2e-4647-b1ca-6a44fec63393" name="Bind Banking Card" isLeaf="false">
+            <elementDefinition Id="ef120e62-cfbc-49a8-b56d-1b4f587f748a" />
+            <flowNodeTargets>
+              <controlFlow Id="5f8a4da4-6c7d-4ded-bbba-6843c72b2c54" isLeaf="false">
+                <opaqueActionMoniker Id="de7532cd-06e6-489f-b035-5ab7181d28b0" LastKnownName="WithDraw" />
+                <elementDefinition Id="e2ce73d4-be45-43a8-8e64-8b56ffeb02f5" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode Id="2a808037-71ce-4604-8d1d-7de38cd09e70" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="88846224-64c8-4acd-a807-4e76c6183afb" />
+          </activityFinalNode>
+          <opaqueAction Id="0d7ea766-13df-488c-a2c5-65fb1ec0a774" name="Transfer" isLeaf="false">
+            <elementDefinition Id="3eadcf7c-1701-41d9-ad42-ff50494c8cdb" />
+            <flowNodeTargets>
+              <controlFlow Id="ac0f9b95-2a87-41a5-ba6a-67a4e598e483" isLeaf="false">
+                <joinNodeMoniker Id="3799ee91-e5a4-47ed-92bb-f519848c9dc6" LastKnownName="Join1" />
+                <elementDefinition Id="424c6014-092c-48de-a067-1e40b5b09984" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <joinNode Id="3799ee91-e5a4-47ed-92bb-f519848c9dc6" name="Join1" isLeaf="false">
+            <elementDefinition Id="4bda97aa-2d5d-420f-b3fc-0605d3df9bc7" />
+            <flowNodeTargets>
+              <controlFlow Id="1ccc7937-1ba3-41ca-839a-4c64433c37df" isLeaf="false">
+                <activityFinalNodeMoniker Id="2a808037-71ce-4604-8d1d-7de38cd09e70" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="5e067f4b-314f-4ae7-bbfd-3d39154ba08c" />
+              </controlFlow>
+            </flowNodeTargets>
+          </joinNode>
+          <forkNode Id="0e10ff93-72f6-4ca5-b712-def916e44550" name="Fork1" isLeaf="false">
+            <elementDefinition Id="27754314-bbfe-42ee-9bfc-e43e4e016d66" />
+            <flowNodeTargets>
+              <controlFlow Id="22a23056-ec42-4931-8e43-b661ed289644" isLeaf="false">
+                <opaqueActionMoniker Id="5315b669-8ae1-4e21-8a52-cec9bf26ef31" LastKnownName="Call third-party platform" />
+                <elementDefinition Id="b0595c1d-2f72-46bb-a747-313ef39caa88" />
+              </controlFlow>
+              <controlFlow Id="90d9e6a7-2cee-4d69-8b02-80b345b3b7e9" isLeaf="false">
+                <opaqueActionMoniker Id="0d7ea766-13df-488c-a2c5-65fb1ec0a774" LastKnownName="Transfer" />
+                <elementDefinition Id="4ee8972f-9804-4834-ab4c-08e72110baaf" />
+              </controlFlow>
+            </flowNodeTargets>
+          </forkNode>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="ce119ae0-7240-43d7-86de-bffc1e310b81" name="Peach.YouHu.Modeling">
+    <elementDefinition Id="84dea7ad-3290-4c48-b832-7cfafeba4f1a" />
+  </package>
+</activityRootModel>

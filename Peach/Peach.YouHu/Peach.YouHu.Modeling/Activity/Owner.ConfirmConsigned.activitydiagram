@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm11="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm12="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="0b723fef-8135-4e2d-bf0b-1bf6fb7ebe65" name="Owner.ConfirmConsigned" linkedPackageId="7121452d-a1ce-47ee-96a5-fbde34158b76" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="a7af5c42-fcc6-4e0a-942d-5454ac95fbf2" name="Owner.ConfirmConsigned" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="dc1606f2-6099-49eb-a19d-d5f415d6f51d" />
+        <nodes>
+          <initialNode Id="2a3ae4c1-941e-4372-aa2e-ea5c61fec3cd" name="Initial1" isLeaf="false">
+            <elementDefinition Id="d5194073-b181-4bd8-96b8-4e4dbe4e0216" />
+            <flowNodeTargets>
+              <controlFlow Id="b8c07ca2-efd9-4581-b2b5-6135a952ee2e" isLeaf="false">
+                <opaqueActionMoniker Id="2324e8df-bd63-4b79-b5cf-8dd1b433dcba" LastKnownName="List all of orders" />
+                <elementDefinition Id="9dc5b7ef-ed73-4ae2-bfb8-7204269bd6d7" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="2324e8df-bd63-4b79-b5cf-8dd1b433dcba" name="List all of orders" isLeaf="false">
+            <elementDefinition Id="98db0888-bb78-41e3-8bee-855ab3d94322" />
+            <flowNodeTargets>
+              <controlFlow Id="2be76e03-94ed-4f26-825b-c35b6bf660e1" isLeaf="false">
+                <opaqueActionMoniker Id="0cb440de-cd14-4f35-b309-f3523ec68369" LastKnownName="Choice an order in Arrived" />
+                <elementDefinition Id="069d0bfa-5c6c-4d7e-acbc-adc7e6b1ec64" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="0cb440de-cd14-4f35-b309-f3523ec68369" name="Choice an order in Arrived" isLeaf="false">
+            <elementDefinition Id="c5f3bdbf-b4ac-4ccd-a929-a197ac767480" />
+            <flowNodeTargets>
+              <controlFlow Id="0b713441-2eb8-4fa0-b31e-7013a9802eff" isLeaf="false">
+                <opaqueActionMoniker Id="518aa52a-3be2-4559-bc38-ed9820c16950" LastKnownName="Payment Code" />
+                <elementDefinition Id="86547720-7b9d-4833-81e5-fd89c4453667" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="a862270b-daae-4356-bc94-e68ee6486a53" name="Confirm" isLeaf="false">
+            <elementDefinition Id="dddab60b-50fd-4515-92db-e89dae7a454b" />
+            <objectFlowTargets>
+              <objectFlow Id="c5bf1eb4-a0dd-427d-8469-53388539dbbe" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <objectNodeMoniker Id="3f25400f-9d5b-4285-9020-6fc540935782" LastKnownName="Order:Consigned" />
+                <elementDefinition Id="bf81b87b-0acb-437d-b31e-24fd16919849" />
+              </objectFlow>
+            </objectFlowTargets>
+          </opaqueAction>
+          <objectNode Id="3f25400f-9d5b-4285-9020-6fc540935782" name="Order:Consigned" isLeaf="false" ordering="Unordered" isControlType="false">
+            <elementDefinition Id="2e42e267-11c8-4d03-aebc-43c1e06c6130" />
+            <objectFlowTargets>
+              <objectFlow Id="d8e61d4d-8448-4ec0-8b22-27b7809fc17c" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <opaqueActionMoniker Id="07141c05-93f3-4131-816b-8c893676ba6d" LastKnownName="Transfer to Driver" />
+                <elementDefinition Id="7f0d11a4-157f-40ab-9e25-051c7786dfe6" />
+              </objectFlow>
+            </objectFlowTargets>
+            <upperBound>
+              <literalInteger Id="fc202428-05ce-496b-8882-aee150441a28" name="2147483647" value="2147483647">
+                <elementDefinition Id="553b6866-650c-4e60-aae3-53e08059fd61" />
+              </literalInteger>
+            </upperBound>
+          </objectNode>
+          <opaqueAction Id="518aa52a-3be2-4559-bc38-ed9820c16950" name="Payment Code" isLeaf="false">
+            <elementDefinition Id="1c642c0e-f02e-4ae0-9ef2-d3a2a569ea09" />
+            <flowNodeTargets>
+              <controlFlow Id="9be37d30-d76a-4d63-a566-22781f532bfc" isLeaf="false">
+                <opaqueActionMoniker Id="a862270b-daae-4356-bc94-e68ee6486a53" LastKnownName="Confirm" />
+                <elementDefinition Id="f6ad67f9-997a-404d-bc78-9ee3bcd0d7fb" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode Id="c3a24976-39c0-41d5-8e40-786eb66a2de2" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="c8a73a4b-890c-4c7b-a22a-99f572e3760b" />
+          </activityFinalNode>
+          <decisionNode Id="b9344ca5-65a3-4f24-b99d-d0ca81393d5a" name="Decision1" isLeaf="false">
+            <elementDefinition Id="27dce5e0-1333-47f2-ac76-07a889667608" />
+            <flowNodeTargets>
+              <controlFlow Id="e1053ed1-d090-4837-bef6-46c21460ffd5" guard="Clean up" isLeaf="false">
+                <activityFinalNodeMoniker Id="c3a24976-39c0-41d5-8e40-786eb66a2de2" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="53a80350-f911-4e6c-99a1-b616132eb611" />
+              </controlFlow>
+              <controlFlow Id="69560484-0bbb-4612-8487-f50b83e8369c" guard="Not" isLeaf="false">
+                <opaqueActionMoniker Id="2324e8df-bd63-4b79-b5cf-8dd1b433dcba" LastKnownName="List all of orders" />
+                <elementDefinition Id="0dc19c1c-8fd1-42fb-b0f8-1518b30155ba" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="58df72d4-e3bc-4a98-8abe-5be6f05dbe9e" name="Reset FrieghtUnit" isLeaf="false">
+            <elementDefinition Id="6af183a3-76db-4ee0-b519-9fefb31307b2" />
+            <objectFlowTargets>
+              <objectFlow Id="c3910ccd-e61d-4552-b94d-8a31c2157e4b" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <objectNodeMoniker Id="782f3e2c-6763-4b18-ad3b-f791ca7cb967" LastKnownName="FrieghtUnit: Ready" />
+                <elementDefinition Id="40b1c941-9e7c-4d6c-9e77-6fbb12f8e7bb" />
+              </objectFlow>
+            </objectFlowTargets>
+          </opaqueAction>
+          <objectNode Id="782f3e2c-6763-4b18-ad3b-f791ca7cb967" name="FrieghtUnit: Ready" isLeaf="false" ordering="Unordered" isControlType="false">
+            <elementDefinition Id="fbee8f91-1154-4c00-af21-8124df86bf05" />
+            <objectFlowTargets>
+              <objectFlow Id="50fa200d-2ad4-4320-ab9e-f156bb6eee45" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <decisionNodeMoniker Id="b9344ca5-65a3-4f24-b99d-d0ca81393d5a" LastKnownName="Decision1" />
+                <elementDefinition Id="00845597-0dcd-410e-91c3-df65f4c9c29b" />
+              </objectFlow>
+            </objectFlowTargets>
+            <upperBound>
+              <literalInteger Id="e0aeed11-c895-4724-986c-ff45d72cf6cf" name="2147483647" value="2147483647">
+                <elementDefinition Id="40cade9d-2e90-440d-a99e-2926035569e4" />
+              </literalInteger>
+            </upperBound>
+          </objectNode>
+          <opaqueAction Id="07141c05-93f3-4131-816b-8c893676ba6d" name="Transfer to Driver" isLeaf="false">
+            <elementDefinition Id="9bc1a3c5-6457-4aff-9fda-7b7016718d22" />
+            <flowNodeTargets>
+              <controlFlow Id="fd1f73e6-8b91-4862-b7a1-088996e814f3" isLeaf="false">
+                <opaqueActionMoniker Id="58df72d4-e3bc-4a98-8abe-5be6f05dbe9e" LastKnownName="Reset FrieghtUnit" />
+                <elementDefinition Id="02244bb9-c342-439c-bc42-10d0c7b8bae8" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="7121452d-a1ce-47ee-96a5-fbde34158b76" name="Peach.YouHu.Modeling">
+    <elementDefinition Id="84dea7ad-3290-4c48-b832-7cfafeba4f1a" />
+    <profileInstances>
+      <packageHasProfileInstances Id="da95d050-383a-428f-926d-b6f1a77c2f0f">
+        <profileInstance Id="87b1a069-4d7c-4810-b43e-b56697fa19ac" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="91b80048-57cf-4937-ab66-f5534136d610">
+        <profileInstance Id="c1cca436-2300-4343-ac25-e4597740bc7a" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</activityRootModel>

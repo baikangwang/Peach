@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm11="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm12="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" dslVersion="1.0.0.0" Id="d29c6e16-6419-42e5-8f1f-87f95176699e" name="YouHu" linkedPackageId="d9562e97-23cd-4ac8-b29a-b46f4dc7e91b" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <ownedCommentsInternal>
+    <comment Id="b73907fa-0560-499c-a691-02dbc399c06b">
+      <elementDefinition Id="895676e7-3611-4a77-aeed-c837c357722b" />
+      <body>Questions
+
+1. What's the conditions premiting to cancel an order which has been started</body>
+    </comment>
+  </ownedCommentsInternal>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" name="YouHu" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="73c2f582-dafb-4373-8c72-21a468711803" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="156076d0-db07-44f8-8a7b-cb1ee63b5fb3" name="Owner" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c1611f84-7dc8-4647-bd3b-2dcd01e8af98" />
+        <targetEnds>
+          <association Id="18a65114-d3c8-4d99-86d5-b4b711870f7e" isDerived="false" sourceEndRoleName="Owner" targetEndRoleName="Find Driver" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="317a16b4-82ae-498c-8785-25b0adcc5a85" LastKnownName="Find Freight" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e798813f-d7e4-4a23-9ca0-e57ca0e4b284" name="Owner" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="9c6a1475-b0fd-4e80-80f7-650e6a0eeb43" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="1ee172d3-1291-4a29-af4c-107e16dad10b" name="Find Driver" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c17ac536-a705-44e9-99fd-6ab9af8f34ad" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c9a5f8d5-f0ab-4162-be97-31f5670187ba" />
+          </association>
+          <association Id="d43e5a93-27cf-408a-9f5b-d243df264a46" isDerived="false" sourceEndRoleName="Owner" targetEndRoleName="Payment" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="8bb4b003-e420-4ec8-8d45-4b1a3454e89a" LastKnownName="Payment" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e4cd4d4a-e7dc-4771-af98-cec55fe941f8" name="Owner" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c27b03f1-7cfc-4eef-a4d4-a4220e4a373b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="25bd9a63-d39d-48a2-b6c5-85088f9f10d0" name="Payment" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="fb5d473c-d43c-429a-bfde-93b4b50f1637" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="7f3665a8-21ef-4bfc-99d6-2246145b60c7" />
+          </association>
+          <association Id="ec10f2a4-9931-4cdd-af3b-ccb133ee7d7f" isDerived="false" sourceEndRoleName="Owner" targetEndRoleName="Register" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="5d3dea5d-cfe6-4588-aded-bf4bd90d24dd" LastKnownName="Register" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="493ebea8-04f2-4548-9dc0-efc8e586000a" name="Owner" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="6d5bb4e8-fcd8-443d-847f-747c8bc08178" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d60d2879-f8a1-4f4c-946b-2e6cf54b8911" name="Register" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="e05cc04c-302b-41bb-b0f6-f10a67572a56" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="ca20fc2b-28f8-44e7-85c1-cd4b54fb34ed" />
+          </association>
+          <association Id="03ed3b52-88ad-40f5-9bd6-7423f2750d58" isDerived="false" sourceEndRoleName="Owner" targetEndRoleName="Publish Goods" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="19f6ee32-4182-4cfa-84e9-618e6c7ce29e" LastKnownName="Publish Goods" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e08b6ebe-b106-4ff7-a2aa-076374827204" name="Owner" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="38e12219-2cd8-4be4-b69b-49e5ba772c59" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7d2abce0-70e0-4886-a6fa-b39286b153ac" name="Publish Goods" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ae6f5ba8-e571-4bb6-b6c6-ff7d04f0bfcb" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="367e39e0-fbc7-448b-a7cf-c8ab140911d5" />
+          </association>
+          <association Id="43bc4f75-8b50-4565-9f4e-3c2d97f92ec2" isDerived="false" sourceEndRoleName="Owner" targetEndRoleName="Performance Evaluation" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="5c8cf11d-52f2-403e-ae68-fb8349584285" LastKnownName="Performance Evaluation" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="baad8e5a-d19a-452d-91ce-6f3c9f9649dc" name="Owner" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="540daff9-7b6a-41bc-bcda-140f88a8b861" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7b61385f-24f9-45a5-917f-1b38d2ed4814" name="Performance Evaluation" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="34ea7e86-46ae-4f4f-ae08-cebdd2e34dce" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="f3b6cffd-6f89-465c-b5f8-1406ec986eb5" />
+          </association>
+          <association Id="ad9b0175-753f-41e1-8f2a-db301d4b853d" isDerived="false" sourceEndRoleName="Owner" targetEndRoleName="Confirm Consigned" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="61a6062b-84c7-428a-a9e2-432e56f67065" LastKnownName="Confirm Consigned" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="bb4a8d32-6039-4718-a6ef-a4f3faf7695f" name="Owner" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="2fd444f0-a86f-4e57-8068-b76f9f6f11bf" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4be99225-391b-42d5-a20c-2e739bdcf689" name="Confirm Consigned" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="8de9421e-1a59-4454-9929-0ef84c020f4f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="513b6418-bc96-46e4-a192-403d628f5956" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="564c9fdd-8da4-4526-b84f-34b5326ab207" name="Driver" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="24720599-101e-4c05-9d92-c56eb913face" />
+        <targetEnds>
+          <association Id="4bd4c6df-f067-406a-9327-edc8f42a5adb" isDerived="false" sourceEndRoleName="Driver" targetEndRoleName="Register" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="5d3dea5d-cfe6-4588-aded-bf4bd90d24dd" LastKnownName="Register" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="bf7aa1c8-7dd1-464f-b3e4-fa81ab351767" name="Driver" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="fedde907-820d-4c07-972f-52bf2850b8c8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="91f0a64c-0ccd-4c08-b142-dbdd39112e07" name="Register" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="e1908d50-0a7c-483a-beee-60b24887f1c6" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="e2b4d0cc-7313-4c4d-903a-e05110b53e93" />
+          </association>
+          <association Id="38dd674e-86d4-4ccf-b8ae-5bb673058399" isDerived="false" sourceEndRoleName="Driver" targetEndRoleName="Publish State " isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="149316d3-f658-455d-8936-0a80a7a7e9bf" LastKnownName="Publish FreightUnit" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d4068c79-ec6e-4c34-9d5a-3285e07ce859" name="Driver" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="59b9bd57-247b-4b57-991e-b19217eacc42" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="0f5f7b75-ee2b-4b2e-96eb-3cbc1f0bdb25" name="Publish State " isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="17c849fa-8ca9-4052-9083-a21be4db8861" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c41803c9-fa3d-4d32-98b8-f2e044b57aaa" />
+          </association>
+          <association Id="19896468-89d8-4497-b11a-aff849a0814e" isDerived="false" sourceEndRoleName="Driver" targetEndRoleName="WithDraw" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="65bc4ae6-e844-44f4-94ff-1ea6a63ec535" LastKnownName="WithDraw" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8aabc86d-ef09-4046-93c3-19a67d0a7b14" name="Driver" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="69b38048-e1cd-4a9e-9bad-b701b120069a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c5a7560e-d1d9-4373-ac45-43dccb5850c9" name="WithDraw" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="1a411a02-1216-4107-b9c4-0518a4d8be48" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="ff56137a-78a7-452e-8bb0-85c3aac2aab9" />
+          </association>
+          <association Id="793584ab-19a4-4530-94fa-5b01b1438296" isDerived="false" sourceEndRoleName="Driver" targetEndRoleName="Confirm Deal" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="ac428b51-fb15-42b8-8024-f26c35177996" LastKnownName="Confirm Deal" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8ace1826-91d0-4c8e-a3c6-dc2cea06bbe5" name="Driver" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="0aadde72-1127-432d-b215-f5568e543ae1" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5cdd80ac-c9c6-45d6-8eec-28457fb44988" name="Confirm Deal" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="b5716729-6ce3-4d5a-8025-4b2854cee6bf" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="15d732c1-84b2-4643-897f-67865c80450d" />
+          </association>
+          <association Id="4a336ba3-3e4d-4875-8564-67dcc8342138" isDerived="false" sourceEndRoleName="Driver" targetEndRoleName="Performance Evaluation" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="5c8cf11d-52f2-403e-ae68-fb8349584285" LastKnownName="Performance Evaluation" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4497d1d8-9c6d-46fc-bd83-31dc51750fc2" name="Driver" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="31b07eed-032b-4516-8aa1-3ca186e8a15f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="eec8efb5-42f2-4532-8188-40f59ccad41b" name="Performance Evaluation" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="0a1e0ca6-7aaf-4458-b1a2-0490594fb730" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0ab48bb6-99cd-462a-abd7-3213cebd1865" />
+          </association>
+          <association Id="12836576-592e-4a95-a808-686f3a7cefbb" isDerived="false" sourceEndRoleName="Driver" targetEndRoleName="Update Order Status" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="52134f45-5264-40f6-a832-d23a0d7e27df" LastKnownName="Update Order State" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a1765559-92fa-4f1d-9b76-e13a6c05b452" name="Driver" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c71947db-a76d-4dc4-8c23-7c1b7bd83bf0" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c3767f21-de96-48bb-9935-66be9af395dd" name="Update Order Status" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c1e42d3b-6f8c-48d7-a55e-d5b019552d3e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="03ea0b48-0122-4e95-89da-17aae2a1207d" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="317a16b4-82ae-498c-8785-25b0adcc5a85" name="Find Freight" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d3219d2a-d5a4-4755-88e9-7ab743b3865d" />
+        <suppliersInternal>
+          <dependency Id="936b1d93-bd11-4690-9649-1a6c54f84437">
+            <useCaseMoniker Id="3164b3ad-7edc-48c8-ba7f-fa03cd74469e" LastKnownName="GPS" />
+            <elementDefinition Id="70c3b06b-7e40-4317-abf4-8140b0e46368" />
+          </dependency>
+          <dependency Id="d51130ab-ed89-475b-abb9-ad7ba957f002">
+            <useCaseMoniker Id="b6c30436-5e84-4b7a-a0de-b136316825a4" LastKnownName="Cost Evaluation" />
+            <elementDefinition Id="ca110a9e-c7cd-4d20-b949-c639a702023b" />
+          </dependency>
+          <dependency Id="0126faa8-144a-4055-9155-22088a006e03">
+            <useCaseMoniker Id="18f034a9-b2f8-4519-8381-b5cac7889e00" LastKnownName="Credit Evaluation" />
+            <elementDefinition Id="f7192e6e-978f-46f3-95af-87331b92acbe" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="8bb4b003-e420-4ec8-8d45-4b1a3454e89a" name="Payment" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f273c0ed-2863-4d9d-af05-02c0b5a07d33" />
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="5d3dea5d-cfe6-4588-aded-bf4bd90d24dd" name="Register" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="bf0ba700-9113-4843-b67a-e4dedff8b93d" />
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="149316d3-f658-455d-8936-0a80a7a7e9bf" name="Publish FreightUnit" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="e0f26d70-33c3-4c51-990a-5d7ffd255f4e" />
+        <suppliersInternal>
+          <dependency Id="ae1cf3c0-8c28-4a58-9480-cd4496c5b922">
+            <useCaseMoniker Id="3164b3ad-7edc-48c8-ba7f-fa03cd74469e" LastKnownName="GPS" />
+            <elementDefinition Id="862d9e09-2fc0-4295-8291-8893f8634005" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="3164b3ad-7edc-48c8-ba7f-fa03cd74469e" name="GPS" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c5dc8dd0-079d-46b0-8c26-2bafc526fa0c" />
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="b6c30436-5e84-4b7a-a0de-b136316825a4" name="Cost Evaluation" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="6dddec83-78ec-4258-b465-38f99a9cf22d" />
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="65bc4ae6-e844-44f4-94ff-1ea6a63ec535" name="WithDraw" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ed7af185-3701-4b9b-a577-7a3c172e309a" />
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="ac428b51-fb15-42b8-8024-f26c35177996" name="Confirm Deal" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="908c455c-480c-4034-a3ac-dacc3ef74994" />
+        <suppliersInternal>
+          <dependency Id="bc6117e1-bddb-4413-955c-4d213e1f5d47">
+            <useCaseMoniker Id="18f034a9-b2f8-4519-8381-b5cac7889e00" LastKnownName="Credit Evaluation" />
+            <elementDefinition Id="7bd4630a-e24c-4bc8-90c7-ca45e057819e" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="19f6ee32-4182-4cfa-84e9-618e6c7ce29e" name="Publish Goods" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="54885a89-b8c0-4d01-9b6b-3a69cc283bf8" />
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="5c8cf11d-52f2-403e-ae68-fb8349584285" name="Performance Evaluation" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="bc06e2b6-f11f-44d8-9b76-2ab2d6b26862" />
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="52134f45-5264-40f6-a832-d23a0d7e27df" name="Update Order State" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b84d25dd-b698-41fa-96be-e74c2210847b" />
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="61a6062b-84c7-428a-a9e2-432e56f67065" name="Confirm Consigned" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f09e5cff-194b-4837-a062-d67063cf7ac6" />
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="6aff921e-4517-40d0-a023-c8532202d7fb" name="YouHu.AutoConsigned" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="727646a4-4653-4c00-94c6-3c9f94a91a84" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="adc6011f-87a7-4e5e-8a3c-b4de6c297796" name="Change order to Consigned on 7 days" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="66671896-ac14-409b-883b-cdf7aeefad69" />
+        <subjects>
+          <subsystemMoniker Id="6aff921e-4517-40d0-a023-c8532202d7fb" LastKnownName="YouHu.AutoConsigned" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <useCaseModelRootHasTypes>
+      <useCase Id="8b5a8470-435e-4746-93e5-ed2805fda6fc" name="Send DEALT Alert to Owner when Order is dealt" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b6d72cae-ace5-4f19-b2e1-8793c9b8ac18" />
+        <subjects>
+          <subsystemMoniker Id="65eeb267-4b96-49a8-9905-7c0d2b8a447e" LastKnownName="YouHu.AutoAlert" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="65eeb267-4b96-49a8-9905-7c0d2b8a447e" name="YouHu.AutoAlert" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="494b8028-9b54-4c81-bc47-f93e52329f61" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="865ba3e4-ebd3-46c1-bdd5-16d9b249d2f3" name="Send DEALING Alert to Driver when Order is dealing" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f45ce6bd-f290-4752-af2d-6505589fad77" />
+        <subjects>
+          <subsystemMoniker Id="65eeb267-4b96-49a8-9905-7c0d2b8a447e" LastKnownName="YouHu.AutoAlert" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="993368d4-4bd4-4985-a705-f433d1ae7c01" name="Send Arrived Alert to Owner when order is arrived" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b9a180ba-a099-4cb8-9e87-a9f63b16d152" />
+        <subjects>
+          <subsystemMoniker Id="65eeb267-4b96-49a8-9905-7c0d2b8a447e" LastKnownName="YouHu.AutoAlert" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="13fd4a8e-3f72-4a96-b9f7-c82efbee1ef2" name="Transfer Income to Driver" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="fd5b9800-3f13-4b08-b08f-d3fa6e9d416d" />
+        <subjects>
+          <subsystemMoniker Id="6aff921e-4517-40d0-a023-c8532202d7fb" LastKnownName="YouHu.AutoConsigned" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="18f034a9-b2f8-4519-8381-b5cac7889e00" name="Credit Evaluation" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c5357028-f8cb-40b4-a69f-247dfc4759d1" />
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="87681326-d4bf-4283-a4d7-01c0c753efc0" name="Insurance" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="347a8f06-b4ca-4aff-9f8e-cf938a3e3547" />
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="0d145dae-adff-40c9-882c-4e121f6825f8" name="Audit Trail" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="02157ab6-42e1-4116-b836-8ae05ca295b0" />
+        <subjects>
+          <subsystemMoniker Id="9851abaa-6a48-42eb-8bed-9eb8e3046d07" LastKnownName="YouHu" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="d9562e97-23cd-4ac8-b29a-b46f4dc7e91b" name="Peach.YouHu.Modeling">
+    <elementDefinition Id="84dea7ad-3290-4c48-b832-7cfafeba4f1a" />
+    <profileInstances>
+      <packageHasProfileInstances Id="a552e93d-760f-49a5-962d-64ef077df108">
+        <profileInstance Id="b939e1c7-c146-440d-b473-b7d629e55897" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="d7337802-c843-42cc-93ac-4937eb75d4ea">
+        <profileInstance Id="0d0b346f-01df-4cb6-abda-9589b88b8593" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</useCaseModelRoot>

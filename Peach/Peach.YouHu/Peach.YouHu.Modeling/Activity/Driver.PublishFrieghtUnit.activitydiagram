@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" xmlns:dm11="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="0dccf1d5-f7a5-49f9-9ee0-9ecd1afb8899" name="Driver.PublishFrieghtUnit" linkedPackageId="cdf29bdf-b11e-491b-8f53-51f9c96613be" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="26748c7d-c6cd-46ae-b78d-404d183bbfb6">
+      <profileInstance Id="2fd6a510-6768-48e2-bd94-1ef1a4b1c3d1" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="ad0be5a2-0ec4-4198-914f-76b2856edaf4">
+      <profileInstance Id="6c3f662a-2124-4a6d-afaf-2d46668b3854" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="197bd5a2-61bc-42d4-8ca2-5ee83651faf7" name="Driver.PublishFrieghtUnit" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="0ba12558-c618-4ff6-b947-e993fc486484" />
+        <nodes>
+          <initialNode Id="078385de-554c-4453-9de3-808acaf38005" name="Initial1" isLeaf="false">
+            <elementDefinition Id="8e3eadb3-29fd-4698-837d-e42a315670ec" />
+            <flowNodeTargets>
+              <controlFlow Id="dc53d5f2-957e-42cb-9953-5ac5e0500280" isLeaf="false">
+                <opaqueActionMoniker Id="7e7da150-c06b-4357-8f66-c7e1076825bf" LastKnownName="Choise FrieghtUnit" />
+                <elementDefinition Id="ca9f3679-1c4a-461b-9f5c-d96f5bb32ff7" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="7e7da150-c06b-4357-8f66-c7e1076825bf" name="Choise FrieghtUnit" isLeaf="false">
+            <elementDefinition Id="dc46b758-9e14-44e5-b2bd-80e34011b049" />
+            <flowNodeTargets>
+              <controlFlow Id="be34748a-4d4c-4d46-b48c-d013cd187f57" isLeaf="false">
+                <opaqueActionMoniker Id="be4b7ae5-4d8e-4310-b4f2-7b96326cccaf" LastKnownName="Add Comment" />
+                <elementDefinition Id="93383836-ffbd-46ac-b250-b143d1d23881" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="be4b7ae5-4d8e-4310-b4f2-7b96326cccaf" name="Add Comment" isLeaf="false">
+            <elementDefinition Id="95d888de-c890-49fc-89f1-d512ce14c0c8" />
+            <flowNodeTargets>
+              <controlFlow Id="f3921705-fa56-4d56-972e-ad97da66a21a" isLeaf="false">
+                <opaqueActionMoniker Id="5a2a7ef6-0d7c-4ec2-9ea0-79314cf7edc2" LastKnownName="Publish" />
+                <elementDefinition Id="c7a01448-6cda-4634-8c4d-5399154a3d97" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <objectNode Id="c2850f61-b990-4100-8d7f-b8d71f7416d6" name="FrieghtUnit to Ready" isLeaf="false" ordering="Unordered" isControlType="false">
+            <elementDefinition Id="2cac490c-2ee7-4266-aadc-30bd80a185a0" />
+            <objectFlowTargets>
+              <objectFlow Id="853d40e4-c3b3-4692-8caa-a7431469a8d2" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <activityFinalNodeMoniker Id="4778a0c7-d8e0-47dc-8661-8895023d5310" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="0334882c-34c5-4da4-93f3-50c0ffe3182a" />
+              </objectFlow>
+            </objectFlowTargets>
+            <upperBound>
+              <literalInteger Id="791024cc-ce51-4b30-b679-d629bab2f8b1" name="2147483647" value="2147483647">
+                <elementDefinition Id="f9c087df-b55c-4041-ad1e-f21cb2635c23" />
+              </literalInteger>
+            </upperBound>
+          </objectNode>
+          <opaqueAction Id="5a2a7ef6-0d7c-4ec2-9ea0-79314cf7edc2" name="Publish" isLeaf="false">
+            <elementDefinition Id="adcf0657-a755-4626-9ee0-f25706cae949" />
+            <objectFlowTargets>
+              <objectFlow Id="712d5a7c-6ae8-457f-b7dc-c7466107d265" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <objectNodeMoniker Id="c2850f61-b990-4100-8d7f-b8d71f7416d6" LastKnownName="FrieghtUnit to Ready" />
+                <elementDefinition Id="10aa5b75-38e1-496c-9769-e10f613bb5a3" />
+              </objectFlow>
+            </objectFlowTargets>
+          </opaqueAction>
+          <activityFinalNode Id="4778a0c7-d8e0-47dc-8661-8895023d5310" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="b5e8fe3b-b58d-43df-a0ec-aa9b04de0b73" />
+          </activityFinalNode>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="cdf29bdf-b11e-491b-8f53-51f9c96613be" name="Peach.YouHu.Modeling">
+    <elementDefinition Id="84dea7ad-3290-4c48-b832-7cfafeba4f1a" />
+  </package>
+</activityRootModel>

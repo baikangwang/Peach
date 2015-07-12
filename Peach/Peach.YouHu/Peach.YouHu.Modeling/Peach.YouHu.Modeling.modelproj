@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{b2704f03-e249-4af6-a750-c2bec0951884}</ProjectGuid>
+    <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
+    <Name>Peach.YouHu.Modeling</Name>
+    <RootNamespace>Peach.YouHu.Modeling</RootNamespace>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
+  <ItemGroup>
+    <Content Include="Activity\Driver.ConfirmDeal.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Activity\Driver.ConfirmDeal.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Activity\Driver.ConfirmDeal.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Activity\Driver.PostEvaluation.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Activity\Driver.PostEvaluation.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Activity\Driver.PostEvaluation.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Activity\Driver.PublishFrieghtUnit.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Activity\Driver.PublishFrieghtUnit.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Activity\Driver.PublishFrieghtUnit.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Activity\Driver.Register.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Activity\Driver.Register.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Activity\Driver.Register.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Activity\Driver.UpdateOrderState.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Activity\Driver.UpdateOrderState.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Activity\Driver.UpdateOrderState.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Activity\Driver.WithDraw.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Activity\Driver.WithDraw.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Activity\Driver.WithDraw.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Activity\Owner.ConfirmConsigned.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Activity\Owner.ConfirmConsigned.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Activity\Owner.ConfirmConsigned.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Activity\Owner.Evaluation.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Activity\Owner.Evaluation.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Activity\Owner.Evaluation.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Activity\Owner.FindFreightUnit.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Activity\Owner.FindFreightUnit.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Activity\Owner.FindFreightUnit.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Activity\Owner.Payment.Later.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Activity\Owner.Payment.Later.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Activity\Owner.Payment.Later.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Activity\Owner.Payment.Prepay.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Activity\Owner.Payment.Prepay.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Activity\Owner.Payment.Prepay.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Activity\Owner.PublishGoods.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Activity\Owner.PublishGoods.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Activity\Owner.PublishGoods.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Activity\Owner.Register.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Activity\Owner.Register.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Activity\Owner.Register.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Sequence\Driver.ConfirmDeal.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Sequence\Driver.ConfirmDeal.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Sequence\Driver.ConfirmDeal.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Sequence\Driver.PublishFreightUnit.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Sequence\Driver.PublishFreightUnit.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Sequence\Driver.PublishFreightUnit.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Sequence\Driver.Register.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Sequence\Driver.Register.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Sequence\Driver.Register.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Sequence\Driver.WithDraw.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Sequence\Driver.WithDraw.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Sequence\Driver.WithDraw.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Sequence\Owner.ConfirmConsigned.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Sequence\Owner.ConfirmConsigned.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Sequence\Owner.ConfirmConsigned.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Sequence\Owner.FindFrieghtUnit.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Sequence\Owner.FindFrieghtUnit.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Sequence\Owner.FindFrieghtUnit.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Sequence\Owner.Payment.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Sequence\Owner.Payment.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Sequence\Owner.Payment.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Sequence\Owner.PublishGoods.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Sequence\Owner.PublishGoods.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Sequence\Owner.PublishGoods.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Sequence\Owner.Register.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Sequence\Owner.Register.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Sequence\Owner.Register.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Sequence\PostEvaluation.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Sequence\PostEvaluation.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Sequence\PostEvaluation.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Sequence\UpdateOrderState.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Sequence\UpdateOrderState.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Sequence\UpdateOrderState.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="YouHu.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="YouHu.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>YouHu.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="YouHu.usecasediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="YouHu.usecasediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>YouHu.usecasediagram</DependentUpon>
+    </Content>
+    <Folder Include="ModelDefinition\" />
+    <Content Include="ModelDefinition\Peach.YouHu.Modeling.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Folder Include="Activity" />
+    <Folder Include="Sequence" />
+  </ItemGroup>
+</Project>
