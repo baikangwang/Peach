@@ -3,23 +3,14 @@ using System.Collections.Generic;
 
 namespace Peach.Downloader
 {
+    using System.Runtime.Remoting.Channels;
     using System.Threading;
     using System.Threading.Tasks;
 
     using Peach.Downloader.Models;
 
-    public class DownloadingQueue:IDisposable
+    public abstract class DownloadingQueue:IDisposable
     {
-        private static DownloadingQueue _default=new DownloadingQueue();
-
-        public static DownloadingQueue Default
-        {
-            get
-            {
-                return _default;
-            }
-        }
-
         private IList<ISeed> _queue;
 
         const int MAX_THREAD = 10;
@@ -38,11 +29,16 @@ namespace Peach.Downloader
 
         public event SeedStatusEvent SeedStatusChanged;
 
-        protected DownloadingQueue()
+        public event EventHandler Finished;
+
+        private PendingQueue _pendingQueue;
+
+        protected DownloadingQueue(PendingQueue pendingQueue)
         {
             this._cancel = new CancellationTokenSource();
             this._stoper = new CancellationTokenSource();
             this._queue = new List<ISeed>(MAX_THREAD);
+            this._pendingQueue = pendingQueue;
         }
 
         public void Start()
@@ -62,14 +58,14 @@ namespace Peach.Downloader
 
                         if (this.IsEmpty())
                         {
-                            if (PendingQueue.Default.IsEmpty()) this.Pause(60*1000);
+                            if (this._pendingQueue.IsEmpty()) this.OnFinished();
                             else
                             {
                                 while (!this.IsFull())
                                 {
                                     if (token.IsCancellationRequested) token.ThrowIfCancellationRequested();
 
-                                    ISeed seed = PendingQueue.Default.Dequeue();
+                                    ISeed seed = this._pendingQueue.Dequeue();
 
                                     if (seed != null)
                                     {
@@ -85,7 +81,7 @@ namespace Peach.Downloader
                         }
                         else
                         {
-                            if (PendingQueue.Default.IsEmpty())
+                            if (this._pendingQueue.IsEmpty())
                             {
                                 this.Process(token);
                                 this.Pause(3*1000);
@@ -96,8 +92,8 @@ namespace Peach.Downloader
                                 {
                                     if (token.IsCancellationRequested)
                                         token.ThrowIfCancellationRequested();
-                                    
-                                    ISeed seed = PendingQueue.Default.Dequeue();
+
+                                    ISeed seed = this._pendingQueue.Dequeue();
                                     if (seed != null) this.Enqueue(seed);
                                     else break;
                                 }
@@ -131,24 +127,25 @@ namespace Peach.Downloader
                             break;
                         case Status.Waiting:
                             seed.Status=Status.Downloading;
-                            Task.Factory.StartNew(() => { Downloader.Ting56.Download(seed,token); },token);
+                            this.DownloadAsync(seed,token);
                             break;
                         case Status.Downloading:
                         default:
                             break;
                     }
-
                 }
             }
         }
+
+        protected abstract void DownloadAsync(ISeed seed, CancellationToken token);
 
         private void Enqueue(ISeed seed)
         {
             if (seed == null) return;
 
-            seed.Completed += Seed_Completed;
-            seed.Fail += Seed_Fail;
-            seed.StatusChanged += Seed_StatusChanged;
+            seed.Completed += this.Seed_Completed;
+            seed.Fail += this.Seed_Fail;
+            seed.StatusChanged += this.Seed_StatusChanged;
 
             this._queue.Add(seed);
         }
@@ -259,6 +256,12 @@ namespace Peach.Downloader
                         handler(sender, changed);
                     }
                 });
+        }
+
+        protected virtual void OnFinished()
+        {
+            var handler = this.Finished;
+            if (handler != null) { handler(this, EventArgs.Empty); }
         }
     }
 }

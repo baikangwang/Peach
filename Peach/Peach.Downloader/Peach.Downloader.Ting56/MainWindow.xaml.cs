@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace Peach.Downloader.Ting56
+﻿namespace Peach.Downloader.Ting56
 {
+    using System;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using System.Windows.Media;
 
     using Peach.Downloader.Models;
 
@@ -35,11 +27,11 @@ namespace Peach.Downloader.Ting56
         public MainWindow()
         {
             InitializeComponent();
-            PendingQueue.Default.Ready+=this.Default_Ready;
-            PendingQueue.Default.StatusChanged += this.Default_StatusChanged;
-            DownloadingQueue.Default.SeedCompleted += this.Default_SeedCompleted;
-            DownloadingQueue.Default.SeedFail += this.Default_SeedFail;
-            DownloadingQueue.Default.SeedStatusChanged += this.Default_SeedStatusChanged;
+            PendingQueue.Ting56.Ready+=this.Default_Ready;
+            PendingQueue.Ting56.StatusChanged += this.Default_StatusChanged;
+            DownloadingQueue.Ting56.SeedCompleted += this.Default_SeedCompleted;
+            DownloadingQueue.Ting56.SeedFail += this.Default_SeedFail;
+            DownloadingQueue.Ting56.SeedStatusChanged += this.Default_SeedStatusChanged;
             this._scheduler=TaskScheduler.FromCurrentSynchronizationContext();
             this._label = new Label();
             this.StatusBar.Items.Add(this._label);
@@ -66,7 +58,7 @@ namespace Peach.Downloader.Ting56
                     TreeViewItem item = this._seeds[sender.Chapter][sender.Episode];
                     item.Foreground = new SolidColorBrush(Colors.Red);
                     item.Header = string.Format("{0}-{1}", sender.Title, sender.Status);
-                    Task.Factory.StartNew(() => { PendingQueue.Default.RefreshCache(); });
+                    Task.Factory.StartNew(() => { PendingQueue.Ting56.RefreshCache(); });
                 }, CancellationToken.None, TaskCreationOptions.None, this._scheduler);
         }
 
@@ -80,7 +72,7 @@ namespace Peach.Downloader.Ting56
                     TreeViewItem item = this._seeds[sender.Chapter][sender.Episode];
                     item.Foreground = new SolidColorBrush(Colors.Green);
                     item.Header = string.Format("{0}-{1}", sender.Title, sender.Status);
-                    Task.Factory.StartNew(() => { PendingQueue.Default.RefreshCache(); });
+                    Task.Factory.StartNew(() => { PendingQueue.Ting56.RefreshCache(); });
                 }, CancellationToken.None, TaskCreationOptions.None, this._scheduler);
 
         }
@@ -154,7 +146,7 @@ namespace Peach.Downloader.Ting56
                     (task) =>
                     {
                         //start downloading queue
-                        DownloadingQueue.Default.Start();
+                        DownloadingQueue.Ting56.Start();
                     });
         }
 
@@ -170,15 +162,15 @@ namespace Peach.Downloader.Ting56
             if (isStarted)
             {
                 this.Cursor = Cursors.Wait;
-                PendingQueue.Default.Stop();
-                DownloadingQueue.Default.Stop();
+                PendingQueue.Ting56.Stop();
+                DownloadingQueue.Ting56.Stop();
                 this.btTransaction.Content = "Start";
                 this.Cursor = Cursors.Arrow;
             }
             else
             {
                 this.Cursor = Cursors.Wait;
-                Task.Factory.StartNew(() => { PendingQueue.Default.Start(); });
+                Task.Factory.StartNew(() => { PendingQueue.Ting56.Start(); });
                 this.btTransaction.Content = "Stop";
                 this.Cursor = Cursors.Arrow;
             }

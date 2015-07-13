@@ -68,5 +68,10 @@
                 return new List<ISeed>();
             }
         }
+
+        public string GetCachePath()
+        {
+            return this.CachePath;
+        }
     }
 }
