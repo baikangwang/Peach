@@ -1,17 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Peach.YouHu.Modeling", "Peach.YouHu.Modeling\Peach.YouHu.Modeling.modelproj", "{B2704F03-E249-4AF6-A750-C2BEC0951884}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.YouHu.API", "Peach.YouHu.API\Peach.YouHu.API.csproj", "{E67B5878-4457-4525-951F-932F2BF386C1}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://baikangwang.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Peach.YouHu.Modeling\\Peach.YouHu.Modeling.modelproj
 		SccProjectName1 = Peach.YouHu.Modeling
 		SccLocalPath1 = Peach.YouHu.Modeling
+		SccProjectUniqueName2 = Peach.YouHu.API\\Peach.YouHu.API.csproj
+		SccProjectName2 = Peach.YouHu.API
+		SccLocalPath2 = Peach.YouHu.API
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +29,10 @@ Global
 		{B2704F03-E249-4AF6-A750-C2BEC0951884}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2704F03-E249-4AF6-A750-C2BEC0951884}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2704F03-E249-4AF6-A750-C2BEC0951884}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E67B5878-4457-4525-951F-932F2BF386C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E67B5878-4457-4525-951F-932F2BF386C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E67B5878-4457-4525-951F-932F2BF386C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E67B5878-4457-4525-951F-932F2BF386C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
