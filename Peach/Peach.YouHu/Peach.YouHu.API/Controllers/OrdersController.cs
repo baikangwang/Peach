@@ -14,6 +14,9 @@ using Peah.YouHu.API.Models;
 namespace Peah.YouHu.API.Controllers
 {
     using System.Collections;
+    using System.Threading;
+
+    using Peah.YouHu.API.Component;
 
     [RoutePrefix("api/Orders")]
     public class OrdersController : ApiController
@@ -102,7 +105,7 @@ namespace Peah.YouHu.API.Controllers
             this._db.Orders.Remove(order);
             await this._db.SaveChangesAsync();
 
-            return Ok(order);
+            return this.Ok(order);
         }
 
         // POST: api/Orders/Publish
@@ -146,22 +149,57 @@ namespace Peah.YouHu.API.Controllers
 
         // GET: api/Orders/Owner/Orders
         [Route("Owner/Orders")]
-        public async Task<IList<OwnerOrderViewModel>> List()
+        [ResponseType(typeof(IList<OwnerOrderViewModel>))]
+        public async Task<IHttpActionResult> OwnerOrders(int id)
         {
-            IList<OwnerOrderViewModel> view = await this._db.Orders.Where(o => o.State != OrderState.Consigned)
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            IList<OwnerOrderViewModel> view = await this._db.Orders
+                .Include(o=>o.Owner)
+                .Include(o=>o.FreightUnit)
+                .Include(o=>o.FreightUnit.Driver)
+                .Where(o => o.State != OrderState.Consigned && o.Owner.Id==id)
                 .Select(o=>new OwnerOrderViewModel(o.Id,o.FreightUnit.Driver.Name,o.Destination,o.Description,o.PublishedDate,o.State))
                 .ToListAsync();
+            return this.Ok(view);
+        }
 
-            return view;
+        [Route("Driver/Orders")]
+        [ResponseType(typeof(IList<DriverOrderViewModel>))]
+        public async Task<IHttpActionResult> DriverOrders(int id)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            IList<DriverOrderViewModel> view = await this._db.Orders
+                .Include(o => o.Owner)
+                .Include(o => o.FreightUnit)
+                .Include(o => o.FreightUnit.Driver)
+                .Where(o => o.State != OrderState.Consigned && o.FreightUnit.Driver.Id == id)
+                .Select(o => new DriverOrderViewModel(o.Id, o.Owner.Name,o.Source, o.Destination, o.Description, o.PublishedDate, o.State))
+                .ToListAsync();
+            return this.Ok(view);
         }
 
         // POST: api/Orders/Owner/MakeDeal
         [Route("Owner/MakeDeal")]
         public async Task<IHttpActionResult> MakeDeal(MakeDealBindingModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+            
             Order order = await this._db.Orders.FindAsync(model.OrderId);
             FreightUnit fu = await this._db.FreightUnits.FindAsync(model.FreightUnitId);
             order.FreightUnit = fu;
+            order.ModifiedBy = model.ModifiedBy;
+            order.ModifiedDate=DateTime.Now;
             order.State = OrderState.Dealing;
             this._db.Entry(order).State = EntityState.Modified;
             
@@ -182,6 +220,99 @@ namespace Peah.YouHu.API.Controllers
             {
                 return this.BadRequest();
             }
+        }
+
+        // POST: api/Orders/Owner/Pay
+        [Route("Pay")]
+        [ResponseType(typeof(bool))]
+        public async Task<IHttpActionResult> Pay(PayBdingModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            Order order = await this._db.Orders.FindAsync(model.OrderId);
+            string paymentCode = order.Owner.PaymentCode;
+            if (paymentCode != model.PaymentCode)
+                return this.BadRequest("Invalid Payment Code");
+
+            order.State = OrderState.Paying;
+            order.ModifiedDate=DateTime.Now;
+            order.ModifiedBy = model.ModifiedBy;
+            this._db.Entry(order).State = EntityState.Modified;
+
+            try
+            {
+                await this._db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return this.BadRequest("Fail to update order state to Paying");
+            }
+
+            bool paid = await PaymentPlatment.Default.Pay(model.Paid);
+
+            if (paid)
+            {
+                order.State = OrderState.Paid;
+                order.ModifiedDate = DateTime.Now;
+                order.ModifiedBy = model.ModifiedBy;
+                order.Paid = model.Paid;
+                this._db.Entry(order).State = EntityState.Modified;
+                await this._db.SaveChangesAsync();
+            }
+            else
+                return this.BadRequest("Fail to pay, try a later");
+
+            return this.Ok(true);
+        }
+
+        // POST: api/Orders/Owner/Consign
+        [Route("Consign")]
+        [ResponseType(typeof(bool))]
+        public async Task<IHttpActionResult> Consign(ConsignBindingModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            Order order = await this._db.Orders.FindAsync(model.OrderId);
+            
+            string paymentCode = order.Owner.PaymentCode;
+            if (paymentCode != model.PaymentCode)
+                return this.BadRequest("Invalid Payment Code");
+
+            order.State = OrderState.Consigned;
+            order.ModifiedDate = DateTime.Now;
+            order.ModifiedBy = model.ModifiedBy;
+
+            Driver driver = order.FreightUnit.Driver;
+            decimal paid = order.Paid ?? 0;
+            driver.TotalIncome += paid;
+            driver.CurrentIncome += paid;
+            driver.ModifiedBy = 0;
+            driver.ModifiedDate = DateTime.Now;
+
+            using (DbContextTransaction trans=this._db.Database.BeginTransaction())
+            {
+                try
+                {
+                    this._db.Entry(order).State = EntityState.Modified;
+                    this._db.Entry(driver).State = EntityState.Modified;
+
+                    await this._db.SaveChangesAsync();
+                    trans.Commit();
+                }
+                catch (Exception)
+                {
+                    trans.Rollback();
+                    return this.BadRequest("Fail to consign the order, try a later");
+                }
+            }
+
+            return this.Ok(true);
         }
 
         protected override void Dispose(bool disposing)

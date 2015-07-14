@@ -43,5 +43,7 @@ namespace Peah.YouHu.API.Models
         public OrderState State { get; set; }
 
         public DateTime PublishedDate { get; set; }
+
+        public decimal? Paid { get; set; }
     }
 }

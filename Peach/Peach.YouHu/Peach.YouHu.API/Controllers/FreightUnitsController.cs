@@ -103,13 +103,20 @@ namespace Peah.YouHu.API.Controllers
             return Ok(freightUnit);
         }
 
-        // GET: api/freightUnit/find
+        // GET: api/freightUnits/find
         [Route("Find")]
-        public async Task<IList<FreightUnitViewModel>> Find(int id)
+        [ResponseType(typeof(IList<FreightUnitViewModel>))]
+        public async Task<IHttpActionResult> Find(int id)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
             Order order = await db.Orders.FindAsync(id);
 
             IList<FreightUnitViewModel> view = await db.FreightUnits
+                .Include(u=>u.Driver)
                 .Where(u=>FreightUnitFinder.Default.Match(u.Height,u.Height,order.Size,u.Weight,order.Weight,u.Location,order.Source))
                 .Select(u=>new FreightUnitViewModel(u.Id,u.Driver.Rank??0,u.Driver.Name,u.Location))
                 .OrderByDescending(v=>v.Rank)
@@ -121,7 +128,7 @@ namespace Peah.YouHu.API.Controllers
                 return v;
             }).ToList();
 
-            return view;
+            return this.Ok(view);
         }
 
 

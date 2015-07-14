@@ -32,8 +32,66 @@ namespace Peah.YouHu.API.Models
 
     public class MakeDealBindingModel
     {
+        [Required]
+        [Display(Name = "Order Id")]
         public int OrderId { get; set; }
 
+        [Required]
+        [Display(Name = "Freight Unit Id")]
         public int FreightUnitId { get; set; }
+
+        [Required]
+        [Display(Name = "Modified Uesr")]
+        public int ModifiedBy { get; set; }
+    }
+
+
+    public class ValidatePaymentCodeBindingModel
+    {
+        [Required]
+        [Display(Name = "Driver Id")]
+        public int DriverId { get; set; }
+
+        [Required]
+        [Display(Name = "Payment Code")]
+        public string PaymentCode { get; set; }
+    }
+
+    public class PayBdingModel
+    {
+        [Required]
+        [Display(Name = "Order Id")]
+        public int OrderId { get; set; }
+
+        [Required]
+        [Display(Name = "Payment Code")]
+        public string PaymentCode { get; set; }
+
+        [Required]
+        [Display(Name = "Freight Cost")]
+        public decimal FreightCost { get; set; }
+
+        [Required]
+        [Display(Name = "Modified Uesr")]
+        public int ModifiedBy { get; set; }
+
+        [Required]
+        [Display(Name = "Payment Amount")]
+        public decimal Paid { get; set; }
+    }
+
+    public class ConsignBindingModel
+    {
+        [Required]
+        [Display(Name = "Order Id")]
+        public int OrderId { get; set; }
+
+        [Required]
+        [Display(Name = "Payment Code")]
+        public string PaymentCode { get; set; }
+
+        [Required]
+        [Display(Name = "Modified Uesr")]
+        public int ModifiedBy { get; set; }
     }
 }

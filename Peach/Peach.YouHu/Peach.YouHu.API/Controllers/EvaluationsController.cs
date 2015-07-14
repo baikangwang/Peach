@@ -13,6 +13,11 @@ using Peah.YouHu.API.Models;
 
 namespace Peah.YouHu.API.Controllers
 {
+    using System.Threading;
+
+    using Peah.YouHu.API.Models.Enum;
+
+    [RoutePrefix("api/Evaluations")]
     public class EvaluationsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -100,6 +105,98 @@ namespace Peah.YouHu.API.Controllers
             await db.SaveChangesAsync();
 
             return Ok(evaluation);
+        }
+
+        [Route("Owner/Evaluate")]
+        public async Task<IHttpActionResult> OwnerEvaluate(EvaluateBindingModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            Order order = await this.db.Orders.FindAsync(model.OrderId);
+
+            Driver driver = await this.db.Drivers.FindAsync(model.Id);
+
+            driver.Rank += model.Rank;
+
+            Evaluation evaluation = new Evaluation();
+            evaluation.Order = order;
+            evaluation.Comments = model.Comments;
+            evaluation.From = EvaluationFrom.Owner;
+            evaluation.ModifiedBy = 0;
+            evaluation.ModifiedDate = DateTime.Now;
+            evaluation.Rank = model.Rank;
+
+            order.OwnerEvaluation = evaluation;
+
+            using (DbContextTransaction trans= this.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    this.db.Entry(order).State = EntityState.Modified;
+
+                    this.db.Entry(evaluation).State = EntityState.Added;
+                    
+                    await this.db.SaveChangesAsync();
+
+                    trans.Commit();
+                }
+                catch (Exception)
+                {
+                    trans.Rollback();
+                    return this.BadRequest("Fail to post comments");
+                }
+            }
+
+            return this.Ok();
+        }
+
+        [Route("Driver/Evaluate")]
+        public async Task<IHttpActionResult> DriverEvaluate(EvaluateBindingModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            Order order = await this.db.Orders.FindAsync(model.OrderId);
+
+            Owner owner = await this.db.Owners.FindAsync(model.Id);
+
+            owner.Rank += model.Rank;
+
+            Evaluation evaluation = new Evaluation();
+            evaluation.Order = order;
+            evaluation.Comments = model.Comments;
+            evaluation.From = EvaluationFrom.Owner;
+            evaluation.ModifiedBy = 0;
+            evaluation.ModifiedDate = DateTime.Now;
+            evaluation.Rank = model.Rank;
+
+            order.DriverEvaluation = evaluation;
+
+            using (DbContextTransaction trans = this.db.Database.BeginTransaction())
+            {
+                try
+                {
+                    this.db.Entry(order).State = EntityState.Modified;
+
+                    this.db.Entry(evaluation).State = EntityState.Added;
+
+                    await this.db.SaveChangesAsync();
+
+                    trans.Commit();
+                }
+                catch (Exception)
+                {
+                    trans.Rollback();
+                    return this.BadRequest("Fail to post comments");
+                }
+            }
+
+            return this.Ok();
         }
 
         protected override void Dispose(bool disposing)
