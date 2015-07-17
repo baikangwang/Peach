@@ -217,6 +217,7 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Driver.cs" />
+    <Compile Include="Models\DriverBindingModel.cs" />
     <Compile Include="Models\Enum\EvaluationFrom.cs" />
     <Compile Include="Models\Enum\FreightUnitState.cs" />
     <Compile Include="Models\Enum\FreightUnitType.cs" />
@@ -224,6 +225,7 @@
     <Compile Include="Models\Evaluation.cs" />
     <Compile Include="Models\EvaluationBindingModel.cs" />
     <Compile Include="Models\FreightUnit.cs" />
+    <Compile Include="Models\FreightUnitBindingModel.cs" />
     <Compile Include="Models\FreightUnitViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IUser.cs" />
@@ -231,6 +233,7 @@
     <Compile Include="Models\OrderBindingModels.cs" />
     <Compile Include="Models\OrderViewModels.cs" />
     <Compile Include="Models\Owner.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />

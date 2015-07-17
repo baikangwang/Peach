@@ -1,115 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Description;
-using Peah.YouHu.API.Models;
-
-namespace Peah.YouHu.API.Controllers
+﻿namespace Peah.YouHu.API.Controllers
 {
-    using System.Collections;
-    using System.Threading;
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+    using System.Web.Http.Description;
 
     using Peah.YouHu.API.Component;
+    using Peah.YouHu.API.Models;
 
-    [RoutePrefix("api/Orders")]
+    [RoutePrefix("api")]
     public class OrdersController : ApiController
     {
-        private ApplicationDbContext _db = new ApplicationDbContext();
+        private OwnerDbContext _db = new OwnerDbContext();
 
-        // GET: api/Orders
-        public IQueryable<Order> GetOrders()
-        {
-            return this._db.Orders;
-        }
-
-        // GET: api/Orders/5
-        [ResponseType(typeof(Order))]
-        public async Task<IHttpActionResult> GetOrder(int id)
-        {
-            Order order = await this._db.Orders.FindAsync(id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(order);
-        }
-
-        // PUT: api/Orders/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutOrder(int id, Order order)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != order.Id)
-            {
-                return BadRequest();
-            }
-
-            this._db.Entry(order).State = EntityState.Modified;
-
-            try
-            {
-                await this._db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OrderExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Orders
-        [ResponseType(typeof(Order))]
-        public async Task<IHttpActionResult> PostOrder(Order order)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            this._db.Orders.Add(order);
-            await this._db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = order.Id }, order);
-        }
-
-        // DELETE: api/Orders/5
-        [ResponseType(typeof(Order))]
-        public async Task<IHttpActionResult> DeleteOrder(int id)
-        {
-            Order order = await this._db.Orders.FindAsync(id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            this._db.Orders.Remove(order);
-            await this._db.SaveChangesAsync();
-
-            return this.Ok(order);
-        }
-
+        #region Publish
         // POST: api/Orders/Publish
-        [Route("Owner/Publish")]
+        [Route("Owner/Orders/Publish")]
         public async Task<IHttpActionResult> Publish(PublishBindingModel model)
         {
             if (!this.ModelState.IsValid)
@@ -146,11 +56,13 @@ namespace Peah.YouHu.API.Controllers
                 return this.BadRequest();
             }
         }
+        #endregion
 
+        #region Owner/List
         // GET: api/Orders/Owner/Orders
-        [Route("Owner/Orders")]
+        [Route("Owner/Orders/List")]
         [ResponseType(typeof(IList<OwnerOrderViewModel>))]
-        public async Task<IHttpActionResult> OwnerOrders(int id)
+        public async Task<IHttpActionResult> OwnerOrders(string id)
         {
             if (!this.ModelState.IsValid)
             {
@@ -166,10 +78,12 @@ namespace Peah.YouHu.API.Controllers
                 .ToListAsync();
             return this.Ok(view);
         }
+        #endregion
 
-        [Route("Driver/Orders")]
+        #region Driver/List
+        [Route("Driver/Orders/List")]
         [ResponseType(typeof(IList<DriverOrderViewModel>))]
-        public async Task<IHttpActionResult> DriverOrders(int id)
+        public async Task<IHttpActionResult> DriverOrders(string id)
         {
             if (!this.ModelState.IsValid)
             {
@@ -185,9 +99,11 @@ namespace Peah.YouHu.API.Controllers
                 .ToListAsync();
             return this.Ok(view);
         }
+        #endregion
 
+        #region MakeDeal
         // POST: api/Orders/Owner/MakeDeal
-        [Route("Owner/MakeDeal")]
+        [Route("Owner/Orders/MakeDeal")]
         public async Task<IHttpActionResult> MakeDeal(MakeDealBindingModel model)
         {
             if (!this.ModelState.IsValid)
@@ -221,9 +137,11 @@ namespace Peah.YouHu.API.Controllers
                 return this.BadRequest();
             }
         }
+        #endregion
 
+        #region Pay
         // POST: api/Orders/Owner/Pay
-        [Route("Pay")]
+        [Route("Owner/Orders/Pay")]
         [ResponseType(typeof(bool))]
         public async Task<IHttpActionResult> Pay(PayBdingModel model)
         {
@@ -242,6 +160,8 @@ namespace Peah.YouHu.API.Controllers
             order.ModifiedBy = model.ModifiedBy;
             this._db.Entry(order).State = EntityState.Modified;
 
+            Owner owner = order.Owner;
+
             try
             {
                 await this._db.SaveChangesAsync();
@@ -251,7 +171,7 @@ namespace Peah.YouHu.API.Controllers
                 return this.BadRequest("Fail to update order state to Paying");
             }
 
-            bool paid = await PaymentPlatment.Default.Pay(model.Paid);
+            bool paid = await PaymentPlatment.Default.Pay(model.Paid,owner.Name);
 
             if (paid)
             {
@@ -267,9 +187,11 @@ namespace Peah.YouHu.API.Controllers
 
             return this.Ok(true);
         }
+        #endregion
 
+        #region Consign
         // POST: api/Orders/Owner/Consign
-        [Route("Consign")]
+        [Route("Owner/Orders/Consign")]
         [ResponseType(typeof(bool))]
         public async Task<IHttpActionResult> Consign(ConsignBindingModel model)
         {
@@ -288,6 +210,11 @@ namespace Peah.YouHu.API.Controllers
             order.ModifiedDate = DateTime.Now;
             order.ModifiedBy = model.ModifiedBy;
 
+            FreightUnit fu = order.FreightUnit;
+            fu.State=FreightUnitState.Ready;
+            fu.ModifiedDate = DateTime.Now;
+            fu.ModifiedBy = 0;
+
             Driver driver = order.FreightUnit.Driver;
             decimal paid = order.Paid ?? 0;
             driver.TotalIncome += paid;
@@ -301,6 +228,7 @@ namespace Peah.YouHu.API.Controllers
                 {
                     this._db.Entry(order).State = EntityState.Modified;
                     this._db.Entry(driver).State = EntityState.Modified;
+                    this._db.Entry(fu).State=EntityState.Modified;
 
                     await this._db.SaveChangesAsync();
                     trans.Commit();
@@ -314,6 +242,110 @@ namespace Peah.YouHu.API.Controllers
 
             return this.Ok(true);
         }
+        #endregion
+
+        #region ConfirmDeal
+
+        [Route("Driver/Orders/ConfirmDeal")]
+        public async Task<IHttpActionResult> ConfirmDeal(ConfirmDealBindingModel model)
+        {
+            if (!this.ModelState.IsValid)
+                return this.BadRequest(this.ModelState);
+
+            int modifiedBy = model.ModifiedBy;
+            int acceptedId = model.AcceptedId;
+            IList<int> rejectedIds = model.RejectedIds;
+
+            Order accepted = await this._db.Orders.FindAsync(acceptedId);
+            
+            IList<Order> rejecteds = await Task.Run(() => rejectedIds.Select(r => this._db.Orders.Find(r)).ToList());
+
+            accepted.State=OrderState.Dealt;
+            accepted.ModifiedDate=DateTime.Now;
+            accepted.ModifiedBy = modifiedBy;
+            this._db.Entry(accepted).State = EntityState.Modified;
+
+            foreach (Order rej in rejecteds)
+            {
+                rej.State = OrderState.Rejected;
+                rej.ModifiedDate = DateTime.Now;
+                rej.ModifiedBy = modifiedBy;
+                this._db.Entry(rej).State=EntityState.Modified;
+            }
+
+            using (DbContextTransaction trans=this._db.Database.BeginTransaction() )
+            {
+                try
+                {
+                   await this._db.SaveChangesAsync();
+                   trans.Commit();
+                }
+                catch (Exception)
+                {
+                    trans.Rollback();
+                    return this.BadRequest("Fail to confirm the deal");
+                }
+            }
+
+            return this.Ok();
+        }
+
+        #endregion
+
+        #region UpdateOrderState
+
+        [Route("Driver/Orders/UpdateOrderState")]
+        public async Task<IHttpActionResult> UpdateOrderState(UpdateOrderStateBindingModel model)
+        {
+            if (!this.ModelState.IsValid)
+                return this.BadRequest(this.ModelState);
+
+            int orderId = model.OrderId;
+            OrderState oState = model.State;
+            int modifiedBy = model.ModifiedBy;
+            string location = model.Location;
+
+            if (oState != OrderState.Paid && oState != OrderState.InProgress)
+                return this.Ok();
+            else
+            {
+                Order order = await this._db.Orders.FindAsync(orderId);
+                FreightUnit fu = order.FreightUnit;
+
+                if(oState==OrderState.Paid)
+                    order.State=OrderState.InProgress;
+                else if (oState == OrderState.InProgress)
+                    order.State = OrderState.Arrived;
+
+                fu.Location = location;
+                fu.ModifiedDate=DateTime.Now;
+                fu.ModifiedBy = 0;
+
+                order.ModifiedBy = modifiedBy;
+                order.ModifiedDate = DateTime.Now;
+
+                using (DbContextTransaction trans=this._db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        this._db.Entry(order).State = EntityState.Modified;
+                        this._db.Entry(fu).State = EntityState.Modified;
+                        await this._db.SaveChangesAsync();
+                        trans.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        trans.Rollback();
+                        return this.BadRequest("Fail to Change order state");
+                    }
+                }
+
+            }
+
+            return this.Ok();
+        }
+
+        #endregion
 
         protected override void Dispose(bool disposing)
         {
@@ -322,11 +354,6 @@ namespace Peah.YouHu.API.Controllers
                 this._db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool OrderExists(int id)
-        {
-            return this._db.Orders.Count(e => e.Id == id) > 0;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Peah.YouHu.API.Controllers
 {
     public class OwnersController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private OwnerDbContext db = new OwnerDbContext();
 
         // GET: api/Owners
         public IQueryable<Owner> GetOwners()
@@ -25,7 +25,7 @@ namespace Peah.YouHu.API.Controllers
 
         // GET: api/Owners/5
         [ResponseType(typeof(Owner))]
-        public async Task<IHttpActionResult> GetOwner(int id)
+        public async Task<IHttpActionResult> GetOwner(string id)
         {
             Owner owner = await db.Owners.FindAsync(id);
             if (owner == null)
@@ -38,7 +38,7 @@ namespace Peah.YouHu.API.Controllers
 
         // PUT: api/Owners/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutOwner(int id, Owner owner)
+        public async Task<IHttpActionResult> PutOwner(string id, Owner owner)
         {
             if (!ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace Peah.YouHu.API.Controllers
             base.Dispose(disposing);
         }
 
-        private bool OwnerExists(int id)
+        private bool OwnerExists(string id)
         {
             return db.Owners.Count(e => e.Id == id) > 0;
         }

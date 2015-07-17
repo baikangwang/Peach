@@ -17,97 +17,30 @@ namespace Peah.YouHu.API.Controllers
 
     using Peah.YouHu.API.Models.Enum;
 
-    [RoutePrefix("api/Evaluations")]
+    [RoutePrefix("api")]
     public class EvaluationsController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private OwnerDbContext _odb;
 
-        // GET: api/Evaluations
-        public IQueryable<Evaluation> GetEvaluations()
+        private DriverDbContext _ddb;
+
+        protected OwnerDbContext OwnerDb
         {
-            return db.Evaluations;
+            get
+            {
+                return this._odb ?? (this._odb = new OwnerDbContext());
+            }
         }
 
-        // GET: api/Evaluations/5
-        [ResponseType(typeof(Evaluation))]
-        public async Task<IHttpActionResult> GetEvaluation(int id)
+        protected DriverDbContext DriverDb
         {
-            Evaluation evaluation = await db.Evaluations.FindAsync(id);
-            if (evaluation == null)
+            get
             {
-                return NotFound();
+                return this._ddb ?? (this._ddb = new DriverDbContext());
             }
-
-            return Ok(evaluation);
         }
 
-        // PUT: api/Evaluations/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutEvaluation(int id, Evaluation evaluation)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != evaluation.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(evaluation).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EvaluationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Evaluations
-        [ResponseType(typeof(Evaluation))]
-        public async Task<IHttpActionResult> PostEvaluation(Evaluation evaluation)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Evaluations.Add(evaluation);
-            await db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = evaluation.Id }, evaluation);
-        }
-
-        // DELETE: api/Evaluations/5
-        [ResponseType(typeof(Evaluation))]
-        public async Task<IHttpActionResult> DeleteEvaluation(int id)
-        {
-            Evaluation evaluation = await db.Evaluations.FindAsync(id);
-            if (evaluation == null)
-            {
-                return NotFound();
-            }
-
-            db.Evaluations.Remove(evaluation);
-            await db.SaveChangesAsync();
-
-            return Ok(evaluation);
-        }
-
-        [Route("Owner/Evaluate")]
+        [Route("Owner/Evaluations/Evaluate")]
         public async Task<IHttpActionResult> OwnerEvaluate(EvaluateBindingModel model)
         {
             if (!this.ModelState.IsValid)
@@ -115,9 +48,9 @@ namespace Peah.YouHu.API.Controllers
                 return this.BadRequest(this.ModelState);
             }
 
-            Order order = await this.db.Orders.FindAsync(model.OrderId);
+            Order order = await this.OwnerDb.Orders.FindAsync(model.OrderId);
 
-            Driver driver = await this.db.Drivers.FindAsync(model.Id);
+            Driver driver = await this.OwnerDb.Drivers.FindAsync(model.Id);
 
             driver.Rank += model.Rank;
 
@@ -131,15 +64,15 @@ namespace Peah.YouHu.API.Controllers
 
             order.OwnerEvaluation = evaluation;
 
-            using (DbContextTransaction trans= this.db.Database.BeginTransaction())
+            using (DbContextTransaction trans = this.OwnerDb.Database.BeginTransaction())
             {
                 try
                 {
-                    this.db.Entry(order).State = EntityState.Modified;
+                    this.OwnerDb.Entry(order).State = EntityState.Modified;
 
-                    this.db.Entry(evaluation).State = EntityState.Added;
-                    
-                    await this.db.SaveChangesAsync();
+                    this.OwnerDb.Entry(evaluation).State = EntityState.Added;
+
+                    await this.OwnerDb.SaveChangesAsync();
 
                     trans.Commit();
                 }
@@ -153,7 +86,7 @@ namespace Peah.YouHu.API.Controllers
             return this.Ok();
         }
 
-        [Route("Driver/Evaluate")]
+        [Route("Driver/Evaluations/Evaluate")]
         public async Task<IHttpActionResult> DriverEvaluate(EvaluateBindingModel model)
         {
             if (!this.ModelState.IsValid)
@@ -161,9 +94,9 @@ namespace Peah.YouHu.API.Controllers
                 return this.BadRequest(this.ModelState);
             }
 
-            Order order = await this.db.Orders.FindAsync(model.OrderId);
+            Order order = await this.DriverDb.Orders.FindAsync(model.OrderId);
 
-            Owner owner = await this.db.Owners.FindAsync(model.Id);
+            Owner owner = await this.DriverDb.Owners.FindAsync(model.Id);
 
             owner.Rank += model.Rank;
 
@@ -177,15 +110,15 @@ namespace Peah.YouHu.API.Controllers
 
             order.DriverEvaluation = evaluation;
 
-            using (DbContextTransaction trans = this.db.Database.BeginTransaction())
+            using (DbContextTransaction trans = this.DriverDb.Database.BeginTransaction())
             {
                 try
                 {
-                    this.db.Entry(order).State = EntityState.Modified;
+                    this.DriverDb.Entry(order).State = EntityState.Modified;
 
-                    this.db.Entry(evaluation).State = EntityState.Added;
+                    this.DriverDb.Entry(evaluation).State = EntityState.Added;
 
-                    await this.db.SaveChangesAsync();
+                    await this.DriverDb.SaveChangesAsync();
 
                     trans.Commit();
                 }
@@ -203,14 +136,9 @@ namespace Peah.YouHu.API.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                this._odb.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool EvaluationExists(int id)
-        {
-            return db.Evaluations.Count(e => e.Id == id) > 0;
         }
     }
 }

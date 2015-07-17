@@ -19,9 +19,14 @@ namespace Peah.YouHu.API.Component
             }
         }
 
-        public async Task<bool> Pay(decimal cost)
+        public async Task<bool> Pay(decimal cost,string remitter)
         {
             return await Task.Run<bool>(() => true);
+        }
+
+        public async Task<bool> WithDraw(decimal amount, string reciever)
+        {
+            return await Task.Run(() => true);
         }
     }
 }

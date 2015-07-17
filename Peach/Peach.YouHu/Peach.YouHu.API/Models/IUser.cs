@@ -8,7 +8,6 @@ namespace Peah.YouHu.API.Models
 {
     public interface IUser
     {
-        int Id { get; set; }
         string Password { get; set; }
         string UserName { get; set; }
         string Name { get; set; }
@@ -17,5 +16,11 @@ namespace Peah.YouHu.API.Models
         int ModifiedBy { get; set; }
 
         DateTime ModifiedDate { get; set; }
+
+        string Address { get; set; }
+
+        string Phone { get; set; }
+
+        int Rank { get; set; }
     }
 }

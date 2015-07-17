@@ -45,7 +45,6 @@ namespace Peah.YouHu.API.Models
         public int ModifiedBy { get; set; }
     }
 
-
     public class ValidatePaymentCodeBindingModel
     {
         [Required]
@@ -93,5 +92,39 @@ namespace Peah.YouHu.API.Models
         [Required]
         [Display(Name = "Modified Uesr")]
         public int ModifiedBy { get; set; }
+    }
+
+    public class ConfirmDealBindingModel
+    {
+        [Required]
+        [Display(Name = "Modified User")]
+        public int ModifiedBy { get; set; }
+
+        [Required]
+        [Display(Name = "Accepted Order Id")]
+        public int AcceptedId { get; set; }
+
+        [Required]
+        [Display(Name = "Rejected Order Ids")]
+        public IList<int> RejectedIds { get; set; }
+    }
+
+    public class UpdateOrderStateBindingModel
+    {
+        [Required]
+        [Display(Name = "Order Id")]
+        public int OrderId { get; set; }
+
+        [Required]
+        [Display(Name = "Order State")]
+        public OrderState State { get; set; }
+
+        [Required]
+        [Display(Name = "Modified User")]
+        public int ModifiedBy { get; set; }
+
+        [Required]
+        [Display(Name = "Location")]
+        public string Location { get; set; }
     }
 }
