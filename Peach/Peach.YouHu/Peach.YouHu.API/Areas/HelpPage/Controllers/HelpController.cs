@@ -1,11 +1,12 @@
-using System;
-using System.Web.Http;
-using System.Web.Mvc;
-using Peah.YouHu.API.Areas.HelpPage.ModelDescriptions;
-using Peah.YouHu.API.Areas.HelpPage.Models;
-
 namespace Peah.YouHu.API.Areas.HelpPage.Controllers
 {
+    using System;
+    using System.Web.Http;
+    using System.Web.Mvc;
+
+    using Peah.YouHu.API.Areas.HelpPage.ModelDescriptions;
+    using Peah.YouHu.API.Areas.HelpPage.Models;
+
     /// <summary>
     /// The controller that will handle requests for the help page.
     /// </summary>

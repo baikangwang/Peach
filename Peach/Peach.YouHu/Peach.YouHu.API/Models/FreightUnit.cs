@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Peah.YouHu.API.Models
+﻿namespace Peah.YouHu.API.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
     using Peah.YouHu.API.Models.Enum;
@@ -32,7 +28,7 @@ namespace Peah.YouHu.API.Models
 
         public float Weight { get; set; }
 
-        public int ModifiedBy { get; set; }
+        public string ModifiedBy { get; set; }
 
         public DateTime ModifiedDate { get; set; }
     }

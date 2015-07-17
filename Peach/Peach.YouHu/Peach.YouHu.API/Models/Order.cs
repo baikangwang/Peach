@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Peah.YouHu.API.Models
+﻿namespace Peah.YouHu.API.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
     public class Order
@@ -28,7 +24,7 @@ namespace Peah.YouHu.API.Models
 
         public DateTime ModifiedDate { get; set; }
 
-        public int ModifiedBy { get; set; }
+        public string ModifiedBy { get; set; }
 
         public Owner Owner { get; set; }
 

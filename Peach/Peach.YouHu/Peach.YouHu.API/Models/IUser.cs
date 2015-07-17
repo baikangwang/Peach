@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Peah.YouHu.API.Models
+﻿namespace Peah.YouHu.API.Models
 {
+    using System;
+
     public interface IUser
     {
         string Password { get; set; }
@@ -13,7 +9,7 @@ namespace Peah.YouHu.API.Models
         string Name { get; set; }
         string PaymentCode { get; set; }
 
-        int ModifiedBy { get; set; }
+        string ModifiedBy { get; set; }
 
         DateTime ModifiedDate { get; set; }
 

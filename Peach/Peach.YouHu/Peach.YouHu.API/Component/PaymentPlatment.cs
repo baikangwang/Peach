@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Peah.YouHu.API.Component
+﻿namespace Peah.YouHu.API.Component
 {
     using System.Threading.Tasks;
 

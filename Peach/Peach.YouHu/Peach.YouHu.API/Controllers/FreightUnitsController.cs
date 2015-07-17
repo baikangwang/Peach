@@ -1,29 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Description;
-using Peah.YouHu.API.Models;
-
-namespace Peah.YouHu.API.Controllers
+﻿namespace Peah.YouHu.API.Controllers
 {
-    using System.Threading;
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+    using System.Web.Http.Description;
 
-    using Peah.YouHu.API.Models.Enum;
+    using Peah.YouHu.API.Models;
 
-    [RoutePrefix("api/FreightUnits")]
-    public class FreightUnitsController : ApiController
+    [Authorize]
+    [RoutePrefix("api")]
+    public class FreightUnitsController : BaseController
     {
-        private OwnerDbContext db = new OwnerDbContext();
-
         // GET: api/FreightUnits/List
-        [Route("List")]
+        [Route("Driver/FreightUnits/List")]
         [ResponseType(typeof(IList<FreightUnitViewModel>))]
         public async Task<IHttpActionResult> List(string id)
         {
@@ -32,7 +24,7 @@ namespace Peah.YouHu.API.Controllers
                 return this.BadRequest(this.ModelState);
             }
 
-            IList<FreightUnitViewModel> view = await this.db.FreightUnits.Include(u => u.Driver)
+            IList<FreightUnitViewModel> view = await this.DriverDb.FreightUnits.Include(u => u.Driver)
                 .Where(u => u.Driver.Id == id)
                 .Select(u => new FreightUnitViewModel(u.Id, u.Driver.Rank, u.Driver.Name, u.Location))
                 .ToListAsync();
@@ -41,7 +33,7 @@ namespace Peah.YouHu.API.Controllers
         }
 
         // GET: api/freightUnits/find
-        [Route("Find")]
+        [Route("Owner/FreightUnits/Find")]
         [ResponseType(typeof(IList<FreightUnitViewModel>))]
         public async Task<IHttpActionResult> Find(int id)
         {
@@ -50,9 +42,9 @@ namespace Peah.YouHu.API.Controllers
                 return this.BadRequest(this.ModelState);
             }
 
-            Order order = await db.Orders.FindAsync(id);
+            Order order = await this.OwnerDb.Orders.FindAsync(id);
 
-            IList<FreightUnitViewModel> view = await db.FreightUnits
+            IList<FreightUnitViewModel> view = await this.OwnerDb.FreightUnits
                 .Include(u=>u.Driver)
                 .Where(u=>FreightUnitFinder.Default.Match(u.Height,u.Height,order.Size,u.Weight,order.Weight,u.Location,order.Source))
                 .Select(u=>new FreightUnitViewModel(u.Id,u.Driver.Rank,u.Driver.Name,u.Location))
@@ -69,7 +61,7 @@ namespace Peah.YouHu.API.Controllers
         }
 
         // POST: api/freightUnits/Publish
-        [Route("Publish")]
+        [Route("Driver/FreightUnits/Publish")]
         public async Task<IHttpActionResult> Publish(PublishFreightUnitBindingModel model)
         {
             if (!this.ModelState.IsValid)
@@ -77,18 +69,18 @@ namespace Peah.YouHu.API.Controllers
                 return this.BadRequest(this.ModelState);
             }
 
-            FreightUnit unit = await this.db.FreightUnits.FindAsync(model.Id);
+            FreightUnit unit = await this.DriverDb.FreightUnits.FindAsync(model.Id);
 
             unit.Location = model.Location;
-            unit.State=FreightUnitState.Ready;
-            unit.ModifiedDate=DateTime.Now;
-            unit.ModifiedBy = model.ModifiedBy;
+            unit.State = FreightUnitState.Ready;
+            unit.ModifiedDate = DateTime.Now;
+            unit.ModifiedBy = this.Logon.Id;
 
-            this.db.Entry(unit).State=EntityState.Modified;
+            this.DriverDb.Entry(unit).State = EntityState.Modified;
 
             try
             {
-               await this.db.SaveChangesAsync();
+                await this.DriverDb.SaveChangesAsync();
             }
             catch (Exception)
             {
@@ -99,18 +91,18 @@ namespace Peah.YouHu.API.Controllers
         }
 
         // POST: api/freightUnits/Publish
-        [Route("Register")]
+        [Route("Driver/FreightUnits/Register")]
         public async Task<IHttpActionResult> Register(RegisterFreightUnitBindingModel model)
         {
             if (!this.ModelState.IsValid)
                 return this.BadRequest(this.ModelState);
 
-            int driverId = model.DriverId;
-            Driver driver = await this.db.Drivers.FindAsync(driverId);
+            //int driverId = model.DriverId;
+            Driver driver = this.Logon as Driver;
 
-            FreightUnit fu=new FreightUnit();
+            FreightUnit fu = new FreightUnit();
             fu.Location = model.Location;
-            fu.ModifiedBy = driverId;
+            fu.ModifiedBy = this.Logon.Id; //driverId;
             fu.ModifiedDate=DateTime.Now;
             fu.State=FreightUnitState.None;
             fu.Height = model.Height;
@@ -123,8 +115,8 @@ namespace Peah.YouHu.API.Controllers
 
             try
             {
-                this.db.Entry(fu).State = EntityState.Added;
-                await this.db.SaveChangesAsync();
+                this.DriverDb.Entry(fu).State = EntityState.Added;
+                await this.DriverDb.SaveChangesAsync();
             }
             catch (Exception)
             {
@@ -132,15 +124,6 @@ namespace Peah.YouHu.API.Controllers
             }
 
             return this.Ok();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

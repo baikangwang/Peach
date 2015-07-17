@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Peah.YouHu.API.Models
+﻿namespace Peah.YouHu.API.Models
 {
     using System.ComponentModel.DataAnnotations;
 
@@ -19,16 +14,16 @@ namespace Peah.YouHu.API.Models
         [Display(Name = "Location")]
         public string Location { get; set; }
 
-        [Required]
-        [Display(Name = "Modified User")]
-        public int ModifiedBy { get; set; }
+        //[Required]
+        //[Display(Name = "Modified User")]
+        //public int ModifiedBy { get; set; }
     }
 
     public class RegisterFreightUnitBindingModel
     {
-        [Required]
-        [Display(Name = "Driver Id")]
-        public int DriverId { get; set; }
+        //[Required]
+        //[Display(Name = "Driver Id")]
+        //public int DriverId { get; set; }
 
         [Required]
         [Display(Name = "Location")]

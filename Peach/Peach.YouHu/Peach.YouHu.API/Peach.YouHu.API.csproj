@@ -204,13 +204,13 @@
     <Compile Include="Component\FreightUnitFinder.cs" />
     <Compile Include="Component\PaymentPlatment.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DriversController.cs" />
     <Compile Include="Controllers\EvaluationsController.cs" />
     <Compile Include="Controllers\FreightUnitsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\OwnersController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

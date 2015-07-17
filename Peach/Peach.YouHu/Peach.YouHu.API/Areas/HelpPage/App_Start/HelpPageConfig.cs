@@ -2,22 +2,17 @@
 // package to your project.
 ////#define Handle_PageResultOfT
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Reflection;
-using System.Web;
-using System.Web.Http;
+
 #if Handle_PageResultOfT
 using System.Web.Http.OData;
 #endif
 
 namespace Peah.YouHu.API.Areas.HelpPage
 {
+    using System.Diagnostics.CodeAnalysis;
+    using System.Net.Http.Headers;
+    using System.Web.Http;
+
     /// <summary>
     /// Use this class to customize the Help Page.
     /// For example you can set a custom <see cref="System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation

@@ -1,7 +1,7 @@
-using System;
-
 namespace Peah.YouHu.API.Areas.HelpPage.ModelDescriptions
 {
+    using System;
+
     /// <summary>
     /// Use this attribute to change the name of the <see cref="ModelDescription"/> generated for a type.
     /// </summary>

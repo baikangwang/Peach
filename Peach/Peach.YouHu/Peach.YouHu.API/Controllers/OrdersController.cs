@@ -12,11 +12,10 @@
     using Peah.YouHu.API.Component;
     using Peah.YouHu.API.Models;
 
+    [Authorize]
     [RoutePrefix("api")]
-    public class OrdersController : ApiController
+    public class OrdersController : BaseController
     {
-        private OwnerDbContext _db = new OwnerDbContext();
-
         #region Publish
         // POST: api/Orders/Publish
         [Route("Owner/Orders/Publish")]
@@ -35,12 +34,14 @@
             order.Weight = model.Weight;
             order.State = OrderState.Ready;
             order.PublishedDate = DateTime.Now;
-            this._db.Orders.Add(order);
-            this._db.Entry(order).State = EntityState.Added;
+            order.ModifiedDate=DateTime.Now;
+            order.ModifiedBy = this.Logon.Id;
+            this.OwnerDb.Orders.Add(order);
+            this.OwnerDb.Entry(order).State = EntityState.Added;
 
             try
             {
-                int added = await this._db.SaveChangesAsync();
+                int added = await this.OwnerDb.SaveChangesAsync();
 
                 if (added > 0)
                 {
@@ -69,7 +70,7 @@
                 return this.BadRequest(this.ModelState);
             }
 
-            IList<OwnerOrderViewModel> view = await this._db.Orders
+            IList<OwnerOrderViewModel> view = await this.OwnerDb.Orders
                 .Include(o=>o.Owner)
                 .Include(o=>o.FreightUnit)
                 .Include(o=>o.FreightUnit.Driver)
@@ -90,7 +91,7 @@
                 return this.BadRequest(this.ModelState);
             }
 
-            IList<DriverOrderViewModel> view = await this._db.Orders
+            IList<DriverOrderViewModel> view = await this.DriverDb.Orders
                 .Include(o => o.Owner)
                 .Include(o => o.FreightUnit)
                 .Include(o => o.FreightUnit.Driver)
@@ -111,17 +112,17 @@
                 return this.BadRequest(this.ModelState);
             }
             
-            Order order = await this._db.Orders.FindAsync(model.OrderId);
-            FreightUnit fu = await this._db.FreightUnits.FindAsync(model.FreightUnitId);
+            Order order = await this.OwnerDb.Orders.FindAsync(model.OrderId);
+            FreightUnit fu = await this.OwnerDb.FreightUnits.FindAsync(model.FreightUnitId);
             order.FreightUnit = fu;
-            order.ModifiedBy = model.ModifiedBy;
+            order.ModifiedBy = this.Logon.Id;
             order.ModifiedDate=DateTime.Now;
             order.State = OrderState.Dealing;
-            this._db.Entry(order).State = EntityState.Modified;
+            this.OwnerDb.Entry(order).State = EntityState.Modified;
             
             try
             {
-                int added = await this._db.SaveChangesAsync();
+                int added = await this.OwnerDb.SaveChangesAsync();
 
                 if (added > 0)
                 {
@@ -150,21 +151,21 @@
                 return this.BadRequest(this.ModelState);
             }
 
-            Order order = await this._db.Orders.FindAsync(model.OrderId);
+            Order order = await this.OwnerDb.Orders.FindAsync(model.OrderId);
             string paymentCode = order.Owner.PaymentCode;
             if (paymentCode != model.PaymentCode)
                 return this.BadRequest("Invalid Payment Code");
 
             order.State = OrderState.Paying;
             order.ModifiedDate=DateTime.Now;
-            order.ModifiedBy = model.ModifiedBy;
-            this._db.Entry(order).State = EntityState.Modified;
+            order.ModifiedBy = this.Logon.Id;
+            this.OwnerDb.Entry(order).State = EntityState.Modified;
 
             Owner owner = order.Owner;
 
             try
             {
-                await this._db.SaveChangesAsync();
+                await this.OwnerDb.SaveChangesAsync();
             }
             catch (Exception)
             {
@@ -177,10 +178,10 @@
             {
                 order.State = OrderState.Paid;
                 order.ModifiedDate = DateTime.Now;
-                order.ModifiedBy = model.ModifiedBy;
+                order.ModifiedBy = this.Logon.Id;
                 order.Paid = model.Paid;
-                this._db.Entry(order).State = EntityState.Modified;
-                await this._db.SaveChangesAsync();
+                this.OwnerDb.Entry(order).State = EntityState.Modified;
+                await this.OwnerDb.SaveChangesAsync();
             }
             else
                 return this.BadRequest("Fail to pay, try a later");
@@ -200,7 +201,7 @@
                 return this.BadRequest(this.ModelState);
             }
 
-            Order order = await this._db.Orders.FindAsync(model.OrderId);
+            Order order = await this.OwnerDb.Orders.FindAsync(model.OrderId);
             
             string paymentCode = order.Owner.PaymentCode;
             if (paymentCode != model.PaymentCode)
@@ -208,29 +209,29 @@
 
             order.State = OrderState.Consigned;
             order.ModifiedDate = DateTime.Now;
-            order.ModifiedBy = model.ModifiedBy;
+            order.ModifiedBy = this.Logon.Id;
 
             FreightUnit fu = order.FreightUnit;
-            fu.State=FreightUnitState.Ready;
+            fu.State = FreightUnitState.Ready;
             fu.ModifiedDate = DateTime.Now;
-            fu.ModifiedBy = 0;
+            fu.ModifiedBy = this.Logon.Id;
 
             Driver driver = order.FreightUnit.Driver;
             decimal paid = order.Paid ?? 0;
             driver.TotalIncome += paid;
             driver.CurrentIncome += paid;
-            driver.ModifiedBy = 0;
+            driver.ModifiedBy = this.Logon.Id;
             driver.ModifiedDate = DateTime.Now;
 
-            using (DbContextTransaction trans=this._db.Database.BeginTransaction())
+            using (DbContextTransaction trans=this.OwnerDb.Database.BeginTransaction())
             {
                 try
                 {
-                    this._db.Entry(order).State = EntityState.Modified;
-                    this._db.Entry(driver).State = EntityState.Modified;
-                    this._db.Entry(fu).State=EntityState.Modified;
+                    this.OwnerDb.Entry(order).State = EntityState.Modified;
+                    this.OwnerDb.Entry(driver).State = EntityState.Modified;
+                    this.OwnerDb.Entry(fu).State = EntityState.Modified;
 
-                    await this._db.SaveChangesAsync();
+                    await this.OwnerDb.SaveChangesAsync();
                     trans.Commit();
                 }
                 catch (Exception)
@@ -252,32 +253,31 @@
             if (!this.ModelState.IsValid)
                 return this.BadRequest(this.ModelState);
 
-            int modifiedBy = model.ModifiedBy;
             int acceptedId = model.AcceptedId;
             IList<int> rejectedIds = model.RejectedIds;
 
-            Order accepted = await this._db.Orders.FindAsync(acceptedId);
-            
-            IList<Order> rejecteds = await Task.Run(() => rejectedIds.Select(r => this._db.Orders.Find(r)).ToList());
+            Order accepted = await this.DriverDb.Orders.FindAsync(acceptedId);
+
+            IList<Order> rejecteds = await Task.Run(() => rejectedIds.Select(r => this.DriverDb.Orders.Find(r)).ToList());
 
             accepted.State=OrderState.Dealt;
             accepted.ModifiedDate=DateTime.Now;
-            accepted.ModifiedBy = modifiedBy;
-            this._db.Entry(accepted).State = EntityState.Modified;
+            accepted.ModifiedBy = this.Logon.Id;
+            this.DriverDb.Entry(accepted).State = EntityState.Modified;
 
             foreach (Order rej in rejecteds)
             {
                 rej.State = OrderState.Rejected;
                 rej.ModifiedDate = DateTime.Now;
-                rej.ModifiedBy = modifiedBy;
-                this._db.Entry(rej).State=EntityState.Modified;
+                rej.ModifiedBy = this.Logon.Id;
+                this.DriverDb.Entry(rej).State = EntityState.Modified;
             }
 
-            using (DbContextTransaction trans=this._db.Database.BeginTransaction() )
+            using (DbContextTransaction trans = this.DriverDb.Database.BeginTransaction())
             {
                 try
                 {
-                   await this._db.SaveChangesAsync();
+                    await this.DriverDb.SaveChangesAsync();
                    trans.Commit();
                 }
                 catch (Exception)
@@ -302,35 +302,34 @@
 
             int orderId = model.OrderId;
             OrderState oState = model.State;
-            int modifiedBy = model.ModifiedBy;
             string location = model.Location;
 
             if (oState != OrderState.Paid && oState != OrderState.InProgress)
                 return this.Ok();
             else
             {
-                Order order = await this._db.Orders.FindAsync(orderId);
+                Order order = await this.DriverDb.Orders.FindAsync(orderId);
                 FreightUnit fu = order.FreightUnit;
 
-                if(oState==OrderState.Paid)
-                    order.State=OrderState.InProgress;
+                if (oState == OrderState.Paid)
+                    order.State = OrderState.InProgress;
                 else if (oState == OrderState.InProgress)
                     order.State = OrderState.Arrived;
 
                 fu.Location = location;
                 fu.ModifiedDate=DateTime.Now;
-                fu.ModifiedBy = 0;
+                fu.ModifiedBy = this.Logon.Id;
 
-                order.ModifiedBy = modifiedBy;
+                order.ModifiedBy = this.Logon.Id;
                 order.ModifiedDate = DateTime.Now;
 
-                using (DbContextTransaction trans=this._db.Database.BeginTransaction())
+                using (DbContextTransaction trans=this.DriverDb.Database.BeginTransaction())
                 {
                     try
                     {
-                        this._db.Entry(order).State = EntityState.Modified;
-                        this._db.Entry(fu).State = EntityState.Modified;
-                        await this._db.SaveChangesAsync();
+                        this.DriverDb.Entry(order).State = EntityState.Modified;
+                        this.DriverDb.Entry(fu).State = EntityState.Modified;
+                        await this.DriverDb.SaveChangesAsync();
                         trans.Commit();
                     }
                     catch (Exception)
@@ -346,14 +345,5 @@
         }
 
         #endregion
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                this._db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

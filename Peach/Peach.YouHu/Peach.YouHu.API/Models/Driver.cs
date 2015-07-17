@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Peah.YouHu.API.Models
+﻿namespace Peah.YouHu.API.Models
 {
-    using System.ComponentModel.DataAnnotations;
+    using System.Collections.Generic;
     using System.Security.Claims;
     using System.Threading.Tasks;
 

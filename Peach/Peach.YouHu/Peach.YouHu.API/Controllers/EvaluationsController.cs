@@ -1,45 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Description;
-using Peah.YouHu.API.Models;
-
-namespace Peah.YouHu.API.Controllers
+﻿namespace Peah.YouHu.API.Controllers
 {
-    using System.Threading;
+    using System;
+    using System.Data.Entity;
+    using System.Threading.Tasks;
+    using System.Web.Http;
 
+    using Peah.YouHu.API.Models;
     using Peah.YouHu.API.Models.Enum;
 
+    [Authorize]
     [RoutePrefix("api")]
-    public class EvaluationsController : ApiController
+    public class EvaluationsController : BaseController
     {
-        private OwnerDbContext _odb;
-
-        private DriverDbContext _ddb;
-
-        protected OwnerDbContext OwnerDb
-        {
-            get
-            {
-                return this._odb ?? (this._odb = new OwnerDbContext());
-            }
-        }
-
-        protected DriverDbContext DriverDb
-        {
-            get
-            {
-                return this._ddb ?? (this._ddb = new DriverDbContext());
-            }
-        }
-
         [Route("Owner/Evaluations/Evaluate")]
         public async Task<IHttpActionResult> OwnerEvaluate(EvaluateBindingModel model)
         {
@@ -58,7 +30,7 @@ namespace Peah.YouHu.API.Controllers
             evaluation.Order = order;
             evaluation.Comments = model.Comments;
             evaluation.From = EvaluationFrom.Owner;
-            evaluation.ModifiedBy = 0;
+            evaluation.ModifiedBy = this.Logon.Id;
             evaluation.ModifiedDate = DateTime.Now;
             evaluation.Rank = model.Rank;
 
@@ -97,14 +69,14 @@ namespace Peah.YouHu.API.Controllers
             Order order = await this.DriverDb.Orders.FindAsync(model.OrderId);
 
             Owner owner = await this.DriverDb.Owners.FindAsync(model.Id);
-
+            
             owner.Rank += model.Rank;
 
             Evaluation evaluation = new Evaluation();
             evaluation.Order = order;
             evaluation.Comments = model.Comments;
             evaluation.From = EvaluationFrom.Owner;
-            evaluation.ModifiedBy = 0;
+            evaluation.ModifiedBy = this.Logon.Id;
             evaluation.ModifiedDate = DateTime.Now;
             evaluation.Rank = model.Rank;
 
@@ -130,15 +102,6 @@ namespace Peah.YouHu.API.Controllers
             }
 
             return this.Ok();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                this._odb.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Peah.YouHu.API.Models
+﻿namespace Peah.YouHu.API.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     public class PublishBindingModel
     {
         [Required]
@@ -70,9 +67,9 @@ namespace Peah.YouHu.API.Models
         [Display(Name = "Freight Cost")]
         public decimal FreightCost { get; set; }
 
-        [Required]
-        [Display(Name = "Modified Uesr")]
-        public int ModifiedBy { get; set; }
+        //[Required]
+        //[Display(Name = "Modified Uesr")]
+        //public int ModifiedBy { get; set; }
 
         [Required]
         [Display(Name = "Payment Amount")]
@@ -96,9 +93,9 @@ namespace Peah.YouHu.API.Models
 
     public class ConfirmDealBindingModel
     {
-        [Required]
-        [Display(Name = "Modified User")]
-        public int ModifiedBy { get; set; }
+        //[Required]
+        //[Display(Name = "Modified User")]
+        //public int ModifiedBy { get; set; }
 
         [Required]
         [Display(Name = "Accepted Order Id")]
@@ -119,9 +116,9 @@ namespace Peah.YouHu.API.Models
         [Display(Name = "Order State")]
         public OrderState State { get; set; }
 
-        [Required]
-        [Display(Name = "Modified User")]
-        public int ModifiedBy { get; set; }
+        //[Required]
+        //[Display(Name = "Modified User")]
+        //public int ModifiedBy { get; set; }
 
         [Required]
         [Display(Name = "Location")]

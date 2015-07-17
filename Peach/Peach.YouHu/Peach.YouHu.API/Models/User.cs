@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Peah.YouHu.API.Models
+﻿namespace Peah.YouHu.API.Models
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
+    using System;
+    using System.Security.Principal;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
-    public class User : IdentityUser, IUser
+    public abstract class User : IdentityUser,IPrincipal, IUser
     {
         public string Password { get; set; }
 
@@ -20,7 +14,7 @@ namespace Peah.YouHu.API.Models
 
         public string PaymentCode { get; set; }
 
-        public int ModifiedBy { get; set; }
+        public string ModifiedBy { get; set; }
 
         public DateTime ModifiedDate { get; set; }
 
@@ -29,5 +23,20 @@ namespace Peah.YouHu.API.Models
         public string Phone { get; set; }
 
         public int Rank { get; set; }
+
+        public bool IsInRole(string role)
+        {
+            return true;
+        }
+
+        private IIdentity _identity;
+        public IIdentity Identity {
+            get
+            {
+                return this._identity
+                       ?? (this._identity =
+                           new GenericIdentity(this.UserName, DefaultAuthenticationTypes.ExternalCookie));
+            }
+        }
     }
 }

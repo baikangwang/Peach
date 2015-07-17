@@ -1,9 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
-
-namespace Peah.YouHu.API.Models
+﻿namespace Peah.YouHu.API.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     // Models used as parameters to AccountController actions.
 
     public class AddExternalLoginBindingModel

@@ -1,7 +1,7 @@
-using System.Collections.ObjectModel;
-
 namespace Peah.YouHu.API.Areas.HelpPage.ModelDescriptions
 {
+    using System.Collections.ObjectModel;
+
     public class ComplexTypeModelDescription : ModelDescription
     {
         public ComplexTypeModelDescription()

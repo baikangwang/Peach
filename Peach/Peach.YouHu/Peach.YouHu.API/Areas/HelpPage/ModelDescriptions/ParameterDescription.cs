@@ -1,8 +1,7 @@
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-
 namespace Peah.YouHu.API.Areas.HelpPage.ModelDescriptions
 {
+    using System.Collections.ObjectModel;
+
     public class ParameterDescription
     {
         public ParameterDescription()

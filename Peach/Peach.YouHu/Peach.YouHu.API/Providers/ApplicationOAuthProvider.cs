@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OAuth;
-using Peah.YouHu.API.Models;
-
-namespace Peah.YouHu.API.Providers
+﻿namespace Peah.YouHu.API.Providers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Security.Claims;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
 
-    using Microsoft.Owin;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security;
+    using Microsoft.Owin.Security.Cookies;
+    using Microsoft.Owin.Security.OAuth;
+
+    using Peah.YouHu.API.Models;
 
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
@@ -60,6 +56,7 @@ namespace Peah.YouHu.API.Providers
                     CookieAuthenticationDefaults.AuthenticationType);
 
                 properties = CreateProperties(user.UserName);
+                context.Request.User = user;
             }
             else
             {
@@ -76,6 +73,7 @@ namespace Peah.YouHu.API.Providers
                 cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,CookieAuthenticationDefaults.AuthenticationType);
 
                 properties = CreateProperties(user.UserName);
+                context.Request.User = user;
             }
 
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
@@ -87,7 +85,13 @@ namespace Peah.YouHu.API.Providers
         {
             if (string.IsNullOrEmpty(path)) return string.Empty;
 
-            return string.Empty;
+            string pattern = "(?<=.*?/api/).*?(?=/.*)";
+
+            Regex regex=new Regex(pattern,RegexOptions.Compiled|RegexOptions.IgnoreCase|RegexOptions.Singleline);
+
+            Match m = regex.Match(path);
+
+            return m.Success ? m.Value : string.Empty;
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

@@ -1,11 +1,9 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-
-namespace Peah.YouHu.API.Models
+﻿namespace Peah.YouHu.API.Models
 {
+    using System.Data.Entity;
+
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     //public class ApplicationUser : IdentityUser
     //{
@@ -32,13 +30,13 @@ namespace Peah.YouHu.API.Models
 
         //public System.Data.Entity.DbSet<Peah.YouHu.API.Models.Owner> Owners { get; set; }
 
-        public System.Data.Entity.DbSet<Peah.YouHu.API.Models.Driver> Drivers { get; set; }
+        public DbSet<Driver> Drivers { get; set; }
 
-        public System.Data.Entity.DbSet<Peah.YouHu.API.Models.Order> Orders { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
-        public System.Data.Entity.DbSet<Peah.YouHu.API.Models.Evaluation> Evaluations { get; set; }
+        public DbSet<Evaluation> Evaluations { get; set; }
 
-        public System.Data.Entity.DbSet<Peah.YouHu.API.Models.FreightUnit> FreightUnits { get; set; }
+        public DbSet<FreightUnit> FreightUnits { get; set; }
     }
 
     public class DriverDbContext : IdentityDbContext<Driver>
@@ -53,15 +51,15 @@ namespace Peah.YouHu.API.Models
             return new DriverDbContext();
         }
 
-        public System.Data.Entity.DbSet<Peah.YouHu.API.Models.Owner> Owners { get; set; }
+        public DbSet<Owner> Owners { get; set; }
 
         //public System.Data.Entity.DbSet<Peah.YouHu.API.Models.Driver> Drivers { get; set; }
 
-        public System.Data.Entity.DbSet<Peah.YouHu.API.Models.Order> Orders { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
-        public System.Data.Entity.DbSet<Peah.YouHu.API.Models.Evaluation> Evaluations { get; set; }
+        public DbSet<Evaluation> Evaluations { get; set; }
 
-        public System.Data.Entity.DbSet<Peah.YouHu.API.Models.FreightUnit> FreightUnits { get; set; }
+        public DbSet<FreightUnit> FreightUnits { get; set; }
     }
 
     //public class OwnerDbContext : ApplicationDbContext,IdentityDbContext<Owner>
