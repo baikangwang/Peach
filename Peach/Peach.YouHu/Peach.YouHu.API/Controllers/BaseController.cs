@@ -7,23 +7,13 @@
     public class BaseController : ApiController
     {
         #region DbContext
-        private OwnerDbContext _odb;
+        private AppDbContext _odb;
 
-        private DriverDbContext _ddb;
-
-        protected virtual OwnerDbContext OwnerDb
+        protected virtual AppDbContext AppDb
         {
             get
             {
-                return this._odb ?? (this._odb = new OwnerDbContext());
-            }
-        }
-
-        protected virtual DriverDbContext DriverDb
-        {
-            get
-            {
-                return this._ddb ?? (this._ddb = new DriverDbContext());
+                return this._odb ?? (this._odb = new AppDbContext());
             }
         }
 
@@ -31,19 +21,17 @@
         {
             if (disposing)
             {
-                if (this._ddb != null)
-                    this._ddb.Dispose();
                 if (this._odb != null)
                     this._odb.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        protected virtual User Logon
+        protected virtual AppUser Logon
         {
             get
             {
-                return this.User as User;
+                return this.User as AppUser;
             }
         }
 

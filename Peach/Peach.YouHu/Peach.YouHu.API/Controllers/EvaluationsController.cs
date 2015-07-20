@@ -20,9 +20,9 @@
                 return this.BadRequest(this.ModelState);
             }
 
-            Order order = await this.OwnerDb.Orders.FindAsync(model.OrderId);
+            Order order = await this.AppDb.Orders.FindAsync(model.OrderId);
 
-            Driver driver = await this.OwnerDb.Drivers.FindAsync(model.Id);
+            AppUser driver = this.AppDb.Users.Find(model.Id);
 
             driver.Rank += model.Rank;
 
@@ -36,15 +36,15 @@
 
             order.OwnerEvaluation = evaluation;
 
-            using (DbContextTransaction trans = this.OwnerDb.Database.BeginTransaction())
+            using (DbContextTransaction trans = this.AppDb.Database.BeginTransaction())
             {
                 try
                 {
-                    this.OwnerDb.Entry(order).State = EntityState.Modified;
+                    this.AppDb.Entry(order).State = EntityState.Modified;
 
-                    this.OwnerDb.Entry(evaluation).State = EntityState.Added;
+                    this.AppDb.Entry(evaluation).State = EntityState.Added;
 
-                    await this.OwnerDb.SaveChangesAsync();
+                    await this.AppDb.SaveChangesAsync();
 
                     trans.Commit();
                 }
@@ -66,31 +66,31 @@
                 return this.BadRequest(this.ModelState);
             }
 
-            Order order = await this.DriverDb.Orders.FindAsync(model.OrderId);
+            Order order = await this.AppDb.Orders.FindAsync(model.OrderId);
 
-            Owner owner = await this.DriverDb.Owners.FindAsync(model.Id);
+            AppUser owner = this.AppDb.Users.Find(model.Id);
             
             owner.Rank += model.Rank;
 
             Evaluation evaluation = new Evaluation();
             evaluation.Order = order;
             evaluation.Comments = model.Comments;
-            evaluation.From = EvaluationFrom.Owner;
+            evaluation.From = EvaluationFrom.Driver;
             evaluation.ModifiedBy = this.Logon.Id;
             evaluation.ModifiedDate = DateTime.Now;
             evaluation.Rank = model.Rank;
 
             order.DriverEvaluation = evaluation;
 
-            using (DbContextTransaction trans = this.DriverDb.Database.BeginTransaction())
+            using (DbContextTransaction trans = this.AppDb.Database.BeginTransaction())
             {
                 try
                 {
-                    this.DriverDb.Entry(order).State = EntityState.Modified;
+                    this.AppDb.Entry(order).State = EntityState.Modified;
 
-                    this.DriverDb.Entry(evaluation).State = EntityState.Added;
+                    this.AppDb.Entry(evaluation).State = EntityState.Added;
 
-                    await this.DriverDb.SaveChangesAsync();
+                    await this.AppDb.SaveChangesAsync();
 
                     trans.Commit();
                 }

@@ -19,11 +19,11 @@
 
         [Required]
         [Display(Name = "Size")]
-        public float Size { get; set; }
+        public decimal Size { get; set; }
 
         [Required]
         [Display(Name = "Weight")]
-        public float Weight { get; set; }
+        public decimal Weight { get; set; }
 
     }
 

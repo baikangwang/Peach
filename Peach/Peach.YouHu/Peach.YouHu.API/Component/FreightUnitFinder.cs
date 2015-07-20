@@ -10,7 +10,7 @@
             }
         }
 
-        public bool Match(float length,float height, float usize, float weight, float uweight, string location,string source)
+        public bool Match(decimal length,decimal height, decimal usize, decimal weight, decimal uweight, string location,string source)
         {
             if (source != location) return false;
 

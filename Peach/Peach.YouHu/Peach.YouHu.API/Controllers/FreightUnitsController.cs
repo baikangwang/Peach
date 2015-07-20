@@ -24,9 +24,9 @@
                 return this.BadRequest(this.ModelState);
             }
 
-            IList<FreightUnitViewModel> view = await this.DriverDb.FreightUnits.Include(u => u.Driver)
+            IList<FreightUnitViewModel> view = await this.AppDb.FreightUnits.Include(u => u.Driver)
                 .Where(u => u.Driver.Id == id)
-                .Select(u => new FreightUnitViewModel(u.Id, u.Driver.Rank, u.Driver.Name, u.Location))
+                .Select(u => new FreightUnitViewModel(u.Id, u.Driver.Rank, u.Driver.FullName, u.Location))
                 .ToListAsync();
 
             return this.Ok(view);
@@ -42,12 +42,12 @@
                 return this.BadRequest(this.ModelState);
             }
 
-            Order order = await this.OwnerDb.Orders.FindAsync(id);
+            Order order = await this.AppDb.Orders.FindAsync(id);
 
-            IList<FreightUnitViewModel> view = await this.OwnerDb.FreightUnits
+            IList<FreightUnitViewModel> view = await this.AppDb.FreightUnits
                 .Include(u=>u.Driver)
                 .Where(u=>FreightUnitFinder.Default.Match(u.Height,u.Height,order.Size,u.Weight,order.Weight,u.Location,order.Source))
-                .Select(u=>new FreightUnitViewModel(u.Id,u.Driver.Rank,u.Driver.Name,u.Location))
+                .Select(u=>new FreightUnitViewModel(u.Id,u.Driver.Rank,u.Driver.FullName,u.Location))
                 .OrderByDescending(v=>v.Rank)
                 .ToListAsync();
 
@@ -69,18 +69,18 @@
                 return this.BadRequest(this.ModelState);
             }
 
-            FreightUnit unit = await this.DriverDb.FreightUnits.FindAsync(model.Id);
+            FreightUnit unit = await this.AppDb.FreightUnits.FindAsync(model.Id);
 
             unit.Location = model.Location;
             unit.State = FreightUnitState.Ready;
             unit.ModifiedDate = DateTime.Now;
             unit.ModifiedBy = this.Logon.Id;
 
-            this.DriverDb.Entry(unit).State = EntityState.Modified;
+            this.AppDb.Entry(unit).State = EntityState.Modified;
 
             try
             {
-                await this.DriverDb.SaveChangesAsync();
+                await this.AppDb.SaveChangesAsync();
             }
             catch (Exception)
             {
@@ -98,7 +98,7 @@
                 return this.BadRequest(this.ModelState);
 
             //int driverId = model.DriverId;
-            Driver driver = this.Logon as Driver;
+            AppUser driver = this.Logon;
 
             FreightUnit fu = new FreightUnit();
             fu.Location = model.Location;
@@ -115,8 +115,8 @@
 
             try
             {
-                this.DriverDb.Entry(fu).State = EntityState.Added;
-                await this.DriverDb.SaveChangesAsync();
+                this.AppDb.Entry(fu).State = EntityState.Added;
+                await this.AppDb.SaveChangesAsync();
             }
             catch (Exception)
             {

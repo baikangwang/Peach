@@ -31,11 +31,11 @@
 
         [Required]
         [Display(Name = "Height of the freight unit")]
-        public float Height { get; set; }
+        public decimal Height { get; set; }
 
         [Required]
         [Display(Name = "Length of the freight unit")]
-        public float Length { get; set; }
+        public decimal Length { get; set; }
 
         [Required]
         [Display(Name = "Licence of the freight unit")]
@@ -47,6 +47,6 @@
 
         [Required]
         [Display(Name = "Weight of the freight unit")]
-        public float Weight { get; set; }
+        public decimal Weight { get; set; }
     }
 }

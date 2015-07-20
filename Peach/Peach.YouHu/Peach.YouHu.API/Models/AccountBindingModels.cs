@@ -46,6 +46,10 @@
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Role",Description = "Owner or Driver")]
+        public AppRole Role { get; set; }
     }
 
     public class RegisterExternalBindingModel
@@ -53,6 +57,10 @@
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Role")]
+        public AppRole Role { get; set; }
     }
 
     public class RemoveLoginBindingModel

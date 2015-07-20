@@ -12,7 +12,7 @@
             }
         }
 
-        public decimal Calculate(string source,string detination,float size,float weight)
+        public decimal Calculate(string source,string detination,decimal size,decimal weight)
         {
             return 5000.0m;
         }

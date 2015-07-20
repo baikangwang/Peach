@@ -8,7 +8,6 @@
 
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
-    using Microsoft.Owin.Security.Cookies;
     using Microsoft.Owin.Security.OAuth;
 
     using Peah.YouHu.API.Models;
@@ -29,69 +28,32 @@
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            string role = this.GetRole(context.Request.Path.Value);
+            // string role = this.GetRole(context.Request.Path.Value);
 
-            if (string.IsNullOrEmpty(role))
+            // context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+
+            //ClaimsIdentity cookiesIdentity;
+            var userManager = context.OwinContext.GetUserManager<AppUserManager>();
+            AppUser user = await userManager.FindAsync(context.UserName, context.Password);
+
+            if (user == null)
+            {
+                context.SetError("invalid_grant", "The user name or password is incorrect.");
                 return;
-
-            ClaimsIdentity oAuthIdentity;
-            ClaimsIdentity cookiesIdentity;
-            AuthenticationProperties properties;
-            if (Regex.IsMatch(role, "owner"))
-            {
-                var userManager = context.OwinContext.GetUserManager<OwnerManager>();
-                Owner user = await userManager.FindAsync(context.UserName, context.Password);
-
-                if (user == null)
-                {
-                    context.SetError("invalid_grant", "The user name or password is incorrect.");
-                    return;
-                }
-
-                oAuthIdentity = await user.GenerateUserIdentityAsync(
-                    userManager,
-                    OAuthDefaults.AuthenticationType);
-                cookiesIdentity = await user.GenerateUserIdentityAsync(
-                    userManager,
-                    CookieAuthenticationDefaults.AuthenticationType);
-
-                properties = CreateProperties(user.UserName);
-                context.Request.User = user;
             }
-            else
-            {
-                var userManager = context.OwinContext.GetUserManager<DriverManager>();
-                Driver user = await userManager.FindAsync(context.UserName, context.Password);
 
-                if (user == null)
-                {
-                    context.SetError("invalid_grant", "The user name or password is incorrect.");
-                    return;
-                }
+            var oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, OAuthDefaults.AuthenticationType);
+            //cookiesIdentity = await user.GenerateUserIdentityAsync(
+            //    userManager,
+            //    CookieAuthenticationDefaults.AuthenticationType);
 
-                oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,OAuthDefaults.AuthenticationType);
-                cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,CookieAuthenticationDefaults.AuthenticationType);
-
-                properties = CreateProperties(user.UserName);
-                context.Request.User = user;
-            }
+            var properties = CreateProperties(user.UserName);
+            context.Request.User = user;
 
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
-            context.Request.Context.Authentication.SignIn(cookiesIdentity);
-        }
-
-        private string GetRole(string path)
-        {
-            if (string.IsNullOrEmpty(path)) return string.Empty;
-
-            string pattern = "(?<=.*?/api/).*?(?=/.*)";
-
-            Regex regex=new Regex(pattern,RegexOptions.Compiled|RegexOptions.IgnoreCase|RegexOptions.Singleline);
-
-            Match m = regex.Match(path);
-
-            return m.Success ? m.Value : string.Empty;
+            context.Request.Context.Authentication.SignIn(oAuthIdentity);
+            //context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

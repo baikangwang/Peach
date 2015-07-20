@@ -5,11 +5,12 @@
 
     using Peah.YouHu.API.Models.Enum;
 
-    public class Evaluation
+    public class Evaluation:AuditObj
     {
         [Key]
         public int Id { get; set; }
 
+        [MaxLength(500)]
         public string Comments { get; set; }
 
         public EvaluationFrom From { get; set; }
@@ -17,9 +18,5 @@
         public Order Order { get; set; }
 
         public int Rank { get; set; }
-
-        public DateTime ModifiedDate { get; set; }
-
-        public string ModifiedBy { get; set; }
     }
 }

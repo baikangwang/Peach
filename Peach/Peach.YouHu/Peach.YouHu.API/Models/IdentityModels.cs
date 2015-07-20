@@ -16,21 +16,19 @@
     //    }
     //}
 
-    public class OwnerDbContext : IdentityDbContext<Owner>
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
-        public OwnerDbContext()
+        public AppDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
         
-        public static OwnerDbContext Create()
+        public static AppDbContext Create()
         {
-            return new OwnerDbContext();
+            return new AppDbContext();
         }
 
-        //public System.Data.Entity.DbSet<Peah.YouHu.API.Models.Owner> Owners { get; set; }
-
-        public DbSet<Driver> Drivers { get; set; }
+        public DbSet<DriverExt> DriverExts { get; set; }
 
         public DbSet<Order> Orders { get; set; }
 
@@ -38,32 +36,4 @@
 
         public DbSet<FreightUnit> FreightUnits { get; set; }
     }
-
-    public class DriverDbContext : IdentityDbContext<Driver>
-    {
-        public DriverDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
-
-        public static DriverDbContext Create()
-        {
-            return new DriverDbContext();
-        }
-
-        public DbSet<Owner> Owners { get; set; }
-
-        //public System.Data.Entity.DbSet<Peah.YouHu.API.Models.Driver> Drivers { get; set; }
-
-        public DbSet<Order> Orders { get; set; }
-
-        public DbSet<Evaluation> Evaluations { get; set; }
-
-        public DbSet<FreightUnit> FreightUnits { get; set; }
-    }
-
-    //public class OwnerDbContext : ApplicationDbContext,IdentityDbContext<Owner>
-    //{
-
-    //}
 }
