@@ -9,9 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.YouHu.Client.Web", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.YouHu.API", "Peach.YouHu.API\Peach.YouHu.API.csproj", "{E67B5878-4457-4525-951F-932F2BF386C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.YouHu.API.Test", "Peach.YouHu.API.Test\Peach.YouHu.API.Test.csproj", "{70B2D544-5989-46BA-96C1-E80E3153F57E}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://baikangwang.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
@@ -24,6 +26,9 @@ Global
 		SccProjectUniqueName3 = Peach.YouHu.API\\Peach.YouHu.API.csproj
 		SccProjectName3 = Peach.YouHu.API
 		SccLocalPath3 = Peach.YouHu.API
+		SccProjectUniqueName4 = Peach.YouHu.API.Test\\Peach.YouHu.API.Test.csproj
+		SccProjectName4 = Peach.YouHu.API.Test
+		SccLocalPath4 = Peach.YouHu.API.Test
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +47,10 @@ Global
 		{E67B5878-4457-4525-951F-932F2BF386C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E67B5878-4457-4525-951F-932F2BF386C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E67B5878-4457-4525-951F-932F2BF386C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70B2D544-5989-46BA-96C1-E80E3153F57E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B2D544-5989-46BA-96C1-E80E3153F57E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B2D544-5989-46BA-96C1-E80E3153F57E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B2D544-5989-46BA-96C1-E80E3153F57E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -21,6 +21,9 @@
         public AppDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            this.Configuration.LazyLoadingEnabled = true;
+            this.Configuration.ProxyCreationEnabled = true;
+            this.Configuration.ValidateOnSaveEnabled = true;
         }
         
         public static AppDbContext Create()

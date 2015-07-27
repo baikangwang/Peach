@@ -9,10 +9,6 @@
         public int OrderId { get; set; }
 
         [Required]
-        [Display(Name = "Owner/Driver Id")]
-        public int Id { get; set; }
-
-        [Required]
         [Display(Name = "Rank")]
         public int Rank { get; set; }
 

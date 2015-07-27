@@ -22,7 +22,7 @@
 
             Order order = await this.AppDb.Orders.FindAsync(model.OrderId);
 
-            AppUser driver = this.AppDb.Users.Find(model.Id);
+            AppUser driver = order.FreightUnit.Driver;
 
             driver.Rank += model.Rank;
 
@@ -41,7 +41,7 @@
                 try
                 {
                     this.AppDb.Entry(order).State = EntityState.Modified;
-
+                    this.AppDb.Entry(driver).State=EntityState.Modified;
                     this.AppDb.Entry(evaluation).State = EntityState.Added;
 
                     await this.AppDb.SaveChangesAsync();
@@ -68,7 +68,7 @@
 
             Order order = await this.AppDb.Orders.FindAsync(model.OrderId);
 
-            AppUser owner = this.AppDb.Users.Find(model.Id);
+            AppUser owner = order.Owner;
             
             owner.Rank += model.Rank;
 

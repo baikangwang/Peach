@@ -46,8 +46,10 @@
 
             IList<FreightUnitViewModel> view = await this.AppDb.FreightUnits
                 .Include(u=>u.Driver)
-                .Where(u=>FreightUnitFinder.Default.Match(u.Height,u.Height,order.Size,u.Weight,order.Weight,u.Location,order.Source))
-                .Select(u=>new FreightUnitViewModel(){Id =u.Id,Rank = u.Driver.Rank,Driver = u.Driver.FullName,Location = u.Location})
+                //todo: implement later
+                //.Where(u=>FreightUnitFinder.Default.Match(u.Length,u.Height,order.Size,u.Weight,order.Weight,u.Location,order.Source))
+                .Where(u => (order.Source == u.Location) && (order.Weight <= u.Weight) && (order.Size <= (u.Length * u.Height)))
+                .Select(u => new FreightUnitViewModel() { Id = u.Id, Rank = u.Driver.Rank, Driver = u.Driver.FullName, Location = u.Location })
                 .OrderByDescending(v=>v.Rank)
                 .ToListAsync();
 
@@ -80,11 +82,14 @@
 
             try
             {
-                await this.AppDb.SaveChangesAsync();
+               int added= await this.AppDb.SaveChangesAsync();
+
+                if (added <= 0)
+                    return this.BadRequest("Fail to publish the freight unit");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return this.BadRequest("Fail to publish the freight unit");
+                return this.BadRequest("Fail to publish the freight unit. "+ ex.Message);
             }
 
             return this.Ok();
@@ -116,11 +121,14 @@
             try
             {
                 this.AppDb.Entry(fu).State = EntityState.Added;
-                await this.AppDb.SaveChangesAsync();
+                int added = await this.AppDb.SaveChangesAsync();
+
+                if (added <= 0)
+                    return this.BadRequest("Fail to register freight unit");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return this.BadRequest("Fail to register freight unit");
+                return this.BadRequest("Fail to register freight unit. " + ex.Message);
             }
 
             return this.Ok();

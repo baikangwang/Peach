@@ -36,11 +36,12 @@
             order.PublishedDate = DateTime.Now;
             order.ModifiedDate=DateTime.Now;
             order.ModifiedBy = this.LogonId;
+            order.Owner = this.Logon;
             this.AppDb.Orders.Add(order);
-            this.AppDb.Entry(order).State = EntityState.Added;
 
             try
             {
+                this.AppDb.Entry(order).State = EntityState.Added;
                 int added = await this.AppDb.SaveChangesAsync();
 
                 if (added > 0)
@@ -147,7 +148,6 @@
         #region Pay
         // POST: api/Orders/Owner/Pay
         [Route("Owner/Orders/Pay")]
-        [ResponseType(typeof(bool))]
         public async Task<IHttpActionResult> Pay(PayBdingModel model)
         {
             if (!this.ModelState.IsValid)
@@ -184,20 +184,20 @@
                 order.ModifiedDate = DateTime.Now;
                 order.ModifiedBy = this.LogonId;
                 order.Paid = model.Paid;
+                // order.FreightCost = model.FreightCost;
                 this.AppDb.Entry(order).State = EntityState.Modified;
                 await this.AppDb.SaveChangesAsync();
             }
             else
                 return this.BadRequest("Fail to pay, try a later");
 
-            return this.Ok(true);
+            return this.Ok();
         }
         #endregion
 
         #region Consign
         // POST: api/Orders/Owner/Consign
         [Route("Owner/Orders/Consign")]
-        [ResponseType(typeof(bool))]
         public async Task<IHttpActionResult> Consign(ConsignBindingModel model)
         {
             if (!this.ModelState.IsValid)
@@ -221,7 +221,20 @@
             fu.ModifiedBy = this.LogonId;
 
             DriverExt ext = this.AppDb.DriverExts.FirstOrDefault(de => de.Driver.Id == order.FreightUnit.Driver.Id);
+            bool isNew = false;
             decimal paid = order.Paid ?? 0;
+
+            if (ext == null)
+            {
+                ext = new DriverExt()
+                      {
+                          CurrentIncome = 0,
+                          TotalIncome = 0,
+                          Driver = order.FreightUnit.Driver
+                      };
+                isNew = true;
+            }
+            
             ext.TotalIncome += paid;
             ext.CurrentIncome += paid;
             ext.ModifiedBy = this.LogonId;
@@ -232,7 +245,7 @@
                 try
                 {
                     this.AppDb.Entry(order).State = EntityState.Modified;
-                    this.AppDb.Entry(ext).State = EntityState.Modified;
+                    this.AppDb.Entry(ext).State = isNew ? EntityState.Added : EntityState.Modified;
                     this.AppDb.Entry(fu).State = EntityState.Modified;
 
                     await this.AppDb.SaveChangesAsync();
@@ -245,7 +258,7 @@
                 }
             }
 
-            return this.Ok(true);
+            return this.Ok();
         }
         #endregion
 

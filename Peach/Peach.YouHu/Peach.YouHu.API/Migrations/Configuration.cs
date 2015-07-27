@@ -7,6 +7,7 @@ namespace Peah.YouHu.API.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<Peah.YouHu.API.Models.AppDbContext>
     {
+        
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;

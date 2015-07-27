@@ -16,17 +16,17 @@
         [MaxLength(200)]
         public string Destination { get; set; }
 
-        public Evaluation DriverEvaluation { get; set; }
+        public virtual Evaluation DriverEvaluation { get; set; }
 
         public DateTime? DueDate { get; set; }
 
         public decimal? FreightCost { get; set; }
 
-        public FreightUnit FreightUnit { get; set; }
+        public virtual FreightUnit FreightUnit { get; set; }
 
-        public AppUser Owner { get; set; }
+        public virtual AppUser Owner { get; set; }
 
-        public Evaluation OwnerEvaluation { get; set; }
+        public virtual Evaluation OwnerEvaluation { get; set; }
 
         public decimal Size { get; set; }
 

@@ -10,13 +10,13 @@
             }
         }
 
-        public bool Match(decimal length,decimal height, decimal usize, decimal weight, decimal uweight, string location,string source)
+        public bool Match(decimal ulength,decimal uheight, decimal osize, decimal weight, decimal uweight, string location,string source)
         {
             if (source != location) return false;
 
             if (weight > uweight) return false;
 
-            if (usize > length * height) return false;
+            if (osize > ulength * uheight) return false;
 
             return true;
         }

@@ -11,7 +11,7 @@
         #region DbContext
         private AppDbContext _odb;
 
-        protected virtual AppDbContext AppDb
+        public virtual AppDbContext AppDb
         {
             get
             {
@@ -30,7 +30,7 @@
         }
 
         private AppUser _logon;
-        protected virtual AppUser Logon
+        public virtual AppUser Logon
         {
             get
             {

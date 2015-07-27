@@ -41,10 +41,10 @@
                             </p>
                             <hr class="seperator"/>
                             <div class="col-xs-2 col-md-1">
-                                <span class="badge">Weight: {{order.Weight|number:1}}</span>
+                                <span class="badge">{{getState(order).toUpperCase()}}</span>
                             </div>
                             <div class="col-xs-2 col-md-1">
-                                <span class="badge">Size: {{order.Size|number:1}} M</span>
+                                <span class="badge">Published: {{order.PublishedDate}}</span>
                             </div>
                         </div>
                         <div class="col-xs-4 col-md-4">

@@ -97,12 +97,12 @@
     <Content Include="app\services\samplesService.js" />
     <Content Include="app\views\home.html" />
     <Content Include="app\views\login.html" />
-    <Content Include="app\views\consign.html" />
-    <Content Include="app\views\freights.html" />
-    <Content Include="app\views\makeDeal.html" />
+    <Content Include="app\views\owner\consign.html" />
+    <Content Include="app\views\owner\freights.html" />
+    <Content Include="app\views\owner\makeDeal.html" />
     <Content Include="app\views\owner\orders.html" />
-    <Content Include="app\views\pay.html" />
-    <Content Include="app\views\publish.html" />
+    <Content Include="app\views\owner\pay.html" />
+    <Content Include="app\views\owner\publish.html" />
     <Content Include="app\views\signup.html" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />

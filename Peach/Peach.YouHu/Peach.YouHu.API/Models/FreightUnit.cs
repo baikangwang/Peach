@@ -10,7 +10,7 @@
         [Key]
         public int Id { get; set; }
 
-        public AppUser Driver { get; set; }
+        public virtual AppUser Driver { get; set; }
 
         public decimal Height { get; set; }
 

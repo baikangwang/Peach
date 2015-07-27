@@ -15,7 +15,7 @@
 
         public EvaluationFrom From { get; set; }
 
-        public Order Order { get; set; }
+        public virtual Order Order { get; set; }
 
         public int Rank { get; set; }
     }
