@@ -28,11 +28,8 @@
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            // string role = this.GetRole(context.Request.Path.Value);
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
-            // context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-
-            //ClaimsIdentity cookiesIdentity;
             var userManager = context.OwinContext.GetUserManager<AppUserManager>();
             AppUser user = await userManager.FindAsync(context.UserName, context.Password);
 
@@ -47,8 +44,8 @@
             //    userManager,
             //    CookieAuthenticationDefaults.AuthenticationType);
 
-            var properties = CreateProperties(user.UserName);
-            context.Request.User = user;
+            var properties = CreateProperties(user.UserName,user.Role);
+            //context.Request.User = user;
 
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
@@ -92,11 +89,12 @@
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string userName)
+        public static AuthenticationProperties CreateProperties(string userName,AppRole role)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", userName }
+                { "userName", userName },
+                {"role",role.ToString()}
             };
             return new AuthenticationProperties(data);
         }

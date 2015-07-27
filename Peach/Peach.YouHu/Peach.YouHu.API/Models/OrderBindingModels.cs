@@ -36,10 +36,6 @@
         [Required]
         [Display(Name = "Freight Unit Id")]
         public int FreightUnitId { get; set; }
-
-        [Required]
-        [Display(Name = "Modified Uesr")]
-        public int ModifiedBy { get; set; }
     }
 
     public class ValidatePaymentCodeBindingModel
@@ -85,10 +81,6 @@
         [Required]
         [Display(Name = "Payment Code")]
         public string PaymentCode { get; set; }
-
-        [Required]
-        [Display(Name = "Modified Uesr")]
-        public int ModifiedBy { get; set; }
     }
 
     public class ConfirmDealBindingModel

@@ -5,9 +5,9 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Peach.YouHu.Modeling", "Peach.YouHu.Modeling\Peach.YouHu.Modeling.modelproj", "{B2704F03-E249-4AF6-A750-C2BEC0951884}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.YouHu.API", "Peach.YouHu.API\Peach.YouHu.API.csproj", "{E67B5878-4457-4525-951F-932F2BF386C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.YouHu.Client.Web", "Peach.YouHu.Client.Web\Peach.YouHu.Client.Web.csproj", "{485DCB00-6E52-4A0D-BC3C-3E617445F287}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.YouHu.API.Test", "Peach.YouHu.API.Test\Peach.YouHu.API.Test.csproj", "{70B2D544-5989-46BA-96C1-E80E3153F57E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peach.YouHu.API", "Peach.YouHu.API\Peach.YouHu.API.csproj", "{E67B5878-4457-4525-951F-932F2BF386C1}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -18,12 +18,12 @@ Global
 		SccProjectUniqueName1 = Peach.YouHu.Modeling\\Peach.YouHu.Modeling.modelproj
 		SccProjectName1 = Peach.YouHu.Modeling
 		SccLocalPath1 = Peach.YouHu.Modeling
-		SccProjectUniqueName2 = Peach.YouHu.API\\Peach.YouHu.API.csproj
-		SccProjectName2 = Peach.YouHu.API
-		SccLocalPath2 = Peach.YouHu.API
-		SccProjectUniqueName3 = Peach.YouHu.API.Test\\Peach.YouHu.API.Test.csproj
-		SccProjectName3 = Peach.YouHu.API.Test
-		SccLocalPath3 = Peach.YouHu.API.Test
+		SccProjectUniqueName2 = Peach.YouHu.Client.Web\\Peach.YouHu.Client.Web.csproj
+		SccProjectName2 = Peach.YouHu.Client.Web
+		SccLocalPath2 = Peach.YouHu.Client.Web
+		SccProjectUniqueName3 = Peach.YouHu.API\\Peach.YouHu.API.csproj
+		SccProjectName3 = Peach.YouHu.API
+		SccLocalPath3 = Peach.YouHu.API
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,14 +34,14 @@ Global
 		{B2704F03-E249-4AF6-A750-C2BEC0951884}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2704F03-E249-4AF6-A750-C2BEC0951884}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2704F03-E249-4AF6-A750-C2BEC0951884}.Release|Any CPU.Build.0 = Release|Any CPU
+		{485DCB00-6E52-4A0D-BC3C-3E617445F287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{485DCB00-6E52-4A0D-BC3C-3E617445F287}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{485DCB00-6E52-4A0D-BC3C-3E617445F287}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{485DCB00-6E52-4A0D-BC3C-3E617445F287}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E67B5878-4457-4525-951F-932F2BF386C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E67B5878-4457-4525-951F-932F2BF386C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E67B5878-4457-4525-951F-932F2BF386C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E67B5878-4457-4525-951F-932F2BF386C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70B2D544-5989-46BA-96C1-E80E3153F57E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70B2D544-5989-46BA-96C1-E80E3153F57E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70B2D544-5989-46BA-96C1-E80E3153F57E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70B2D544-5989-46BA-96C1-E80E3153F57E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

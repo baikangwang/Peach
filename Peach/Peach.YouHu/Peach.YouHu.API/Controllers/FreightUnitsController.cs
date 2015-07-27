@@ -26,7 +26,7 @@
 
             IList<FreightUnitViewModel> view = await this.AppDb.FreightUnits.Include(u => u.Driver)
                 .Where(u => u.Driver.Id == id)
-                .Select(u => new FreightUnitViewModel(u.Id, u.Driver.Rank, u.Driver.FullName, u.Location))
+                .Select(u => new FreightUnitViewModel(){Id = u.Id,Rank = u.Driver.Rank,Driver = u.Driver.FullName,Location = u.Location})
                 .ToListAsync();
 
             return this.Ok(view);
@@ -47,7 +47,7 @@
             IList<FreightUnitViewModel> view = await this.AppDb.FreightUnits
                 .Include(u=>u.Driver)
                 .Where(u=>FreightUnitFinder.Default.Match(u.Height,u.Height,order.Size,u.Weight,order.Weight,u.Location,order.Source))
-                .Select(u=>new FreightUnitViewModel(u.Id,u.Driver.Rank,u.Driver.FullName,u.Location))
+                .Select(u=>new FreightUnitViewModel(){Id =u.Id,Rank = u.Driver.Rank,Driver = u.Driver.FullName,Location = u.Location})
                 .OrderByDescending(v=>v.Rank)
                 .ToListAsync();
 
@@ -74,7 +74,7 @@
             unit.Location = model.Location;
             unit.State = FreightUnitState.Ready;
             unit.ModifiedDate = DateTime.Now;
-            unit.ModifiedBy = this.Logon.Id;
+            unit.ModifiedBy = this.LogonId;
 
             this.AppDb.Entry(unit).State = EntityState.Modified;
 
@@ -102,7 +102,7 @@
 
             FreightUnit fu = new FreightUnit();
             fu.Location = model.Location;
-            fu.ModifiedBy = this.Logon.Id; //driverId;
+            fu.ModifiedBy = this.LogonId; //driverId;
             fu.ModifiedDate=DateTime.Now;
             fu.State=FreightUnitState.None;
             fu.Height = model.Height;

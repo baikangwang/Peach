@@ -42,12 +42,14 @@
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [DataType(DataType.Password)]
+        [Required]
+        [DataType(DataType.Text)]
         [Display(Name = "Role",Description = "Owner or Driver")]
         public AppRole Role { get; set; }
     }

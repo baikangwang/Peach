@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="YouHuApp">
+<head>
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+    <title>YouHu</title>
+    <link href="content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="content/css/site.css" rel="stylesheet" />
+    <link href="content/css/loading-bar.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-ng-controller="indexController">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="btn btn-success navbar-toggle" data-ng-click="navbarExpanded = !navbarExpanded">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+                <a class="navbar-brand" href="#/">YouHu</a>
+            </div>
+            <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
+                <ul class="nav navbar-nav navbar-right">
+                    <li data-ng-hide="!authentication.isAuth"><a href="#">Welcome {{authentication.userName}}</a></li>
+                    <li data-ng-hide="!authentication.isAuth || authentication.role!='Owner'"><a href="#/owner/orders">My Orders</a></li>
+                    <li data-ng-hide="!authentication.isAuth || authentication.role=='Owner'"><a href="#/driver/orders">My Orders</a></li>
+                    <li data-ng-hide="!authentication.isAuth || authentication.role=='Owner'"><a href="#/freightUnits">My Freights</a></li>
+                    <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<div class="hidden">
+    <div class="container">
+        <div class="page-header  text-center">
+            <h1><!--Something--></h1>
+        </div>
+        <p><!--something--></p>
+    </div>
+</div>
+<div class="row">
+    &nbsp;
+</div>
+    <hr class="container seperator"/>
+    <section class="container jumbotron" id="body">
+        <div data-ng-view=""></div>
+    </section>
+    <hr />
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-muted">Created by <a target="_blank" href="#">YouHu</a>.</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="text-muted">Offical Site: <a target="_blank" href="http://www.youhu.com">youhu.com</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 3rd party libraries -->
+    <script type="text/javascript" src="scripts/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/angular-route.min.js"></script>
+    <script type="text/javascript" src="scripts/angular-animate.min.js"></script>
+    <script type="text/javascript" src="scripts/common.js"></script>
+    <script type="text/javascript" src="scripts/angular-local-storage.js"></script>
+    <script type="text/javascript" src="scripts/toaster.js"></script>
+    <script type="text/javascript" src="scripts/ui-bootstrap-0.9.0.min.js"></script>
+    <script type="text/javascript" src="scripts/ui-bootstrap-tpls-0.9.0.min.js"></script>
+    <script type="text/javascript" src="scripts/loading-bar.min.js"></script>
+    <!-- Load app main script -->
+    <script src="app/app.js"></script>
+    <!-- Load services -->
+    <script src="app/services/authInterceptorService.js"></script>
+    <script src="app/services/authService.js"></script>
+    <script src="app/services/ownerService.js"></script>
+    <!-- Load controllers -->
+    <script src="app/controllers/indexController.js"></script>
+    <script src="app/controllers/homeController.js"></script>
+    <script src="app/controllers/loginController.js"></script>
+    <script src="app/controllers/signupController.js"></script>
+    <script src="app/controllers/ownerOrdersController.js"></script>
+</body>
+</html>

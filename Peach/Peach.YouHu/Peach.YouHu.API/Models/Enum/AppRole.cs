@@ -7,7 +7,7 @@ namespace Peah.YouHu.API.Models
 {
     public enum AppRole
     {
-        Owner,
-        Driver
+        Owner=0,
+        Driver=1
     }
 }

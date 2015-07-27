@@ -43,8 +43,8 @@
 
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthAuthorizationServer(OAuthOptions);
-            // app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-            app.UseOAuthBearerTokens(OAuthOptions);
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+            // app.UseOAuthBearerTokens(OAuthOptions);
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(

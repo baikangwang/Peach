@@ -30,7 +30,7 @@
             evaluation.Order = order;
             evaluation.Comments = model.Comments;
             evaluation.From = EvaluationFrom.Owner;
-            evaluation.ModifiedBy = this.Logon.Id;
+            evaluation.ModifiedBy = this.LogonId;
             evaluation.ModifiedDate = DateTime.Now;
             evaluation.Rank = model.Rank;
 
@@ -76,7 +76,7 @@
             evaluation.Order = order;
             evaluation.Comments = model.Comments;
             evaluation.From = EvaluationFrom.Driver;
-            evaluation.ModifiedBy = this.Logon.Id;
+            evaluation.ModifiedBy = this.LogonId;
             evaluation.ModifiedDate = DateTime.Now;
             evaluation.Rank = model.Rank;
 

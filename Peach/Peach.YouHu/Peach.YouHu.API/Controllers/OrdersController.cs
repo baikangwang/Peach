@@ -35,7 +35,7 @@
             order.State = OrderState.Ready;
             order.PublishedDate = DateTime.Now;
             order.ModifiedDate=DateTime.Now;
-            order.ModifiedBy = this.Logon.Id;
+            order.ModifiedBy = this.LogonId;
             this.AppDb.Orders.Add(order);
             this.AppDb.Entry(order).State = EntityState.Added;
 
@@ -63,19 +63,21 @@
         // GET: api/Orders/Owner/Orders
         [Route("Owner/Orders/List")]
         [ResponseType(typeof(IList<OwnerOrderViewModel>))]
-        public async Task<IHttpActionResult> OwnerOrders(string id)
+        public async Task<IHttpActionResult> OwnerOrders()
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
+            string id = this.LogonId;
+
             IList<OwnerOrderViewModel> view = await this.AppDb.Orders
                 .Include(o=>o.Owner)
                 .Include(o=>o.FreightUnit)
                 .Include(o=>o.FreightUnit.Driver)
                 .Where(o => o.State != OrderState.Consigned && o.Owner.Id==id)
-                .Select(o=>new OwnerOrderViewModel(o.Id,o.FreightUnit.Driver.FullName,o.Destination,o.Description,o.PublishedDate,o.State))
+                .Select(o=>new OwnerOrderViewModel(){Id = o.Id,Driver = o.FreightUnit.Driver.FullName,Destination = o.Destination,Description = o.Description,PublishedDate = o.PublishedDate,State = o.State})
                 .ToListAsync();
             return this.Ok(view);
         }
@@ -84,19 +86,21 @@
         #region Driver/List
         [Route("Driver/Orders/List")]
         [ResponseType(typeof(IList<DriverOrderViewModel>))]
-        public async Task<IHttpActionResult> DriverOrders(string id)
+        public async Task<IHttpActionResult> DriverOrders()
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
+            string id = this.LogonId;
+
             IList<DriverOrderViewModel> view = await this.AppDb.Orders
                 .Include(o => o.Owner)
                 .Include(o => o.FreightUnit)
                 .Include(o => o.FreightUnit.Driver)
                 .Where(o => o.State != OrderState.Consigned && o.FreightUnit.Driver.Id == id)
-                .Select(o => new DriverOrderViewModel(o.Id, o.Owner.FullName,o.Source, o.Destination, o.Description, o.PublishedDate, o.State))
+                .Select(o => new DriverOrderViewModel(){Id = o.Id, OwnerName = o.Owner.FullName,Source = o.Source, Destination = o.Destination,Description = o.Description,PublishedDate = o.PublishedDate,State = o.State})
                 .ToListAsync();
             return this.Ok(view);
         }
@@ -115,7 +119,7 @@
             Order order = await this.AppDb.Orders.FindAsync(model.OrderId);
             FreightUnit fu = await this.AppDb.FreightUnits.FindAsync(model.FreightUnitId);
             order.FreightUnit = fu;
-            order.ModifiedBy = this.Logon.Id;
+            order.ModifiedBy = this.LogonId;
             order.ModifiedDate=DateTime.Now;
             order.State = OrderState.Dealing;
             this.AppDb.Entry(order).State = EntityState.Modified;
@@ -158,7 +162,7 @@
 
             order.State = OrderState.Paying;
             order.ModifiedDate=DateTime.Now;
-            order.ModifiedBy = this.Logon.Id;
+            order.ModifiedBy = this.LogonId;
             this.AppDb.Entry(order).State = EntityState.Modified;
 
             AppUser owner = order.Owner;
@@ -178,7 +182,7 @@
             {
                 order.State = OrderState.Paid;
                 order.ModifiedDate = DateTime.Now;
-                order.ModifiedBy = this.Logon.Id;
+                order.ModifiedBy = this.LogonId;
                 order.Paid = model.Paid;
                 this.AppDb.Entry(order).State = EntityState.Modified;
                 await this.AppDb.SaveChangesAsync();
@@ -209,18 +213,18 @@
 
             order.State = OrderState.Consigned;
             order.ModifiedDate = DateTime.Now;
-            order.ModifiedBy = this.Logon.Id;
+            order.ModifiedBy = this.LogonId;
 
             FreightUnit fu = order.FreightUnit;
             fu.State = FreightUnitState.Ready;
             fu.ModifiedDate = DateTime.Now;
-            fu.ModifiedBy = this.Logon.Id;
+            fu.ModifiedBy = this.LogonId;
 
             DriverExt ext = this.AppDb.DriverExts.FirstOrDefault(de => de.Driver.Id == order.FreightUnit.Driver.Id);
             decimal paid = order.Paid ?? 0;
             ext.TotalIncome += paid;
             ext.CurrentIncome += paid;
-            ext.ModifiedBy = this.Logon.Id;
+            ext.ModifiedBy = this.LogonId;
             ext.ModifiedDate = DateTime.Now;
 
             using (DbContextTransaction trans=this.AppDb.Database.BeginTransaction())
@@ -262,14 +266,14 @@
 
             accepted.State=OrderState.Dealt;
             accepted.ModifiedDate=DateTime.Now;
-            accepted.ModifiedBy = this.Logon.Id;
+            accepted.ModifiedBy = this.LogonId;
             this.AppDb.Entry(accepted).State = EntityState.Modified;
 
             foreach (Order rej in rejecteds)
             {
                 rej.State = OrderState.Rejected;
                 rej.ModifiedDate = DateTime.Now;
-                rej.ModifiedBy = this.Logon.Id;
+                rej.ModifiedBy = this.LogonId;
                 this.AppDb.Entry(rej).State = EntityState.Modified;
             }
 
@@ -318,9 +322,9 @@
 
                 fu.Location = location;
                 fu.ModifiedDate=DateTime.Now;
-                fu.ModifiedBy = this.Logon.Id;
+                fu.ModifiedBy = this.LogonId;
 
-                order.ModifiedBy = this.Logon.Id;
+                order.ModifiedBy = this.LogonId;
                 order.ModifiedDate = DateTime.Now;
 
                 using (DbContextTransaction trans=this.AppDb.Database.BeginTransaction())

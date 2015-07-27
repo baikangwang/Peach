@@ -294,7 +294,7 @@
 
             if (externalLogin.LoginProvider != provider)
             {
-                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                // Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
                 return new ChallengeResult(provider, this);
             }
 
@@ -309,11 +309,11 @@
                 
                  ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     OAuthDefaults.AuthenticationType);
-                ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    CookieAuthenticationDefaults.AuthenticationType);
+                //ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                //    CookieAuthenticationDefaults.AuthenticationType);
 
-                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
-                Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
+                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName,user.Role);
+                Authentication.SignIn(properties, oAuthIdentity);
             }
             else
             {

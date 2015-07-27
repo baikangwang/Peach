@@ -36,6 +36,8 @@
         public DateTime PublishedDate { get; set; }
         public OrderState State { get; set; }
 
+        public DriverOrderViewModel() { }
+
         public DriverOrderViewModel(int id, string ownerName, string source, string destination, string description, DateTime publishedDate, OrderState state)
         {
             this.Id = id;
