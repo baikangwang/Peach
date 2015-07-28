@@ -59,9 +59,9 @@
         [Display(Name = "Payment Code")]
         public string PaymentCode { get; set; }
 
-        [Required]
-        [Display(Name = "Freight Cost")]
-        public decimal FreightCost { get; set; }
+        //[Required]
+        //[Display(Name = "Freight Cost")]
+        //public decimal FreightCost { get; set; }
 
         //[Required]
         //[Display(Name = "Modified Uesr")]
@@ -94,8 +94,8 @@
         public int AcceptedId { get; set; }
 
         [Required]
-        [Display(Name = "Rejected Order Ids")]
-        public IList<int> RejectedIds { get; set; }
+        [Display(Name="Auto Freight Cost")]
+        public decimal FreightCost { get; set; }
     }
 
     public class UpdateOrderStateBindingModel
@@ -104,9 +104,9 @@
         [Display(Name = "Order Id")]
         public int OrderId { get; set; }
 
-        [Required]
-        [Display(Name = "Order State")]
-        public OrderState State { get; set; }
+        //[Required]
+        //[Display(Name = "Order State")]
+        //public OrderState State { get; set; }
 
         //[Required]
         //[Display(Name = "Modified User")]

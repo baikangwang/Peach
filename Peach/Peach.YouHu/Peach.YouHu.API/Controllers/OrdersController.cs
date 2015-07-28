@@ -64,6 +64,7 @@
         // GET: api/Orders/Owner/Orders
         [Route("Owner/Orders/List")]
         [ResponseType(typeof(IList<OwnerOrderViewModel>))]
+        [HttpGet]
         public async Task<IHttpActionResult> OwnerOrders()
         {
             if (!this.ModelState.IsValid)
@@ -77,7 +78,7 @@
                 .Include(o=>o.Owner)
                 .Include(o=>o.FreightUnit)
                 .Include(o=>o.FreightUnit.Driver)
-                .Where(o => o.State != OrderState.Consigned && o.Owner.Id==id)
+                .Where(o => /*o.State != OrderState.Consigned &&*/ o.Owner.Id==id)
                 .Select(o=>new OwnerOrderViewModel(){Id = o.Id,Driver = o.FreightUnit.Driver.FullName,Destination = o.Destination,Description = o.Description,PublishedDate = o.PublishedDate,State = o.State})
                 .ToListAsync();
             return this.Ok(view);
@@ -87,6 +88,7 @@
         #region Driver/List
         [Route("Driver/Orders/List")]
         [ResponseType(typeof(IList<DriverOrderViewModel>))]
+        [HttpGet]
         public async Task<IHttpActionResult> DriverOrders()
         {
             if (!this.ModelState.IsValid)
@@ -100,9 +102,23 @@
                 .Include(o => o.Owner)
                 .Include(o => o.FreightUnit)
                 .Include(o => o.FreightUnit.Driver)
-                .Where(o => o.State != OrderState.Consigned && o.FreightUnit.Driver.Id == id)
-                .Select(o => new DriverOrderViewModel(){Id = o.Id, OwnerName = o.Owner.FullName,Source = o.Source, Destination = o.Destination,Description = o.Description,PublishedDate = o.PublishedDate,State = o.State})
+                .Where(o => /*o.State != OrderState.Consigned &&*/ o.FreightUnit.Driver.Id == id)
+                .Select(o => new DriverOrderViewModel()
+                             {
+                                 Id = o.Id, OwnerName = o.Owner.FullName, 
+                                 Source = o.Source, Destination = o.Destination, 
+                                 Description = o.Description, PublishedDate = o.PublishedDate, 
+                                 State = o.State, FreightCost = o.FreightCost,Weight=o.Weight,Size=o.Size
+                             })
                 .ToListAsync();
+
+            view = view.Select(
+                v =>
+                {
+                    if (v.FreightCost == null || v.FreightCost == 0.0m) v.FreightCost = FreightCostCalculator.Default.Calculate(v.Source, v.Destination, v.Weight, v.Size); return v;
+                })
+                .ToList();
+
             return this.Ok(view);
         }
         #endregion
@@ -248,17 +264,25 @@
                     this.AppDb.Entry(ext).State = isNew ? EntityState.Added : EntityState.Modified;
                     this.AppDb.Entry(fu).State = EntityState.Modified;
 
-                    await this.AppDb.SaveChangesAsync();
-                    trans.Commit();
+                    int effected = await this.AppDb.SaveChangesAsync();
+
+                    if (effected > 0)
+                    {
+                        trans.Commit();
+                        return this.Ok();
+                    }
+                    else
+                    {
+                        trans.Rollback();
+                        return this.BadRequest("Fail to consign the order, try a later");
+                    }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     trans.Rollback();
-                    return this.BadRequest("Fail to consign the order, try a later");
+                    return this.BadRequest("Fail to consign the order, try a later. " + ex.Message);
                 }
             }
-
-            return this.Ok();
         }
         #endregion
 
@@ -271,40 +295,54 @@
                 return this.BadRequest(this.ModelState);
 
             int acceptedId = model.AcceptedId;
-            IList<int> rejectedIds = model.RejectedIds;
+            //IList<int> rejectedIds = model.RejectedIds;
 
-            Order accepted = await this.AppDb.Orders.FindAsync(acceptedId);
+            // Order accepted = await this.AppDb.Orders.FindAsync(acceptedId);
 
-            IList<Order> rejecteds = await Task.Run(() => rejectedIds.Select(r => this.AppDb.Orders.Find(r)).ToList());
-
-            accepted.State=OrderState.Dealt;
-            accepted.ModifiedDate=DateTime.Now;
-            accepted.ModifiedBy = this.LogonId;
-            this.AppDb.Entry(accepted).State = EntityState.Modified;
-
-            foreach (Order rej in rejecteds)
-            {
-                rej.State = OrderState.Rejected;
-                rej.ModifiedDate = DateTime.Now;
-                rej.ModifiedBy = this.LogonId;
-                this.AppDb.Entry(rej).State = EntityState.Modified;
-            }
+            IList<Order> dealings = await this.AppDb.Orders.Where(o => o.State == OrderState.Dealing && o.FreightUnit.Driver.Id == this.LogonId).ToListAsync();
 
             using (DbContextTransaction trans = this.AppDb.Database.BeginTransaction())
             {
                 try
                 {
-                    await this.AppDb.SaveChangesAsync();
-                   trans.Commit();
+                    foreach (var order in dealings)
+                    {
+                        if (order.Id == acceptedId)
+                        {
+                            order.State = OrderState.Dealt;
+                            order.FreightCost = model.FreightCost;
+                        }
+                        else
+                        {
+                            order.State = OrderState.Rejected;
+                            var current = order.FreightUnit;
+                            order.FreightUnit = null;
+                            this.AppDb.Entry(current).State = EntityState.Modified;
+
+                        }
+
+                        order.ModifiedDate = DateTime.Now;
+                        order.ModifiedBy = this.LogonId;
+                        this.AppDb.Entry(order).State = EntityState.Modified;
+                    }
+                   int effected= await this.AppDb.SaveChangesAsync();
+                   if (effected > 0)
+                   {
+                       trans.Commit();
+                       return this.Ok();
+                   }
+                   else
+                   {
+                       trans.Rollback();
+                       return this.BadRequest("Fail to confirm the deal.");
+                   }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     trans.Rollback();
-                    return this.BadRequest("Fail to confirm the deal");
+                    return this.BadRequest("Fail to confirm the deal. " + ex.Message);
                 }
             }
-
-            return this.Ok();
         }
 
         #endregion
@@ -318,14 +356,14 @@
                 return this.BadRequest(this.ModelState);
 
             int orderId = model.OrderId;
-            OrderState oState = model.State;
+            Order order = await this.AppDb.Orders.FindAsync(orderId);
+            OrderState oState = order.State;
             string location = model.Location;
 
             if (oState != OrderState.Paid && oState != OrderState.InProgress)
                 return this.Ok();
             else
             {
-                Order order = await this.AppDb.Orders.FindAsync(orderId);
                 FreightUnit fu = order.FreightUnit;
 
                 if (oState == OrderState.Paid)
@@ -346,19 +384,27 @@
                     {
                         this.AppDb.Entry(order).State = EntityState.Modified;
                         this.AppDb.Entry(fu).State = EntityState.Modified;
-                        await this.AppDb.SaveChangesAsync();
-                        trans.Commit();
+                        int effected = await this.AppDb.SaveChangesAsync();
+                        
+                        if (effected>0)
+                        {
+                            trans.Commit();
+                            return this.Ok();
+                        }
+                        else
+                        {
+                            trans.Rollback();
+                            return this.BadRequest("Fail to Change order state");
+                        }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
                         trans.Rollback();
-                        return this.BadRequest("Fail to Change order state");
+                        return this.BadRequest("Fail to Change order state. "+ex.Message);
                     }
                 }
 
             }
-
-            return this.Ok();
         }
 
         #endregion

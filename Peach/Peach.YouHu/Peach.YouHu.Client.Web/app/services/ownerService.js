@@ -16,7 +16,7 @@ app.factory('ownerService', ['$http', function ($http) {
 
         var _list = function() {
 
-            return $http.post(serviceBase + 'api/Owner/Orders/List')
+            return $http.get(serviceBase + 'api/Owner/Orders/List')
                 .success(function(response) {
                     return response;
                 })
@@ -56,11 +56,21 @@ app.factory('ownerService', ['$http', function ($http) {
         };
 
         var _find = function(orderId) {
-            return $http.post(serviceBase + 'api/Owner/FreightUnits/Find', { id: orderId })
+            return $http.get(serviceBase + 'api/Owner/FreightUnits/Find', { Id: orderId })
                 .success(function(response) {
                     return response;
                 })
                 .error(function(response) {
+                    return response;
+                });
+        };
+
+        var _evaluate = function (evaluate) {
+            return $http.post(serviceBase + 'api/Owner/Evaluations/Evaluate', evaluate)
+                .success(function (response) {
+                    return response;
+                })
+                .error(function (response) {
                     return response;
                 });
         };
@@ -71,6 +81,7 @@ app.factory('ownerService', ['$http', function ($http) {
         ownerServiceFactory.pay = _pay;
         ownerServiceFactory.consign = _consign;
         ownerServiceFactory.findFrieghtUnit = _find;
+        ownerServiceFactory.evaluate = _evaluate;
 
         return ownerServiceFactory;
     }

@@ -1,9 +1,22 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+﻿<div class="modal-header">
+    <a href="" class="close" data-ng-click="close()">&times;</a>
+    <h4>Payment</h4>
+</div>
+<div class="modal-body">
+    <form class="form form-group" name="payForm">
+        <div class="form-group">
+            <div class="row">
+                <span class="label">Freight Cost:</span><input readonly name="freightCost" type="text" class="label" data-ng-model="freightCost" value="freightCost" />
+            </div>
+            <div class="row">
+                <input type="number" name="paid" class="form-control" data-ng-model="payModel.Paid" placeholder="Put cost amount you paid" required autofocus />
+            </div>
+            <div class="row">
+                <input type="text" name="paymentCode" class="form-control" data-ng-model="payModel.PaymentCode" placeholder="Payment Code of 6 digits" required />
+            </div>
+            <div class="row">
+                <button data-ng-click="pay()" type="button">PAY</button>
+            </div>
+        </div>
+    </form>
+</div>

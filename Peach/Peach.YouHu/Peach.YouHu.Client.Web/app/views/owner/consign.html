@@ -1,9 +1,16 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+﻿<div class="modal-header">
+    <a href="" class="close" data-ng-click="close()">&times;</a>
+    <h4>Consign</h4>
+</div>
+<div class="modal-body">
+    <form class="form form-group" novalidate>
+        <div class="form-group">
+            <div class="row">
+                <input type="text" class="form-control" data-ng-model="consignModel.PaymentCode" placeholder="Payment Code of 6 digits" required />
+            </div>
+            <div class="row">
+                <button data-ng-click="consign()" type="button">CONSIGN</button>
+            </div>
+        </div>
+    </form>
+</div>

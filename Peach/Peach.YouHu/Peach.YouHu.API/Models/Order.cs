@@ -2,6 +2,10 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Data.Entity.ModelConfiguration;
+    using System.Runtime.Serialization;
+
+    using Microsoft.Ajax.Utilities;
 
     public class Order:AuditObj
     {
@@ -41,4 +45,25 @@
 
         public decimal? Paid { get; set; }
     }
+
+    //public class OrderMapper : EntityTypeConfiguration<Order>
+    //{
+    //    public OrderMapper()
+    //    {
+    //        this.ToTable("Order", "Order")
+    //            .HasKey(c=>c.Id);
+    //            this.Property(c=>c.AlertCount).IsOptional();
+    //            this.Property(c => c.Description).IsRequired().HasMaxLength(200);
+    //            this.Property(c => c.Destination).IsRequired();
+    //            this.Property(c => c.AlertCount).IsOptional();
+    //            this.Property(c => c.AlertCount).IsOptional();
+    //            this.Property(c => c.AlertCount).IsOptional();
+    //            this.Property(c => c.AlertCount).IsOptional();
+    //            this.Property(c => c.AlertCount).IsOptional();
+    //            this.Property(c => c.AlertCount).IsOptional();
+    //            this.Property(c => c.AlertCount).IsOptional();
+    //            this.Property(c => c.AlertCount).IsOptional();
+
+    //    }
+    //}
 }

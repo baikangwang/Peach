@@ -17,10 +17,15 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/signup.html"
     });
 
-    //$routeProvider.when("/driver/orders", {
-    //    controller: "samplesController",
-    //    templateUrl: "/app/views/samples.html"
-    //});
+    $routeProvider.when("/driver/orders", {
+        controller: "driverOrdersController",
+        templateUrl: "/app/views/driver/orders.html"
+    });
+
+    $routeProvider.when("/driver/freightsUnits", {
+        controller: "driverfreightsUnitsController",
+        templateUrl: "/app/views/driver/freights.html"
+    });
 
     $routeProvider.when("/owner/orders", {
         controller: "ownerOrdersController",

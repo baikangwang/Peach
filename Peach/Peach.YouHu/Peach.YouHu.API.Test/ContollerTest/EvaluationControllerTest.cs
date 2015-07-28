@@ -17,19 +17,38 @@ namespace Peach.YouHu.API.Test.ContollerTest
     public class EvaluationControllerTest
     {
         [TestMethod]
-        [TestCategory("Owner.Order")]
+        [TestCategory("Step 9 - Owner")]
         public void OwnerEvaluateTest()
         {
-            using (UTOEvaluationsController controller = new UTDEvaluationsController())
+            using (UTOEvaluationsController controller = new UTOEvaluationsController())
             {
                 var model = new EvaluateBindingModel()
                             {
                                 Comments = "好就一个字",
-                                OrderId = 2,
+                                OrderId = 3,//2,
                                 Rank = 9
                             };
 
                 var result = controller.OwnerEvaluate(model).Result;
+
+                Assert.IsTrue(result is OkResult);
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("Step 9 - Driver")]
+        public void DriverEvaluateTest()
+        {
+            using (UTDEvaluationsController controller = new UTDEvaluationsController())
+            {
+                var model = new EvaluateBindingModel()
+                {
+                    Comments = "好人一生平安",
+                    OrderId = 3,//2,
+                    Rank = 9
+                };
+
+                var result = controller.DriverEvaluate(model).Result;
 
                 Assert.IsTrue(result is OkResult);
             }

@@ -44,18 +44,25 @@
                     this.AppDb.Entry(driver).State=EntityState.Modified;
                     this.AppDb.Entry(evaluation).State = EntityState.Added;
 
-                    await this.AppDb.SaveChangesAsync();
+                    int effected= await this.AppDb.SaveChangesAsync();
 
-                    trans.Commit();
+                    if(effected>0)
+                    {
+                        trans.Commit();
+                        return this.Ok();
+                    }
+                    else
+                    {
+                        trans.Rollback();
+                        return this.BadRequest("Fail to post comments");
+                    }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     trans.Rollback();
-                    return this.BadRequest("Fail to post comments");
+                    return this.BadRequest("Fail to post comments. " + ex.Message);
                 }
             }
-
-            return this.Ok();
         }
 
         [Route("Driver/Evaluations/Evaluate")]
@@ -90,18 +97,25 @@
 
                     this.AppDb.Entry(evaluation).State = EntityState.Added;
 
-                    await this.AppDb.SaveChangesAsync();
+                    int effected = await this.AppDb.SaveChangesAsync();
 
-                    trans.Commit();
+                     if (effected > 0)
+                     {
+                         trans.Commit();
+                         return this.Ok();
+                     }
+                     else
+                     {
+                         trans.Rollback();
+                         return this.BadRequest("Fail to post comments");
+                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     trans.Rollback();
-                    return this.BadRequest("Fail to post comments");
+                    return this.BadRequest("Fail to post comments. " + ex.Message);
                 }
             }
-
-            return this.Ok();
         }
     }
 }

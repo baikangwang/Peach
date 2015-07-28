@@ -36,6 +36,12 @@
         public DateTime PublishedDate { get; set; }
         public OrderState State { get; set; }
 
+        public decimal? FreightCost { get; set; }
+
+        public decimal Weight { get; set; }
+
+        public decimal Size { get; set; }
+
         public DriverOrderViewModel() { }
 
         public DriverOrderViewModel(int id, string ownerName, string source, string destination, string description, DateTime publishedDate, OrderState state)

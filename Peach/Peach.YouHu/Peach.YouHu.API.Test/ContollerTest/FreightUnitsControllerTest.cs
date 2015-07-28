@@ -13,7 +13,7 @@ namespace Peach.YouHu.API.Test.Controller
     public class FreightUnitsControllerTest
     {
         [TestMethod]
-        [TestCategory("Driver.FreightUnit")]
+        [TestCategory("Step 1 - Driver")]
         public void PublishTest()
         {
             using (UTDFreightUnitController controller=new UTDFreightUnitController())
@@ -31,7 +31,7 @@ namespace Peach.YouHu.API.Test.Controller
         }
 
         [TestMethod]
-        [TestCategory("Driver.FreightUnit")]
+        [TestCategory("Step 1 - Driver")]
         public void RegisterTest()
         {
             using (UTDFreightUnitController controller=new UTDFreightUnitController())
@@ -53,7 +53,7 @@ namespace Peach.YouHu.API.Test.Controller
         }
 
         [TestMethod]
-        [TestCategory("Owner.FreightUnit")]
+        [TestCategory("Step 3 - Owner")]
         public void FindTest()
         {
             using (UTDFreightUnitController controller=new UTDFreightUnitController())

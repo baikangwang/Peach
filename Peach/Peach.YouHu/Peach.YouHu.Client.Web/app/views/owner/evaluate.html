@@ -1,0 +1,22 @@
+﻿<div class="modal-header">
+    <a href="" class="close" data-ng-click="close()">&times;</a>
+    <h4>Evaluation</h4>
+</div>
+<div class="modal-body">
+    <form class="form form-horizontal">
+        <div class="form-group">
+            <div class="row text-center">
+                <h5>What do you think the driver?</h5>
+            </div>
+            <div class="row">
+                <input type="text" class="form-control" data-ng-model="evaluateModel.Comments" placeholder="Leave some comments" required />
+            </div>
+            <div class="row">
+                <input type="number" class="form-control" data-ng-model="evaluateModel.PaymentCode" placeholder="Rank: 0 ~ 9" required />
+            </div>
+            <div class="row">
+                <button data-ng-click="evaluate()" type="button">POST</button>
+            </div>
+        </div>
+    </form>
+</div>

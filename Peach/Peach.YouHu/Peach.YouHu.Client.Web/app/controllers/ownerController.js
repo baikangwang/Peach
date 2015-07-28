@@ -3,9 +3,6 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
         
         $scope.orders = [];
         $scope.orderCount = 0;
-        //    function () {
-        //    return $scope.orders.length;
-        //};
 
         init();
 
@@ -150,7 +147,27 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
                 }
             );
         };
-        
+
+        $scope.showEvaluate = function (order) {
+            var evaluateModal = $modal.open({
+                templateUrl: 'app/views/owner/evaluate.html',
+                controller: 'evaluateController',
+                resolve: {
+                    order: function () {
+                        return order;
+                    }
+                }
+            });
+
+            evaluateModal.result.then(
+                function () {
+                    listOrders();
+                },
+                function () {
+                    // nothing to do
+                }
+            );
+        };
     }
 ]);
 
@@ -190,6 +207,7 @@ app.controller('publishOrderController', ['$scope', '$modalInstance', 'ownerServ
 app.controller('findFreightUnitController', ['$scope','$modal','$findModal','order','ownerService', function($scope,$modal, $findModal,order, ownerService) {
 
     $scope.freightUnits = [];
+    $scope.freightUnitsCount = 0;
 
     init();
 
@@ -201,9 +219,12 @@ app.controller('findFreightUnitController', ['$scope','$modal','$findModal','ord
         ownerService.find(order.Id)
             .success(function(success) {
                 $scope.freightUnits = success;
+                $scope.freightUnitsCount = success.length;
+
             })
             .error(function(error) {
                 $scope.freightUnits = [];
+                $scope.freightUnitsCount = 0;
                 var msg;
                 if (error.ExceptionMessage)
                     msg = error.ExceptionMessage;
@@ -244,16 +265,16 @@ app.controller('findFreightUnitController', ['$scope','$modal','$findModal','ord
 
 app.controller('makeDealController', ['$scope', '$makeDealModal', 'order','freightUnit', 'ownerService', function($scope, $makeDealModal, order,freightUnit, ownerService) {
     $scope.makeDealModel = {
-        orderId: 0,
-        freightUnitId: 0
+        OrderId: 0,
+        FreightUnitId: 0
     }
 
     init();
 
     function init() {
 
-        $scope.makeDealModel.orderId = order.Id;
-        $scope.makeDealModel.freightUnitId = freightUnit.Id;
+        $scope.makeDealModel.OrderId = order.Id;
+        $scope.makeDealModel.FreightUnitId = freightUnit.Id;
     }
 
     $scope.close = function() {
@@ -280,16 +301,18 @@ app.controller('makeDealController', ['$scope', '$makeDealModal', 'order','freig
 
 app.controller('payController', ['$scope','$payModal','order', 'ownerService', function ($scope,$payModal,order, ownerService) {
     $scope.payModel = {
-        orderId: 0,
-        paymentCode: "",
-        freightCost: 0.0,
-        paid: 0.0
+        OrderId: 0,
+        PaymentCode: "",
+        Paid: 0.0
     };
+
+    $scope.freightCost = 0.0;
 
     init();
 
     function init() {
-        $scope.payModel.orderId = order.Id;
+        $scope.payModel.OrderId = order.Id;
+        $scope.freightCost = order.FreightCost;
     }
 
     $scope.close = function() {
@@ -317,14 +340,14 @@ app.controller('payController', ['$scope','$payModal','order', 'ownerService', f
 
 app.controller('cosignController', ['$scope','$consignModal','order','ownerService', function ($scope,$consignModal,order, ownerService) {
     $scope.consignModel = {
-        orderId: 0,
-        paymentCode: ""
+        OrderId: 0,
+        PaymentCode: ""
     };
 
     init();
 
     function init() {
-        $scope.consignModel.orderId = order.Id;
+        $scope.consignModel.OrderId = order.Id;
     }
 
     $scope.close= function() {
@@ -349,3 +372,41 @@ app.controller('cosignController', ['$scope','$consignModal','order','ownerServi
         });
     }
 }]);
+
+app.controller('evaluateController', ['$scope', '$evaluateModal', 'order', 'ownerService', function ($scope, $evaluateModal, order, ownerService) {
+
+    $scope.evaluateModel = {
+        Comments: "",
+        Rank: 0,
+        OrderId:0
+    }
+
+    init();
+
+    function init() {
+        $scope.evaluateModel.OrderId = order.Id;
+    }
+
+    $scope.close= function () {
+        $evaluateModal.dismiss('cancel');
+    }
+
+    $scope.evaluate=function () {
+        ownerService.evaluate($scope.evaluateModel)
+        .success(function (success) {
+            alert("Consign Successfully");
+            $scope.close();
+        })
+            .error(function (error) {
+                var msg;
+                if (error.ExceptionMessage)
+                    msg = error.ExceptionMessage;
+                else if (error.Message)
+                    msg = error.Message;
+                else
+                    msg = 'Error occured';
+                alert(msg);
+            });
+    }
+}
+]);

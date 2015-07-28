@@ -17,7 +17,8 @@
         // GET: api/FreightUnits/List
         [Route("Driver/FreightUnits/List")]
         [ResponseType(typeof(IList<FreightUnitViewModel>))]
-        public async Task<IHttpActionResult> List(string id)
+        [HttpGet]
+        public async Task<IHttpActionResult> List()
         {
             if (!this.ModelState.IsValid)
             {
@@ -25,7 +26,7 @@
             }
 
             IList<FreightUnitViewModel> view = await this.AppDb.FreightUnits.Include(u => u.Driver)
-                .Where(u => u.Driver.Id == id)
+                .Where(u => u.Driver.Id == this.LogonId)
                 .Select(u => new FreightUnitViewModel(){Id = u.Id,Rank = u.Driver.Rank,Driver = u.Driver.FullName,Location = u.Location})
                 .ToListAsync();
 
@@ -35,6 +36,7 @@
         // GET: api/freightUnits/find
         [Route("Owner/FreightUnits/Find")]
         [ResponseType(typeof(IList<FreightUnitViewModel>))]
+        [HttpGet]
         public async Task<IHttpActionResult> Find(int id)
         {
             if (!this.ModelState.IsValid)
