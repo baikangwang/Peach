@@ -14,6 +14,17 @@ app.factory('driverService', ['$http', function ($http) {
                 });
         };
 
+        var _register = function (model) {
+
+            return $http.post(serviceBase + 'api/Driver/FreightUnits/Register', model)
+                .success(function (response) {
+                    return response;
+                })
+                .error(function (response) {
+                    return response;
+                });
+        };
+
         var _listOrders = function() {
 
             return $http.get(serviceBase + 'api/Driver/Orders/List')
@@ -26,7 +37,7 @@ app.factory('driverService', ['$http', function ($http) {
         };
 
         var _listFreights = function() {
-            return $http.post(serviceBase + 'api/Driver/FreightUnits/List')
+            return $http.get(serviceBase + 'api/Driver/FreightUnits/List')
                 .success(function(response) {
                     return response;
                 })
@@ -71,6 +82,7 @@ app.factory('driverService', ['$http', function ($http) {
         driverServiceFactory.confirmDeal = _confirmDeal;
         driverServiceFactory.updateOrderState = _updateOrderState;
         driverServiceFactory.evaluate = _evaluate;
+        driverServiceFactory.register = _register;
 
         return driverServiceFactory;
     }

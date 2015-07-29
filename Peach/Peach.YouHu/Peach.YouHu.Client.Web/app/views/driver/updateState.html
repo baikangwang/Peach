@@ -1,16 +1,16 @@
 ﻿<div class="modal-header">
     <a href="" class="close" data-ng-click="close()">&times;</a>
-    <h4>Make Deal</h4>
+    <h4>UPDATE</h4>
 </div>
 <div class="modal-body">
     <form class="form form-horizontal">
         <div class="form-group">
             <div class="row text-center">
-                <h5>Are you sure to make deal with this freight?</h5>
+                <input type="text" class="form-control" data-ng-model="updateStateModel.Location" />
             </div>
             <div class="row">
                 <div class="col-md-5 col-md-offset-2">
-                    <button class="btn btn-block" type="submit" data-ng-click="makeDeal()">DEAL</button>
+                    <button class="btn btn-block" type="submit" data-ng-click="updateState()">UPDATE</button>
                 </div>
                 <div class="col-md-5">
                     <button class="btn btn-block" type="button" data-ng-click="close()">CANCEL</button>

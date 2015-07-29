@@ -3,9 +3,6 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
         
         $scope.orders = [];
         $scope.orderCount = 0;
-        //    function () {
-        //    return $scope.orders.length;
-        //};
 
         init();
 
@@ -32,40 +29,8 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
 
         $scope.getState = function(order) {
 
-            //Ready = 0,
-            //Dealing = 1,
-            //Rejected = 2,
-            //Dealt = 3,
-            //Paying = 4,
-            //Paid = 5,
-            //InProgress = 6,
-            //Arrived = 7,
-            //Consigned = 8
-
             if (order.State) {
-                switch (order.State) {
-                case 0:
-                    return "ready";
-                case 1:
-                    return "dealing";
-                case 2:
-                    return "rejected";
-                case 3:
-                    return "dealt";
-                case 4:
-                    return "paying";
-                case 5:
-                    return "paid";
-                case 6:
-                    return "inprogress";
-                case 7:
-                    return "arrived";
-                case 8:
-                    return "consigned";
-                default:
-                    return "ready";
-                }
-
+                return YouHuHelper.orderStateHelper.toLabel(order.State);
             } else
                 return "ready";
         };
@@ -156,14 +121,7 @@ app.controller('confirmDealController', ['$scope', '$confirmDealModal','order','
             $scope.close();
 
         }, function(error) {
-            var msg;
-            if (error.ExceptionMessage)
-                msg = error.ExceptionMessage;
-            else if (error.Message)
-                msg = error.Message;
-            else
-                msg = 'Error occured';
-            alert(msg);
+            alert(YouHuHelper.errorHelper.getErrorMsg(error));
         });
     };
 
@@ -191,14 +149,7 @@ app.controller('updateStateController', ['$scope', '$updateStateModal', 'order',
                 $scope.close();
             })
             .error(function(error) {
-                var msg;
-                if (error.ExceptionMessage)
-                    msg = error.ExceptionMessage;
-                else if (error.Message)
-                    msg = error.Message;
-                else
-                    msg = 'Error occured';
-                alert(msg);
+                alert(YouHuHelper.errorHelper.getErrorMsg(error));
             });
     };
 }]);
@@ -227,14 +178,7 @@ app.controller('evaluateController', ['$scope', '$evaluateModal', 'order', 'driv
                 $scope.close();
             })
             .error(function(error) {
-                var msg;
-                if (error.ExceptionMessage)
-                    msg = error.ExceptionMessage;
-                else if (error.Message)
-                    msg = error.Message;
-                else
-                    msg = 'Error occured';
-                alert(msg);
+                alert(YouHuHelper.errorHelper.getErrorMsg(error));
             });
     };
 }]);
@@ -260,14 +204,7 @@ app.controller('freightUnitsController', ['$scope','$modal','driverService', fun
             .error(function (error) {
                 $scope.freightUnits = [];
                 $scope.freightUnitsCount = 0;
-                var msg;
-                if (error.ExceptionMessage)
-                    msg = error.ExceptionMessage;
-                else if (error.Message)
-                    msg = error.Message;
-                else
-                    msg = 'Error occured';
-                alert(msg);
+                alert(YouHuHelper.errorHelper.getErrorMsg(error));
             });
     };
 
@@ -292,6 +229,21 @@ app.controller('freightUnitsController', ['$scope','$modal','driverService', fun
             alert("Error Occured");
         });
     };
+
+    $scope.showRegister=function () {
+        var registerModal = $modal.open({
+            templateUrl: 'app/views/driver/register.html',
+            contorller: 'registerFreightUnitController',
+        });
+
+        registerModal.result.then(function (success) {
+            $scope.refresh();
+            $scope.close();
+        }, function () {
+            // nothing to do
+            alert("Error Occured");
+        });
+    }
 }]);
 
 app.controller('publishFreightUnitController', ['$scope', '$publishModal', 'freightUnit','driverService',function ($scope, $publishModal, freightUnit,driverService)
@@ -318,14 +270,36 @@ app.controller('publishFreightUnitController', ['$scope', '$publishModal', 'frei
                 $scope.close();
             })
             .error(function (error) {
-                var msg;
-                if (error.ExceptionMessage)
-                    msg = error.ExceptionMessage;
-                else if (error.Message)
-                    msg = error.Message;
-                else
-                    msg = 'Error occured';
-                alert(msg);
+                alert(YouHuHelper.errorHelper.getErrorMsg(error));
             });
     };
+
+    $scope.register = function () {
+    };
+}]);
+
+app.controller('registerFreightUnitController', ['$scope', '$registerModal', 'driverService', function ($scope, $registerModal, driverService) {
+    $scope.registerModel = {
+        Location: "",
+        Height: 0.0,
+        Length: 0.0,
+        Licence: "",
+        Type: 0,
+        Weight: 0.0
+    };
+
+    $scope.close = function () {
+        $registerModal.dismiss('cancel');
+    };
+
+    $scope.evaluate = function () {
+        driverService.register($scope.registerModel)
+            .success(function (success) {
+                alert("Register Successfully");
+                $scope.close();
+            })
+            .error(function (error) {
+                alert(YouHuHelper.errorHelper.getErrorMsg(error));
+            });
+    }
 }]);

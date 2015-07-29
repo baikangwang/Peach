@@ -90,8 +90,8 @@
     <Content Include="app\controllers\loginController.js" />
     <Content Include="app\controllers\driverController.js" />
     <Content Include="app\controllers\ownerController.js" />
-    <Content Include="app\controllers\samplesController.js" />
     <Content Include="app\controllers\signupController.js" />
+    <Content Include="app\helper\helper.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
     <Content Include="app\services\driverService.js" />
@@ -102,6 +102,7 @@
     <Content Include="app\views\driver\freights.html" />
     <Content Include="app\views\driver\orders.html" />
     <Content Include="app\views\driver\publish.html" />
+    <Content Include="app\views\driver\register.html" />
     <Content Include="app\views\driver\updateState.html" />
     <Content Include="app\views\home.html" />
     <Content Include="app\views\login.html" />

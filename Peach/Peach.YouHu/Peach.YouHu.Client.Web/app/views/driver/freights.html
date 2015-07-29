@@ -1,32 +1,30 @@
-﻿<div class="modal-header">
-    <a href="" class="close" data-ng-click="close()">&times;</a>
-    <h4>Find Matched Freights</h4>
-</div>
-<div class="modal-body">
-    <div class="row">
-        <form class="form form-horizontal">
-            <div class="row" data-ng-show="freightUnitsCount == 0">
-                <h4 class="text-center">Not found any matched freight units. Please refresh later.</h4>
+﻿<div class="row">
+    <form class="form form-horizontal">
+        <div class="row" data-ng-show="freightUnitsCount == 0">
+            <h4 class="col-md-12 text-center">Not found any matched freight units. Please refresh later.</h4>
+            <div class="col-md-offset-4 col-md-4 col-md-offset-4">
+                <button type="button" class="btn btn-block" data-ng-click="register()">REGISTER</button>
             </div>
-            <div class="row">
-                <div class="col-md-offset-4 col-md-4 col-md-offset-4">
-                    <button type="button" class="btn btn-block" data-ng-click="refresh()">REFRESH</button>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-4 col-md-4 col-md-offset-4">
+                <button type="button" class="btn btn-block" data-ng-click="refresh()">REFRESH</button>
             </div>
-            <div class="row form-group" data-ng-show="freightUnitsCount > 0">
-                <ul class="list-group" data-ng-repeat="fu in freightUnits">
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h5>Driver {{fu.Driver}}(Rank{{fu.Rank}}) at {{fu.Location}} estimated {{fu.Cost}} (Yuan)</h5>
-                            </div>
-                            <div class="col-md-4">
-                                <button class="btn" type="submit" data-ng-click="showMakeDeal(fu)"></button>
-                            </div>
+        </div>
+        <div class="row form-group" data-ng-show="freightUnitsCount > 0">
+            <ul class="list-group" data-ng-repeat="fu in freightUnits">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>Driver {{fu.Driver}}(Rank{{fu.Rank}}) at {{fu.Location}}</h5>
                         </div>
-                    </li>
-                </ul>
-            </div>
-        </form>
-    </div>
+                        <div class="col-md-4">
+                            <button class="btn" type="submit" data-ng-click="showPublish(fu)"></button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
 </div>
+

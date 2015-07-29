@@ -2,10 +2,10 @@
     <form class="form-horizontal">
         <toaster-contianer toaster-options="{'time-out':1700}"></toaster-contianer>
         <div class="well well-sm" data-ng-show="orderCount == 0">
-            <h5 class="text-center">You haven't been published any orders, it's time to publish a new one.</h5>
+            <h5 class="text-center">You haven't been published any orders, wait a little bit.</h5>
             <div class="row">
                 <div class="col-md-offset-5 col-md-2 col-md-offset-5">
-                    <button type="button" class="btn btn-lg btn-block" data-ng-click="showPublish()">PUBLISH</button>
+                    <button type="button" class="btn btn-lg btn-block" data-ng-click="refresh()">REFRESH</button>
                 </div>
             </div>
         </div>
@@ -18,19 +18,24 @@
             <ul class="list-group" data-ng-repeat="order in orders">
                 <li class="list-group-item">
                     <div class="row container">
-                        <div class="col-xs-4 col-md-5">
+                        <div class="col-xs-2 col-md-2">
                             <h1>
-                                <label class="label-primary">Driver: {{order.Driver}}</label>
+                                <label class="label-primary">Owner: {{order.OwnerName}}</label>
                             </h1>
                         </div>
-                        <div class="col-xs-4 col-md-5">
+                        <div class="col-xs-4 col-md-4">
+                            <h1>
+                                <label class="label-primary">From: {{order.Source}}</label>
+                            </h1>
+                        </div>
+                        <div class="col-xs-4 col-md-4">
                             <h1>
                                 <label class="label-primary">To: {{order.Destination}}</label>
                             </h1>
                         </div>
-                        <div class="col-xs-4 col-md-2">
+                        <div class="col-xs-2 col-md-2">
                             <h1>
-                                <label class="label-primary">Cost: 0</label>
+                                <label class="label-primary">Cost: {{order.FreightCost}}</label>
                             </h1>
                         </div>
                     </div>
@@ -48,9 +53,9 @@
                             </div>
                         </div>
                         <div class="col-xs-4 col-md-4">
-                            <button class="btn btn-primary" data-ng-show="getState(order)=='dealt'" data-ng-click="showPay(order)">PAY</button>
-                            <button class="btn btn-primary" data-ng-show="getState(order)=='arrived'" data-ng-click="showConsign(order)">COSIGN</button>
-                            <button class="btn btn-primary" data-ng-show="getState(order)=='ready'|| getState(order)=='rejected'" data-ng-click="showFindFreight(order)">FIND</button>
+                            <button class="btn btn-primary" data-ng-show="getState(order)=='dealing'" data-ng-click="showConfirmDeal(order)">DEAL</button>
+                            <button class="btn btn-primary" data-ng-show="getState(order)=='paid'" data-ng-click="showUpdateState(order)">GO</button>
+                            <button class="btn btn-primary" data-ng-show="getState(order)=='inprogress'" data-ng-click="showUpdateState(order)">ARRIVED</button>
                             <button class="btn btn-primary" data-ng-show="getState(order)=='consigned'" data-ng-click="showEvaluate(order)">EVALUATE</button>
                         </div>
                     </div>

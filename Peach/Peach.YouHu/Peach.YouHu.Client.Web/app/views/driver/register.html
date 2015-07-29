@@ -1,0 +1,47 @@
+﻿<div class="modal-header">
+    <a href="" class="close" data-ng-click="close()">&times;</a>
+    <h4>REGISTER NEW</h4>
+</div>
+<div class="modal-body">
+    <form class="form form-horizontal">
+        <div class="form-group">
+            <div class="row">
+                <div class="">
+                    <input type="number" class="form-control" data-ng-model="registerModel.Type" placeholder="Type" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="">
+                    <input type="text" class="form-control" data-ng-model="registerModel.Licence" placeholder="Licence" required />
+                </div>
+            </div>
+            <div class="row">
+                <div class="">
+                    <input type="number" class="form-control" data-ng-model="registerModel.Weight" placeholder="Weight" required />
+                </div>
+            </div>
+            <div class="row">
+                <div class="">
+                    <input type="number" class="form-control" data-ng-model="registerModel.Height" placeholder="Height" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="">
+                    <input type="number" class="form-control" data-ng-model="registerModel.Length" placeholder="Length" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="">
+                    <input type="text" class="form-control" data-ng-model="registerModel.Location" placeholder="Where is your freight unit locating?" required />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 pull-right">
+                    <button class="btn btn-primary btn-block btn-lg" type="submit" data-ng-click="register()">PUBLISH</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
