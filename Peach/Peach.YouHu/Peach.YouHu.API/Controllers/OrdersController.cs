@@ -79,7 +79,7 @@
                 .Include(o=>o.FreightUnit)
                 .Include(o=>o.FreightUnit.Driver)
                 .Where(o => /*o.State != OrderState.Consigned &&*/ o.Owner.Id==id)
-                .Select(o=>new OwnerOrderViewModel(){Id = o.Id,Driver = o.FreightUnit.Driver.FullName,Destination = o.Destination,Description = o.Description,PublishedDate = o.PublishedDate,State = o.State,FreightCost = o.FreightCost??(0.0m)})
+                .Select(o=>new OwnerOrderViewModel(){Id = o.Id,Driver = o.FreightUnit.Driver.FullName,Destination = o.Destination,Description = o.Description,PublishedDate = o.PublishedDate,State = o.State,FreightCost = o.FreightCost??(0.0m),Source = o.Source})
                 .ToListAsync();
             return this.Ok(view);
         }

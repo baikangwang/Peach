@@ -137,6 +137,11 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
                 }
             );
         };
+
+        $scope.getCSS = function (order) {
+            var state = $scope.getState(order);
+            return YouHuHelper.orderStateHelper.toCSS(state);
+        }
     }
 ]);
 

@@ -95,6 +95,12 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
                 }
             );
         };
+
+        $scope.getCSS = function (order) {
+            var state = $scope.getState(order);
+            return YouHuHelper.orderStateHelper.toCSS(state);
+        }
+
     }]);
 
 app.controller('confirmDealController', ['$scope', '$modalInstance', 'order', 'driverService', function ($scope, $modalInstance, order, driverService) {

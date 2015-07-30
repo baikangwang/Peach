@@ -39,6 +39,13 @@ app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
 
-app.run(['authService', function (authService) {
+app.run(['authService','$location', function (authService,$location) {
     authService.fillAuthData();
+
+        var oauth = authService.authentication;
+        if (oauth) {
+            if (oauth.isAuth) {
+                $location.path("/" + oauth.role.toLowerCase() + "/orders");
+            }
+        }
 }]);

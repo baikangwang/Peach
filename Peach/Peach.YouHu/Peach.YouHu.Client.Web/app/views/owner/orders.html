@@ -16,47 +16,72 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2 pull-right">
-                    <button type="button" class="btn btn-block btn-primary" data-ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span> REFRESH</button>
+                <div class="col-md-1 pull-right">
+                    <p>
+                        <button type="button" class="btn btn-block" data-ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span></button>
+                    </p>
                 </div>
             </div>
             <ul class="list-group" data-ng-repeat="order in orders">
-                <li class="list-group-item">
-                    <div class="row container">
-                        <div class="col-xs-4 col-md-5">
-                            <h3>
-                                <p>Driver: {{order.Driver}}</p>
-                            </h3>
-                        </div>
-                        <div class="col-xs-4 col-md-5">
-                            <h3>
-                                <p>To: {{order.Destination}}</p>
-                            </h3>
-                        </div>
-                        <div class="col-xs-4 col-md-2">
-                            <h3>
-                                <p>Cost: {{order.FreightCost}}</p>
-                            </h3>
+                <li class="list-group-item panel" data-ng-class="'panel-'+getCSS(order)">
+                    <div class="panel-heading">
+                        <div class="row container">
+                            <div class="col-lg-3">
+                                <h3 class="text-left">
+                                    <span class="label" data-ng-class="'label-'+getCSS(order)">
+                                        {{order.Source}}
+                                    </span>
+                                </h3>
+                            </div>
+                            <div class="col-lg-1">
+                                <h3 class="text-center">
+                                    <span class="glyphicon glyphicon-arrow-right"></span>
+                                </h3>
+                            </div>
+                            <div class="col-lg-3">
+                                <h3 class="text-right">
+                                    <span class="label" data-ng-class="'label-'+getCSS(order)">
+                                        {{order.Destination}}
+                                    </span>
+                                </h3>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="text-right">
+                                    <span class="badge">{{ order.PublishedDate | date: 'yyyy-MM-dd hh:mm:ss'}}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="text-right">
+                                    <span class="badge">{{getState(order).toUpperCase()}}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-8 col-md-8">
-                            <p class="text-warning">
-                                <small>{{order.Description}}</small>
-                            </p>
-                            <hr class="seperator"/>
-                            <div class="col-xs-2 col-md-1">
-                                <span class="badge">{{getState(order).toUpperCase()}}</span>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <h3 class="text-left">
+                                    <p>
+                                        <span class="glyphicon glyphicon-user"></span> {{order.Driver? order.Driver:'FINDING...'}}
+                                    </p>
+                                </h3>
                             </div>
-                            <div class="col-xs-2 col-md-1">
-                                <span class="badge">Published: {{order.PublishedDate}}</span>
+                            <div class="col-lg-4">
+                                <p class="text-warning">
+                                    <small>{{order.Description}}</small>
+                                </p>
                             </div>
-                        </div>
-                        <div class="col-xs-4 col-md-4">
-                            <button class="btn btn-primary" data-ng-show="getState(order)=='dealt'" data-ng-click="showPay(order)">PAY</button>
-                            <button class="btn btn-primary" data-ng-show="getState(order)=='arrived'" data-ng-click="showConsign(order)">COSIGN</button>
-                            <button class="btn btn-primary" data-ng-show="getState(order)=='ready'|| getState(order)=='rejected'" data-ng-click="showFindFreight(order)">FIND</button>
-                            <button class="btn btn-primary" data-ng-show="getState(order)=='consigned'" data-ng-click="showEvaluate(order)">EVALUATE</button>
+                            <div class="col-lg-3">
+                                <h3 class="text-right">
+                                    {{order.FreightCost!=0?(order.FreightCost | currency:'&yen;'):'FINDING...'}}
+                                </h3>
+                            </div>
+                            <div class="col-lg-3 text-right">
+                                <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getState(order)=='dealt'" data-ng-click="showPay(order)">PAY</button>
+                                <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getState(order)=='arrived'" data-ng-click="showConsign(order)">COSIGN</button>
+                                <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getState(order)=='ready'|| getState(order)=='rejected'" data-ng-click="showFindFreight(order)">FIND</button>
+                                <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getState(order)=='consigned'" data-ng-click="showEvaluate(order)">EVALUATE</button>
+                            </div>
                         </div>
                     </div>
                 </li>

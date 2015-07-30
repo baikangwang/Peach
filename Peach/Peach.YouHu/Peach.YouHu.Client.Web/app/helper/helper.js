@@ -39,6 +39,28 @@ YouHuHelper.orderStateHelper = {
 
         } else
             return "ready";
+    },
+
+    toCSS:function (state) {
+        switch (state) {
+            case "ready":
+            case "rejected":
+                return "warning";
+            case "dealing":
+                return "info";
+            case "dealt":
+            case "paying":
+            case "paid":
+                return "danger";
+            case "inprogress":
+                return "info";
+            case "arrived":
+                return "success";
+            case "consigned":
+                return "default";
+            default:
+                return "warning";
+        }
     }
 };
 
@@ -76,8 +98,8 @@ YouHuHelper.freightUnitTypeHelper = {
     }
 };
 
-YouHuHelper.freightUnitStateHelper= {
-    toLabel:function (state) {
+YouHuHelper.freightUnitStateHelper = {
+    toLabel: function (state) {
         if (state) {
             switch (state) {
                 case 0:
@@ -92,6 +114,19 @@ YouHuHelper.freightUnitStateHelper= {
 
         } else
             return "none";
+    },
+
+    toCSS: function (state) {
+        switch (state) {
+            case "none":
+                return "default";
+            case "busy":
+                return "danger";
+            case "ready":
+                return "success";
+            default:
+                return "default";
+        }
     }
 }
 
