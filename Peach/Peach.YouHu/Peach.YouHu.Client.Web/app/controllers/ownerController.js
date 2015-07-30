@@ -44,7 +44,7 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
 
             modalInstance.result.then(function (success) {
 
-                listOrders();
+                $scope.refresh();
 
                 showFindFreight(success.orderId);
 
@@ -55,19 +55,19 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
 
         $scope.showFindFreight = function(order) {
 
-            var findModal = $modal.open({
+            var modalInstance = $modal.open({
                 templateUrl: 'app/views/owner/freights.html',
                 controller: 'findFreightUnitController',
                 resolve: {
-                    orderId: function() {
-                        return order.Id;
+                    order: function() {
+                        return order;
                     }
                 }
             });
 
-            findModal.result.then(
+            modalInstance.result.then(
                 function() {
-                    listOrders();
+                    $scope.refresh();
                 },
                 function() {
                     // nothing to do
@@ -76,7 +76,7 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
         };
 
         $scope.showPay = function(order) {
-            var payModal = $modal.open({
+            var modalInstance = $modal.open({
                 templateUrl: 'app/views/owner/pay.html',
                 controller: 'payController',
                 resolve: {
@@ -86,9 +86,9 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
                 }
             });
 
-            payModal.result.then(
+            modalInstance.result.then(
                 function() {
-                    listOrders();
+                    $scope.refresh();
                 },
                 function() {
                     // nothing to do
@@ -97,7 +97,7 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
         };
 
         $scope.showConsign = function(order) {
-            var consignModal = $modal.open({
+            var modalInstance = $modal.open({
                 templateUrl: 'app/views/owner/consign.html',
                 controller: 'consignController',
                 resolve: {
@@ -107,9 +107,9 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
                 }
             });
 
-            consignModal.result.then(
+            modalInstance.result.then(
                 function() {
-                    listOrders();
+                    $scope.refresh();
                 },
                 function() {
                     // nothing to do
@@ -118,7 +118,7 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
         };
 
         $scope.showEvaluate = function (order) {
-            var evaluateModal = $modal.open({
+            var modalInstance = $modal.open({
                 templateUrl: 'app/views/owner/evaluate.html',
                 controller: 'evaluateController',
                 resolve: {
@@ -128,9 +128,9 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
                 }
             });
 
-            evaluateModal.result.then(
+            modalInstance.result.then(
                 function () {
-                    listOrders();
+                    $scope.refresh();
                 },
                 function () {
                     // nothing to do
@@ -155,9 +155,8 @@ app.controller('publishOrderController', ['$scope', '$modalInstance', 'ownerServ
     };
 
     $scope.publish = function() {
-
         ownerService.publish($scope.publishModel).then(function(response) {
-            $scope.close();
+            $modalInstance.close();
 
         }, function(error) {
             alert(YouHuHelper.errorHelper.getErrorMsg(error));
@@ -166,7 +165,7 @@ app.controller('publishOrderController', ['$scope', '$modalInstance', 'ownerServ
 
 }]);
 
-app.controller('findFreightUnitController', ['$scope','$modal','$findModal','order','ownerService', function($scope,$modal, $findModal,order, ownerService) {
+app.controller('findFreightUnitController', ['$scope', '$modal', '$modalInstance', 'order', 'ownerService', function ($scope, $modal, $modalInstance, order, ownerService) {
 
     $scope.freightUnits = [];
     $scope.freightUnitsCount = 0;
@@ -178,7 +177,7 @@ app.controller('findFreightUnitController', ['$scope','$modal','$findModal','ord
     }
 
     function listFreightUnits() {
-        ownerService.find(order.Id)
+        ownerService.findFrieghtUnit(order.Id)
             .success(function(success) {
                 $scope.freightUnits = success;
                 $scope.freightUnitsCount = success.length;
@@ -196,29 +195,29 @@ app.controller('findFreightUnitController', ['$scope','$modal','$findModal','ord
     };
 
     $scope.close = function() {
-        $findModal.dismiss('cancel');
+        $modalInstance.dismiss('cancel');
     };
 
     $scope.showMakeDeal = function(freightUnit) {
-        var makeDealModal = $modal.open({
+        var modalInstance = $modal.open({
             templateUrl: 'app/views/owner/makeDeal.html',
-            contorller: 'makeDealController',
+            controller: 'makeDealController',
             resolve: {
-                order: order,
-                freightUnit: freightUnit
+                order: function () { return order; },
+                freightUnit: function () { return freightUnit }
             }
         });
 
-        makeDealModal.result.then(function(success) {
-            $scope.close();
+        modalInstance.result.then(function (success) {
+            $modalInstance.close();
         }, function() {
             // nothing to do
-            alert("Error Occured");
         });
     };
 }]);
 
-app.controller('makeDealController', ['$scope', '$makeDealModal', 'order','freightUnit', 'ownerService', function($scope, $makeDealModal, order,freightUnit, ownerService) {
+app.controller('makeDealController', ['$scope', '$modalInstance', 'order', 'freightUnit', 'ownerService', function ($scope, $modalInstance, order, freightUnit, ownerService) {
+
     $scope.makeDealModel = {
         OrderId: 0,
         FreightUnitId: 0
@@ -233,21 +232,21 @@ app.controller('makeDealController', ['$scope', '$makeDealModal', 'order','freig
     }
 
     $scope.close = function() {
-        $makeDealModal.dismiss('cancel');
+        $modalInstance.dismiss('cancel');
     };
 
     $scope.makeDeal = function() {
-        ownerService.makeDeal($scope.makeDealModel).success(function(response) {
-                alert("Make Deal Successfully");
-                $scope.close();
-            })
-            .error(function(error) {
+        ownerService.makeDeal($scope.makeDealModel).success(function (response) {
+            alert("Make Deal Successfully");
+            $modalInstance.close();
+        })
+            .error(function (error) {
                 alert(YouHuHelper.errorHelper.getErrorMsg(error));
             });
     };
 }]);
 
-app.controller('payController', ['$scope','$payModal','order', 'ownerService', function ($scope,$payModal,order, ownerService) {
+app.controller('payController', ['$scope', '$modalInstance', 'order', 'ownerService', function ($scope, $modalInstance, order, ownerService) {
     $scope.payModel = {
         OrderId: 0,
         PaymentCode: "",
@@ -264,14 +263,14 @@ app.controller('payController', ['$scope','$payModal','order', 'ownerService', f
     }
 
     $scope.close = function() {
-        $payModal.dismiss('cancel');
+        $modalInstance.dismiss('cancel');
     };
 
     $scope.pay = function() {
         ownerService.pay($scope.payModel)
             .success(function(success) {
                 alert("Pay Successfully");
-                $scope.close();
+                $modalInstance.close();
             })
             .error(function(error) {
                 alert(YouHuHelper.errorHelper.getErrorMsg(error));
@@ -279,7 +278,7 @@ app.controller('payController', ['$scope','$payModal','order', 'ownerService', f
     };
 }]);
 
-app.controller('cosignController', ['$scope','$consignModal','order','ownerService', function ($scope,$consignModal,order, ownerService) {
+app.controller('consignController', ['$scope', '$modalInstance', 'order', 'ownerService', function ($scope, $modalInstance, order, ownerService) {
     $scope.consignModel = {
         OrderId: 0,
         PaymentCode: ""
@@ -292,22 +291,22 @@ app.controller('cosignController', ['$scope','$consignModal','order','ownerServi
     }
 
     $scope.close= function() {
-        $consignModal.dismiss('cancel');
+        $modalInstance.dismiss('cancel');
     }
 
     $scope.consign= function() {
         ownerService.consign($scope.consignModel)
         .success(function(success) {
             alert("Consign Successfully");
-                $scope.close();
-            })
+            $modalInstance.close();
+        })
         .error(function(error) {
             alert(YouHuHelper.errorHelper.getErrorMsg(error));
         });
     }
 }]);
 
-app.controller('evaluateController', ['$scope', '$evaluateModal', 'order', 'ownerService', function ($scope, $evaluateModal, order, ownerService) {
+app.controller('evaluateController', ['$scope', '$modalInstance', 'order', 'ownerService', function ($scope, $modalInstance, order, ownerService) {
 
     $scope.evaluateModel = {
         Comments: "",
@@ -322,14 +321,14 @@ app.controller('evaluateController', ['$scope', '$evaluateModal', 'order', 'owne
     }
 
     $scope.close= function () {
-        $evaluateModal.dismiss('cancel');
+        $modalInstance.dismiss('cancel');
     }
 
     $scope.evaluate=function () {
         ownerService.evaluate($scope.evaluateModel)
         .success(function (success) {
             alert("Consign Successfully");
-            $scope.close();
+            $modalInstance.close();
         })
             .error(function (error) {
                 alert(YouHuHelper.errorHelper.getErrorMsg(error));

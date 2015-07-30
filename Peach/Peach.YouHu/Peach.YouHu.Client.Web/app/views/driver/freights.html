@@ -3,7 +3,7 @@
         <div class="row" data-ng-show="freightUnitsCount == 0">
             <h4 class="col-md-12 text-center">Not found any matched freight units. Please refresh later.</h4>
             <div class="col-md-offset-4 col-md-4 col-md-offset-4">
-                <button type="button" class="btn btn-block" data-ng-click="register()">REGISTER</button>
+                <button type="button" class="btn btn-block" data-ng-click="showRegister()">REGISTER</button>
             </div>
         </div>
         <div class="row">
@@ -19,7 +19,7 @@
                             <h5>Driver {{fu.Driver}}(Rank{{fu.Rank}}) at {{fu.Location}}</h5>
                         </div>
                         <div class="col-md-4">
-                            <button class="btn" type="submit" data-ng-click="showPublish(fu)"></button>
+                            <button class="btn" type="submit" data-ng-click="showPublish(fu)">PUBLISH</button>
                         </div>
                     </div>
                 </li>

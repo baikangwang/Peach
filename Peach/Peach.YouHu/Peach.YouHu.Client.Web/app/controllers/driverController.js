@@ -12,7 +12,7 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
 
         function listOrders() {
 
-            driverService.list()
+            driverService.listOrders()
                 .success(function(response) {
                     $scope.orders = response;
                     $scope.orderCount = $scope.orders.length;
@@ -36,7 +36,7 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
         };
 
         $scope.showConfirmDeal = function(order) {
-            var confirmDealModal = $modal.open({
+            var modalInstance = $modal.open({
                 templateUrl: 'app/views/driver/confirmDeal.html',
                 controller: 'confirmDealController',
                 resolve: {
@@ -46,8 +46,8 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
                 }
             });
 
-            confirmDealModal.result.then(function (success) {
-                listOrders();
+            modalInstance.result.then(function (success) {
+                $scope.refresh();
             }, function() {
                 // nothing to do
             });
@@ -55,7 +55,7 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
 
         $scope.showUpdateState = function(order) {
 
-            var updateStateModal = $modal.open({
+            var modalInstance = $modal.open({
                 templateUrl: 'app/views/driver/updateState.html',
                 controller: 'updateStateController',
                 resolve: {
@@ -65,9 +65,9 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
                 }
             });
 
-            updateStateModal.result.then(
+            modalInstance.result.then(
                 function() {
-                    listOrders();
+                    $scope.refresh();
                 },
                 function() {
                     // nothing to do
@@ -76,7 +76,7 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
         };
 
         $scope.showEvaluate = function(order) {
-            var evaluateModal = $modal.open({
+            var modalInstance = $modal.open({
                 templateUrl: 'app/views/driver/evaluate.html',
                 controller: 'evaluateController',
                 resolve: {
@@ -86,9 +86,9 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
                 }
             });
 
-            evaluateModal.result.then(
+            modalInstance.result.then(
                 function() {
-                    listOrders();
+                    $scope.refresh();
                 },
                 function() {
                     // nothing to do
@@ -97,7 +97,7 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
         };
     }]);
 
-app.controller('confirmDealController', ['$scope', '$confirmDealModal','order','driverService', function ($scope, $confirmDealModal,order, driverService) {
+app.controller('confirmDealController', ['$scope', '$modalInstance', 'order', 'driverService', function ($scope, $modalInstance, order, driverService) {
 
     $scope.confirmDealModel = {
         AcceptedId: 0,
@@ -112,13 +112,13 @@ app.controller('confirmDealController', ['$scope', '$confirmDealModal','order','
     }
 
     $scope.close = function() {
-        $confirmDealModal.dismiss('cancel');
+        $modalInstance.dismiss('cancel');
     };
-
+    
     $scope.confirmDeal = function() {
 
         driverService.confirmDeal($scope.confirmDealModel).then(function (response) {
-            $scope.close();
+            $modalInstance.close();
 
         }, function(error) {
             alert(YouHuHelper.errorHelper.getErrorMsg(error));
@@ -127,7 +127,7 @@ app.controller('confirmDealController', ['$scope', '$confirmDealModal','order','
 
 }]);
 
-app.controller('updateStateController', ['$scope', '$updateStateModal', 'order', 'driverService', function ($scope, $updateStateModal, order, driverService) {
+app.controller('updateStateController', ['$scope', '$modalInstance', 'order', 'driverService', function ($scope, $modalInstance, order, driverService) {
     $scope.updateStateModel = {
         OrderId: 0,
         Location: ""
@@ -140,13 +140,13 @@ app.controller('updateStateController', ['$scope', '$updateStateModal', 'order',
     }
 
     $scope.close = function() {
-        $updateStateModal.dismiss('cancel');
+        $modalInstance.dismiss('cancel');
     };
 
     $scope.updateState = function() {
         driverService.updateOrderState($scope.updateStateModel).success(function (response) {
                 alert("Update order state Successfully");
-                $scope.close();
+                $modalInstance.close();
             })
             .error(function(error) {
                 alert(YouHuHelper.errorHelper.getErrorMsg(error));
@@ -154,7 +154,7 @@ app.controller('updateStateController', ['$scope', '$updateStateModal', 'order',
     };
 }]);
 
-app.controller('evaluateController', ['$scope', '$evaluateModal', 'order', 'driverService', function ($scope, $evaluateModal, order, driverService) {
+app.controller('evaluateController', ['$scope', '$modalInstance', 'order', 'driverService', function ($scope, $modalInstance, order, driverService) {
     $scope.evaluateModel = {
         OrderId: 0,
         Rank: 0,
@@ -168,14 +168,14 @@ app.controller('evaluateController', ['$scope', '$evaluateModal', 'order', 'driv
     }
 
     $scope.close = function() {
-        $evaluateModal.dismiss('cancel');
+        $modalInstance.dismiss('cancel');
     };
 
     $scope.evaluate = function() {
         driverService.evaluate($scope.evaluateModel)
             .success(function(success) {
                 alert("Evaluate Successfully");
-                $scope.close();
+                $modalInstance.close();
             })
             .error(function(error) {
                 alert(YouHuHelper.errorHelper.getErrorMsg(error));
@@ -195,7 +195,7 @@ app.controller('freightUnitsController', ['$scope','$modal','driverService', fun
     }
 
     function listFreightUnits() {
-        driverService.listOrders()
+        driverService.listFreights()
             .success(function (success) {
                 $scope.freightUnits = success;
                 $scope.freightUnitsCount = success.length;
@@ -213,32 +213,29 @@ app.controller('freightUnitsController', ['$scope','$modal','driverService', fun
     };
 
     $scope.showPublish = function (freightUnit) {
-        var publishModal = $modal.open({
+        var modalInstance = $modal.open({
             templateUrl: 'app/views/driver/publish.html',
-            contorller: 'publishFreightUnitController',
+            controller: 'publishFreightUnitController',
             resolve: {
-                order: order,
-                freightUnit: freightUnit
+                freightUnit: function () { return freightUnit }
             }
         });
 
-        publishModal.result.then(function (success) {
-            $scope.close();
+        modalInstance.result.then(function (success) {
+            $scope.refresh();
         }, function () {
             // nothing to do
-            alert("Error Occured");
         });
     };
 
     $scope.showRegister=function () {
-        var registerModal = $modal.open({
+        var modalInstance = $modal.open({
             templateUrl: 'app/views/driver/register.html',
-            contorller: 'registerFreightUnitController',
+            controller: 'registerFreightUnitController'
         });
 
-        registerModal.result.then(function (success) {
+        modalInstance.result.then(function (success) {
             $scope.refresh();
-            $scope.close();
         }, function () {
             // nothing to do
             alert("Error Occured");
@@ -246,7 +243,7 @@ app.controller('freightUnitsController', ['$scope','$modal','driverService', fun
     }
 }]);
 
-app.controller('publishFreightUnitController', ['$scope', '$publishModal', 'freightUnit','driverService',function ($scope, $publishModal, freightUnit,driverService)
+app.controller('publishFreightUnitController', ['$scope', '$modalInstance', 'freightUnit', 'driverService', function ($scope, $modalInstance, freightUnit, driverService)
 {
     $scope.publishModel = {
         Id: 0,
@@ -260,25 +257,23 @@ app.controller('publishFreightUnitController', ['$scope', '$publishModal', 'frei
     }
 
     $scope.close = function () {
-        $publishModal.dismiss('cancel');
+        $modalInstance.dismiss('cancel');
     };
 
     $scope.publish = function () {
         driverService.publish($scope.publishModel)
             .success(function (success) {
                 alert("Publish Successfully");
-                $scope.close();
+                $modalInstance.close();
             })
             .error(function (error) {
                 alert(YouHuHelper.errorHelper.getErrorMsg(error));
             });
     };
-
-    $scope.register = function () {
-    };
 }]);
 
-app.controller('registerFreightUnitController', ['$scope', '$registerModal', 'driverService', function ($scope, $registerModal, driverService) {
+app.controller('registerFreightUnitController', ['$scope', '$modalInstance', 'driverService', function ($scope, $modalInstance, driverService) {
+
     $scope.registerModel = {
         Location: "",
         Height: 0.0,
@@ -289,14 +284,14 @@ app.controller('registerFreightUnitController', ['$scope', '$registerModal', 'dr
     };
 
     $scope.close = function () {
-        $registerModal.dismiss('cancel');
+        $modalInstance.dismiss('cancel');
     };
 
     $scope.evaluate = function () {
         driverService.register($scope.registerModel)
             .success(function (success) {
                 alert("Register Successfully");
-                $scope.close();
+                $modalInstance.close();
             })
             .error(function (error) {
                 alert(YouHuHelper.errorHelper.getErrorMsg(error));

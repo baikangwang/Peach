@@ -89,7 +89,7 @@ namespace Peach.YouHu.API.Test.Controller
             {
                 var model = new PayBdingModel()
                 {
-                    FreightCost = 6000,
+                    // FreightCost = 6000,
                     OrderId = 3,//2,
                     Paid = 6000,
                     PaymentCode = "123456"

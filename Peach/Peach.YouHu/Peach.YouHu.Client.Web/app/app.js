@@ -22,8 +22,8 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/driver/orders.html"
     });
 
-    $routeProvider.when("/driver/freightsUnits", {
-        controller: "driverfreightsUnitsController",
+    $routeProvider.when("/driver/freightUnits", {
+        controller: "freightUnitsController",
         templateUrl: "/app/views/driver/freights.html"
     });
 

@@ -22,7 +22,7 @@
                     <li data-ng-hide="!authentication.isAuth"><a href="#">Welcome {{authentication.userName}}</a></li>
                     <li data-ng-hide="!authentication.isAuth || authentication.role!='Owner'"><a href="#/owner/orders">My Orders</a></li>
                     <li data-ng-hide="!authentication.isAuth || authentication.role=='Owner'"><a href="#/driver/orders">My Orders</a></li>
-                    <li data-ng-hide="!authentication.isAuth || authentication.role=='Owner'"><a href="#/freightUnits">My Freights</a></li>
+                    <li data-ng-hide="!authentication.isAuth || authentication.role=='Owner'"><a href="#/driver/freightUnits">My Freights</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
                     <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
                     <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>

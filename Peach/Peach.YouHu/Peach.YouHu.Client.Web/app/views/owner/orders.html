@@ -11,6 +11,11 @@
         </div>
         <div data-ng-show="orderCount > 0">
             <div class="row">
+                <div class="col-md-offset-5 col-md-2 col-md-offset-5">
+                    <button type="button" class="btn btn-lg btn-block" data-ng-click="showPublish()">PUBLISH</button>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-2 pull-right">
                     <button type="button" class="btn btn-block btn-primary" data-ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span> REFRESH</button>
                 </div>
@@ -19,19 +24,19 @@
                 <li class="list-group-item">
                     <div class="row container">
                         <div class="col-xs-4 col-md-5">
-                            <h1>
-                                <label class="label-primary">Driver: {{order.Driver}}</label>
-                            </h1>
+                            <h3>
+                                <p>Driver: {{order.Driver}}</p>
+                            </h3>
                         </div>
                         <div class="col-xs-4 col-md-5">
-                            <h1>
-                                <label class="label-primary">To: {{order.Destination}}</label>
-                            </h1>
+                            <h3>
+                                <p>To: {{order.Destination}}</p>
+                            </h3>
                         </div>
                         <div class="col-xs-4 col-md-2">
-                            <h1>
-                                <label class="label-primary">Cost: 0</label>
-                            </h1>
+                            <h3>
+                                <p>Cost: {{order.FreightCost}}</p>
+                            </h3>
                         </div>
                     </div>
                     <div class="row">

@@ -10,6 +10,7 @@
         public string Description { get; set; }
         public DateTime PublishedDate { get; set; }
         public OrderState State { get; set; }
+        public decimal FreightCost { get; set; }
 
         public OwnerOrderViewModel()
         {

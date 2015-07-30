@@ -56,13 +56,16 @@ app.factory('ownerService', ['$http', function ($http) {
         };
 
         var _find = function(orderId) {
-            return $http.get(serviceBase + 'api/Owner/FreightUnits/Find', { Id: orderId })
-                .success(function(response) {
-                    return response;
-                })
-                .error(function(response) {
-                    return response;
-                });
+            return $http(
+            {
+                url: serviceBase + 'api/Owner/FreightUnits/Find',
+                method: "GET",
+                params: { Id: orderId }
+            }).success(function (response) {
+                return response;
+            }).error(function (response) {
+                return response;
+            });
         };
 
         var _evaluate = function (evaluate) {
