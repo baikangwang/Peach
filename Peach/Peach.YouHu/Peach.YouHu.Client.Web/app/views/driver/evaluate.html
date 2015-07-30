@@ -3,20 +3,22 @@
     <h4>Evaluation</h4>
 </div>
 <div class="modal-body">
+    <p class="text-center">
+        <h4>What do you think the driver?</h4>
+    </p>
     <form class="form form-horizontal">
-        <div class="form-group">
-            <div class="row text-center">
-                <h5>What do you think the driver?</h5>
-            </div>
-            <div class="row">
-                <input type="text" class="form-control" data-ng-model="evaluateModel.Comments" placeholder="Leave some comments" required />
-            </div>
-            <div class="row">
-                <input type="number" class="form-control" data-ng-model="evaluateModel.Rank" placeholder="Rank: 0 ~ 9" required />
-            </div>
-            <div class="row">
-                <button data-ng-click="evaluate()" type="button">POST</button>
-            </div>
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
+            <input type="text" class="form-control" data-ng-model="evaluateModel.Comments" placeholder="Leave some comments" required/>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+            <input type="number" class="form-control" data-ng-model="evaluateModel.Rank" placeholder="Rank: 0 ~ 9" required/>
         </div>
     </form>
+</div>
+<div class="modal-footer">
+    <div class="row col-md-2 pull-right">
+        <button class="btn btn-block" data-ng-click="evaluate()" type="button">POST</button>
+    </div>
 </div>

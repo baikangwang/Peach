@@ -27,23 +27,23 @@
                     <div class="panel-heading">
                         <div class="row container">
                             <div class="col-lg-3">
-                                <h3 class="text-left">
+                                <h4 class="text-left">
                                     <span class="label" data-ng-class="'label-'+getCSS(order)">
                                         {{order.Source}}
                                     </span>
-                                </h3>
+                                </h4>
                             </div>
                             <div class="col-lg-1">
-                                <h3 class="text-center">
+                                <h4 class="text-center">
                                     <span class="glyphicon glyphicon-arrow-right"></span>
-                                </h3>
+                                </h4>
                             </div>
                             <div class="col-lg-3">
-                                <h3 class="text-right">
+                                <h4 class="text-right">
                                     <span class="label" data-ng-class="'label-'+getCSS(order)">
                                         {{order.Destination}}
                                     </span>
-                                </h3>
+                                </h4>
                             </div>
                             <div class="col-lg-4">
                                 <div class="text-right">
@@ -60,11 +60,11 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-2">
-                                <h3 class="text-left">
+                                <h4 class="text-left">
                                     <p>
                                         <span class="glyphicon glyphicon-user"></span> {{order.Driver? order.Driver:'FINDING...'}}
                                     </p>
-                                </h3>
+                                </h4>
                             </div>
                             <div class="col-lg-4">
                                 <p class="text-warning">
@@ -72,9 +72,9 @@
                                 </p>
                             </div>
                             <div class="col-lg-3">
-                                <h3 class="text-right">
-                                    {{order.FreightCost!=0?(order.FreightCost | currency:'&yen;'):'FINDING...'}}
-                                </h3>
+                                <h4 class="text-right">
+                                    {{order.FreightCost!=0?(order.FreightCost | currency:'&yen;'):'N/A'}}
+                                </h4>
                             </div>
                             <div class="col-lg-3 text-right">
                                 <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getState(order)=='dealt'" data-ng-click="showPay(order)">PAY</button>

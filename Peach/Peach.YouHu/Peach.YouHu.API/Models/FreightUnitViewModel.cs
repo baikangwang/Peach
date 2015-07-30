@@ -12,6 +12,8 @@
 
         public decimal Cost { get; set; }
 
+        public FreightUnitState State { get; set; }
+
 
         public FreightUnitViewModel() { }
 

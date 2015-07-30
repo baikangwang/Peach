@@ -3,14 +3,14 @@
     <h4>Consign</h4>
 </div>
 <div class="modal-body">
-    <form class="form form-group" novalidate>
-        <div class="form-group">
-            <div class="row">
-                <input type="text" class="form-control" data-ng-model="consignModel.PaymentCode" placeholder="Payment Code of 6 digits" required />
-            </div>
-            <div class="row">
-                <button data-ng-click="consign()" type="button">CONSIGN</button>
-            </div>
+    <form class="form form-horizontal" novalidate>
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span><input type="text" class="form-control" data-ng-model="consignModel.PaymentCode" placeholder="Payment Code of 6 digits" required/>
         </div>
     </form>
+</div>
+<div class="modal-footer">
+    <div class="row col-md-3 pull-right">
+        <button class="btn btn-block" data-ng-click="consign()" type="button">CONSIGN</button>
+    </div>
 </div>

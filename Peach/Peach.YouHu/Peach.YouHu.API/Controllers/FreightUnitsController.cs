@@ -27,7 +27,7 @@
 
             IList<FreightUnitViewModel> view = await this.AppDb.FreightUnits.Include(u => u.Driver)
                 .Where(u => u.Driver.Id == this.LogonId)
-                .Select(u => new FreightUnitViewModel(){Id = u.Id,Rank = u.Driver.Rank,Driver = u.Driver.FullName,Location = u.Location})
+                .Select(u => new FreightUnitViewModel(){Id = u.Id,Rank = u.Driver.Rank,Driver = u.Driver.FullName,Location = u.Location,State = u.State})
                 .ToListAsync();
 
             return this.Ok(view);

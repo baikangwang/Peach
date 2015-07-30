@@ -97,7 +97,6 @@
     <Content Include="app\services\authService.js" />
     <Content Include="app\services\driverService.js" />
     <Content Include="app\services\ownerService.js" />
-    <Content Include="app\services\samplesService.js" />
     <Content Include="app\views\driver\confirmDeal.html" />
     <Content Include="app\views\driver\evaluate.html" />
     <Content Include="app\views\driver\freights.html" />
@@ -214,7 +213,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_DetectChanges="False" BuildVersion_ConfigurationName="Release" BuildVersion_BuildAction="ReBuild" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.None.YearDayOfYear" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.YearDayOfYear" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildAction="ReBuild" BuildVersion_ConfigurationName="Release" BuildVersion_DetectChanges="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

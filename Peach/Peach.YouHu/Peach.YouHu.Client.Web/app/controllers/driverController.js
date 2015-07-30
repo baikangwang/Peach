@@ -247,6 +247,11 @@ app.controller('freightUnitsController', ['$scope','$modal','driverService', fun
             alert("Error Occured");
         });
     }
+
+    $scope.getCSS=function (freightUnit) {
+        var state = YouHuHelper.freightUnitStateHelper.toLabel(freightUnit.State);
+        return YouHuHelper.freightUnitStateHelper.toCSS(state);
+    }
 }]);
 
 app.controller('publishFreightUnitController', ['$scope', '$modalInstance', 'freightUnit', 'driverService', function ($scope, $modalInstance, freightUnit, driverService)

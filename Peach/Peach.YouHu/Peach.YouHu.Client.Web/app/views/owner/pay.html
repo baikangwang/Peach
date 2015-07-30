@@ -3,24 +3,25 @@
     <h4>Payment</h4>
 </div>
 <div class="modal-body">
-    <form class="form form-group" name="payForm">
-        <div class="form-group">
-            <div class="row">
-                <h3>
-                    <p>
-                        Freight Cost:<input readonly name="freightCost" type="text" class="label" data-ng-model="freightCost" value="freightCost" />
-                    </p>
-                </h3>
-            </div>
-            <div class="row">
+    <form class="form" name="payForm">
+        <h3 class="well text-center">
+            Freight&nbsp;Cost&nbsp;{{freightCost|currency:"&yen;"}}
+        </h3>
+        <p>
+            <div class="input-group">
+                <span class="input-group-addon">&yen;</span>
                 <input type="number" name="paid" class="form-control" data-ng-model="payModel.Paid" placeholder="Put cost amount you paid" required autofocus />
             </div>
-            <div class="row">
-                <input type="text" name="paymentCode" class="form-control" data-ng-model="payModel.PaymentCode" placeholder="Payment Code of 6 digits" required />
-            </div>
-            <div class="row">
-                <button data-ng-click="pay()" type="button">PAY</button>
-            </div>
-        </div>
+        </p>
+        <p>
+            <div class="input-group"></div>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+            <input type="text" name="paymentCode" class="form-control" data-ng-model="payModel.PaymentCode" placeholder="Payment Code of 6 digits" required />
+        </p>
     </form>
+</div>
+<div class="modal-footer">
+    <div class="row col-md-2 pull-right">
+        <button class="btn btn-block" data-ng-click="pay()" type="button">PAY</button>
+    </div>
 </div>

@@ -3,19 +3,18 @@
     <h4>Make Deal</h4>
 </div>
 <div class="modal-body">
-    <form class="form form-horizontal">
-        <div class="form-group">
-            <div class="row text-center">
-                <h5>Are you sure to make deal with this freight?</h5>
-            </div>
-            <div class="row">
-                <div class="col-md-5 col-md-offset-2">
-                    <button class="btn btn-block" type="submit" data-ng-click="makeDeal()">DEAL</button>
-                </div>
-                <div class="col-md-5">
-                    <button class="btn btn-block" type="button" data-ng-click="close()">CANCEL</button>
-                </div>
-            </div>
+    <p class="text-center well">
+        <h3>Are you sure to make deal with this freight?</h3>
+    </p>
+</div>
+<div class="modal-footer">
+    <div class="row">
+        <div class="col-md-5">
+            <button class="btn btn-block" type="submit" data-ng-click="makeDeal()">DEAL</button>
         </div>
-    </form>
+        <div class="col-md-2">&nbsp;</div>
+        <div class="col-md-5">
+            <button class="btn btn-block" type="button" data-ng-click="close()">CANCEL</button>
+        </div>
+    </div>
 </div>

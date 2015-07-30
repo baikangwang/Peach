@@ -49,3 +49,7 @@ app.run(['authService','$location', function (authService,$location) {
             }
         }
 }]);
+
+//app.run(['$templateCache', function ($templateCache) {
+//    $templateCache.removeAll();
+//}]);

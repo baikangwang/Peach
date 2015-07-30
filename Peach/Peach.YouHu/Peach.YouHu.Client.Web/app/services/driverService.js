@@ -1,7 +1,7 @@
 ﻿'use strict';
 app.factory('driverService', ['$http', function ($http) {
 
-        var serviceBase = 'http://localhost:20268/';
+    var serviceBase = 'http://nltc369:8080/';
         var driverServiceFactory = {};
 
         var _publish = function (model) {

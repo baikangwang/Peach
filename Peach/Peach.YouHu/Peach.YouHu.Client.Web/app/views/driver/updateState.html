@@ -4,18 +4,20 @@
 </div>
 <div class="modal-body">
     <form class="form form-horizontal">
-        <div class="form-group">
-            <div class="row text-center">
-                <input type="text" class="form-control" data-ng-model="updateStateModel.Location" />
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-bookmark"></span></span>
+                <input type="text" class="form-control" placeholder="Where did your frieght unit reached..." data-ng-model="updateStateModel.Location"/>
             </div>
-            <div class="row">
-                <div class="col-md-5 col-md-offset-2">
-                    <button class="btn btn-block" type="submit" data-ng-click="updateState()">UPDATE</button>
-                </div>
-                <div class="col-md-5">
-                    <button class="btn btn-block" type="button" data-ng-click="close()">CANCEL</button>
-                </div>
-            </div>
-        </div>
     </form>
+</div>
+<div class="modal-footer">
+    <div class="row">
+        <div class="col-md-5">
+            <button class="btn btn-block" type="submit" data-ng-click="updateState()">UPDATE</button>
+        </div>
+        <div class="col-md-2">&nbsp;</div>
+        <div class="col-md-5">
+            <button class="btn btn-block" type="button" data-ng-click="close()">CANCEL</button>
+        </div>
+    </div>
 </div>

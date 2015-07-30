@@ -58,6 +58,7 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
             var modalInstance = $modal.open({
                 templateUrl: 'app/views/owner/freights.html',
                 controller: 'findFreightUnitController',
+                size:'lg',
                 resolve: {
                     order: function() {
                         return order;
