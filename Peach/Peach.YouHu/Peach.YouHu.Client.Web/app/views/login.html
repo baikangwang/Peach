@@ -1,21 +1,27 @@
-﻿<div class="row">
-    <div class="col-md-4">&nbsp;</div>
-    <div class="col-md-4">
-        <form class="form-login col-md-10" name="loginForm" role="form">
-            <h2 class="form-login-heading">Login</h2>
-            <p>
-                <input type="text" class="form-control" placeholder="Email" data-ng-model="loginData.userName" required autofocus>
-            </p>
-            <p>
-                <input type="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
-            </p>
-            <p>
+﻿<div class="col-md-4">&nbsp;</div>
+<div class="col-md-4 well">
+    <form class="" name="loginForm" role="form">
+        <fieldset>
+            <legend class="form-login-heading">Login</legend>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="email" class="form-control" style="height: 47px" placeholder="Email" data-ng-model="loginData.userName" required autofocus>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input type="password" class="form-control" style="height: 47px" placeholder="Password" data-ng-model="loginData.password" required>
+                </div>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-info btn-block" type="submit" data-ng-disabled="loginForm.$invalid || !loginForm.$dirty" data-ng-click="login()">Login</button>
-            </p>
-        </form>
-    </div>
-    <div class="col-md-4">&nbsp;</div>
+            </div>
+        </fieldset>
+    </form>
 </div>
+<div class="col-md-4">&nbsp;</div>
 <hr data-ng-hide="message == ''"/>
 <div class="row container">
     <div data-ng-hide="message == ''" class="alert alert-danger">

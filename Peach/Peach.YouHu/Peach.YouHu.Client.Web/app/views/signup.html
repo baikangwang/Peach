@@ -1,33 +1,43 @@
-﻿<div class="row">
-    <div class="col-md-4">&nbsp;</div>
-    <div class="col-md-4">
-        <div class="row">
-            <form class="form-login col-md-10" name="signupForm" role="form">
-                <h2 class="form-login-heading">Sign up</h2>
-                <p class="form-group">
-                <p>
-                    <input type="text" class="form-control" placeholder="Email" data-ng-model="registration.email" required autofocus>
-                </p>
-                <p>
-                    <input type="password" class="form-control" placeholder="Password" data-ng-model="registration.password" required>
-                </p>
-                <p>
-                    <input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="registration.confirmPassword" required>
-                </p>
-                <p>
-                        <input type="radio" class="radio radio-inline" name="role" id="owner" data-ng-model="registration.role" value="Owner"/>
-                        <label class="label label-danger control-label">Owner</label>
-                    <input type="radio" class="radio radio-inline" name="role" id="driver" data-ng-model="registration.role" value="Driver">
-                        <label class="label label-info control-label">Driver</label>
-                </p>
-                <p>
-                    <button class="btn btn-info btn-block" type="submit" data-ng-disabled="signupForm.$invalid || !signupForm.$dirty" data-ng-click="signUp()">Submit</button>
-                </p>
-            </form>
-        </div>
-          </div>
-    <div class="col-md-4">&nbsp;</div>
+﻿<div class="col-md-4">&nbsp;</div>
+<div class="col-md-4 well">
+    <form class="" name="signupForm" role="form">
+        <fieldset>
+            <legend class="form-login-heading">Sign up</legend>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input type="email" class="form-control" style="height: 47px" placeholder="Email" data-ng-model="loginData.userName" required autofocus>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input type="password" class="form-control" style="height: 47px" placeholder="Password" data-ng-model="loginData.password" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input type="password" class="form-control" style="height: 47px" placeholder="Confirm Password" data-ng-model="registration.confirmPassword" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default" data-ng-class="{active:registration.role==0,'btn-danger':registration.role==0}">
+                        <input type="radio" name="options" id="option2" data-ng-model="registration.role" value="0" autocomplete="off">Owner
+                    </label>
+                    <label class="btn btn-default" data-ng-class="{active:registration.role==1,'btn-primary':registration.role==1}">
+                        <input type="radio" name="options" id="option3" data-ng-model="registration.role" value="1" autocomplete="off">Driver
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-info btn-block" type="submit" data-ng-disabled="signupForm.$invalid || !signupForm.$dirty" data-ng-click="signUp()">Submit</button>
+            </div>
+        </fieldset>
+    </form>
 </div>
+<div class="col-md-4">&nbsp;</div>
 <hr data-ng-hide="message == ''" />
 <div class="row container">
     <div data-ng-hide="message == ''" class="alert alert-danger">

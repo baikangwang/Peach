@@ -1,22 +1,24 @@
-﻿<div class="modal-header">
-    <a href="" class="close" data-ng-click="close()">&times;</a>
-    <h4>PUBLISH</h4>
-</div>
-<div class="modal-body">
-    <form class="form form-horizontal">
-        <div class="form-group">
-            <div class="row">
-                <div class="">
-                    <input type="text" class="form-control" data-ng-model="publishModel.Location" placeholder="Where is the freight unit locating..." required />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-4 pull-right">
-                    <button class="btn btn-primary btn-block btn-lg" type="submit" data-ng-click="publish()">PUBLISH</button>
+﻿<form class="form form-horizontal">
+    <div class="modal-header">
+        <a href="" class="close" data-ng-click="close()">&times;</a>
+        <h4>PUBLISH</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
+                    <input type="text" class="form-control" data-ng-model="publishModel.Location" placeholder="Where is the freight unit locating..." required/>
                 </div>
             </div>
         </div>
-    </form>
-</div>
-
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 pull-right">
+                <button class="btn btn-primary btn-block btn-lg" type="submit" data-ng-click="publish()">PUBLISH</button>
+            </div>
+        </div>
+    </div>
+</form>
 

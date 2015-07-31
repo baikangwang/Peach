@@ -7,24 +7,26 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-1 pull-right">
-                <p>
-                    <button type="button" class="btn btn-block" data-ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span></button>
-                </p>
+            <div class="col-md-6 pull-right">
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-primary" data-ng-click="showRegister()">REGISTER</button>
+                    <button type="button" class="btn btn-primary" data-ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span></button>
+                </div>
             </div>
         </div>
-        <div class="row form-group" data-ng-show="freightUnitsCount > 0">
+        <p></p>
+        <div class="row" data-ng-show="freightUnitsCount > 0">
             <div class="container">
                 <table class="table table-hover">
                     <tr class="{{getCSS(fu)}}" data-ng-repeat="fu in freightUnits">
                         <td class="col-md-4">
-                            <h4><span class="label label-primary"><span class="glyphicon glyphicon-user"></span>&nbsp;{{fu.Driver}}&nbsp;(Rank{{fu.Rank}})</span></h4>
+                            <h4><span class="label label-primary"><span class="glyphicon glyphicon-star"></span>Rank({{fu.Rank}})</span></h4>
                         </td>
                         <td class="col-md-4">
                             <h4><span class="label label-primary"><span class="glyphicon glyphicon-home"></span>&nbsp;{{fu.Location}}</span></h4>
                         </td>
                         <td class="col-md-2">
-                            <span class="badge">{{fu.State.toUpperCase()}}</span>
+                            <span class="badge">{{getState(fu).toUpperCase()}}</span>
                         </td>
                         <td class="col-md-2">
                             <button class="btn btn-block" type="submit" data-ng-click="showPublish(fu)">PUBLISH</button>

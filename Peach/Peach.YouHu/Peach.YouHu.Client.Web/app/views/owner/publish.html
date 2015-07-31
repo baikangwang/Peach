@@ -1,40 +1,60 @@
-﻿<div class="modal-header">
-    <a href="" class="close" data-ng-click="close()">&times;</a>
-    <h4>ORDER PUBLISH</h4>
-</div>
-<div class="modal-body">
-    <form class="form form-horizontal">
-        <div class="form-group">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
+﻿<form class="form form-horizontal" role="form">
+    <div class="modal-header">
+        <a href="" class="close" data-ng-click="close()">&times;</a>
+        <h4>ORDER PUBLISH</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
                     <input type="text" class="form-control" data-ng-model="publishModel.Description" placeholder="What's you would like deliver..." required />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
+        </div>
+        <p></p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
                     <input type="text" class="form-control" data-ng-model="publishModel.Source" placeholder="From" required />
                 </div>
-                <div class="col-lg-6 col-md-6">
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-flag"></span></span>
                     <input type="text" class="form-control" data-ng-model="publishModel.Destination" placeholder="To" required />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <input type="text" class="form-control" data-ng-model="publishModel.Size" placeholder="Size (m)" required />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <input type="text" class="form-control" data-ng-model="publishModel.Weight" placeholder="Weight (kg)" required />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-4 pull-right">
-                    <button class="btn btn-primary btn-block btn-lg" type="submit" data-ng-click="publish()">PUBLISH</button>
+        </div>
+        <p></p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-fullscreen" id="fsize"></span></span>
+                    <input type="text" class="form-control" data-ng-model="publishModel.Size" placeholder="Size" required aria-describedby="fsize" />
+                    <span class="input-group-addon">(m)</span>
                 </div>
             </div>
         </div>
-    </form>
-</div>
+        <p></p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-scale" id="fweight"></span></span>
+                    <input type="text" class="form-control" data-ng-model="publishModel.Weight" placeholder="Weight" required aria-describedby="fweight" />
+                    <span class="input-group-addon">(t)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 pull-right">
+                <button class="btn btn-block" type="submit" data-ng-click="publish()">PUBLISH</button>
+            </div>
+        </div>
+    </div>
+</form>
 
 

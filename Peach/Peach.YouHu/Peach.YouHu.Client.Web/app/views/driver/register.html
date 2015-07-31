@@ -1,47 +1,80 @@
-﻿<div class="modal-header">
-    <a href="" class="close" data-ng-click="close()">&times;</a>
-    <h4>REGISTER NEW</h4>
-</div>
-<div class="modal-body">
-    <form class="form form-horizontal">
-        <div class="form-group">
-            <div class="row">
-                <div class="">
+﻿<form class="form form-horizontal">
+    <div class="modal-header">
+        <a href="" class="close" data-ng-click="close()">&times;</a>
+        <h4>REGISTER NEW</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-bed"></span></span>
                     <input type="number" class="form-control" data-ng-model="registerModel.Type" placeholder="Type" required/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="">
-                    <input type="text" class="form-control" data-ng-model="registerModel.Licence" placeholder="Licence" required />
-                </div>
-            </div>
-            <div class="row">
-                <div class="">
-                    <input type="number" class="form-control" data-ng-model="registerModel.Weight" placeholder="Weight" required />
-                </div>
-            </div>
-            <div class="row">
-                <div class="">
-                    <input type="number" class="form-control" data-ng-model="registerModel.Height" placeholder="Height" required/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="">
-                    <input type="number" class="form-control" data-ng-model="registerModel.Length" placeholder="Length" required/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="">
-                    <input type="text" class="form-control" data-ng-model="registerModel.Location" placeholder="Where is your freight unit locating?" required />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-4 pull-right">
-                    <button class="btn btn-primary btn-block btn-lg" type="submit" data-ng-click="register()">PUBLISH</button>
+                    <select class="form-control" data-ng-model="registerModel.Type" required>
+                        <option value="0">LORRY</option>
+                        <option value="1">MINI VAN</option>
+                        <option value="2">TANK LORRY</option>
+                        <option value="3">TRUCK</option>
+                        <option value="4">VAN</option>
+                    </select>
                 </div>
             </div>
         </div>
-    </form>
-</div>
+        <p></p>
+        <div class="row">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-font"></span></span>
+                    <input type="text" class="form-control" data-ng-model="registerModel.Licence" placeholder="Licence" required/>
+                </div>
+            </div>
+        </div>
+        <p></p>
+        <div class="row">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-scale"></span></span>
+                    <input type="number" class="form-control" data-ng-model="registerModel.Weight" placeholder="Weight" required/>
+                    <span class="input-group-addon">(t)</span>
+                </div>
+            </div>
+        </div>
+        <p></p>
+        <div class="row">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-resize-vertical"></span></span>
+                    <input type="number" class="form-control" data-ng-model="registerModel.Height" placeholder="Height" required/>
+                    <span class="input-group-addon">(m)</span>
+                </div>
+            </div>
+        </div>
+        <p></p>
+        <div class="row">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-resize-horizontal"></span></span>
+                    <input type="number" class="form-control" data-ng-model="registerModel.Length" placeholder="Length" required/>
+                    <span class="input-group-addon">(m)</span>
+                </div>
+            </div>
+        </div>
+        <p></p>
+        <div class="row">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+                    <input type="text" class="form-control" data-ng-model="registerModel.Location" placeholder="Where is your freight unit locating?" required />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 pull-right">
+                <button class="btn btn-primary btn-block btn-lg" type="submit" data-ng-click="register()">PUBLISH</button>
+            </div>
+        </div>
+    </div>
+</form>
 
 
