@@ -16,6 +16,45 @@ YouHuHelper.orderStateHelper = {
         if (state) {
             switch (state) {
                 case 0:
+                    return "未接单";//"ready";
+                case 1:
+                    return "待接单";//"dealing";
+                case 2:
+                    return "被拒绝";//"rejected";
+                case 3:
+                    return "已接单";//"dealt";
+                case 4:
+                    return "待付款";//"paying";
+                case 5:
+                    return "已付款";//"paid";
+                case 6:
+                    return "运输中";//"inprogress";
+                case 7:
+                    return "已送达";//"arrived";
+                case 8:
+                    return "已收货";//"consigned";
+                default:
+                    return "待命中";//"ready";
+            }
+
+        } else
+            return "ready";
+    },
+
+    toValue:function (state) {
+        //Ready = 0,
+        //Dealing = 1,
+        //Rejected = 2,
+        //Dealt = 3,
+        //Paying = 4,
+        //Paid = 5,
+        //InProgress = 6,
+        //Arrived = 7,
+        //Consigned = 8
+
+        if (state) {
+            switch (state) {
+                case 0:
                     return "ready";
                 case 1:
                     return "dealing";
@@ -41,22 +80,33 @@ YouHuHelper.orderStateHelper = {
             return "ready";
     },
 
-    toCSS:function (state) {
+    toCSS: function (state) {
+
+        //Ready = 0,
+        //Dealing = 1,
+        //Rejected = 2,
+        //Dealt = 3,
+        //Paying = 4,
+        //Paid = 5,
+        //InProgress = 6,
+        //Arrived = 7,
+        //Consigned = 8
+
         switch (state) {
-            case "ready":
-            case "rejected":
+            case 0://"ready":
+            case 2://"rejected":
                 return "warning";
-            case "dealing":
+            case 1://"dealing":
                 return "info";
-            case "dealt":
-            case "paying":
-            case "paid":
+            case 3://"dealt":
+            case 4://"paying":
+            case 5://"paid":
                 return "danger";
-            case "inprogress":
+            case 6://"inprogress":
                 return "info";
-            case "arrived":
+            case 7://"arrived":
                 return "success";
-            case "consigned":
+            case 8://"consigned":
                 return "default";
             default:
                 return "warning";
@@ -80,21 +130,21 @@ YouHuHelper.freightUnitTypeHelper = {
         if (state) {
             switch (state) {
                 case 0:
-                    return "lorry";
+                    return "牵引车";//"lorry";
                 case 1:
-                    return "miniVan";
+                    return "面包车";//"miniVan";
                 case 2:
-                    return "tankLorry";
+                    return "罐车";//"tankLorry";
                 case 3:
-                    return "truck";
+                    return "卡车";//"truck";
                 case 4:
-                    return "van";
+                    return "皮卡车";//"van";
                 default:
-                    return "truck";
+                    return "卡车";//"truck";
             }
 
         } else
-            return "truck";
+            return "卡车";//"truck";
     }
 };
 
@@ -103,17 +153,17 @@ YouHuHelper.freightUnitStateHelper = {
         if (state) {
             switch (state) {
                 case 0:
-                    return "none";
+                    return "未发布";//"none";
                 case 1:
-                    return "ready";
+                    return "待接单";//"ready";
                 case 2:
-                    return "busy";
+                    return "运输中";//"busy";
                 default:
-                    return "none";
+                    return "未发布";//"none";
             }
 
         } else
-            return "none";
+            return "未发布";//"none";
     },
 
     toCSS: function (state) {
@@ -138,7 +188,7 @@ YouHuHelper.errorHelper= {
         else if (error.Message)
             msg = error.Message;
         else
-            msg = 'Error occured';
+            msg = '发生错误';
         //alert(msg);
         return msg;
     }

@@ -1,14 +1,16 @@
 ﻿<form class="form form-horizontal">
     <div class="modal-header">
         <a href="" class="close" data-ng-click="close()">&times;</a>
-        <h4>PUBLISH</h4>
+        <h4>发 布</h4>
     </div>
     <div class="modal-body">
         <div class="row">
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
-                    <input type="text" class="form-control" data-ng-model="publishModel.Location" placeholder="Where is the freight unit locating..." required/>
+            <div class="col-md-offset-1 col-md-10">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                        <input type="text" class="form-control" data-ng-model="publishModel.Location" placeholder="您的车在哪座城市？" required />
+                    </div>
                 </div>
             </div>
         </div>
@@ -16,7 +18,7 @@
     <div class="modal-footer">
         <div class="row">
             <div class="col-lg-4 col-md-4 pull-right">
-                <button class="btn btn-primary btn-block btn-lg" type="submit" data-ng-click="publish()">PUBLISH</button>
+                <button class="btn btn-danger btn-block btn-lg" type="submit" data-ng-click="publish()">发 布</button>
             </div>
         </div>
     </div>

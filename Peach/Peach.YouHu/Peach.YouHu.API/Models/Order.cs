@@ -44,6 +44,8 @@
         public DateTime PublishedDate { get; set; }
 
         public decimal? Paid { get; set; }
+
+        public int ConsignCode { get; set; }
     }
 
     //public class OrderMapper : EntityTypeConfiguration<Order>

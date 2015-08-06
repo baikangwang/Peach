@@ -1,22 +1,22 @@
 ﻿<form class="form form-horizontal">
     <div class="modal-header">
         <a href="" class="close" data-ng-click="close()">&times;</a>
-        <h4>UPDATE</h4>
+        <h4>到 哪 了？</h4>
     </div>
     <div class="modal-body">
             <div class="input-group">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
-                <input type="text" class="form-control" placeholder="Where did your frieght unit reached..." data-ng-model="updateStateModel.Location" />
+                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                <input type="text" class="form-control" placeholder="车到哪座城市了？" data-ng-model="updateStateModel.Location" />
             </div>
     </div>
     <div class="modal-footer">
         <div class="row">
             <div class="col-md-5">
-                <button class="btn btn-block" type="submit" data-ng-click="updateState()">UPDATE</button>
+                <button class="btn btn-primary btn-block" type="submit" data-ng-click="updateState()">好 了</button>
             </div>
             <div class="col-md-2">&nbsp;</div>
             <div class="col-md-5">
-                <button class="btn btn-block" type="button" data-ng-click="close()">CANCEL</button>
+                <button class="btn btn-block" type="button" data-ng-click="close()">算 了</button>
             </div>
         </div>
     </div>

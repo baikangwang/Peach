@@ -32,6 +32,13 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
             if (order.State) {
                 return YouHuHelper.orderStateHelper.toLabel(order.State);
             } else
+                return "未接单";
+        };
+
+        $scope.getStateStr = function (order) {
+            if (order.State) {
+                return YouHuHelper.orderStateHelper.toValue(order.State);
+            } else
                 return "ready";
         };
 
@@ -97,8 +104,7 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
         };
 
         $scope.getCSS = function (order) {
-            var state = $scope.getState(order);
-            return YouHuHelper.orderStateHelper.toCSS(state);
+            return YouHuHelper.orderStateHelper.toCSS(order.State);
         }
 
     }]);
@@ -163,7 +169,7 @@ app.controller('updateStateController', ['$scope', '$modalInstance', 'order', 'd
 app.controller('evaluateController', ['$scope', '$modalInstance', 'order', 'driverService', function ($scope, $modalInstance, order, driverService) {
     $scope.evaluateModel = {
         OrderId: 0,
-        Rank: 0,
+        Rank: "",//0,
         Comments: ""
     };
 
@@ -290,18 +296,18 @@ app.controller('registerFreightUnitController', ['$scope', '$modalInstance', 'dr
 
     $scope.registerModel = {
         Location: "",
-        Height: 0.0,
-        Length: 0.0,
+        Height: "",//0.0,
+        Length: "",//0.0,
         Licence: "",
         Type: 0,
-        Weight: 0.0
+        Weight: ""//0.0
     };
 
     $scope.close = function () {
         $modalInstance.dismiss('cancel');
     };
 
-    $scope.evaluate = function () {
+    $scope.register = function () {
         driverService.register($scope.registerModel)
             .success(function (success) {
                 alert("Register Successfully");

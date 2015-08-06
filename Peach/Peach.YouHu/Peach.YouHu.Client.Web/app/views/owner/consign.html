@@ -1,17 +1,17 @@
 ﻿<form class="form form-horizontal">
     <div class="modal-header">
         <a href="" class="close" data-ng-click="close()">&times;</a>
-        <h4>Consign</h4>
+        <h4>确 认 收 货</h4>
     </div>
     <div class="modal-body">
         <div class="input-group">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-credit-card"></span></span>
-            <input type="text" class="form-control" data-ng-model="consignModel.PaymentCode" placeholder="Payment Code of 6 digits" required />
+            <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+            <input type="text" class="form-control" data-ng-model="consignModel.PaymentCode" placeholder="交 易 密 码" required />
         </div>
     </div>
     <div class="modal-footer">
         <div class="row col-md-3 pull-right">
-            <button class="btn btn-block" data-ng-click="consign()" type="button">CONSIGN</button>
+            <button class="btn btn-primary btn-block" data-ng-click="consign()" type="button">确 认</button>
         </div>
     </div>
 </form>   

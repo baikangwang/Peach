@@ -1,10 +1,97 @@
 ﻿<div class="row">
     <form class="form-horizontal">
+        <toaster-contianer toaster-options="{'time-out':1700}"></toaster-contianer>
+        <div class="well well-sm" data-ng-show="orderCount == 0">
+            <h3 class="text-center">您还没有接过单，请先<a href="#/driver/freightUnits">发布</a>您的车辆吧</h3>
+            <div class="row">
+                <div class="col-md-offset-5 col-md-2 col-md-offset-5">
+                    <button type="button" class="btn btn-primary btn-block" data-ng-click="refresh()"><i class="fa fa-refresh"></i></button>
+                </div>
+            </div>
+        </div>
+        <div data-ng-show="orderCount > 0">
+            <div class="row">
+                <div class="col-lg-offset-10 col-lg-1">
+                    <p>
+                        <button type="button" class="btn btn-primary btn-lg btn-block" data-ng-click="refresh()"><i class="fa fa-refresh"></i></button>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-1 col-lg-10">
+                    <ul class="list-group">
+                        <li class="list-group-item" data-ng-repeat="order in orders" data-ng-class="'list-group-item-'+getCSS(order)">
+                            <div class="list-group-item-heading">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <h4 class="text-left">
+                                            <span class="label" data-ng-class="'label-'+getCSS(order)">
+                                                <i class="fa fa-home fa-lg"></i>&nbsp;{{order.Source}}
+                                            </span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <h4 class="text-center">
+                                            <i class="fa fa-arrow-right fa-lg"></i>
+                                        </h4>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h4 class="text-right">
+                                            <span class="label" data-ng-class="'label-'+getCSS(order)">
+                                                <i class="fa fa-flag fg-lg"></i>&nbsp;{{order.Destination}}
+                                            </span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="text-right">
+                                            <span class="badge">{{ order.PublishedDate | date: 'yyyy-MM-dd hh:mm:ss'}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="text-right">
+                                            <span class="badge">{{getState(order).toUpperCase()}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item-body">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <h5 class="text-left">
+                                            <i class="fa fa-user"></i> {{order.OwnerName}}
+                                        </h5>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <small class="text-warning">{{order.Description}}</small>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h5 class="text-right">
+                                            {{order.FreightCost!=0?(order.FreightCost | currency:'&yen;'):'N/A'}}
+                                        </h5>
+                                    </div>
+                                    <div class="col-lg-3 text-right">
+                                        <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getStateStr(order)=='dealing'" data-ng-click="showConfirmDeal(order)">接 单</button>
+                                        <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getStateStr(order)=='paid'" data-ng-click="showUpdateState(order)">出 发</button>
+                                        <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getStateStr(order)=='inprogress'" data-ng-click="showUpdateState(order)">送 达</button>
+                                        <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getStateStr(order)=='consigned'" data-ng-click="showEvaluate(order)">评 价</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--
+<div class="row">
+    <form class="form-horizontal">
         <div class="well well-sm" data-ng-show="orderCount == 0">
             <h5 class="text-center">You haven't been published any orders, wait a little bit.</h5>
             <div class="row">
                 <div class="col-md-offset-5 col-md-2 col-md-offset-5">
-                    <button type="button" class="btn btn-lg btn-block" data-ng-click="refresh()">REFRESH</button>
+                    <button type="button" class="btn btn-block" data-ng-click="refresh()"><i class="fa fa-refresh"></i></button>
                 </div>
             </div>
         </div>
@@ -13,7 +100,7 @@
             <div class="row">
                 <div class="col-md-1 pull-right">
                     <p>
-                        <button type="button" class="btn btn-block" data-ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span></button>
+                        <button type="button" class="btn btn-block" data-ng-click="refresh()"><i class="fa fa-refresh"></i></button>
                     </p>
                 </div>
             </div>
@@ -30,7 +117,7 @@
                             </div>
                             <div class="col-lg-1">
                                 <h4 class="text-center">
-                                    <span class="glyphicon glyphicon-arrow-right"></span>
+                                    <i class="fa fa-arrow-right"></i>
                                 </h4>
                             </div>
                             <div class="col-lg-3">
@@ -56,15 +143,11 @@
                         <div class="row">
                             <div class="col-lg-2">
                                 <h4 class="text-left">
-                                    <p>
-                                        <span class="glyphicon glyphicon-user"></span> {{order.OwnerName}}
-                                    </p>
+                                        <i class="fa fa-user"></i> {{order.OwnerName}}
                                 </h4>
                             </div>
                             <div class="col-lg-4">
-                                <p class="text-warning">
-                                    <small>{{order.Description}}</small>
-                                </p>
+                                    <small class="text-warning">{{order.Description}}</small>
                             </div>
                             <div class="col-lg-3">
                                 <h4 class="text-right">
@@ -84,3 +167,4 @@
         </div>
     </form>
 </div>
+-->

@@ -1,43 +1,63 @@
-﻿<div class="col-md-4">&nbsp;</div>
-<div class="col-md-4 well">
-    <form class="" name="signupForm" role="form">
-        <fieldset>
-            <legend class="form-login-heading">Sign up</legend>
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                    <input type="email" class="form-control" style="height: 47px" placeholder="Email" data-ng-model="loginData.userName" required autofocus>
+﻿<div class="row">
+    <div class="col-md-4">&nbsp;</div>
+    <div class="col-md-4 well">
+        <form class="" name="signupForm" role="form">
+            <fieldset>
+                <legend class="form-login-heading">注 册</legend>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" style="height: 47px" placeholder="用 户 名" data-ng-model="registration.UserName" required autofocus>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input type="password" class="form-control" style="height: 47px" placeholder="Password" data-ng-model="loginData.password" required>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" style="height: 47px" placeholder="真实姓名" data-ng-model="registration.FullName" required>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input type="password" class="form-control" style="height: 47px" placeholder="Confirm Password" data-ng-model="registration.confirmPassword" required>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-inbox"></i></span>
+                        <input type="email" class="form-control" style="height: 47px" placeholder="邮 箱" data-ng-model="registration.Email" required>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default" data-ng-class="{active:registration.role==0,'btn-danger':registration.role==0}">
-                        <input type="radio" name="options" id="option2" data-ng-model="registration.role" value="0" autocomplete="off">Owner
-                    </label>
-                    <label class="btn btn-default" data-ng-class="{active:registration.role==1,'btn-primary':registration.role==1}">
-                        <input type="radio" name="options" id="option3" data-ng-model="registration.role" value="1" autocomplete="off">Driver
-                    </label>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="password" class="form-control" style="height: 47px" placeholder="密 码" data-ng-model="registration.Password" required>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-info btn-block" type="submit" data-ng-disabled="signupForm.$invalid || !signupForm.$dirty" data-ng-click="signUp()">Submit</button>
-            </div>
-        </fieldset>
-    </form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="password" class="form-control" style="height: 47px" placeholder="密 码 确 认" data-ng-model="registration.ConfirmPassword" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default" data-ng-class="{active:registration.Role==0,'btn-danger':registration.Role==0}">
+                            <input type="radio" name="role" id="ro" data-ng-model="registration.Role" value="0" autocomplete="off">货 主
+                        </label>
+                        <label class="btn btn-default" data-ng-class="{active:registration.Role==1,'btn-primary':registration.Role==1}">
+                            <input type="radio" name="role" id="rd" data-ng-model="registration.Role" value="1" autocomplete="off">车 主
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                        <input type="text" class="form-control" style="height: 47px" placeholder="交 易 密 码" data-ng-model="registration.PaymentCode" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-info btn-block" type="submit" data-ng-disabled="signupForm.$invalid || !signupForm.$dirty" data-ng-click="signUp()">注 册</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-md-4">&nbsp;</div>
 </div>
-<div class="col-md-4">&nbsp;</div>
 <hr data-ng-hide="message == ''" />
 <div class="row container">
     <div data-ng-hide="message == ''" class="alert alert-danger">

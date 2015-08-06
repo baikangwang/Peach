@@ -337,11 +337,13 @@
 
             var user = new AppUser()
                        {
-                           UserName = model.Email,
-                           Email = model.Email,
+                           Email=model.Email,
+                           UserName = model.UserName,
+                           FullName = model.FullName,
                            Role = model.Role,
                            ModifiedDate = DateTime.Now,
-                           ModifiedBy = String.Empty
+                           ModifiedBy = String.Empty,
+                           PaymentCode = model.PaymentCode
                        };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);

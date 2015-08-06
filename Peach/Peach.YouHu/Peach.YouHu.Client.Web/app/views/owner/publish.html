@@ -1,14 +1,14 @@
 ﻿<form class="form form-horizontal" role="form">
     <div class="modal-header">
         <a href="" class="close" data-ng-click="close()">&times;</a>
-        <h4>ORDER PUBLISH</h4>
+        <h4>发 布 货 单</h4>
     </div>
     <div class="modal-body">
         <div class="row">
             <div class="col-md-6">
                 <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
-                    <input type="text" class="form-control" data-ng-model="publishModel.Description" placeholder="What's you would like deliver..." required />
+                    <span class="input-group-addon"><i class="fa fa-comment"></i></span>
+                    <input type="text" class="form-control" data-ng-model="publishModel.Description" placeholder="发点什么呢？" required />
                 </div>
             </div>
         </div>
@@ -16,24 +16,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
-                    <input type="text" class="form-control" data-ng-model="publishModel.Source" placeholder="From" required />
+                    <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                    <input type="text" class="form-control" data-ng-model="publishModel.Source" placeholder="从哪座城市出发" required />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-flag"></span></span>
-                    <input type="text" class="form-control" data-ng-model="publishModel.Destination" placeholder="To" required />
-                </div>
-            </div>
-        </div>
-        <p></p>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-fullscreen" id="fsize"></span></span>
-                    <input type="text" class="form-control" data-ng-model="publishModel.Size" placeholder="Size" required aria-describedby="fsize" />
-                    <span class="input-group-addon">(m)</span>
+                    <span class="input-group-addon"><i class="fa fa-flag"></i></span>
+                    <input type="text" class="form-control" data-ng-model="publishModel.Destination" placeholder="送到哪座城市" required />
                 </div>
             </div>
         </div>
@@ -41,9 +31,19 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-scale" id="fweight"></span></span>
-                    <input type="text" class="form-control" data-ng-model="publishModel.Weight" placeholder="Weight" required aria-describedby="fweight" />
-                    <span class="input-group-addon">(t)</span>
+                    <span class="input-group-addon"><i class="fa fa-fullscreen" id="fsize"></i></span>
+                    <input type="text" class="form-control" data-ng-model="publishModel.Size" placeholder="体积" required aria-describedby="fsize" />
+                    <span class="input-group-addon">(立方米)</span>
+                </div>
+            </div>
+        </div>
+        <p></p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-scale"></i></span>
+                    <input type="text" class="form-control" data-ng-model="publishModel.Weight" placeholder="重量" required/>
+                    <span class="input-group-addon">(吨)</span>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
     <div class="modal-footer">
         <div class="row">
             <div class="col-lg-4 col-md-4 pull-right">
-                <button class="btn btn-block" type="submit" data-ng-click="publish()">PUBLISH</button>
+                <button class="btn btn-danger btn-block" type="submit" data-ng-click="publish()">发布</button>
             </div>
         </div>
     </div>

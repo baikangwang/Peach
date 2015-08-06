@@ -1,36 +1,38 @@
 ﻿<form class="form form-horizontal">
     <div class="modal-header">
         <a href="" class="close" data-ng-click="close()">&times;</a>
-        <h4 class="modal-title">Find Matched Freights</h4>
+        <h4 class="modal-title">寻 找 货 车</h4>
     </div>
     <div class="modal-body">
         <div class="row" data-ng-show="freightUnitsCount == 0">
-            <h4 class="text-center">Not found any matched freight units. Please refresh later.</h4>
+            <h4 class="text-center">没有货车接单，再等一下</h4>
         </div>
         <div class="row">
-            <div class="col-md-offset-10 col-md-2">
+            <div class="col-md-offset-10 col-md-1">
                 <p>
-                    <button type="button" class="btn btn-block" data-ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span></button>
+                    <button type="button" class="btn btn-primary btn-block" data-ng-click="refresh()"><i class="fa fa-refresh"></i></button>
                 </p>
             </div>
         </div>
         <div class="row" data-ng-show="freightUnitsCount > 0">
-            <table class="table table-hover">
-                <tr data-ng-repeat="fu in freightUnits">
-                    <td class="col-md-3">
-                        <h4>{{fu.Cost|currency:"&yen;"}}</h4>
-                    </td>
-                    <td class="col-md-4">
-                        <h4><span class="label label-primary"><span class="glyphicon glyphicon-user"></span>&nbsp;{{fu.Driver}}&nbsp;(Rank{{fu.Rank}})</span></h4>
-                    </td>
-                    <td class="col-md-3">
-                        <h4><span class="label label-primary"><span class="glyphicon glyphicon-home"></span>&nbsp;{{fu.Location}}</span></h4>
-                    </td>
-                    <td class="col-md-2">
-                        <button class="btn btn-block" type="submit" data-ng-click="showMakeDeal(fu)">GET IT</button>
-                    </td>
-                </tr>
-            </table>
+            <div class="col-md-offset-1 col-md-10">
+                <table class="table table-hover">
+                    <tr data-ng-repeat="fu in freightUnits">
+                        <td class="col-md-3">
+                            <h4>{{fu.Cost|currency:"&yen;"}}</h4>
+                        </td>
+                        <td class="col-md-4">
+                            <h4><span class="label label-primary"><i class="fa fa-truck"></i>&nbsp;{{fu.Driver}}&nbsp;(星级{{fu.Rank}})</span></h4>
+                        </td>
+                        <td class="col-md-3">
+                            <h4><span class="label label-primary"><i class="fa fa-home"></i>&nbsp;{{fu.Location}}</span></h4>
+                        </td>
+                        <td class="col-md-2">
+                            <button class="btn btn-danger btn-block" type="submit" data-ng-click="showMakeDeal(fu)">就找TA</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
     <div class="modal-footer">

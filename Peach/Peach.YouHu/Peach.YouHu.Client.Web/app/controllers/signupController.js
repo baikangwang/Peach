@@ -5,10 +5,13 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
     $scope.message = "";
 
     $scope.registration = {
-        email: "",
-        password: "",
-        confirmPassword: "",
-        role:0
+        Email:"",
+        UserName: "",
+        FullName:"",
+        Password: "",
+        ConfirmPassword: "",
+        Role: 0,
+        PaymentCode:""
     };
 
     $scope.signUp = function () {

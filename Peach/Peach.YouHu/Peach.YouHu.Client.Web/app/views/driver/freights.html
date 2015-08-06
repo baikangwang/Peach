@@ -1,16 +1,16 @@
 ﻿<div class="row">
     <form class="form form-horizontal">
         <div class="row" data-ng-show="freightUnitsCount == 0">
-            <h4 class="col-md-12 text-center">Not found any matched freight units. Please refresh later.</h4>
+            <h4 class="col-md-12 text-center">您还没有发布车辆信息</h4>
             <div class="col-md-offset-4 col-md-4 col-md-offset-4">
-                <button type="button" class="btn btn-block" data-ng-click="showRegister()">REGISTER</button>
+                <button type="button" class="btn btn-danger btn-block" data-ng-click="showRegister()">加 入 车 辆</button>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 pull-right">
-                <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-primary" data-ng-click="showRegister()">REGISTER</button>
-                    <button type="button" class="btn btn-primary" data-ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span></button>
+            <div class="col-md-offset-10 col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger" data-ng-click="showRegister()">加 入 车 辆</button>
+                    <button type="button" class="btn btn-primary" data-ng-click="refresh()"><i class="fa fa-refresh"></i></button>
                 </div>
             </div>
         </div>
@@ -20,16 +20,16 @@
                 <table class="table table-hover">
                     <tr class="{{getCSS(fu)}}" data-ng-repeat="fu in freightUnits">
                         <td class="col-md-4">
-                            <h4><span class="label label-primary"><span class="glyphicon glyphicon-star"></span>Rank({{fu.Rank}})</span></h4>
+                            <h4><span class="label label-primary"><i class="fa fa-star"></i>星级({{fu.Rank}})</span></h4>
                         </td>
-                        <td class="col-md-4">
-                            <h4><span class="label label-primary"><span class="glyphicon glyphicon-home"></span>&nbsp;{{fu.Location}}</span></h4>
+                        <td class="col-md-5">
+                            <h4><span class="label label-primary"><i class="fa fa-home"></i>&nbsp;{{fu.Location}}</span></h4>
                         </td>
                         <td class="col-md-2">
                             <span class="badge">{{getState(fu).toUpperCase()}}</span>
                         </td>
-                        <td class="col-md-2">
-                            <button class="btn btn-block" type="submit" data-ng-click="showPublish(fu)">PUBLISH</button>
+                        <td class="col-md-1">
+                            <button class="btn btn-danger btn-block" type="submit" data-ng-click="showPublish(fu)">发 布</button>
                         </td>
                     </tr>
                 </table>

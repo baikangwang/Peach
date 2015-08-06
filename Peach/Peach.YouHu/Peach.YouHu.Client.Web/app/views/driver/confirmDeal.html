@@ -1,26 +1,26 @@
 ﻿<form class="form form-horizontal">
     <div class="modal-header">
         <a href="" class="close" data-ng-click="close()">&times;</a>
-        <h4>Confirm Deal</h4>
+        <h4>确 认 接 单</h4>
     </div>
     <div class="modal-body">
         <div class="text-center well">
             <p>
-                <h3>FREIGHT COST: {{confirmDealModel.FreightCost| currency:"&yen;"}}</h3>
+                <h3>运 费： {{confirmDealModel.FreightCost| currency:"&yen;"}}</h3>
             </p>
             <p>
-                <h4>Are you sure to make deal with this freight?</h4>
+                <h4>还满意吗？</h4>
             </p>
         </div>
     </div>
     <div class="modal-footer">
         <div class="row">
             <div class="col-md-5">
-                <button class="btn btn-block" type="submit" data-ng-click="confirmDeal()">DEAL</button>
+                <button class="btn btn-primary btn-block" type="submit" data-ng-click="confirmDeal()">成 交</button>
             </div>
             <div class="col-md-2">&nbsp;</div>
             <div class="col-md-5">
-                <button class="btn btn-block" type="button" data-ng-click="close()">CANCEL</button>
+                <button class="btn btn-block" type="button" data-ng-click="close()">算 了</button>
             </div>
         </div>
     </div>

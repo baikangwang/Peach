@@ -52,6 +52,18 @@
         [DataType(DataType.Text)]
         [Display(Name = "Role",Description = "Owner or Driver")]
         public AppRole Role { get; set; }
+
+        [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
+        [Required]
+        [Display(Name = "Payment Code")]
+        public string PaymentCode { get; set; }
     }
 
     public class RegisterExternalBindingModel

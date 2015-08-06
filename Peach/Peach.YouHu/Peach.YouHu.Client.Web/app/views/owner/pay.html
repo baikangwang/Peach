@@ -1,26 +1,26 @@
 ﻿<form class="form form-horizontal">
     <div class="modal-header">
         <a href="" class="close" data-ng-click="close()">&times;</a>
-        <h4>Payment</h4>
+        <h4>付 款</h4>
     </div>
     <div class="modal-body">
         <h3 class="well text-center">
-            Freight&nbsp;Cost&nbsp;{{freightCost|currency:"&yen;"}}
+            运费 {{freightCost|currency:"&yen;"}}
         </h3>
         <p></p>
         <div class="input-group">
-            <span class="input-group-addon">&yen;</span>
-            <input type="number" name="paid" class="form-control" data-ng-model="payModel.Paid" placeholder="Put cost amount you paid" required autofocus />
+            <span class="input-group-addon"><i class="fa fa-yen fa-lg"></i></span>
+            <input type="number" name="paid" class="form-control" data-ng-model="payModel.Paid" placeholder="{{freightCost}}" required autofocus />
         </div>
         <p></p>
         <div class="input-group">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-credit-card"></span></span>
-            <input type="text" name="paymentCode" class="form-control" data-ng-model="payModel.PaymentCode" placeholder="Payment Code of 6 digits" required />
+            <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+            <input type="text" name="paymentCode" class="form-control" data-ng-model="payModel.PaymentCode" placeholder="交 易 密 码" required />
         </div>
     </div>
     <div class="modal-footer">
         <div class="row col-md-2 pull-right">
-            <button class="btn btn-block" data-ng-click="pay()" type="button">PAY</button>
+            <button class="btn btn-primary btn-block" data-ng-click="pay()" type="button">好 了</button>
         </div>
     </div>
 </form>

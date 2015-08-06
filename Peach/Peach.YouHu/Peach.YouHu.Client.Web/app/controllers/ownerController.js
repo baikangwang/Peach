@@ -33,7 +33,14 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
                 return YouHuHelper.orderStateHelper.toLabel(order.State);
             }
             else
-                return 'ready';
+                return '待接单';
+        };
+
+        $scope.getStateStr = function (order) {
+            if (order.State) {
+                return YouHuHelper.orderStateHelper.toValue(order.State);
+            } else
+                return "ready";
         };
 
         $scope.showPublish = function() {
@@ -140,8 +147,7 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
         };
 
         $scope.getCSS = function (order) {
-            var state = $scope.getState(order);
-            return YouHuHelper.orderStateHelper.toCSS(state);
+            return YouHuHelper.orderStateHelper.toCSS(order.State);
         }
     }
 ]);
@@ -152,8 +158,8 @@ app.controller('publishOrderController', ['$scope', '$modalInstance', 'ownerServ
         Description: "",
         Destination: "",
         Source: "",
-        Size: 0.0,
-        Weight: 0.0
+        Size: "",//0.0,
+        Weight: ""//0.0
     };
 
     $scope.close = function() {
@@ -229,6 +235,8 @@ app.controller('makeDealController', ['$scope', '$modalInstance', 'order', 'frei
         FreightUnitId: 0
     }
 
+    $scope.freightCost = freightUnit.Cost;
+
     init();
 
     function init() {
@@ -256,7 +264,7 @@ app.controller('payController', ['$scope', '$modalInstance', 'order', 'ownerServ
     $scope.payModel = {
         OrderId: 0,
         PaymentCode: "",
-        Paid: 0.0
+        Paid: ""//0.0
     };
 
     $scope.freightCost = 0.0;
@@ -316,7 +324,7 @@ app.controller('evaluateController', ['$scope', '$modalInstance', 'order', 'owne
 
     $scope.evaluateModel = {
         Comments: "",
-        Rank: 0,
+        Rank: "",//0,
         OrderId:0
     }
 
