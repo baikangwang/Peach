@@ -103,6 +103,27 @@ app.controller('driverOrdersController', ['$scope', '$location', '$modal', 'driv
             );
         };
 
+        $scope.showConsign = function(order) {
+            var modalInstance = $modal.open({
+                templateUrl: 'app/views/driver/consign.html',
+                controller: 'consignController',
+                resolve: {
+                    order: function() {
+                        return order;
+                    }
+                }
+            });
+
+            modalInstance.result.then(
+                function() {
+                    $scope.refresh();
+                },
+                function() {
+                    // nothing to do
+                }
+            );
+        };
+
         $scope.getCSS = function (order) {
             return YouHuHelper.orderStateHelper.toCSS(order.State);
         }
@@ -316,5 +337,33 @@ app.controller('registerFreightUnitController', ['$scope', '$modalInstance', 'dr
             .error(function (error) {
                 alert(YouHuHelper.errorHelper.getErrorMsg(error));
             });
+    }
+}]);
+
+app.controller('consignController', ['$scope', '$modalInstance', 'order', 'ownerService', function ($scope, $modalInstance, order, ownerService) {
+    $scope.consignModel = {
+        OrderId: 0,
+        ConsignCode: 0
+    };
+
+    init();
+
+    function init() {
+        $scope.consignModel.OrderId = order.Id;
+    }
+
+    $scope.close = function () {
+        $modalInstance.dismiss('cancel');
+    }
+
+    $scope.consign = function () {
+        ownerService.consign($scope.consignModel)
+        .success(function (success) {
+            alert("Consign Successfully");
+            $modalInstance.close();
+        })
+        .error(function (error) {
+            alert(YouHuHelper.errorHelper.getErrorMsg(error));
+        });
     }
 }]);

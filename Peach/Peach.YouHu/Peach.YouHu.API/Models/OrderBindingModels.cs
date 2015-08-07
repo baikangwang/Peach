@@ -78,9 +78,20 @@
         [Display(Name = "Order Id")]
         public int OrderId { get; set; }
 
+    }
+
+    public class OwnerConsignBindingModel:ConsignBindingModel
+    {
         [Required]
         [Display(Name = "Payment Code")]
         public string PaymentCode { get; set; }
+    }
+
+    public class DriverConsignBindingModel:ConsignBindingModel
+    {
+        [Required]
+        [Display(Name = "Consign Code")]
+        public int ConsignCode { get; set; }
     }
 
     public class ConfirmDealBindingModel

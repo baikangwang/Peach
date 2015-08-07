@@ -73,6 +73,7 @@
                                         <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getStateStr(order)=='dealing'" data-ng-click="showConfirmDeal(order)">接 单</button>
                                         <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getStateStr(order)=='paid'" data-ng-click="showUpdateState(order)">出 发</button>
                                         <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getStateStr(order)=='inprogress'" data-ng-click="showUpdateState(order)">送 达</button>
+                                        <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getStateStr(order)=='arrived'" data-ng-click="showConsign(order)">收&nbsp;货</button>
                                         <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getStateStr(order)=='consigned'" data-ng-click="showEvaluate(order)">评 价</button>
                                     </div>
                                 </div>

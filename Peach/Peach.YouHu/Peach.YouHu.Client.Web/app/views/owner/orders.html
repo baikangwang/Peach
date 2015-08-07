@@ -69,14 +69,16 @@
                                     <div class="col-lg-4">
                                         <small class="text-warning">{{order.Description}}</small>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
+                                        <i class="fa fa-lock"></i><span class="label label-danger">{{order.ConsignCode}}</span>
+                                    </div>
+                                    <div class="col-lg-2">
                                         <h5 class="text-right">
                                             {{order.FreightCost!=0?(order.FreightCost | currency:'&yen;'):'N/A'}}
                                         </h5>
                                     </div>
-                                    <div class="col-lg-3 text-right">
+                                    <div class="col-lg-2 text-right">
                                         <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getStateStr(order)=='dealt'" data-ng-click="showPay(order)">付&nbsp;款</button>
-                                        <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getStateStr(order)=='arrived'" data-ng-click="showConsign(order)">收&nbsp;货</button>
                                         <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getStateStr(order)=='ready'|| getStateStr(order)=='rejected'" data-ng-click="showFindFreight(order)">寻&nbsp;车</button>
                                         <button class="btn" data-ng-class="'btn-'+getCSS(order)" data-ng-show="getStateStr(order)=='consigned'" data-ng-click="showEvaluate(order)">评&nbsp;价</button>
                                     </div>

@@ -212,6 +212,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Component\ConsignCode.cs" />
     <Compile Include="Component\FreightCostCalculator.cs" />
     <Compile Include="Component\FreightUnitFinder.cs" />
     <Compile Include="Component\PaymentPlatment.cs" />
@@ -237,6 +238,10 @@
     <Compile Include="Migrations\201507200545163_RemovePassword.cs" />
     <Compile Include="Migrations\201507200545163_RemovePassword.Designer.cs">
       <DependentUpon>201507200545163_RemovePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508060825349_AddedConsignCode.cs" />
+    <Compile Include="Migrations\201508060825349_AddedConsignCode.Designer.cs">
+      <DependentUpon>201508060825349_AddedConsignCode.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -344,6 +349,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507200545163_RemovePassword.resx">
       <DependentUpon>201507200545163_RemovePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508060825349_AddedConsignCode.resx">
+      <DependentUpon>201508060825349_AddedConsignCode.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -37,6 +37,7 @@
             order.ModifiedDate=DateTime.Now;
             order.ModifiedBy = this.LogonId;
             order.Owner = this.Logon;
+            order.ConsignCode = ConsignCode.Keygen.Generate();
             this.AppDb.Orders.Add(order);
 
             try
@@ -75,11 +76,22 @@
             string id = this.LogonId;
 
             IList<OwnerOrderViewModel> view = await this.AppDb.Orders
-                .Include(o=>o.Owner)
-                .Include(o=>o.FreightUnit)
-                .Include(o=>o.FreightUnit.Driver)
-                .Where(o => /*o.State != OrderState.Consigned &&*/ o.Owner.Id==id)
-                .Select(o=>new OwnerOrderViewModel(){Id = o.Id,Driver = o.FreightUnit.Driver.FullName,Destination = o.Destination,Description = o.Description,PublishedDate = o.PublishedDate,State = o.State,FreightCost = o.FreightCost??(0.0m),Source = o.Source})
+                .Include(o => o.Owner)
+                .Include(o => o.FreightUnit)
+                .Include(o => o.FreightUnit.Driver)
+                .Where(o => /*o.State != OrderState.Consigned &&*/ o.Owner.Id == id)
+                .Select(o => new OwnerOrderViewModel()
+                {
+                    Id = o.Id,
+                    Driver = o.FreightUnit.Driver.FullName,
+                    Destination = o.Destination,
+                    Description = o.Description,
+                    PublishedDate = o.PublishedDate,
+                    State = o.State,
+                    FreightCost = o.FreightCost ?? (0.0m),
+                    Source = o.Source,
+                    ConsignCode = o.ConsignCode
+                })
                 .ToListAsync();
             return this.Ok(view);
         }
@@ -214,7 +226,7 @@
         #region Consign
         // POST: api/Orders/Owner/Consign
         [Route("Owner/Orders/Consign")]
-        public async Task<IHttpActionResult> Consign(ConsignBindingModel model)
+        public async Task<IHttpActionResult> Consign(OwnerConsignBindingModel model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -223,9 +235,9 @@
 
             Order order = await this.AppDb.Orders.FindAsync(model.OrderId);
             
-            string paymentCode = order.Owner.PaymentCode;
-            if (paymentCode != model.PaymentCode)
-                return this.BadRequest("Invalid Payment Code");
+            string code = order.Owner.PaymentCode;
+            if (code != model.PaymentCode)
+                return this.BadRequest("Invalid Consign Code");
 
             order.State = OrderState.Consigned;
             order.ModifiedDate = DateTime.Now;
@@ -257,6 +269,79 @@
             ext.ModifiedDate = DateTime.Now;
 
             using (DbContextTransaction trans=this.AppDb.Database.BeginTransaction())
+            {
+                try
+                {
+                    this.AppDb.Entry(order).State = EntityState.Modified;
+                    this.AppDb.Entry(ext).State = isNew ? EntityState.Added : EntityState.Modified;
+                    this.AppDb.Entry(fu).State = EntityState.Modified;
+
+                    int effected = await this.AppDb.SaveChangesAsync();
+
+                    if (effected > 0)
+                    {
+                        trans.Commit();
+                        return this.Ok();
+                    }
+                    else
+                    {
+                        trans.Rollback();
+                        return this.BadRequest("Fail to consign the order, try a later");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                    return this.BadRequest("Fail to consign the order, try a later. " + ex.Message);
+                }
+            }
+        }
+
+        // POST: api/Orders/Owner/Consign
+        [Route("driver/Orders/Consign")]
+        public async Task<IHttpActionResult> Consign(DriverConsignBindingModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            Order order = await this.AppDb.Orders.FindAsync(model.OrderId);
+
+            int code = order.ConsignCode;
+            if (code != model.ConsignCode)
+                return this.BadRequest("Invalid Consign Code");
+
+            order.State = OrderState.Consigned;
+            order.ModifiedDate = DateTime.Now;
+            order.ModifiedBy = this.LogonId;
+
+            FreightUnit fu = order.FreightUnit;
+            fu.State = FreightUnitState.Ready;
+            fu.ModifiedDate = DateTime.Now;
+            fu.ModifiedBy = this.LogonId;
+
+            DriverExt ext = this.AppDb.DriverExts.FirstOrDefault(de => de.Driver.Id == order.FreightUnit.Driver.Id);
+            bool isNew = false;
+            decimal paid = order.Paid ?? 0;
+
+            if (ext == null)
+            {
+                ext = new DriverExt()
+                {
+                    CurrentIncome = 0,
+                    TotalIncome = 0,
+                    Driver = order.FreightUnit.Driver
+                };
+                isNew = true;
+            }
+
+            ext.TotalIncome += paid;
+            ext.CurrentIncome += paid;
+            ext.ModifiedBy = this.LogonId;
+            ext.ModifiedDate = DateTime.Now;
+
+            using (DbContextTransaction trans = this.AppDb.Database.BeginTransaction())
             {
                 try
                 {

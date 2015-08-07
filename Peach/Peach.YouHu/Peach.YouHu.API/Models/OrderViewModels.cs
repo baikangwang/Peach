@@ -12,6 +12,7 @@
         public OrderState State { get; set; }
         public decimal FreightCost { get; set; }
         public string Source { get; set; }
+        public int ConsignCode { get; set; }
 
         public OwnerOrderViewModel()
         {

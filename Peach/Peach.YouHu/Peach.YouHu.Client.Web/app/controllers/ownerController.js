@@ -104,27 +104,6 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
             );
         };
 
-        $scope.showConsign = function(order) {
-            var modalInstance = $modal.open({
-                templateUrl: 'app/views/owner/consign.html',
-                controller: 'consignController',
-                resolve: {
-                    order: function() {
-                        return order;
-                    }
-                }
-            });
-
-            modalInstance.result.then(
-                function() {
-                    $scope.refresh();
-                },
-                function() {
-                    // nothing to do
-                }
-            );
-        };
-
         $scope.showEvaluate = function (order) {
             var modalInstance = $modal.open({
                 templateUrl: 'app/views/owner/evaluate.html',
@@ -290,34 +269,6 @@ app.controller('payController', ['$scope', '$modalInstance', 'order', 'ownerServ
                 alert(YouHuHelper.errorHelper.getErrorMsg(error));
             });
     };
-}]);
-
-app.controller('consignController', ['$scope', '$modalInstance', 'order', 'ownerService', function ($scope, $modalInstance, order, ownerService) {
-    $scope.consignModel = {
-        OrderId: 0,
-        PaymentCode: ""
-    };
-
-    init();
-
-    function init() {
-        $scope.consignModel.OrderId = order.Id;
-    }
-
-    $scope.close= function() {
-        $modalInstance.dismiss('cancel');
-    }
-
-    $scope.consign= function() {
-        ownerService.consign($scope.consignModel)
-        .success(function(success) {
-            alert("Consign Successfully");
-            $modalInstance.close();
-        })
-        .error(function(error) {
-            alert(YouHuHelper.errorHelper.getErrorMsg(error));
-        });
-    }
 }]);
 
 app.controller('evaluateController', ['$scope', '$modalInstance', 'order', 'ownerService', function ($scope, $modalInstance, order, ownerService) {
