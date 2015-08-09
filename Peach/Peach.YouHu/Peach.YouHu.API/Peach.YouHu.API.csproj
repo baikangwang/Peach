@@ -42,6 +42,17 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="DefaultConnection-Deployment" Order="1">
+          <Destination Path="" />
+          <Object Type="DbFullSql" Enabled="False">
+            <PreSource Path="Data Source=.\ORANGE%3bInitial Catalog=YouHu2%3bIntegrated Security=False%3bUser ID=YouHu%3bPassword=1YouHu2%3bConnect Timeout=90%3bEncrypt=False%3bTrustServerCertificate=False" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\DefaultConnection-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -227,23 +238,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201507200315409_RefactorOwnerDriverToAppUser.cs" />
-    <Compile Include="Migrations\201507200315409_RefactorOwnerDriverToAppUser.Designer.cs">
-      <DependentUpon>201507200315409_RefactorOwnerDriverToAppUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201507200342332_drop driver table.cs" />
-    <Compile Include="Migrations\201507200342332_drop driver table.Designer.cs">
-      <DependentUpon>201507200342332_drop driver table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201507200545163_RemovePassword.cs" />
-    <Compile Include="Migrations\201507200545163_RemovePassword.Designer.cs">
-      <DependentUpon>201507200545163_RemovePassword.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508060825349_AddedConsignCode.cs" />
-    <Compile Include="Migrations\201508060825349_AddedConsignCode.Designer.cs">
-      <DependentUpon>201508060825349_AddedConsignCode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AuditObj.cs" />
@@ -301,6 +295,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="log4net.config" />
+    <None Include="Properties\PublishProfiles\YoHuAPI.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -316,12 +312,16 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
@@ -335,24 +335,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201507200315409_RefactorOwnerDriverToAppUser.resx">
-      <DependentUpon>201507200315409_RefactorOwnerDriverToAppUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201507200342332_drop driver table.resx">
-      <DependentUpon>201507200342332_drop driver table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201507200545163_RemovePassword.resx">
-      <DependentUpon>201507200545163_RemovePassword.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508060825349_AddedConsignCode.resx">
-      <DependentUpon>201508060825349_AddedConsignCode.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\..\Peach.Log\Peach.Log.csproj">
+      <Project>{f594087c-8118-4931-9af4-2f1033635417}</Project>
+      <Name>Peach.Log</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

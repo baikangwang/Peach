@@ -1,7 +1,7 @@
 ﻿'use strict';
 app.factory('ownerService', ['$http', function ($http) {
 
-    var serviceBase = 'http://nltc369:8080/';
+    var serviceBase = 'http://nltc369:8080';//'http://180.76.137.222:8080/';
         var ownerServiceFactory = {};
 
         var _publish = function(publish) {

@@ -1,8 +1,11 @@
 ﻿namespace Peah.YouHu.API.Models
 {
+    using System;
     using System.Data.Entity;
 
     using Microsoft.AspNet.Identity.EntityFramework;
+
+    using Peach.Log;
 
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     //public class ApplicationUser : IdentityUser
@@ -24,6 +27,12 @@
             this.Configuration.LazyLoadingEnabled = true;
             this.Configuration.ProxyCreationEnabled = true;
             this.Configuration.ValidateOnSaveEnabled = true;
+#if DEBUG
+            this.Database.Log = (log) =>
+            {
+                Logger.DEV.Debug(log);
+            };
+#endif
         }
         
         public static AppDbContext Create()

@@ -12,6 +12,7 @@ namespace Peach.Log
     using System;
 
     using log4net;
+    using log4net.Config;
 
     /// <summary>
     /// The logger.
@@ -23,7 +24,8 @@ namespace Peach.Log
         /// <summary>
         /// The current.
         /// </summary>
-        private static readonly Logger current = new Logger();
+        private static Logger _default; //= new Logger();
+        private static Logger _dev;
 
         #endregion
 
@@ -32,7 +34,7 @@ namespace Peach.Log
         /// <summary>
         /// The _logger.
         /// </summary>
-        private readonly ILog _logger;
+        private ILog _logger;
 
         #endregion
 
@@ -41,9 +43,9 @@ namespace Peach.Log
         /// <summary>
         /// Initializes a new instance of the <see cref="Logger"/> class.
         /// </summary>
-        protected Logger()
+        protected Logger(string name="default")
         {
-            this._logger = LogManager.GetLogger("default");
+            this._logger = LogManager.GetLogger(name);
         }
 
         #endregion
@@ -53,11 +55,23 @@ namespace Peach.Log
         /// <summary>
         /// Gets the current.
         /// </summary>
-        public static Logger Current
+        public static Logger Default
         {
             get
             {
-                return current;
+                if (_default == null)
+                    _default = new Logger("default");
+                return _default;
+            }
+        }
+
+        public static Logger DEV
+        {
+            get
+            {
+                if(_dev==null)
+                    _dev=new Logger("dev");
+                return _dev;
             }
         }
 
