@@ -4,3 +4,5 @@
 body {
     font-family: "Microsoft YaHei", "Arial", "Verdana", "Tahoma";
     color: #424242;}
+
+.tangram-suggestion-main{z-index: 2000;}

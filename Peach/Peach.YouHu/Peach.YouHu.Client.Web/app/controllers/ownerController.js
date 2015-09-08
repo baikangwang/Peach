@@ -133,7 +133,7 @@ app.controller('ownerOrdersController', ['$scope', '$location','$modal', 'ownerS
 
 app.controller('publishOrderController', ['$scope', '$modalInstance', 'ownerService', function ($scope, $modalInstance, ownerService) {
 
-    $scope.publishModel = {
+    $scope.model = {
         Description: "",
         Destination: "",
         Source: "",
@@ -146,7 +146,7 @@ app.controller('publishOrderController', ['$scope', '$modalInstance', 'ownerServ
     };
 
     $scope.publish = function() {
-        ownerService.publish($scope.publishModel).then(function(response) {
+        ownerService.publish($scope.model).then(function(response) {
             $modalInstance.close();
 
         }, function(error) {

@@ -90,9 +90,43 @@
                     State = o.State,
                     FreightCost = o.FreightCost ?? (0.0m),
                     Source = o.Source,
-                    ConsignCode = o.ConsignCode
+                    ConsignCode = o.ConsignCode,
+                    ShortDestination = o.Destination,
+                    LongDestination = o.Destination,
+                    ShortSource = o.Source,
+                    LongSource = o.Source,
+                    Destance = 0.0m
                 })
                 .ToListAsync();
+
+            view = view.Select(model =>
+            {
+                // address + "|" +value.city + "|" + point.lng + "," + point.lat;
+                string dest = model.Destination;
+                string source = model.Source;
+                var segaments1 = dest.Split(new[] { "|", "," }, StringSplitOptions.None);
+                var segaments2 = source.Split(new[] { "|", "," }, StringSplitOptions.None);
+                if (segaments1.Length == 1 || segaments2.Length == 1)
+                {
+                    return model;
+                }
+                else
+                {
+                    model.LongDestination = segaments1[0];
+                    model.ShortDestination = segaments1[1];
+
+                    model.LongSource = segaments2[0];
+                    model.ShortSource = segaments2[1];
+                    double lon1, lat1, lon2, lat2;
+                    lon1 = Convert.ToDouble(segaments1[2]);
+                    lat1 = Convert.ToDouble(segaments1[3]);
+                    lon2 = Convert.ToDouble(segaments2[2]);
+                    lat2 = Convert.ToDouble(segaments2[3]);
+                    model.Destance = (decimal)Math.Round(Utility.GetLongDistance(lon1, lat1, lon2, lat2) / 1000, 2, MidpointRounding.ToEven);
+                }
+                return model;
+            }).ToList();
+
             return this.Ok(view);
         }
         #endregion
@@ -120,14 +154,45 @@
                                  Id = o.Id, OwnerName = o.Owner.FullName, 
                                  Source = o.Source, Destination = o.Destination, 
                                  Description = o.Description, PublishedDate = o.PublishedDate, 
-                                 State = o.State, FreightCost = o.FreightCost,Weight=o.Weight,Size=o.Size
+                                 State = o.State, FreightCost = o.FreightCost,Weight=o.Weight,Size=o.Size,
+                                 ShortSource = o.Source,
+                                 LongSource = o.Source,
+                                 ShortDestination = o.Destination,
+                                 LongDestination = o.Destination,
+                                 Destance = 0.0m
                              })
                 .ToListAsync();
 
             view = view.Select(
-                v =>
+                model =>
                 {
-                    if (v.FreightCost == null || v.FreightCost == 0.0m) v.FreightCost = FreightCostCalculator.Default.Calculate(v.Source, v.Destination, v.Weight, v.Size); return v;
+                    if (model.FreightCost == null || model.FreightCost == 0.0m) model.FreightCost = FreightCostCalculator.Default.Calculate(model.Source, model.Destination, model.Weight, model.Size);
+
+                    // address + "|" +value.city + "|" + point.lng + "," + point.lat;
+                    string dest = model.Destination;
+                    string source = model.Source;
+                    var segaments1 = dest.Split(new[] { "|", "," }, StringSplitOptions.None);
+                    var segaments2 = source.Split(new[] { "|", "," }, StringSplitOptions.None);
+                    if (segaments1.Length == 1 || segaments2.Length == 1)
+                    {
+                        return model;
+                    }
+                    else
+                    {
+                        model.LongDestination = segaments1[0];
+                        model.ShortDestination = segaments1[1];
+
+                        model.LongSource = segaments2[0];
+                        model.ShortSource = segaments2[1];
+
+                        double lon1, lat1, lon2, lat2;
+                        lon1 = Convert.ToDouble(segaments1[2]);
+                        lat1 = Convert.ToDouble(segaments1[3]);
+                        lon2 = Convert.ToDouble(segaments2[2]);
+                        lat2 = Convert.ToDouble(segaments2[3]);
+                        model.Destance = (decimal)Math.Round(Utility.GetLongDistance(lon1, lat1, lon2, lat2) / 1000, 2, MidpointRounding.ToEven);
+                    }
+                    return model;
                 })
                 .ToList();
 
@@ -298,7 +363,7 @@
         }
 
         // POST: api/Orders/Owner/Consign
-        [Route("driver/Orders/Consign")]
+        [Route("Driver/Orders/Consign")]
         public async Task<IHttpActionResult> Consign(DriverConsignBindingModel model)
         {
             if (!this.ModelState.IsValid)

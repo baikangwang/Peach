@@ -14,6 +14,11 @@
 
         public FreightUnitState State { get; set; }
 
+        public string LongLocation { get; set; }
+        public string ShortLocation { get; set; }
+
+        public decimal Destance { get; set; }
+
 
         public FreightUnitViewModel() { }
 

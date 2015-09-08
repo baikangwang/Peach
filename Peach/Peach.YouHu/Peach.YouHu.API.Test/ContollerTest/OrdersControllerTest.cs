@@ -107,7 +107,7 @@ namespace Peach.YouHu.API.Test.Controller
         {
             using (OrdersController controller = new UTOwnerOrdersController())
             {
-                var model = new ConsignBindingModel()
+                var model = new OwnerConsignBindingModel()
                 {
                     OrderId = 3,//2,
                     PaymentCode = "123456"

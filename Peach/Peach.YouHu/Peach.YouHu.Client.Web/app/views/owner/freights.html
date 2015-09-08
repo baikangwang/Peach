@@ -21,11 +21,14 @@
                         <td class="col-md-3">
                             <h4>{{fu.Cost|currency:"&yen;"}}</h4>
                         </td>
-                        <td class="col-md-4">
+                        <td class="col-md-3">
                             <h4><span class="label label-primary"><i class="fa fa-truck"></i>&nbsp;{{fu.Driver}}&nbsp;(星级{{fu.Rank}})</span></h4>
                         </td>
-                        <td class="col-md-3">
-                            <h4><span class="label label-primary"><i class="fa fa-home"></i>&nbsp;{{fu.Location}}</span></h4>
+                        <td class="col-md-2">
+                            <h4><span class="label label-primary"><i class="fa fa-home"></i>&nbsp;{{fu.ShortLocation}}</span></h4>
+                        </td>
+                        <td class="col-md-2">
+                            <h4><span class="label label-primary">{{fu.Destance}}&nbsp;km</span></h4>
                         </td>
                         <td class="col-md-2">
                             <button class="btn btn-danger btn-block" type="submit" data-ng-click="showMakeDeal(fu)">就找TA</button>

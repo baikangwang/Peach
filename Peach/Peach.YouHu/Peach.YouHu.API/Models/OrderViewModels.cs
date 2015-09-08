@@ -13,6 +13,11 @@
         public decimal FreightCost { get; set; }
         public string Source { get; set; }
         public int ConsignCode { get; set; }
+        public string ShortSource { get; set; }
+        public string ShortDestination { get; set; }
+        public decimal Destance { get; set; }
+        public string LongSource { get; set; }
+        public string LongDestination { get; set; }
 
         public OwnerOrderViewModel()
         {
@@ -44,6 +49,16 @@
         public decimal Weight { get; set; }
 
         public decimal Size { get; set; }
+
+        public string LongDestination { get; set; }
+
+        public string ShortDestination { get; set; }
+
+        public string LongSource { get; set; }
+
+        public string ShortSource { get; set; }
+
+        public decimal Destance { get; set; }
 
         public DriverOrderViewModel() { }
 

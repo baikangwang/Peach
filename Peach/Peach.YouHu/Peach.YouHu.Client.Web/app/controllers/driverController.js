@@ -161,7 +161,7 @@ app.controller('confirmDealController', ['$scope', '$modalInstance', 'order', 'd
 }]);
 
 app.controller('updateStateController', ['$scope', '$modalInstance', 'order', 'driverService', function ($scope, $modalInstance, order, driverService) {
-    $scope.updateStateModel = {
+    $scope.model = {
         OrderId: 0,
         Location: ""
     }
@@ -169,7 +169,7 @@ app.controller('updateStateController', ['$scope', '$modalInstance', 'order', 'd
     init();
 
     function init() {
-        $scope.updateStateModel.OrderId = order.Id;
+        $scope.model.OrderId = order.Id;
     }
 
     $scope.close = function() {
@@ -177,7 +177,7 @@ app.controller('updateStateController', ['$scope', '$modalInstance', 'order', 'd
     };
 
     $scope.updateState = function() {
-        driverService.updateOrderState($scope.updateStateModel).success(function (response) {
+        driverService.updateOrderState($scope.model).success(function (response) {
                 alert("Update order state Successfully");
                 $modalInstance.close();
             })
@@ -286,7 +286,7 @@ app.controller('freightUnitsController', ['$scope','$modal','driverService', fun
 
 app.controller('publishFreightUnitController', ['$scope', '$modalInstance', 'freightUnit', 'driverService', function ($scope, $modalInstance, freightUnit, driverService)
 {
-    $scope.publishModel = {
+    $scope.model = {
         Id: 0,
         Location: ""
     };
@@ -294,7 +294,7 @@ app.controller('publishFreightUnitController', ['$scope', '$modalInstance', 'fre
     init();
 
     function init() {
-        $scope.publishModel.Id = freightUnit.Id;
+        $scope.model.Id = freightUnit.Id;
     }
 
     $scope.close = function () {
@@ -302,7 +302,7 @@ app.controller('publishFreightUnitController', ['$scope', '$modalInstance', 'fre
     };
 
     $scope.publish = function () {
-        driverService.publish($scope.publishModel)
+        driverService.publish($scope.model)
             .success(function (success) {
                 alert("Publish Successfully");
                 $modalInstance.close();
@@ -315,7 +315,7 @@ app.controller('publishFreightUnitController', ['$scope', '$modalInstance', 'fre
 
 app.controller('registerFreightUnitController', ['$scope', '$modalInstance', 'driverService', function ($scope, $modalInstance, driverService) {
 
-    $scope.registerModel = {
+    $scope.model = {
         Location: "",
         Height: "",//0.0,
         Length: "",//0.0,
@@ -329,7 +329,7 @@ app.controller('registerFreightUnitController', ['$scope', '$modalInstance', 'dr
     };
 
     $scope.register = function () {
-        driverService.register($scope.registerModel)
+        driverService.register($scope.model)
             .success(function (success) {
                 alert("Register Successfully");
                 $modalInstance.close();

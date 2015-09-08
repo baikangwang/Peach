@@ -23,10 +23,10 @@
                         <li class="list-group-item" data-ng-repeat="order in orders" data-ng-class="'list-group-item-'+getCSS(order)">
                             <div class="list-group-item-heading">
                                 <div class="row">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
                                         <h4 class="text-left">
                                             <span class="label" data-ng-class="'label-'+getCSS(order)">
-                                                <i class="fa fa-home fa-lg"></i>&nbsp;{{order.Source}}
+                                                <i class="fa fa-home fa-lg"></i>&nbsp;{{order.ShortSource}}
                                             </span>
                                         </h4>
                                     </div>
@@ -35,10 +35,17 @@
                                             <i class="fa fa-arrow-right fa-lg"></i>
                                         </h4>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
                                         <h4 class="text-right">
                                             <span class="label" data-ng-class="'label-'+getCSS(order)">
-                                                <i class="fa fa-flag fg-lg"></i>&nbsp;{{order.Destination}}
+                                                <i class="fa fa-flag fg-lg"></i>&nbsp;{{order.ShortDestination}}
+                                            </span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <h4 class="text-right">
+                                            <span class="label" data-ng-class="'label-'+getCSS(order)">
+                                                {{order.Destance}}&nbsp;km
                                             </span>
                                         </h4>
                                     </div>

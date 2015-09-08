@@ -1,27 +1,29 @@
-﻿<div class="col-md-4">&nbsp;</div>
-<div class="col-md-4 well">
-    <form class="" name="loginForm" role="form">
-        <fieldset>
-            <legend class="form-login-heading">登&nbsp;录</legend>
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" style="height: 47px" placeholder="用&nbsp;户&nbsp;名" data-ng-model="loginData.userName" required autofocus>
+﻿<div class="row">
+    <div class="col-md-4">&nbsp;</div>
+    <div class="col-md-4 well">
+        <form class="" name="loginForm" role="form">
+            <fieldset>
+                <legend class="form-login-heading">登&nbsp;录</legend>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" style="height: 47px" placeholder="用&nbsp;户&nbsp;名" data-ng-model="loginData.userName" required autofocus>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <input type="password" class="form-control" style="height: 47px" placeholder="密&nbsp;码" data-ng-model="loginData.password" required>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="password" class="form-control" style="height: 47px" placeholder="密&nbsp;码" data-ng-model="loginData.password" required>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-info btn-block" type="submit" data-ng-disabled="loginForm.$invalid || !loginForm.$dirty" data-ng-click="login()">登&nbsp;录</button>
-            </div>
-        </fieldset>
-    </form>
+                <div class="form-group">
+                    <button class="btn btn-info btn-block" type="submit" data-ng-disabled="loginForm.$invalid || !loginForm.$dirty" data-ng-click="login()">登&nbsp;录</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-md-4">&nbsp;</div>
 </div>
-<div class="col-md-4">&nbsp;</div>
 <hr data-ng-hide="message == ''"/>
 <div class="row container">
     <div data-ng-hide="message == ''" class="alert alert-danger">

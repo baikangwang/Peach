@@ -4,10 +4,12 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.Description;
 
+    using Peah.YouHu.API.Component;
     using Peah.YouHu.API.Models;
 
     [Authorize]
@@ -30,6 +32,29 @@
                 .Select(u => new FreightUnitViewModel(){Id = u.Id,Rank = u.Driver.Rank,Driver = u.Driver.FullName,Location = u.Location,State = u.State})
                 .ToListAsync();
 
+            view = view.Select(model =>
+            {
+                // address + "|" +value.city + "|" + point.lng + "," + point.lat;
+                string dest = model.Location;
+                var segaments1 = dest.Split(new[] { "|", "," }, StringSplitOptions.None);
+                if (segaments1.Length == 1)
+                {
+                    return model;
+                }
+                else
+                {
+                    model.LongLocation = segaments1[0];
+                    model.ShortLocation = segaments1[1];
+
+                    //double lon1, lat1;
+                    //lon1 = Convert.ToDouble(segaments1[2]);
+                    //lat1 = Convert.ToDouble(segaments1[3]);
+                    // model.Destance = (decimal)Math.Round(Utility.GetLongDistance(lon1, lat1, lon2, lat2) / 1000, 2, MidpointRounding.ToEven);
+                }
+                return model;
+
+            }).ToList();
+
             return this.Ok(view);
         }
 
@@ -50,15 +75,54 @@
                 .Include(u=>u.Driver)
                 //todo: implement later
                 //.Where(u=>FreightUnitFinder.Default.Match(u.Length,u.Height,order.Size,u.Weight,order.Weight,u.Location,order.Source))
-                .Where(u => (order.Source == u.Location) && (order.Weight <= u.Weight) && (order.Size <= (u.Length * u.Height)))
-                .Select(u => new FreightUnitViewModel() { Id = u.Id, Rank = u.Driver.Rank, Driver = u.Driver.FullName, Location = u.Location })
+                .Where(u => /*(order.Source == u.Location) &&*/ (order.Weight <= u.Weight) && (order.Size <= (u.Length * u.Height)))
+                .Select(u => new FreightUnitViewModel()
+                             {
+                                 Id = u.Id, Rank = u.Driver.Rank, Driver = u.Driver.FullName, Location = u.Location,
+                                 LongLocation = u.Location,
+                                 ShortLocation = u.Location,
+                                 Destance = 0.0m
+                             })
                 .OrderByDescending(v=>v.Rank)
                 .ToListAsync();
 
-            view = view.Select(v=>
+
+            string source = order.Source;
+            var segaments2 = source.Split(new[] { "|", "," }, StringSplitOptions.None);
+            double lon2, lat2;
+            lon2 = Convert.ToDouble(segaments2[2]);
+            lat2 = Convert.ToDouble(segaments2[3]);
+
+            view = view.Where(model=>
             {
-                v.Cost = FreightCostCalculator.Default.Calculate(v.Location, order.Destination, order.Size, order.Weight);
-                return v;
+                string dest = model.Location;
+                var segaments1 = dest.Split(new[] { "|", "," }, StringSplitOptions.None);
+                // filter freight unit is staying in the same city as the order
+                return Regex.IsMatch(segaments1[1], segaments2[1], RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+            }).Select(model =>
+            {
+                model.Cost = FreightCostCalculator.Default.Calculate(model.Location, order.Destination, order.Size, order.Weight);
+
+                // address + "|" +value.city + "|" + point.lng + "," + point.lat;
+                string dest = model.Location;
+                var segaments1 = dest.Split(new[] { "|", "," }, StringSplitOptions.None);
+                if (segaments1.Length == 1 || segaments2.Length == 1)
+                {
+                    return model;
+                }
+                else
+                {
+                    model.LongLocation = segaments1[0];
+                    model.ShortLocation = segaments1[1];
+
+                    double lon1, lat1;
+                    lon1 = Convert.ToDouble(segaments1[2]);
+                    lat1 = Convert.ToDouble(segaments1[3]);
+                    model.Destance = (decimal)Math.Round(Utility.GetLongDistance(lon1, lat1, lon2, lat2) / 1000, 2, MidpointRounding.ToEven);
+                }
+                return model;
+
             }).ToList();
 
             return this.Ok(view);

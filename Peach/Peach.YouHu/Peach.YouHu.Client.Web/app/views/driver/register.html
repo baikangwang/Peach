@@ -10,7 +10,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-truck"></i></span>
-                            <select class="form-control" data-ng-model="registerModel.Type" required>
+                            <select class="form-control" data-ng-model="model.Type" required>
                                 <option value="0">牵引车</option>
                                 <option value="1">面包车</option>
                                 <option value="2">罐车</option>
@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-font"></i></span>
-                            <input type="text" class="form-control" data-ng-model="registerModel.Licence" placeholder="车牌" required />
+                            <input type="text" class="form-control" data-ng-model="model.Licence" placeholder="车牌" required />
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-scale"></i></span>
-                            <input type="number" class="form-control" data-ng-model="registerModel.Weight" placeholder="车重" required />
+                            <input type="number" class="form-control" data-ng-model="model.Weight" placeholder="车重" required />
                             <span class="input-group-addon">(吨)</span>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-resize-vertical"></i></span>
-                            <input type="number" class="form-control" data-ng-model="registerModel.Height" placeholder="车高" required />
+                            <input type="number" class="form-control" data-ng-model="model.Height" placeholder="车高" required />
                             <span class="input-group-addon">(米)</span>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-resize-horizontal"></i></span>
-                            <input type="number" class="form-control" data-ng-model="registerModel.Length" placeholder="车长" required />
+                            <input type="number" class="form-control" data-ng-model="model.Length" placeholder="车长" required />
                             <span class="input-group-addon">(米)</span>
                         </div>
                     </div>
@@ -64,7 +64,8 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-home"></i></span>
-                            <input type="text" class="form-control" data-ng-model="registerModel.Location" placeholder="您的车在哪座城市？" required />
+                            <input type="text" id="location" class="form-control" placeholder="您的车在哪座城市？" required />
+                            <yhlocation target="location"></yhlocation>
                         </div>
                     </div>
                 </div>

@@ -8,7 +8,7 @@
             <div class="col-md-6">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-comment"></i></span>
-                    <input type="text" class="form-control" data-ng-model="publishModel.Description" placeholder="发点什么呢？" required />
+                    <input type="text" class="form-control" data-ng-model="model.Description" placeholder="发点什么呢？" required/>
                 </div>
             </div>
         </div>
@@ -17,13 +17,15 @@
             <div class="col-md-6">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-home"></i></span>
-                    <input type="text" class="form-control" data-ng-model="publishModel.Source" placeholder="从哪座城市出发" required />
+                    <input type="text" id="source" class="form-control" placeholder="从哪座城市出发" required/>
+                    <yhlocation target="source"></yhlocation>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-flag"></i></span>
-                    <input type="text" class="form-control" data-ng-model="publishModel.Destination" placeholder="送到哪座城市" required />
+                    <input type="text" id="destination" class="form-control" placeholder="送到哪座城市" required/>
+                    <yhlocation target="destination"></yhlocation>
                 </div>
             </div>
         </div>
@@ -32,7 +34,7 @@
             <div class="col-md-6">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-fullscreen" id="fsize"></i></span>
-                    <input type="text" class="form-control" data-ng-model="publishModel.Size" placeholder="体积" required aria-describedby="fsize" />
+                    <input type="text" class="form-control" data-ng-model="model.Size" placeholder="体积" required aria-describedby="fsize"/>
                     <span class="input-group-addon">(立方米)</span>
                 </div>
             </div>
@@ -42,7 +44,7 @@
             <div class="col-md-6">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-scale"></i></span>
-                    <input type="text" class="form-control" data-ng-model="publishModel.Weight" placeholder="重量" required/>
+                    <input type="text" class="form-control" data-ng-model="model.Weight" placeholder="重量" required/>
                     <span class="input-group-addon">(吨)</span>
                 </div>
             </div>

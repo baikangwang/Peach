@@ -1,0 +1,33 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+    <style>
+        a.test {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <a href="http://jquery.com/" style="display: none;">jQuery</a>
+    <script src="Scripts/jquery-2.1.3.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("a").show("slow");
+            $("a").addClass("test");
+            $("a").click(function (event) {
+                $("a").removeClass("test");
+                alert("hello world");
+                event.preventDefault();
+                $(this).hide("slow");
+                $.get("index.html", function () {
+                    alert("loaded index.html");
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
