@@ -127,6 +127,13 @@
     <Content Include="Content\css\ui-bootstrap-0.13.0-csp.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\img\basket_full.png" />
+    <Content Include="Content\img\box.png" />
+    <Content Include="Content\img\cart_full.png" />
+    <Content Include="Content\img\evacuator.png" />
+    <Content Include="Content\img\lorry.png" />
+    <Content Include="Content\img\lorry_flatbed.png" />
+    <Content Include="Content\img\tipper.png" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="Scripts\angular-animate.js" />
@@ -238,7 +245,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.YearDayOfYear" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildAction="ReBuild" BuildVersion_ConfigurationName="Release" BuildVersion_DetectChanges="False" />
+      <UserProperties BuildVersion_DetectChanges="False" BuildVersion_ConfigurationName="Release" BuildVersion_BuildAction="ReBuild" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.None.YearDayOfYear" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

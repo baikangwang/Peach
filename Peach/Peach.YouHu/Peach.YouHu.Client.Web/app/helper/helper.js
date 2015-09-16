@@ -1,5 +1,7 @@
 ﻿var YouHuHelper = YouHuHelper || {};
 
+YouHuHelper.service = 'http://180.76.137.222:8080/';//'http://nltc369:8080/';//
+
 YouHuHelper.orderStateHelper = {
 
     toLabel: function (state) {
@@ -187,6 +189,9 @@ YouHuHelper.errorHelper= {
             msg = error.ExceptionMessage;
         else if (error.Message)
             msg = error.Message;
+        else if (error.error_description) {
+            msg = error.error_description;
+        }
         else
             msg = '发生错误';
         //alert(msg);

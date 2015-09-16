@@ -1,7 +1,7 @@
 ﻿'use strict';
 app.factory('ownerService', ['$http', function ($http) {
 
-    var serviceBase = 'http://180.76.137.222:8080/';//'http://nltc369:8080/';//
+    var serviceBase = YouHuHelper.service;
         var ownerServiceFactory = {};
 
         var _publish = function(publish) {

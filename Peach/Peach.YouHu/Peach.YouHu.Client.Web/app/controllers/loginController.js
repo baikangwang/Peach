@@ -15,17 +15,11 @@ app.controller('loginController', ['$scope', '$location', 'authService', functio
             function (response) {
                 $location.path('/' + response.role.toLowerCase() + '/orders');
             },
-         function (response) {
+         function (error) {
 
-             if (response) {
-                 var errors = [];
-                 for (var key in response.data.ModelState) {
-                     for (var i = 0; i < response.data.ModelState[key].length; i++) {
-                         errors.push(response.data.ModelState[key][i]);
-                     }
-                 }
-
-                 $scope.message = "Failed to login due to:" + errors.join(' ');
+             if (error) {
+                 var msg= YouHuHelper.errorHelper.getErrorMsg(error);
+                 $scope.message = "Failed to login due to:" + msg;
              } else {
 
                  $scope.message = "Failed to login due to: server offline";

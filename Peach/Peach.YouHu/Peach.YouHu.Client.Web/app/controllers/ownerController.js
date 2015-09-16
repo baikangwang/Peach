@@ -160,11 +160,13 @@ app.controller('findFreightUnitController', ['$scope', '$modal', '$modalInstance
 
     $scope.freightUnits = [];
     $scope.freightUnitsCount = 0;
+    $scope.Order = {};
 
     init();
 
     function init() {
         listFreightUnits();
+        $scope.Order = order;
     }
 
     function listFreightUnits() {
@@ -172,7 +174,7 @@ app.controller('findFreightUnitController', ['$scope', '$modal', '$modalInstance
             .success(function(success) {
                 $scope.freightUnits = success;
                 $scope.freightUnitsCount = success.length;
-
+                $scope.load();
             })
             .error(function(error) {
                 $scope.freightUnits = [];
